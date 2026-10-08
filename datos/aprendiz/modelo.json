@@ -1,0 +1,61 @@
+{
+  "version": "aprendiz-logistico-v1",
+  "activo": "BTC",
+  "pesos": [
+    -0.13938469635533604,
+    0.019888346801123585,
+    -0.16701182226823005,
+    -0.40198862925649115,
+    -0.11541223771583561,
+    0.03571118886061195,
+    -0.1432194493136959,
+    0.009324737910707832,
+    -0.5355438313638387
+  ],
+  "sesgo": -0.9741217769688321,
+  "ejemplos": 1764,
+  "positivos": 413,
+  "dias": 28,
+  "ultimo_mes": "2021-10",
+  "ejecuciones": [
+    "37848861843"
+  ],
+  "lotes": [
+    {
+      "version": "aprendiz-logistico-v1",
+      "mes": "2021-10",
+      "dias": 28,
+      "ejemplos": 1764,
+      "mezcla_experiencias_actuales": false,
+      "pesos_antes_sha": "a3b3bdc4bfe214e39d214b976a4b6b9dd9d97a4bf14c56820da8c0a44b8d1da7",
+      "pesos_despues_sha": "ef21673ad72b27334cfdd46937bc0b4463604ab0a37f305041567fd84eb31a61",
+      "datos_sha": "f876e04f3737c95e267e493f5902b40164f4a3d0e93e637d53e26c3f05395cc7",
+      "metricas": {
+        "brier": 0.18016691448729188,
+        "brier_base": 0.18084283825610015,
+        "participantes": {
+          "ia": {
+            "neto_compuesto": 0.007575790118864445,
+            "pares": 2
+          },
+          "congelado": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          },
+          "azar": {
+            "neto_compuesto": -0.39594481712892526,
+            "pares": 258
+          },
+          "mantener": {
+            "neto_compuesto": 0.03714774002813126,
+            "pares": 28
+          },
+          "efectivo": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          }
+        }
+      }
+    }
+  ]
+}
