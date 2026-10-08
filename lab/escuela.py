@@ -59,9 +59,10 @@ def _dias_disponibles(activo):
 
 class ArchivoMemoria:
     """Carga una vez los meses de cada activo y reutiliza las velas en la corrida."""
-    def __init__(self):
+    def __init__(self, meses_desde=None, meses_hasta=None):
         self.frames = {}
         self.dias = {}
+        self.meses_desde, self.meses_hasta = meses_desde, meses_hasta
 
     def _cargar(self, activo):
         if activo in self.dias:
@@ -74,7 +75,8 @@ class ArchivoMemoria:
                 meses.update(Path(r).name[:7] for r in p.stdout.splitlines() if r.endswith(".csv.gz"))
         meses.update(p.name[:7] for p in (RAIZ / "velas" / "1m" / activo).glob("*.csv.gz"))
         partes = []
-        for mes in sorted(meses):
+        for mes in sorted(m for m in meses if (self.meses_desde is None or m >= self.meses_desde)
+                          and (self.meses_hasta is None or m < self.meses_hasta)):
             try:
                 partes.append(archivo.leer(activo, mes + "-01", str(pd.Period(mes).end_time.date() + dt.timedelta(days=1))))
             except (LookupError, ValueError):

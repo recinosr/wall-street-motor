@@ -7,6 +7,7 @@ permissions:
   contents: write
 concurrency:
   group: motor-datos
+  queue: max
   cancel-in-progress: false
 jobs:
   archivar:
@@ -28,7 +29,7 @@ jobs:
       - name: Guardar solo BTC y ETH
         run: |
           git -C /tmp/motor-datos config user.name motor-bot
-          git -C /tmp/motor-datos config user.email motor-bot
+          git -C /tmp/motor-datos config user.email motor-bot@users.noreply.github.com
           git -C /tmp/motor-datos add velas/1m/BTC velas/1m/ETH
           if git -C /tmp/motor-datos diff --cached --quiet; then exit 0; fi
           git -C /tmp/motor-datos commit -m "velas Coinbase $(date -u +%F)"

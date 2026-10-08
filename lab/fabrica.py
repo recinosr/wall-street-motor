@@ -64,25 +64,36 @@ def dia(regla, df, semilla):
     lb = regla["lookback_minutos"]
     if len(df) < lb + h + 2:
         return None
-    primero = None
-    for i in range(lb, len(df)-h-1):
-        if not senal(regla, df, i):
-            continue
-        entrada, salida = df.index[i+1], df.index[i+h]
-        if entrada-df.index[i] != pd.Timedelta(minutes=1) or salida-df.index[i] != pd.Timedelta(minutes=h):
-            continue
-        primero = i
-        break
+    idx = np.arange(lb, len(df)-h-1)
+    close = df.close.to_numpy(dtype=float)
+    apertura = df.open.to_numpy(dtype=float)
+    validos = ((df.index[idx]-df.index[idx-lb] == pd.Timedelta(minutes=lb)) &
+               (df.index[idx+1]-df.index[idx] == pd.Timedelta(minutes=1)) &
+               (df.index[idx+h]-df.index[idx] == pd.Timedelta(minutes=h)))
+    posibles = idx[validos]
+    ret = close[idx]/close[idx-lb]-1
+    umbral, familia = regla["umbral"], regla["entrada"]
+    if familia == "momentum":
+        entrada = ret > umbral
+    elif familia == "reversion":
+        entrada = ret < -umbral
+    elif familia == "ruptura":
+        max_previo = df.high.shift(1).rolling(lb).max().to_numpy(dtype=float)
+        entrada = close[idx] > max_previo[idx]*(1+umbral)
+    elif familia == "volatilidad":
+        alto = df.high.rolling(lb+1).max().to_numpy(dtype=float)
+        bajo = df.low.rolling(lb+1).min().to_numpy(dtype=float)
+        entrada = (alto[idx]/bajo[idx]-1 > umbral) & (ret > 0)
+    else:
+        entrada = (df.index[idx].hour == regla["hora_utc"]) & (ret > umbral)
+    candidatos = idx[validos & entrada]
     mantener = (float(df.close.iat[-1]) / float(df.open.iat[0])) * (1-COSTO)**2 - 1
-    if primero is None:
+    if not len(candidatos):
         return 0., 0., mantener, False
-    i = primero
-    neto = (float(df.close.iat[i+h]) / float(df.open.iat[i+1])) * (1-COSTO)**2 - 1
-    posibles = [j for j in range(lb, len(df)-h-1) if df.index[j]-df.index[j-lb] == pd.Timedelta(minutes=lb)
-                and df.index[j+1]-df.index[j] == pd.Timedelta(minutes=1)
-                and df.index[j+h]-df.index[j] == pd.Timedelta(minutes=h)]
-    j = random.Random(semilla).choice(posibles)
-    azar = (float(df.close.iat[j+h]) / float(df.open.iat[j+1])) * (1-COSTO)**2 - 1
+    i = int(candidatos[0])
+    neto = (close[i+h] / apertura[i+1]) * (1-COSTO)**2 - 1
+    j = int(random.Random(semilla).choice(posibles))
+    azar = (close[j+h] / apertura[j+1]) * (1-COSTO)**2 - 1
     return neto, azar, mantener, True
 
 
@@ -93,11 +104,18 @@ def evaluar(regla, velas):
         if resultado is not None:
             filas.append((fecha, *resultado))
     if not filas:
-        return {"dias": 0, "operaciones": 0, "neto": 0., "azar": 0., "mantener": 0., "ventaja": [], "fechas": []}
+        return {"dias": 0, "operaciones": 0, "neto": 0., "azar": 0., "mantener": 0., "ventaja": [], "fechas": [], "mensual": []}
+    meses = sorted(set(f[0][:7] for f in filas))
+    # Cada mes es un pliegue posterior; la regla queda fija antes de la pantalla.
+    mensual = [{"mes": m, "dias": sum(f[0].startswith(m) for f in filas),
+                "neto": float(sum(f[1] for f in filas if f[0].startswith(m))),
+                "azar": float(sum(f[2] for f in filas if f[0].startswith(m))),
+                "mantener": float(sum(f[3] for f in filas if f[0].startswith(m)))} for m in meses]
     return {"dias": len(filas), "operaciones": sum(f[4] for f in filas),
             "neto": float(sum(f[1] for f in filas)), "azar": float(sum(f[2] for f in filas)),
             "mantener": float(sum(f[3] for f in filas)),
-            "ventaja": [float(f[1]-max(f[2],f[3])) for f in filas], "fechas": [f[0] for f in filas]}
+            "ventaja": [float(f[1]-max(f[2],f[3])) for f in filas], "fechas": [f[0] for f in filas],
+            "mensual": mensual}
 
 
 def p_bootstrap(ventaja, semilla, muestras=9999):
@@ -139,6 +157,7 @@ def ejecutar(limite=120, hasta=None):
             registro[regla["id"]] = {"familia": regla["familia"], "activo": regla["activo"],
                 "regla": regla, "dias": v["dias"], "operaciones": v["operaciones"],
                 "neto": v["neto"], "azar": v["azar"], "mantener": v["mantener"],
+                "mensual": v["mensual"],
                 "p": p, "motivo": "sin_ventaja_estadistica" if p >= .05 else "esperando_familia"}
         except LookupError:
             registro[regla["id"]] = {"familia": regla["familia"], "activo": regla["activo"],

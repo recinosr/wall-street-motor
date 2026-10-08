@@ -7,6 +7,7 @@ permissions:
   contents: write
 concurrency:
   group: motor-main
+  queue: max
   cancel-in-progress: false
 jobs:
   gimnasio:
@@ -14,6 +15,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         activo: [BTC, ETH]
     steps:
@@ -38,7 +40,7 @@ jobs:
       - name: Publicar resumen compacto
         run: |
           git config user.name motor-bot
-          git config user.email motor-bot
+          git config user.email motor-bot@users.noreply.github.com
           git add "resultados/gimnasio_${ACTIVO}.json"
           git diff --cached --quiet && exit 0
           git commit -m "gimnasio ${ACTIVO} $(date -u +%F)"

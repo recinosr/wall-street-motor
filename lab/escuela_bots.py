@@ -66,7 +66,9 @@ def semillas_validas(n, activo=None, duracion=60, base=None, intentos=25, archiv
 def correr(n, activo=None, duracion=60, base=None, particion="entrenamiento"):
     if n < 1:
         raise ValueError("N debe ser positivo")
-    cache = ArchivoMemoria()
+    cortes = {"entrenamiento": ("2024-04", "2025-04"),
+              "validacion": ("2025-04", "2026-01")}
+    cache = ArchivoMemoria(*cortes.get(particion, (None, None)))
     semillas = semillas_validas(n, activo, duracion, base, archivo_cache=cache,
                                particion=particion)
     salida = {}

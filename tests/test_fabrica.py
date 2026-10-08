@@ -45,6 +45,25 @@ class FabricaTests(unittest.TestCase):
             self.assertEqual(llamadas, [(fabrica.PANTALLA_DESDE, fabrica.PANTALLA_HASTA)])
             self.assertEqual(json.loads((Path(tmp)/"resultados/fabrica.json").read_text())["registro"]["0"]["motivo"], "sin_datos")
 
+    def test_reserva_solo_tras_bh_de_la_familia_completa(self):
+        reglas = [{"id": str(i), "activo": "BTC", "familia": "ejemplo"} for i in range(2)]
+        muestra = {"dias": 30, "operaciones": 30, "neto": 1., "azar": 0.,
+                   "mantener": 0., "ventaja": [.01]*30, "fechas": [], "mensual": []}
+        with tempfile.TemporaryDirectory() as tmp:
+            llamadas = []
+            def leer(activo, desde, hasta):
+                llamadas.append((desde, hasta))
+                return object()
+            with patch.object(fabrica, "ROOT", Path(tmp)), \
+                 patch.object(fabrica, "variantes", side_effect=lambda: iter(reglas)), \
+                 patch.object(fabrica.archivo, "leer", side_effect=leer), \
+                 patch.object(fabrica, "evaluar", return_value=muestra), \
+                 patch.object(fabrica, "p_bootstrap", return_value=.001):
+                out = fabrica.ejecutar(limite=2)
+            self.assertEqual(out["con_correccion"], 2)
+            self.assertEqual(sum(1 for a, b in llamadas if a == fabrica.RESERVA_DESDE), 1)
+            self.assertTrue(all("final" in r for r in out["registro"].values()))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -46,11 +46,13 @@ def gimnasio_diario(activo):
         publicar(f"gimnasio_{activo}.json", {"sim": activo, "perfiles": [], "estado": "sin_muestra_suficiente"})
         return
     m = meses[-1]
-    perfil = {"sim": activo, "costo_por_lado": .001, "meses": [{k: m[k] for k in (
+    fila = {k: m[k] for k in (
         "mes", "train_desde", "train_hasta", "validacion_desde", "validacion_hasta",
         "prueba_desde", "prueba_hasta", "dias_prueba", "campeon", "prueba_campeon",
         "prueba_sin_entrenar", "mantener_diario", "operaciones", "n_pruebas",
-        "intervalo_ventaja_95")}],
+        "intervalo_ventaja_95", "mejor_posible", "descripcion", "intervalo_95")}
+    perfil = {"sim": activo, "perfil": "costo0.001", "costo_por_lado": .001, "meses": [fila],
+        "conclusion": "Ventaja fuera de muestra no demostrada.",
         "aviso": "Mes de prueba posterior a entrenamiento y validación; costo 0.1 % por lado."}
     publicar(f"gimnasio_{activo}.json", {"sim": activo, "perfiles": [perfil]})
 
