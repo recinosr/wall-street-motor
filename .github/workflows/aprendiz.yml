@@ -1,0 +1,40 @@
+name: aprendiz
+on:
+  schedule:
+    - cron: '25 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: motor-main
+  cancel-in-progress: false
+jobs:
+  aprendiz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Velas Coinbase, incluidas solo las fechas del lote permitido
+        run: |
+          git fetch --depth=1 origin datos:refs/remotes/origin/datos
+          git worktree add --detach /tmp/motor-datos origin/datos
+          ln -s /tmp/motor-datos/velas velas
+      - run: python -m unittest discover -s tests -p 'test_aprendiz.py'
+      - name: Avanzar un mes anterior al corte reservado
+        run: python -m scripts.motor aprendiz --run-id "$GITHUB_RUN_ID"
+      - name: Publicar estado y resultado compacto
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot
+          git add datos/aprendiz resultados/aprendiz*.json
+          git diff --cached --quiet && exit 0
+          git commit -m "aprendiz lote $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin main

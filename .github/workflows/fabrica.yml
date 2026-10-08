@@ -1,0 +1,40 @@
+name: fabrica
+on:
+  schedule:
+    - cron: '10 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: motor-main
+  cancel-in-progress: false
+jobs:
+  fabrica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Velas Coinbase del propio proyecto
+        run: |
+          git fetch --depth=1 origin datos:refs/remotes/origin/datos
+          git worktree add --detach /tmp/motor-datos origin/datos
+          ln -s /tmp/motor-datos/velas velas
+      - run: python -m unittest discover -s tests -p 'test_fabrica.py'
+      - name: Medir como máximo 120 variantes nuevas
+        run: python -m lab.fabrica
+      - name: Publicar memoria de ensayos y fallos
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot
+          git add resultados/fabrica.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fabrica $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin main

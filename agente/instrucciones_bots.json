@@ -1,0 +1,29 @@
+{
+  "familias_activas": [
+    "azar", "momentum", "reversion", "ruptura", "reversion_tendencia",
+    "horario", "ruptura_con_volatilidad"
+  ],
+  "rejillas": {
+    "mantener": [5, 10, 15, 30, 60],
+    "salida": ["tiempo", "volatilidad"],
+    "multiplo_vol": [2, 3, 4],
+    "min_vol_rel": [0, 0.75, 1],
+    "tendencia": ["cualquiera", "1h", "1d"],
+    "gap_max": [0.02, 0.05],
+    "inicio": [60, 120, 180],
+    "fin": [240, 300, 360],
+    "z": [1.5, 2.0, 2.5]
+  },
+  "franjas": [[60, 389]],
+  "reglas_nuevas": [
+    {
+      "nombre": "ruptura_con_volatilidad",
+      "descripcion": "Compra una ruptura del máximo de 30 minutos solo con volatilidad reciente superior a 1.2 veces su mediana",
+      "franjas": [[60, 330]],
+      "condiciones": [
+        {"rasgo": "max30", "operador": "==", "valor": true},
+        {"rasgo": "volatilidad_relativa", "operador": ">", "valor": 1.2}
+      ]
+    }
+  ]
+}

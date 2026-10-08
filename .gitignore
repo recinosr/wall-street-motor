@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+.tools/
+velas/
+datos/escuela/
+datos/gimnasio/
+datos/aprendiz/lotes/
+resultados/*.tmp

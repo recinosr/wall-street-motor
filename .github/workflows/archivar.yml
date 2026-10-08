@@ -1,0 +1,37 @@
+name: archivar
+on:
+  schedule:
+    - cron: '20 2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: motor-datos
+  cancel-in-progress: false
+jobs:
+  archivar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Obtener rama de velas pública
+        run: |
+          git fetch --depth=1 origin datos:refs/remotes/origin/datos
+          git worktree add --detach /tmp/motor-datos origin/datos
+      - name: Descargar ayer de Coinbase y combinar sin duplicados
+        run: python -m lab.archivar diario --salida /tmp/motor-datos
+      - name: Guardar solo BTC y ETH
+        run: |
+          git -C /tmp/motor-datos config user.name motor-bot
+          git -C /tmp/motor-datos config user.email motor-bot
+          git -C /tmp/motor-datos add velas/1m/BTC velas/1m/ETH
+          if git -C /tmp/motor-datos diff --cached --quiet; then exit 0; fi
+          git -C /tmp/motor-datos commit -m "velas Coinbase $(date -u +%F)"
+          git -C /tmp/motor-datos fetch origin datos
+          git -C /tmp/motor-datos rebase origin/datos
+          git -C /tmp/motor-datos push origin HEAD:datos
