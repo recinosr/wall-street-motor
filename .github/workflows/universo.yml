@@ -2,7 +2,11 @@ name: Universo completo y catálogo
 on:
   schedule:
     - cron: '30 22 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      solo_sec:
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -23,10 +27,13 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p test_universo.py
-      - run: python -m lab.universo
+      - run: |
+          if [ "$SOLO_SEC" = "true" ]; then python -m lab.universo --solo-sec; else python -m lab.universo; fi
         env:
           SEC_CONTACT: ${{ secrets.SEC_CONTACT }}
+          SOLO_SEC: ${{ inputs.solo_sec }}
       - run: python -m lab.etfs --salida resultados/etfs.json
+        if: inputs.solo_sec != true
       - uses: actions/upload-artifact@v4
         with:
           name: universo-metricas

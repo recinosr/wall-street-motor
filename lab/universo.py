@@ -139,7 +139,9 @@ def build():
     from lab import sp500
     try:
         for x in sp500.lista():
-            if x['sim'] in stocks: stocks[x['sim']].update({k:x[k] for k in ('cik','sector','industria')})
+            if x['sim'] in stocks:
+                stocks[x['sim']].update({k:x[k] for k in ('cik','sector','industria')})
+                stocks[x['sim']]['cik_lista']=x['cik']
     except Exception as e: failures.append('Sectores S&P: '+str(e)[:100])
     contact=os.environ.get('SEC_CONTACT')
     if contact:
@@ -147,11 +149,24 @@ def build():
             tickers=get('https://www.sec.gov/files/company_tickers.json',headers={'User-Agent':contact}).json()
             for t in tickers.values():
                 if t['ticker'].replace('.','-') in stocks: stocks[t['ticker'].replace('.','-')]['cik']=t['cik_str']
-            fund=sp500.fundamentales(sorted({x['cik'] for x in stocks.values() if x.get('cik')}),contact,dt.date.today().year-1)
+            ciks={c for x in stocks.values() for c in (x.get('cik'),x.get('cik_lista')) if c}
+            fund=sp500.fundamentales(sorted(ciks),contact,dt.date.today().year-1)
             for x in stocks.values():
                 if x.get('cik') in fund:
-                    x['fundamentales']=sp500.metricas(fund[x['cik']],None)
-                    x['fuentes_fundamentales']=fund[x['cik']]
+                    chosen=x['cik']
+                    old=x.get('cik_lista')
+                    if not fund[chosen].get('ingresos') and old and old!=chosen and fund.get(old,{}).get('ingresos'):
+                        x['fundamentales_cik_alternativo']=sp500.metricas(fund[old],None)
+                        x['fuentes_cik_alternativo']=fund[old]
+                        x['nota_cik']='CIK de lista S&P difiere del directorio SEC actual. Estados históricos alternativos separados; no mezclar entidades ni tratarlos como estados actuales.'
+                    x['fundamentales']=sp500.metricas(fund[chosen],None)
+                    x['fuentes_fundamentales']=fund[chosen]
+                    if x['sim']=='XOM' and old==34088 and chosen==2115436 and fund.get(old,{}).get('ingresos'):
+                        x['fundamentales']=sp500.metricas(fund[old],None)
+                        x['fuentes_fundamentales']=fund[old]
+                        x['cik_fundamentales_anuales']=old
+                        x['nota_cik']='XOM: anual2025 del predecesor34088, separado del CIK actual2115436 tras reorganización1-jul2026; no combinar balances/ingresos de distintas entidades.'
+                        x['fuente_continuidad']='https://www.sec.gov/Archives/edgar/data/2115436/000003408826000093/R9.htm'
         except Exception as e: failures.append('SEC: '+str(e)[:100])
     symbols=list(stocks)
     print('Lista oficial:',len(symbols),'símbolos; SEC terminada',flush=True)
@@ -185,8 +200,37 @@ def build():
     return result
 
 
+def refresh_sec(path):
+    """Actualizar solo SEC con la clave cloud; conservar métricas/fechas ya descargadas."""
+    from lab import sp500
+    contact=os.environ.get('SEC_CONTACT')
+    if not contact:raise RuntimeError('SEC_CONTACT no disponible para reparación SEC')
+    result=json.loads(Path(path).read_text(encoding='utf8'))
+    stocks={x['sim']:x for x in result['datos'] if x['tipo']!='cripto'}
+    listed_ciks={x['sim']:x['cik'] for x in sp500.lista()}
+    for sim,x in stocks.items():
+        if sim in listed_ciks:x['cik_lista']=listed_ciks[sim]
+    ciks={c for x in stocks.values() for c in (x.get('cik'),x.get('cik_lista')) if c}
+    fund=sp500.fundamentales(sorted(ciks),contact,dt.date.today().year-1)
+    for x in stocks.values():
+        current=x.get('cik');old=x.get('cik_lista')
+        chosen=old if x['sim']=='XOM' and old==34088 and current==2115436 and fund.get(old,{}).get('ingresos') else current
+        f=fund.get(chosen,{})
+        x['fundamentales']=sp500.metricas(f,None);x['fuentes_fundamentales']=f
+        if chosen!=current:
+            x['cik_fundamentales_anuales']=chosen
+            x['nota_cik']='XOM: estados anuales2025 del predecesor34088; CIK actual2115436 tras1-jul2026. No mezclar ambas entidades.'
+            x['fuente_continuidad']='https://www.sec.gov/Archives/edgar/data/2115436/000003408826000093/R9.htm'
+    result['actualizado_sec']=dt.datetime.now(dt.timezone.utc).isoformat()
+    result['con_fundamentales']=sum(bool(x.get('fundamentales')) for x in result['datos'])
+    Path(path).write_text(json.dumps(result,ensure_ascii=False,allow_nan=False),encoding='utf8')
+    print('SEC actualizada; XOM:',stocks.get('XOM',{}).get('fundamentales'))
+
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser(); p.add_argument('--salida',default='resultados/universo.json'); a=p.parse_args()
-    r=build(); Path(a.salida).parent.mkdir(parents=True,exist_ok=True)
-    Path(a.salida).write_text(json.dumps(r,ensure_ascii=False,allow_nan=False),encoding='utf8')
-    print({k:r[k] for k in ('acciones_etfs','cripto','con_metricas','con_fundamentales','segundos')})
+    p=argparse.ArgumentParser(); p.add_argument('--salida',default='resultados/universo.json');p.add_argument('--solo-sec',action='store_true'); a=p.parse_args()
+    if a.solo_sec:refresh_sec(a.salida)
+    else:
+        r=build(); Path(a.salida).parent.mkdir(parents=True,exist_ok=True)
+        Path(a.salida).write_text(json.dumps(r,ensure_ascii=False,allow_nan=False),encoding='utf8')
+        print({k:r[k] for k in ('acciones_etfs','cripto','con_metricas','con_fundamentales','segundos')})
