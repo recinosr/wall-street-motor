@@ -1,6 +1,9 @@
 import unittest
+import json,os,tempfile
+from pathlib import Path
+from unittest.mock import patch
 import pandas as pd
-from lab.universo import listed, metrics, inverse
+from lab.universo import listed, metrics, inverse,refresh_sec
 from lab.sp500 import CONCEPTOS
 
 class UniverseTests(unittest.TestCase):
@@ -22,3 +25,15 @@ class UniverseTests(unittest.TestCase):
         self.assertIn('top10',r['cobertura'])
     def test_xom_alternative(self):
         self.assertIn('RevenueFromContractWithCustomerIncludingAssessedTax',CONCEPTOS['ingresos'])
+    def test_xom_redomiciliation_even_if_wiki_updated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'u.json';p.write_text(json.dumps({'datos':[{'sim':'XOM','tipo':'acción','cik':2115436,'fecha':'2026-10-08'}]}))
+            fund={34088:{'ingresos':{'valor':100,'periodo':'CY2025','presentado':None}},2115436:{'patrimonio':{'valor':9}}}
+            with patch.dict(os.environ,{'SEC_CONTACT':'solo prueba'}),patch('lab.sp500.lista',return_value=[{'sim':'XOM','cik':2115436}]),patch('lab.sp500.fundamentales',return_value=fund) as f:
+                refresh_sec(p)
+                self.assertIn(34088,f.call_args.args[0])
+            r=json.loads(p.read_text(encoding='utf8'))['datos'][0]
+            self.assertEqual(r['fundamentales']['ingresos'],100)
+            self.assertEqual(r['cik_fundamentales_anuales'],34088)
+            self.assertEqual(r['cik'],2115436)
+            self.assertEqual(r['fecha'],'2026-10-08')

@@ -150,11 +150,12 @@ def build():
             for t in tickers.values():
                 if t['ticker'].replace('.','-') in stocks: stocks[t['ticker'].replace('.','-')]['cik']=t['cik_str']
             ciks={c for x in stocks.values() for c in (x.get('cik'),x.get('cik_lista')) if c}
+            if stocks.get('XOM',{}).get('cik')==2115436:ciks.add(34088)
             fund=sp500.fundamentales(sorted(ciks),contact,dt.date.today().year-1)
             for x in stocks.values():
                 if x.get('cik') in fund:
                     chosen=x['cik']
-                    old=x.get('cik_lista')
+                    old=34088 if x['sim']=='XOM' and chosen==2115436 else x.get('cik_lista')
                     if not fund[chosen].get('ingresos') and old and old!=chosen and fund.get(old,{}).get('ingresos'):
                         x['fundamentales_cik_alternativo']=sp500.metricas(fund[old],None)
                         x['fuentes_cik_alternativo']=fund[old]
@@ -211,9 +212,10 @@ def refresh_sec(path):
     for sim,x in stocks.items():
         if sim in listed_ciks:x['cik_lista']=listed_ciks[sim]
     ciks={c for x in stocks.values() for c in (x.get('cik'),x.get('cik_lista')) if c}
+    if stocks.get('XOM',{}).get('cik')==2115436:ciks.add(34088)
     fund=sp500.fundamentales(sorted(ciks),contact,dt.date.today().year-1)
     for x in stocks.values():
-        current=x.get('cik');old=x.get('cik_lista')
+        current=x.get('cik');old=34088 if x['sim']=='XOM' and current==2115436 else x.get('cik_lista')
         chosen=old if x['sim']=='XOM' and old==34088 and current==2115436 and fund.get(old,{}).get('ingresos') else current
         f=fund.get(chosen,{})
         x['fundamentales']=sp500.metricas(f,None);x['fuentes_fundamentales']=f
