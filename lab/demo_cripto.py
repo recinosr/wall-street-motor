@@ -40,7 +40,8 @@ def fresh(now,quote):
 def market(asset,now):
     # Coinbase latest300 one-minute candles, plus public ticker timestamp.
     base=f'https://api.exchange.coinbase.com/products/{asset}-USD'
-    response=requests.get(base+'/candles',params={'granularity':60},timeout=20);response.raise_for_status()
+    response=requests.get(base+'/candles',params={'granularity':60,'start':(now-timedelta(minutes=180)).isoformat(),'end':now.isoformat()},
+                          headers={'Cache-Control':'no-cache'},timeout=20);response.raise_for_status()
     rows=response.json()
     minute=pd.DataFrame(rows,columns=['time','low','high','open','close','volume'])
     minute.index=pd.to_datetime(minute.pop('time'),unit='s',utc=True);minute=minute.sort_index()
@@ -213,7 +214,7 @@ def run(root=ROOT,now=None,run_id=None):
     data={};proofs={}
     for asset,account in state['accounts'].items():
         try: data[asset]=market(asset,now)
-        except Exception as exc: print(asset,'sin datos:',type(exc).__name__,flush=True)
+        except Exception as exc: print(asset,'sin datos:',str(exc) if isinstance(exc,ValueError) else type(exc).__name__,flush=True)
         pending=account['pending']
         if pending:
             try: proofs[str(pending['run_id'])]=receipt(pending['run_id'],now)
