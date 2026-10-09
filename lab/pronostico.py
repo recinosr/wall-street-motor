@@ -17,6 +17,7 @@ import requests
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from scipy.stats import norm
 from lab.universo import history, get
 from lab.enciclopedia import catalog, detect
 
@@ -54,7 +55,7 @@ def coin_history(product):
 
 
 def fetch(asset):
-    return coin_history(asset['coinbase']) if asset['tipo']=='cripto' else history(asset['sim'],'5y')
+    return coin_history(asset['coinbase']) if asset['tipo']=='cripto' and asset.get('coinbase') else history(asset['sim'],'5y')
 
 
 def features(d):
@@ -64,7 +65,7 @@ def features(d):
         'dist':c/c.rolling(200).mean()-1},index=d.index)
 
 
-def predict(d,sim,horizon):
+def predict(d,sim,horizon,patterns=None):
     x=features(d); last=x.iloc[-1]
     out={'sube_siempre':1.,'azar':float(int(hashlib.sha256((sim+str(d.index[-1])+str(horizon)).encode()).hexdigest()[:8],16)%2)}
     if pd.notna(last['mom']):out['momentum_12_1']=float(last['mom']>=0)
@@ -74,15 +75,19 @@ def predict(d,sim,horizon):
     valid=x.notna().all(axis=1)&future.notna()
     train=x[valid]; y=(future[valid]>0).astype(int)
     if len(train)>=120 and last.notna().all() and y.nunique()==2:
-        split=int(len(train)*.8); model=make_pipeline(StandardScaler(),LogisticRegression(C=.1,max_iter=300))
-        model.fit(train.iloc[:split-horizon],y.iloc[:split-horizon])
-        p=model.predict_proba(train.iloc[split:])[:,1]
-        brier=float(np.mean((p-y.iloc[split:].to_numpy())**2))
+        model=make_pipeline(StandardScaler(),LogisticRegression(C=.1,max_iter=300));errors=[]
+        boundaries=[int(len(train)*f) for f in (.5,.65,.8,1.)]
+        for split,end in zip(boundaries[:-1],boundaries[1:]):
+            if y.iloc[:split-horizon].nunique()<2:continue
+            model.fit(train.iloc[:split-horizon],y.iloc[:split-horizon])
+            p=model.predict_proba(train.iloc[split:end])[:,1]
+            errors.extend((p-y.iloc[split:end].to_numpy())**2)
+        brier=float(np.mean(errors)) if errors else None
         model.fit(train,y)
         out['logistica']=float(model.predict_proba(x.tail(1))[0,1])
     else:brier=None
     # Incluye cada patrón activo; patrones neutros y ausencias se abstienen.
-    signals=detect(d.tail(300))
+    signals=patterns if patterns is not None else detect(d.tail(300),last_only=True)
     for rule in catalog():
         if rule['direccion'] and signals[rule['id']].iloc[-1]:out['patron:'+rule['id']]=float(rule['direccion']>0)
     return out,brier
@@ -105,25 +110,26 @@ def generate(kind,now=None):
         print('Apertura ya ocurrió; no crear pronóstico tardío.');return
     universe=json.loads((ROOT/'resultados/universo.json').read_text(encoding='utf8'))
     assets=[a for a in universe['datos'] if (a['tipo']=='cripto')==(kind=='cripto') and
-            (a.get('volumen_medio_usd') or a.get('volumen_24h_usd') or 0)>5e6 and
-            (kind!='cripto' or a.get('coinbase'))]
+            (a.get('volumen_medio_usd') or a.get('volumen_24h_usd') or 0)>5e6]
     failures=[]; rows=[]
     def one(a):
         try:
             d=fetch(a)
             if len(d)<30:raise ValueError('historia insuficiente')
+            liquidity=float((d.close*d.volume).tail(20).mean())
+            if liquidity<=5e6:raise ValueError('volumen medio20 días no supera USD5M')
             # Ancla inmediatamente anterior al objetivo; rechazar huecos/fecha obsoleta.
             anchor=(pd.Timestamp(dates[0])-pd.Timedelta(days=1)).date() if kind=='cripto' else CAL.previous_session(pd.Timestamp(dates[0])).date()
             if d.index[-1].date()!=anchor:raise ValueError('ancla no fresca')
             if kind=='cripto' and len(d)>5 and not (d.index[-6:].to_series().diff().dropna()==pd.Timedelta(days=1)).all():raise ValueError('huecos recientes')
-            result=[]
+            result=[];patterns=detect(d.tail(300),last_only=True)
             for h,target in zip((1,5),dates):
-                preds,brier=predict(d,a['sim'],h)
+                preds,brier=predict(d,a['sim'],h,patterns)
                 result.append({'sim':a['sim'],'coinbase':a.get('coinbase'),'tipo':a['tipo'],
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
-                    'volumen_filtro_usd':a.get('volumen_medio_usd') or a.get('volumen_24h_usd')})
+                    'volumen_filtro_usd':liquidity})
             return result,None
         except Exception as e:return [],{'sim':a['sim'],'error':str(e)[:150]}
     with cf.ThreadPoolExecutor(max_workers=6) as pool:
@@ -133,9 +139,9 @@ def generate(kind,now=None):
     # Comprobar nuevamente después de descargar todo.
     published=dt.datetime.now(UTC)
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')
-    save_once(path,{'version':1,'publicado':published.isoformat(),'deadline':deadline.isoformat(),
+    save_once(path,{'version':2,'publicado':published.isoformat(),'deadline':deadline.isoformat(),
         'run_id':os.environ.get('GITHUB_RUN_ID'),'tipo':kind,'filas':rows,'fallas':failures,
-        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, validacion final20%, sin ajuste por resultado',
+        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte, sin ajuste por resultado',
         'predictores_registrados':5+sum(bool(r['direccion']) for r in catalog()),
         'aviso':'Dirección entre cierre anterior y cierre objetivo. Patrones se abstienen sin señal. No es simulación de ejecución.'})
 
@@ -183,6 +189,14 @@ def summary(rows):
             acierto_pct=100*wins/n,brier=float(np.mean([(r['p']-r['y'])**2 for r in group])),
             ic95_descriptivo=wilson(wins,n),diferencia_sube_siempre=mean,ic95_por_dia=ci,
             azar_pct=100*np.mean([r['azar_acierto'] for r in group])))
+        for control,field in (('siempre','siempre_acierto'),('azar','azar_acierto')):
+            diffs=np.array([np.mean([r['acierto']-r[field] for r in g]) for g in daily.values()])
+            mean=float(diffs.mean());z=diffs-mean;n_days=len(z)
+            variance=float(z@z/n_days)
+            for lag in range(1,min(6,n_days)):
+                variance+=2*(1-lag/6)*float(z[lag:]@z[:-lag]/n_days)
+            se=math.sqrt(max(0,variance)/n_days)
+            out[-1]['p_'+control]=float(norm.sf(mean/se)) if n_days>=30 and se>0 else 1.
     return out
 
 
@@ -232,6 +246,14 @@ def score(now=None):
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'etiquetas':len(allrows),
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
+    from lab.enciclopedia import bh
+    tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}
+    adjusted=bh(tests)
+    for window in ('acumulado','diario','ventana_30d'):
+        for i,s in enumerate(r[window]):
+            for control in ('siempre','azar'):s['q_'+control]=adjusted[f'{window}:{i}:{control}']
+    r['contrastes_calculados']=len(tests)
+    r['inferencia']='BH global sobre todos los contrastes calculados de3 ventanas, tipos/sectores/horizontes. Pruebas por diferencias de aciertos agrupadas por día, Newey-West5lags, mínimo30días; de lo contrario p=1. No demuestra rendimiento neto.'
     (ROOT/'resultados/marcador.json').write_text(json.dumps(r,ensure_ascii=False,allow_nan=False),encoding='utf8')
     print('Etiquetas:',len(allrows),'Pronósticos:',r['pronosticos_registrados'])
 

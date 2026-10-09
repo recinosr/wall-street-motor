@@ -48,7 +48,7 @@ CATALOGO = [
     ("ARKK", "ARK Innovation", "Temático", "EE. UU.", "reparte", 1),
     ("DIA", "SPDR Dow Jones Industrial", "EE. UU. grandes", "EE. UU.", "reparte", 1),
 ]
-CATALOGO += [('ITA', 'ITA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('XAR', 'XAR ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('PPA', 'PPA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('SHLD', 'SHLD ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('CIBR', 'CIBR ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('HACK', 'HACK ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('BOTZ', 'BOTZ ? IA y rob?tica', 'IA y rob?tica', 'EE. UU.', 'reparte', 1), ('AIQ', 'AIQ ? IA y rob?tica', 'IA y rob?tica', 'EE. UU.', 'reparte', 1), ('XLV', 'XLV ? Salud', 'Salud', 'EE. UU.', 'reparte', 1), ('XLE', 'XLE ? Energ?a', 'Energ?a', 'EE. UU.', 'reparte', 1), ('XLF', 'XLF ? Finanzas', 'Finanzas', 'EE. UU.', 'reparte', 1), ('IWM', 'IWM ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VB', 'VB ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VIG', 'VIG ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('DGRO', 'DGRO ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('URA', 'URA ? Uranio', 'Uranio', 'EE. UU.', 'reparte', 1), ('EWZ', 'EWZ ? Brasil', 'Brasil', 'EE. UU.', 'reparte', 1), ('EWW', 'EWW ? M?xico', 'M?xico', 'EE. UU.', 'reparte', 1), ('INDA', 'INDA ? India', 'India', 'EE. UU.', 'reparte', 1), ('FXI', 'FXI ? China', 'China', 'EE. UU.', 'reparte', 1), ('EWJ', 'EWJ ? Jap?n', 'Jap?n', 'EE. UU.', 'reparte', 1), ('VNQ', 'VNQ ? Inmobiliario', 'Inmobiliario', 'EE. UU.', 'reparte', 1), ('SHY', 'SHY ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('BIL', 'BIL ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('GDX', 'GDX ? Oro minero', 'Oro minero', 'EE. UU.', 'reparte', 1), ('ETHA', 'ETHA ? Ethereum', 'Ethereum', 'EE. UU.', 'no paga', 1)]
+CATALOGO += [('ITA', 'ITA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('XAR', 'XAR ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('PPA', 'PPA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('SHLD', 'SHLD ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('CIBR', 'CIBR ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('HACK', 'HACK ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('BOTZ', 'BOTZ ? IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('AIQ', 'AIQ ? IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('XLV', 'XLV ? Salud', 'Salud', 'EE. UU.', 'reparte', 1), ('XLE', 'XLE ? Energía', 'Energía', 'EE. UU.', 'reparte', 1), ('XLF', 'XLF ? Finanzas', 'Finanzas', 'EE. UU.', 'reparte', 1), ('IWM', 'IWM ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VB', 'VB ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VIG', 'VIG ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('DGRO', 'DGRO ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('URA', 'URA ? Uranio', 'Uranio', 'EE. UU.', 'reparte', 1), ('EWZ', 'EWZ ? Brasil', 'Brasil', 'EE. UU.', 'reparte', 1), ('EWW', 'EWW ? México', 'México', 'EE. UU.', 'reparte', 1), ('INDA', 'INDA ? India', 'India', 'EE. UU.', 'reparte', 1), ('FXI', 'FXI ? China', 'China', 'EE. UU.', 'reparte', 1), ('EWJ', 'EWJ ? Japón', 'Japón', 'EE. UU.', 'reparte', 1), ('VNQ', 'VNQ ? Inmobiliario', 'Inmobiliario', 'EE. UU.', 'reparte', 1), ('SHY', 'SHY ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('BIL', 'BIL ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('GDX', 'GDX ? Oro minero', 'Oro minero', 'EE. UU.', 'reparte', 1), ('ETHA', 'ETHA ? Ethereum', 'Ethereum', 'EE. UU.', 'no paga', 1)]
 
 # Gasto anual tomado de la ficha del emisor cuando la fuente automática no lo trae.
 TER_FICHA = {"VWRA.L": (0.14, "Vanguard, ficha 31-jul-2026 (bajó de 0.19 % el 28-jul-2026)"),
@@ -124,9 +124,9 @@ def ficha(sim, nombre, grupo, dom, pol, parte_us):
         f["gasto_anual_pct"], f["fuente_gasto"] = TER_FICHA[sim]
     # Costo estimado para un inversionista en Guatemala (puntos porcentuales por año)
     ter = f.get("gasto_anual_pct")
-    rd = f.get("rend_dividendo_pct") or 0
+    rd = f.get("rend_dividendo_pct")
     if dom == "EE. UU." and pol == "reparte":
-        ret = rd * 0.30
+        ret = rd * 0.30 if rd is not None else None
         nota = "EE. UU. retiene 30 % de cada dividendo (Guatemala no tiene tratado)."
     elif dom == "Irlanda":
         ret = DIV_SUBYACENTE.get(grupo, rd or 1.5) * parte_us * 0.15
@@ -134,19 +134,28 @@ def ficha(sim, nombre, grupo, dom, pol, parte_us):
     else:
         ret = 0.0
         nota = "No reparte dividendos."
-    f["retencion_estimada_pct"] = round(ret, 2)
-    f["costo_total_guatemala_pct"] = round((ter or 0) + ret, 2) if ter is not None else None
+    f["retencion_estimada_pct"] = round(ret, 2) if ret is not None else None
+    f["costo_total_guatemala_pct"] = round(ter + ret, 2) if ter is not None and ret is not None else None
     f["nota_costo"] = nota + " Costos parciales: faltan fondeo, cambio, intermediario, retiro e impuestos locales; disponibilidad desde Guatemala no verificada." + ("" if ter is not None else " Gasto anual no disponible en la fuente: revisa la ficha del emisor.")
     return f
 
 
 def construir():
     fichas = []
+    previous_path=RAIZ/("resultados" if (RAIZ/"resultados").is_dir() else "salida")/"etfs.json"
+    previous=json.loads(previous_path.read_text(encoding='utf8')) if previous_path.exists() else {}
+    saved={x['sim']:x for x in previous.get('etfs',[])}
     for fila in CATALOGO:
         try:
-            f = ficha(*fila)
-            f.pop("precio", None)
-            fichas.append(f)
+            item=ficha(*fila)
+            if not item.get('top') and saved.get(fila[0],{}).get('top'):
+                old=saved[fila[0]]
+                for key in ('top','sectores','peso_top10_pct','gasto_anual_pct','rend_dividendo_pct','retencion_estimada_pct','costo_total_guatemala_pct','nota_costo'):
+                    if key in old:item[key]=old[key]
+                item['posiciones_recuperadas_de']=old.get('posiciones_recuperadas_de',previous.get('actualizado'))
+                item['nota_cobertura']='La fuente no devolvió posiciones nuevas; última captura conservada, top10 parcial.'
+            item.pop("precio", None)
+            fichas.append(item)
         except Exception as e:
             fichas.append({"sim": fila[0], "nombre": fila[1], "grupo": fila[2], "error": str(e)[:100]})
         time.sleep(0.4)

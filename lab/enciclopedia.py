@@ -123,7 +123,7 @@ def catalog():
     return out
 
 
-def detect(df):
+def detect(df, last_only=False):
     """Solo operaciones rolling/shift hacia atrás y pivotes ya confirmados."""
     o,h,l,c,v = (df[k] for k in ['open','high','low','close','volume'])
     b=(c-o).abs(); r=(h-l).replace(0,np.nan)
@@ -202,6 +202,7 @@ def detect(df):
         if hv[j]>max(hv[j-3:j]) and hv[j]>=max(hv[j+1:i+1]): highs.append(j)
         if lv[j]<min(lv[j-3:j]) and lv[j]<=min(lv[j+1:i+1]): lows.append(j)
         highs=[x for x in highs if x>=i-60]; lows=[x for x in lows if x>=i-60]
+        if last_only and i!=len(df)-1: continue
         if not highs or not lows: continue
         resistance=hv[highs[-1]]; support=lv[lows[-1]]
         ru=cv[i]>resistance*1.005 and cv[i-1]<=resistance*1.005

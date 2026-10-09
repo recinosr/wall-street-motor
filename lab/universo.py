@@ -45,7 +45,8 @@ def history(sim, period='2y'):
     q = j['indicators']['quote'][0]
     d = pd.DataFrame(q, index=pd.to_datetime(j['timestamp'], unit='s', utc=True))
     # Solo velas de sesiones terminadas. No usar la vela intradía de Yahoo.
-    d = d[d.index.normalize() + pd.Timedelta(hours=21, minutes=15) <= pd.Timestamp.now(tz='UTC')]
+    settled=d.index.normalize()+(pd.Timedelta(days=1) if sim.endswith('-USD') else pd.Timedelta(hours=21,minutes=15))
+    d = d[settled <= pd.Timestamp.now(tz='UTC')]
     return d.dropna(subset=['close'])
 
 

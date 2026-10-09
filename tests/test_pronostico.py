@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary
+from lab.enciclopedia import detect
 
 class ForecastTests(unittest.TestCase):
     def test_holiday_and_weekend(self):
@@ -33,3 +34,8 @@ class ForecastTests(unittest.TestCase):
     def test_no_fake_score(self):
         self.assertEqual(summary([]),[]);self.assertIsNone(wilson(0,0))
         self.assertLess(wilson(5,10)[0],.5)
+    def test_last_pattern_optimization_identical(self):
+        rng=np.random.default_rng(55);c=100*np.exp(np.cumsum(rng.normal(0,.03,300)))
+        d=pd.DataFrame({'close':c,'open':c*.99,'high':c*1.02,'low':c*.98,'volume':rng.uniform(1e5,1e6,300)})
+        full=detect(d);last=detect(d,last_only=True)
+        self.assertEqual({k:bool(v.iloc[-1]) for k,v in full.items()},{k:bool(v.iloc[-1]) for k,v in last.items()})

@@ -72,10 +72,10 @@ def simulate(d,entry,exit_signal,strategy,seconds):
             price=None;reason=None
             if gap:price=o[i];reason='hueco';gap_exits+=1
             elif o[i]<=floor:price=o[i];reason='stop_gap'
+            elif sell[i-1] and c[i-1]>entryprice*(1+COST)/(1-COST):price=o[i];reason='senal'
             elif l[i]<=floor:price=floor;reason='stop'  # peor orden si toca también ROI
             elif o[i]>=ceiling:price=o[i];reason='roi_gap'
             elif h[i]>=ceiling:price=ceiling;reason='roi'
-            elif sell[i-1] and c[i-1]>entryprice*(1+COST)/(1-COST):price=o[i];reason='senal'
             if price is not None:
                 cash=qty*price*(1-COST);trades.append({'inicio':opened,'fin':i,'neto':price/entryprice*(1-COST)/(1+COST)-1,'salida':reason});qty=0.
         # Evitar reentrada en vela de salida y señales opuestas simultáneas.
