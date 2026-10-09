@@ -19,6 +19,14 @@ La app privada consulta `resultados/enciclopedia.json` mediante `/api/encicloped
 
 `resultados/*.json` contiene vistas compactas de la última corrida. Los resultados negativos se publican igual que los positivos. Ningún resultado retrospectivo demuestra una ventaja futura. Entrenar y seleccionar muchas reglas exige contar todas las pruebas y corregir comparaciones múltiples; el gimnasio informa su número de candidatos y la fábrica aplica Benjamini–Hochberg a las 324 variantes definidas.
 
+## Cierre tarea11, 9-oct-2026 UTC
+
+Enciclopedia:75 patrones,525 combinaciones,9,450 contrastes globales BH;500 activos procesados y5 fallas documentadas. Corte verificado31-mar-2025.93 contrastes pasan BH,3 combinaciones agrupadas pasan ambos controles, **ninguna regla aporta ventaja positiva estable**. No hay patrones etiquetados contrarios al libro con los requisitos corregidos; esto no demuestra efecto cero. Marubozu bajista tiene media neta negativa; las dos salidas de tres métodos descendentes tienen muestras pequeñas por segmento temporal. No se habilitan automáticamente como reglas cripto.
+
+La demo tiene cron activo cada10min, tres corridas manuales verificadas y cuentas nuevas intactas de1000USD por activo. Intenciones, recibos, cotizaciones futuras y corroboración pública Kraken; última observación en el JSON. Puntualidad real del cron aún pendiente de observar al cierre. La biblioteca privada contiene70 hipótesis y filtros SEC descriptivos, sin afirmar rendimientos futuros.
+
+Pruebas finales del motor:63 correctas. Medición completa y reparación de soloBTC/ETH exitosas; se reutilizaron métricas de acciones. El intento lento cancelado consumió195.05min sumados de jobs; corrida optimizada23.30min y reparación2.00min. Son tiempos de ejecución, no una factura. Código, métricas y correcciones publicados; OHLC licenciados y archivo reservado no se publicaron.
+
 ## Reproducir
 
 Python 3.12:
