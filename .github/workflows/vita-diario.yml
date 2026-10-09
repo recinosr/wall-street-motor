@@ -25,7 +25,7 @@ jobs:
       - run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
-          git add resultados/vita_diario.json resultados/vita_diario/
+          git add resultados/vita_diario.json resultados/vita_diario/ resultados/indice_activos.json
           git diff --cached --quiet && exit 0
           git commit -m "diario Vita $GITHUB_RUN_ID"
           git pull --rebase origin main

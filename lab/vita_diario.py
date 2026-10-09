@@ -29,7 +29,21 @@ def build(directory,day):
              'patrones_contrastes':e.get('pruebas_BH'),'patrones_pasan':e.get('pruebas_pasan_BH'),
              'robots_contrastes':robots.get('pruebas_declaradas'),'robots_casos':len(robots.get('casos',[])),
              'decisiones_demo_acumuladas':demo.get('total_decisions',0),'cuentas_demo':accounts}
-    return {'version':1,'fecha':day,'fuentes':sources,'fuentes_no_disponibles':failures,
+    phrases=[]
+    if isinstance(e.get('patrones'),int) and isinstance(e.get('patrones_pasan'),int):
+        phrases.append(f"En el estudio histórico desde {e.get('begin','fecha no disponible')} hasta antes de {e.get('end_exclusive','fecha no disponible')} medí {e['patrones']} patrones: {e['patrones_pasan']} pasan todos los criterios después de costos. No es una medición de esta semana.")
+    cases=robots.get('casos',[])
+    if cases:
+        rules=len({c.get('estrategia') for c in cases})
+        winners=sum(c.get('supera_ambos') is True for c in cases)
+        phrases.append(f"Probé {rules} robots en {len(cases)} casos históricos: {winners} superan a mantener y al azar con corrección por pruebas múltiples.")
+    for symbol,a in sorted(accounts.items()):
+        if isinstance(a.get('net_liquidation'),(int,float)) and isinstance(a.get('hold_equity'),(int,float)):
+            phrases.append(f"En la demo {symbol} llevo US${a['net_liquidation']:,.2f} frente a US${a['hold_equity']:,.2f} si hubiera mantenido, al corte {a.get('quote_time') or 'no disponible'}; son cuentas ficticias con reglas, no decisiones del chat.")
+            break
+    phrases.append(f"Tengo {m.get('etiquetas',0)} etiquetas maduras de pronósticos y {m.get('pronosticos_registrados',0)} archivos registrados; sin etiquetas no puedo medir aciertos.")
+    phrases.append("Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada.")
+    return {'version':2,'fecha':day,'fuentes':sources,'fuentes_no_disponibles':failures,'frases':phrases,
             'que_probo_hoy':tested,'que_aprendio':learned,
             'que_piensa_probar_manana':['Seguir las reglas publicadas y esperar etiquetas maduras; no se cambia la política ni se crea un ensayo nuevo.'],
             'como_voy':{'pronosticos':forecasts,'demo_contra_mantener':accounts},
@@ -41,6 +55,12 @@ def main():
     value=build(a.resultados,a.fecha);root=Path(a.resultados);root.mkdir(parents=True,exist_ok=True)
     text=json.dumps(value,ensure_ascii=False,allow_nan=False,indent=2)+'\n'
     (root/'vita_diario.json').write_text(text,encoding='utf8')
+    # Solo nombres/símbolos para Vita: no copiar fundamentales ni el universo completo.
+    try:
+        universe=json.loads((root/'universo.json').read_text(encoding='utf8'))
+        index={'actualizado':universe.get('actualizado'),'activos':[{'sim':x['sim'],'nombre':x.get('nombre','')} for x in universe.get('datos',[]) if x.get('sim')]}
+        (root/'indice_activos.json').write_text(json.dumps(index,ensure_ascii=False,allow_nan=False)+'\n',encoding='utf8')
+    except (OSError,ValueError):pass
     archive=root/'vita_diario';archive.mkdir(exist_ok=True);(archive/(a.fecha+'.json')).write_text(text,encoding='utf8')
     print('Diario',a.fecha,'fuentes',len(value['fuentes']),'no disponibles',len(value['fuentes_no_disponibles']))
 
