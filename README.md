@@ -4,6 +4,8 @@ Laboratorio público y autocontenido de simulación con velas de un minuto de BT
 
 ## Rutinas
 
+La app privada consulta `resultados/enciclopedia.json` mediante `/api/enciclopedia`, con caché de una hora. Su catálogo documenta75 reglas y siete salidas; los colores describen evidencia retrospectiva corregida, no promesas. Los datos fuente se descargan en ejecución: el reporte contiene métricas y cobertura, nunca OHLC. `enciclopedia.yml` ejecuta ocho lotes semanales y una BH global antes de publicar.
+
 | Rutina | Frecuencia | Método |
 | --- | --- | --- |
 | `archivar` | diaria | Descarga el día UTC anterior de Coinbase y fusiona sin duplicar. |
