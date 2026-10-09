@@ -21,11 +21,14 @@
       "sha256": "1fbe0a4d2c6ae7025b38f1848c82dffa77270ec04488a6be7b1246c88d7d0ead",
       "fecha": "2026-10-09T13:55:06.607799+00:00",
       "actualizado_hoy": true
+    },
+    "carteras_robots": {
+      "sha256": "5535688b5f4b68dae7dde9f124dd494d3e6106c1fb5802740d28f7c518340689",
+      "fecha": "2026-10-09T16:25:25.725024+00:00",
+      "actualizado_hoy": true
     }
   },
-  "fuentes_no_disponibles": [
-    "carteras_robots"
-  ],
+  "fuentes_no_disponibles": [],
   "que_probo_hoy": [
     {
       "fuente": "marcador",
@@ -46,6 +49,11 @@
       "fuente": "robots",
       "descripcion": "Banco histórico de robots públicos",
       "fecha_resultado": "2026-10-09T13:55:06.607799+00:00"
+    },
+    {
+      "fuente": "carteras_robots",
+      "descripcion": "Comparación retrospectiva de reglas sistemáticas",
+      "fecha_resultado": "2026-10-09T16:25:25.725024+00:00"
     }
   ],
   "que_aprendio": {
