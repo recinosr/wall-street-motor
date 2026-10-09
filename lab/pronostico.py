@@ -62,15 +62,16 @@ def fetch(asset):
     return coin_history(asset['coinbase']) if asset['tipo']=='cripto' and asset.get('coinbase') and not asset.get('coinbase_inactivo') else history(asset['sim'],'5y')
 
 
-def features(d):
+def features(d,crypto=False):
     c=d.close
+    month,year=(30,365) if crypto else (21,252)
     return pd.DataFrame({'r1':c.pct_change(),'r5':c.pct_change(5),
-        'mom':c.shift(21)/c.shift(252)-1,'vol':c.pct_change().rolling(20).std(),
+        'mom':c.shift(month)/c.shift(year)-1,'vol':c.pct_change().rolling(20).std(),
         'dist':c/c.rolling(200).mean()-1},index=d.index)
 
 
 def predict(d,sim,horizon,patterns=None):
-    x=features(d); last=x.iloc[-1]
+    x=features(d,crypto=sim.endswith('-USD')); last=x.iloc[-1]
     out={'sube_siempre':1.,'azar':float(int(hashlib.sha256((sim+str(d.index[-1])+str(horizon)).encode()).hexdigest()[:8],16)%2)}
     if pd.notna(last['mom']):out['momentum_12_1']=float(last['mom']>=0)
     if pd.notna(last['r5']):out['reversion_5d']=float(last['r5']<=0)
@@ -133,7 +134,7 @@ def generate(kind,now=None):
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
-                    'contexto_previo':{k:float(v) for k,v in features(d).iloc[-1].items() if pd.notna(v)},
+                    'contexto_previo':{k:float(v) for k,v in features(d,crypto=a['tipo']=='cripto').iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
             return result,None
         except Exception as e:return [],{'sim':a['sim'],'error':str(e)[:150]}

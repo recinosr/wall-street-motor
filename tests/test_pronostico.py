@@ -26,6 +26,10 @@ class ForecastTests(unittest.TestCase):
         d=pd.DataFrame({'close':np.arange(1,501,dtype=float)})
         a=features(d);d.iloc[400:]=1e8;b=features(d)
         pd.testing.assert_frame_equal(a.iloc[:400],b.iloc[:400])
+    def test_crypto_year_month_are_calendar_days(self):
+        d=pd.DataFrame({'close':np.arange(1,501,dtype=float)})
+        self.assertAlmostEqual(features(d,crypto=True).mom.iloc[-1],470/135-1)
+        self.assertAlmostEqual(features(d).mom.iloc[-1],479/248-1)
     def test_predict_probability(self):
         rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
         d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))

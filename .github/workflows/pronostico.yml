@@ -33,8 +33,8 @@ jobs:
       - name: Registrar antes de la apertura; cripto solo ventana UTC00
         if: github.event.schedule != '45 21 * * *'
         run: |
-          python -m lab.pronostico registrar --tipo acción
           python -m lab.pronostico registrar --tipo cripto
+          python -m lab.pronostico registrar --tipo acción
       - name: Refrescar contador después del registro; no calificar el resultado futuro
         env:
           GH_TOKEN: ${{ github.token }}
