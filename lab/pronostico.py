@@ -30,6 +30,10 @@ def digest(obj):
     return hashlib.sha256(json.dumps(obj,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
 
 
+def git_read(*args):
+    return subprocess.check_output(['git','-c','safe.directory=*',*args],cwd=ROOT,text=True,encoding='utf8')
+
+
 def targets(now,kind):
     day=pd.Timestamp(now.date())
     if kind=='cripto':
@@ -55,7 +59,7 @@ def coin_history(product):
 
 
 def fetch(asset):
-    return coin_history(asset['coinbase']) if asset['tipo']=='cripto' and asset.get('coinbase') else history(asset['sim'],'5y')
+    return coin_history(asset['coinbase']) if asset['tipo']=='cripto' and asset.get('coinbase') and not asset.get('coinbase_inactivo') else history(asset['sim'],'5y')
 
 
 def features(d):
@@ -152,12 +156,12 @@ def receipt(path,payload):
     body={k:v for k,v in payload.items() if k!='sha256'}
     if digest(body)!=payload['sha256']:raise ValueError('Hash alterado')
     rel=path.relative_to(ROOT).as_posix()
-    commit=subprocess.check_output(['git','log','--diff-filter=A','--format=%H','--',rel],cwd=ROOT,text=True).strip().splitlines()
+    commit=git_read('log','--diff-filter=A','--format=%H','--',rel).strip().splitlines()
     if len(commit)!=1:return None
     sha=commit[0]
-    original=json.loads(subprocess.check_output(['git','show',sha+':'+rel],cwd=ROOT,text=True,encoding='utf8'))
+    original=json.loads(git_read('show',sha+':'+rel))
     if original!=payload:raise ValueError('Pronóstico modificado después del commit inicial')
-    date=subprocess.check_output(['git','show','-s','--format=%cI',sha],cwd=ROOT,text=True).strip()
+    date=git_read('show','-s','--format=%cI',sha).strip()
     if pd.Timestamp(date)>=pd.Timestamp(payload['deadline']):return None
     token=os.environ.get('GH_TOKEN')
     if not token:return None
@@ -203,9 +207,12 @@ def summary(rows):
 
 def score(now=None):
     now=now or dt.datetime.now(UTC);directory=ROOT/'resultados/pronosticos';evaluations=ROOT/'resultados/calificaciones'
-    evaluations.mkdir(parents=True,exist_ok=True); failures=[]
+    evaluations.mkdir(parents=True,exist_ok=True); failures=[];registrations=[]
     for path in sorted(directory.glob('*.json')):
         payload=json.loads(path.read_text(encoding='utf8'));proof=receipt(path,payload)
+        registrations.append({'archivo':path.name,'publicado':payload['publicado'],'sha256':payload['sha256'],
+            'filas':len(payload['filas']),'tipo':payload['tipo'],'prueba':proof,
+            'estado':'recibo verificado; etiquetas futuras pendientes' if proof else 'recibo aún no verificado'})
         if not proof:continue
         cache={}
         for row in payload['filas']:
@@ -245,7 +252,7 @@ def score(now=None):
             'Resultados empresariales: fecha no disponible. Este contexto no demuestra la causa.'})
     r={'version':1,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
-        'pronosticos_registrados':len(list(directory.glob('*.json'))),'etiquetas':len(allrows),
+        'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
     from lab.enciclopedia import bh
     tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}

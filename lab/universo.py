@@ -106,12 +106,17 @@ def crypto():
                 'fuente':'CoinGecko'}
     except Exception as e: failures.append('CoinGecko: '+str(e)[:120])
     products=get('https://api.exchange.coinbase.com/products').json()
-    pairs=[p for p in products if p.get('quote_currency')=='USD' and not p.get('trading_disabled')]
+    pairs=[p for p in products if p.get('quote_currency')=='USD']
     def one(p):
         sym=p['base_currency']; match=next((x for x in assets.values() if x['sim']==sym+'-USD'),None)
         row=dict(match or {'sim':p['id'],'nombre':p.get('display_name',sym),'tipo':'cripto',
             'descripcion':DESCRIPTIONS.get(sym,'Criptoactivo negociado en Coinbase; utilidad pendiente de verificación.')})
         row['coinbase']=p['id']
+        row['coinbase_estado']=p.get('status')
+        if p.get('trading_disabled'):
+            row['coinbase_inactivo']=True
+            row['error_cobertura']='Par USD inactivo en Coinbase; no inventar cotización o cambios actuales.'
+            return row
         try:
             s=get('https://api.exchange.coinbase.com/products/'+p['id']+'/stats').json()
             row.update(precio=float(s['last']), volumen_24h_usd=float(s['volume'])*float(s['last']),

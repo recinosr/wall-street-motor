@@ -35,6 +35,10 @@ jobs:
         run: |
           python -m lab.pronostico registrar --tipo acción
           python -m lab.pronostico registrar --tipo cripto
+      - name: Refrescar contador después del registro; no calificar el resultado futuro
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m lab.pronostico calificar
       - uses: actions/upload-artifact@v4
         with:
           name: pronosticos-metricas
