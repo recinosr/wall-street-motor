@@ -263,22 +263,23 @@ def net_return(entry, exit_price, direction=1):
     return direction*(ratio-1)-COST*(1+ratio)
 
 
-def trade(df, i, mode, direction, stop=None):
+def trade(df, i, mode, direction, stop=None, prices=None):
     """Señal al cierre i; compra/short en open i+1. Empate stop/objetivo: stop.
     Brecha de salida: open real, nunca precio del stop si fue atravesado.
     No etiqueta inmadura ni cruza corte2016. R neto dividido riesgo inicial.
     """
     if i+1>=len(df): return None
-    entry=float(df.open.iat[i+1]); h=int(mode.split('_')[1]) if mode.startswith('fijo') else 20
+    prices=prices if prices is not None else df[['open','high','low','close']].to_numpy(float)
+    entry=float(prices[i+1,0]); h=int(mode.split('_')[1]) if mode.startswith('fijo') else 20
     if i+h>=len(df): return None
     if df.index[i]<pd.Timestamp(SPLIT,tz='UTC')<=df.index[i+h]: return None
     if mode.startswith('fijo'):
-        return net_return(entry,float(df.close.iat[i+h]),direction),h,None
+        return net_return(entry,float(prices[i+h,3]),direction),h,None
     risk=direction*(entry-stop)
     if risk<=0 or risk/entry>.5: return None
     target=entry+direction*int(mode.split('_')[1])*risk
     for j in range(i+1,i+21):
-        opening,hi,lo,close=(float(df[k].iat[j]) for k in ['open','high','low','close'])
+        opening,hi,lo,close=prices[j]
         if direction*(opening-stop)<=0: price=opening
         elif direction*(opening-target)>=0: price=opening
         elif (lo<=stop if direction==1 else hi>=stop): price=stop
@@ -319,7 +320,7 @@ def measure_asset(symbol,df):
     misma frecuencia sin reemplazo; conserva distribución de distancia del stop.
     Base: retorno normal neto direccional del activo y duración realmente observada.
     """
-    patterns=detect(df); out={}
+    patterns=detect(df); out={}; prices=df[['open','high','low','close']].to_numpy(float)
     forward={}
     for direction in [-1,1]:
         for h in [1,5,10,20]:
@@ -331,12 +332,12 @@ def measure_asset(symbol,df):
     for p in catalog():
         direction=p['direccion'] or 1
         stop_series=(df.low.rolling(p['extremo_velas'],min_periods=1).min() if direction==1 else df.high.rolling(p['extremo_velas'],min_periods=1).max())
-        indices=np.flatnonzero(patterns[p['id']].to_numpy())
+        indices=np.flatnonzero(patterns[p['id']].to_numpy()); stops=stop_series.to_numpy(float)
         for mode in EXITS:
             key=p['id']+'|'+mode; events=[]; last_exit=-1
             for i in indices:
                 if i+1<=last_exit: continue
-                stop=float(stop_series.iat[i]); result=trade(df,i,mode,direction,stop)
+                stop=float(stops[i]); result=trade(df,i,mode,direction,stop,prices)
                 if result is None: continue
                 value,h,risk_r=result; last_exit=i+h
                 period='antes2016' if df.index[i].year<2016 else 'desde2016'
@@ -346,7 +347,7 @@ def measure_asset(symbol,df):
                     group=df.index.year<2016 if period=='antes2016' else df.index.year>=2016
                     if period=='antes2016': group=group & (np.arange(len(df))+h < np.searchsorted(df.index,pd.Timestamp(SPLIT,tz='UTC')))
                     forward[(direction,h,period)]=float(vals[group].mean())
-                risk=direction*(float(df.open.iat[i+1])-stop)/float(df.open.iat[i+1])
+                risk=direction*(prices[i+1,0]-stop)/prices[i+1,0]
                 events.append(dict(date=df.index[i].date().isoformat(),net=value,normal=forward[(direction,h,period)],
                                    period=period,r=risk_r,risk=risk,h=h))
             seed=int(hashlib.sha256((symbol+key).encode()).hexdigest()[:16],16)
@@ -375,16 +376,16 @@ def measure_asset(symbol,df):
                     rotation=int(rng.integers(0,len(candidates))) if candidates else 0
                     for j in np.roll(candidates,rotation):
                         if any(start<=j<end for start,end in chosen): continue
-                        e=group[len(chosen)]; entry=float(df.open.iat[j+1])
-                        trial=trade(df,j,mode,direction,entry*(1-direction*e['risk']))
+                        e=group[len(chosen)]; entry=float(prices[j+1,0])
+                        trial=trade(df,j,mode,direction,entry*(1-direction*e['risk']),prices)
                         if trial and all(j+trial[1]<=start or j>=end for start,end in chosen): chosen.append((j,j+trial[1]))
                         if len(chosen)==len(group): break
                 if len(chosen)<len(group):
                     for e in group: e['random']=None
                     continue
                 for e,(j,_) in zip(group,chosen):
-                    entry=float(df.open.iat[j+1]); stop=entry*(1-direction*e['risk'])
-                    result=trade(df,j,mode,direction,stop)
+                    entry=float(prices[j+1,0]); stop=entry*(1-direction*e['risk'])
+                    result=trade(df,j,mode,direction,stop,prices)
                     e['random']=result[0] if result else None
             # Derived date-level metrics only, no raw OHLC.
             out[key]=[dict(e,symbol=symbol) for e in events if e.get('random') is not None]

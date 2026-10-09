@@ -35,6 +35,14 @@ class EncyclopediaTest(unittest.TestCase):
         self.assertIsNone(trade(d,29,'fijo_1',1))
         self.assertIsNone(trade(d,0,'ratio_1',1,60))
 
+    def test_batch_prices_equal_reference(self):
+        d=fixture(70);prices=d[['open','high','low','close']].to_numpy(float)
+        for i in range(0,50,7):
+            for mode in ['fijo_1','fijo_5','ratio_1','ratio_3']:
+                for direction in [-1,1]:
+                    stop=float(d.close.iat[i])*(.97 if direction==1 else 1.03)
+                    self.assertEqual(trade(d,i,mode,direction,stop),trade(d,i,mode,direction,stop,prices))
+
     def test_split_prevents_leakage(self):
         d=fixture(30); d.index=pd.date_range('2015-12-25',periods=30,tz='UTC')
         self.assertIsNone(trade(d,0,'fijo_10',1))
