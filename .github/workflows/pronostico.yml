@@ -8,7 +8,7 @@ permissions:
   contents: write
   actions: read
 concurrency:
-  group: motor-main
+  group: pronostico-calculo
   queue: max
   cancel-in-progress: false
 jobs:
@@ -35,10 +35,34 @@ jobs:
         run: |
           python -m lab.pronostico registrar --tipo acción
           python -m lab.pronostico registrar --tipo cripto
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pronosticos-metricas
+          path: |
+            resultados/pronosticos/
+            resultados/calificaciones/
+            resultados/marcador.json
+  publicar:
+    needs: registrar
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: motor-main
+      queue: max
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: pronosticos-metricas
+          path: resultados/
       - name: Publicar cadena verificable sin reescribir pasado
         run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
+          mkdir -p resultados/pronosticos resultados/calificaciones
           git add resultados/pronosticos/ resultados/calificaciones/ resultados/marcador.json
           git diff --cached --quiet && exit 0
           git commit -m "pronósticos y marcador $GITHUB_RUN_ID"

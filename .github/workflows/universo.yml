@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: motor-main
+  group: universo-calculo
   queue: max
   cancel-in-progress: false
 jobs:

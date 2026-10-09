@@ -1,0 +1,61 @@
+name: Robots públicos banco de pruebas
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: robots-medicion
+  cancel-in-progress: false
+jobs:
+  medir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        activo: [BTC, ETH, LINK, SOL]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_robots.py
+      - run: python -m lab.robots --activo ${{ matrix.activo }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robots-${{ matrix.activo }}
+          path: resultados/robots_partes/*.json
+  publicar:
+    needs: medir
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    concurrency:
+      group: motor-main
+      queue: max
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: robots-*
+          merge-multiple: true
+          path: resultados/robots_partes/
+      - run: python -m lab.robots --finalizar
+      - run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/robots.json resultados/robots_partes/
+          git commit -m "robots públicos medidos $GITHUB_RUN_ID"
+          git pull --rebase origin main
+          git push origin main

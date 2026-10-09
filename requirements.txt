@@ -7,3 +7,5 @@ scipy>=1.12
 lxml>=5
 yfinance>=0.2.54
 exchange_calendars>=4.5
+
+TA-Lib>=0.6.5

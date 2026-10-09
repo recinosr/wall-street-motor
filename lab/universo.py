@@ -153,18 +153,25 @@ def build():
                     x['fuentes_fundamentales']=fund[x['cik']]
         except Exception as e: failures.append('SEC: '+str(e)[:100])
     symbols=list(stocks)
-    for i in range(0,len(symbols),20):
-        batch=symbols[i:i+20]
-        try:
-            for sym,m in spark(batch).items(): stocks[sym].update(m)
-        except Exception as e: failures.append('Spark '+','.join(batch)+': '+str(e)[:80])
-        time.sleep(.3)
+    print('Lista oficial:',len(symbols),'símbolos; SEC terminada',flush=True)
+    batches=[symbols[i:i+20] for i in range(0,len(symbols),20)]
+    def spark_batch(batch):
+        try:return spark(batch),None
+        except Exception as e:return {},'Spark '+','.join(batch)+': '+str(e)[:80]
+        finally:time.sleep(.3)
+    with cf.ThreadPoolExecutor(max_workers=8) as pool:
+        for i,(data,error) in enumerate(pool.map(spark_batch,batches)):
+            for sym,m in data.items():stocks[sym].update(m)
+            if error:failures.append(error)
+            if i%50==0:print('Spark lotes:',i,'/',len(batches),flush=True)
     # Chart tiene volumen; lotes concurrentes acotados, sin escribir precios fuente.
     def volume(sym):
         try: return sym,metrics(history(sym))
         except Exception: return sym,{'error_cobertura':'Sin historial/volumen verificable.'}
-    with cf.ThreadPoolExecutor(max_workers=6) as pool:
-        for sym,m in pool.map(volume,symbols): stocks[sym].update(m)
+    with cf.ThreadPoolExecutor(max_workers=12) as pool:
+        for i,(sym,m) in enumerate(pool.map(volume,symbols)):
+            stocks[sym].update(m)
+            if i%1000==0:print('Volumen:',i,'/',len(symbols),flush=True)
     coins,err=crypto(); failures+=err
     data=list(stocks.values())+coins
     result={'version':1,'actualizado':dt.datetime.now(dt.timezone.utc).isoformat(),
