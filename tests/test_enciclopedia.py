@@ -2,7 +2,7 @@ import unittest
 import json
 import numpy as np
 import pandas as pd
-from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return,measure_asset
+from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return,measure_asset,aggregate_dates,merge_dates
 
 
 def fixture(n=260):
@@ -71,5 +71,10 @@ class EncyclopediaTest(unittest.TestCase):
         events=[dict(date=f'2020-01-{i:02}',net=.01,normal=0,random=0,r=1) for i in range(1,25)]*4
         s=summarize(events);self.assertEqual(s['n'],96);self.assertEqual(s['fechas'],24)
         self.assertEqual(s['p_normal'],1);self.assertEqual(s['esperanza_R'],1)
+
+    def test_sufficient_statistics_preserve_measurement(self):
+        events=[dict(date=f'2020-02-{i:02}',net=.01*i,normal=.002,random=-.003,r=i/2) for i in range(1,25)]*4
+        a=aggregate_dates(events[:40]);merge_dates(a,aggregate_dates(events[40:]))
+        self.assertEqual(summarize(events),summarize(a))
 
 if __name__=='__main__': unittest.main()

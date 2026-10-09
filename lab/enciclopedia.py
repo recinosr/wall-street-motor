@@ -400,12 +400,30 @@ def measure_asset(symbol,df):
     return out
 
 
+def aggregate_dates(events):
+    """Sufficient date-level statistics; no need to retain millions of trade dicts."""
+    dates={}
+    for e in events:
+        row=dates.setdefault(e['date'],[0.,0.,0.,0.,0.,0.,0.])
+        row[0]+=1;row[1]+=e['net']>0;row[2]+=e['net'];row[3]+=e['normal'];row[4]+=e['random']
+        if e['r'] is not None: row[5]+=e['r'];row[6]+=1
+    return dates
+
+
+def merge_dates(target,source):
+    for date,values in source.items():
+        row=target.setdefault(date,[0.]*7)
+        for i,value in enumerate(values): row[i]+=value
+
+
 def summarize(events,seed=1):
     if not events: return dict(n=0,ganadoras=None,media_neta=None,p_normal=1.,p_azar=1.,t=None,ci_fecha=None,esperanza_R=None)
-    n=len(events); net=np.array([e['net'] for e in events]); base=np.array([e['normal'] for e in events]); rand=np.array([e['random'] for e in events])
+    dates=events if isinstance(events,dict) else aggregate_dates(events)
+    rows=np.array([dates[k] for k in sorted(dates)],dtype=float)
+    totals=rows.sum(axis=0);n=int(totals[0])
     # Cluster across assets by signal date. Moving20-date block bootstrap reduces overlap dependence.
-    frame=pd.DataFrame(dict(date=[e['date'] for e in events],normal=net-base,azar=net-rand,net=net))
-    daily=frame.groupby('date',sort=True).mean(); values=daily.to_numpy(); m=len(values)
+    values=np.column_stack([(rows[:,2]-rows[:,3])/rows[:,0],(rows[:,2]-rows[:,4])/rows[:,0],rows[:,2]/rows[:,0]])
+    m=len(values)
     mean=values.mean(axis=0); rng=np.random.default_rng(seed)
     if m<30 or n<30:
         p=[1.,1.]; t=None; ci=None
@@ -423,11 +441,10 @@ def summarize(events,seed=1):
         stats=np.divide(mean,se,out=np.zeros(3),where=se>0)
         p=[float(2*student.sf(abs(stats[i]),m-1)) if se[i]>0 else 1. for i in range(2)]
         t=float(stats[0]); ci=[float(x) for x in np.quantile(boot[:,2],[.025,.975])]
-    risk=[e['r'] for e in events if e['r'] is not None]
-    return dict(n=n,fechas=m,ganadoras=float((net>0).mean()),media_neta=float(net.mean()),
-                normal=float(base.mean()),azar=float(rand.mean()),exceso_normal=float((net-base).mean()),
-                exceso_azar=float((net-rand).mean()),p_normal=p[0],p_azar=p[1],t=t,ci_fecha=ci,
-                esperanza_R=float(np.mean(risk)) if risk else None,
+    return dict(n=n,fechas=m,ganadoras=float(totals[1]/n),media_neta=float(totals[2]/n),
+                normal=float(totals[3]/n),azar=float(totals[4]/n),exceso_normal=float((totals[2]-totals[3])/n),
+                exceso_azar=float((totals[2]-totals[4])/n),p_normal=p[0],p_azar=p[1],t=t,ci_fecha=ci,
+                esperanza_R=float(totals[5]/totals[6]) if totals[6] else None,
                 inferencia='t con error estándar bootstrap bloques20 fechas; activos agrupados por fecha; IC media de fechas')
 
 
@@ -442,18 +459,27 @@ def finalize(parts,output=ROOT/'resultados/enciclopedia.json'):
     combined={}; coverage={}; errors={}; minutes=0
     for part in parts:
         coverage.update(part['coverage']); errors.update(part['errors']); minutes+=part['minutes']
-        for key,events in part['events'].items(): combined.setdefault(key,[]).extend(events)
+        if 'aggregates' in part:
+            for key,groups in part['aggregates'].items():
+                targets=combined.setdefault(key,{})
+                for asset,dates in groups.items(): merge_dates(targets.setdefault(asset,{}),dates)
+        else:
+            for key,events in part['events'].items():
+                groups=combined.setdefault(key,{})
+                merge_dates(groups.setdefault('universo',{}),aggregate_dates(events))
+                for asset in ['BTC-USD','ETH-USD']:
+                    merge_dates(groups.setdefault(asset,{}),aggregate_dates(e for e in events if e['symbol']==asset))
     rows=[]; tests={}
     # Global correction includes FULL/pre/post x two contrasts x pool/BTC/ETH x all exits.
     for p in catalog():
         exits=[]
         for mode in EXITS:
-            events=combined.get(p['id']+'|'+mode,[]); groups={}
+            events=combined.get(p['id']+'|'+mode,{}); groups={}
             for asset in ['universo','BTC-USD','ETH-USD']:
-                selected=events if asset=='universo' else [e for e in events if e['symbol']==asset]
+                selected=events.get(asset,{})
                 groups[asset]={}
                 for period in ['total','antes2016','desde2016']:
-                    subset=selected if period=='total' else [e for e in selected if e['period']==period]
+                    subset=selected if period=='total' else {date:values for date,values in selected.items() if (date<SPLIT)==(period=='antes2016')}
                     key=p['id']+'|'+mode+'|'+asset+'|'+period
                     s=summarize(subset,int(hashlib.sha256(key.encode()).hexdigest()[:8],16))
                     groups[asset][period]=s
@@ -494,7 +520,7 @@ def finalize(parts,output=ROOT/'resultados/enciclopedia.json'):
 
 
 def batch(symbols,fetcher=fetch_daily):
-    started=time.monotonic(); result=dict(events={},coverage={},errors={},minutes=0)
+    started=time.monotonic(); result=dict(aggregates={},coverage={},errors={},minutes=0)
     # Download concurrently, measure deterministically one asset at a time. No persistent raw data.
     with ThreadPoolExecutor(max_workers=4) as pool:
         def get(symbol):
@@ -505,7 +531,10 @@ def batch(symbols,fetcher=fetch_daily):
             result['coverage'][symbol]=dict(first=df.index[0].date().isoformat(),last=df.index[-1].date().isoformat(),sessions=len(df),ten_years=(df.index[-1]-df.index[0]).days>=3652)
             try:
                 events=measure_asset(symbol,df)
-                for key,values in events.items(): result['events'].setdefault(key,[]).extend(values)
+                for key,values in events.items():
+                    group=result['aggregates'].setdefault(key,{})
+                    dates=aggregate_dates(values);merge_dates(group.setdefault('universo',{}),dates)
+                    if symbol in ['BTC-USD','ETH-USD']: merge_dates(group.setdefault(symbol,{}),dates)
             except Exception as exc:
                 result['coverage'].pop(symbol); result['errors'][symbol]='measure_'+type(exc).__name__
                 raise
@@ -519,8 +548,10 @@ if __name__=='__main__':
     parser.add_argument('--merge',type=Path); parser.add_argument('--output',type=Path); parser.add_argument('--symbols',nargs='+')
     args=parser.parse_args()
     if args.merge:
-        parts=[json.loads(p.read_text(encoding='utf8')) for p in sorted(args.merge.rglob('parte-*.json'))]
-        if len(parts)!=args.batches: raise ValueError('Faltan lotes: no aplicar BH parcial')
+        paths=sorted(args.merge.rglob('parte-*.json'))
+        if len(paths)!=args.batches: raise ValueError('Faltan lotes: no aplicar BH parcial')
+        # Stream one batch at a time; do not load all large artifacts into RAM.
+        parts=(json.loads(p.read_text(encoding='utf8')) for p in paths)
         result=finalize(parts,args.output or ROOT/'resultados/enciclopedia.json')
         print(json.dumps({k:result[k] for k in ['patrones','velas','pruebas_BH','patrones_pasan','patrones_contrarios','minutes_compute']}))
     else:
