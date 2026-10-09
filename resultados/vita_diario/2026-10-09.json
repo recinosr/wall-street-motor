@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "fecha": "2026-10-09",
+  "fuentes": {
+    "marcador": {
+      "sha256": "e7ddc100351721a76ad7ec9e8f79eb354fe59a6eca1e96d1c977db267e1bdc3e",
+      "fecha": "2026-10-09T14:10:20.013970+00:00",
+      "actualizado_hoy": true
+    },
+    "enciclopedia": {
+      "sha256": "f1cd9448dc773e54415ee70f2241589484144ff2acd9166f2fb25f653857ea81",
+      "fecha": "2026-10-09T04:52:51.262463+00:00",
+      "actualizado_hoy": true
+    },
+    "demo_cripto": {
+      "sha256": "0823fb011227f22e04b22a8091234edb7af136de3249351f5c783b3a71cff2bd",
+      "fecha": "2026-10-09T11:24:58.133025+00:00",
+      "actualizado_hoy": true
+    },
+    "robots": {
+      "sha256": "1fbe0a4d2c6ae7025b38f1848c82dffa77270ec04488a6be7b1246c88d7d0ead",
+      "fecha": "2026-10-09T13:55:06.607799+00:00",
+      "actualizado_hoy": true
+    }
+  },
+  "fuentes_no_disponibles": [
+    "carteras_robots"
+  ],
+  "que_probo_hoy": [
+    {
+      "fuente": "marcador",
+      "descripcion": "Registro y calificación de pronósticos publicados con recibo",
+      "fecha_resultado": "2026-10-09T14:10:20.013970+00:00"
+    },
+    {
+      "fuente": "enciclopedia",
+      "descripcion": "Pruebas históricas de patrones",
+      "fecha_resultado": "2026-10-09T04:52:51.262463+00:00"
+    },
+    {
+      "fuente": "demo_cripto",
+      "descripcion": "Observación de reglas cripto en cuentas ficticias",
+      "fecha_resultado": "2026-10-09T11:24:58.133025+00:00"
+    },
+    {
+      "fuente": "robots",
+      "descripcion": "Banco histórico de robots públicos",
+      "fecha_resultado": "2026-10-09T13:55:06.607799+00:00"
+    }
+  ],
+  "que_aprendio": {
+    "etiquetas_pronostico": 0,
+    "aciertos": [],
+    "patrones_contrastes": 9450,
+    "patrones_pasan": 93,
+    "robots_contrastes": 48,
+    "robots_casos": 24,
+    "decisiones_demo_acumuladas": 8,
+    "cuentas_demo": {
+      "BTC": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 999.3697507288907,
+        "vs_hold": 0.6302492711092782,
+        "fees": 0.0,
+        "quote_time": "2026-10-09T11:24:56.501105303Z"
+      },
+      "ETH": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 997.6333175337353,
+        "vs_hold": 2.366682466264706,
+        "fees": 0.0,
+        "quote_time": "2026-10-09T11:24:56.422669364Z"
+      }
+    }
+  },
+  "que_piensa_probar_manana": [
+    "Seguir las reglas publicadas y esperar etiquetas maduras; no se cambia la política ni se crea un ensayo nuevo."
+  ],
+  "como_voy": {
+    "pronosticos": [],
+    "demo_contra_mantener": {
+      "BTC": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 999.3697507288907,
+        "vs_hold": 0.6302492711092782,
+        "fees": 0.0,
+        "quote_time": "2026-10-09T11:24:56.501105303Z"
+      },
+      "ETH": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 997.6333175337353,
+        "vs_hold": 2.366682466264706,
+        "fees": 0.0,
+        "quote_time": "2026-10-09T11:24:56.422669364Z"
+      }
+    }
+  },
+  "aviso": "Resumen determinista de resultados disponibles, no reflexión de un LLM. Una fuente con fecha anterior no es una prueba hecha hoy. Acumulados no son aciertos del día. Sin etiquetas maduras, aún no se puede medir precisión. No hay ventaja futura demostrada."
+}
