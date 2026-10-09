@@ -133,9 +133,10 @@ def generate(kind,now=None):
             return result,None
         except Exception as e:return [],{'sim':a['sim'],'error':str(e)[:150]}
     with cf.ThreadPoolExecutor(max_workers=6) as pool:
-        for result,err in pool.map(one,assets):
+        for i,(result,err) in enumerate(pool.map(one,assets)):
             rows+=result
             if err:failures.append(err)
+            if i%500==0:print('Pronósticos activos:',i,'/',len(assets),flush=True)
     # Comprobar nuevamente después de descargar todo.
     published=dt.datetime.now(UTC)
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')

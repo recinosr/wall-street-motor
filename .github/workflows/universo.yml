@@ -27,6 +27,29 @@ jobs:
         env:
           SEC_CONTACT: ${{ secrets.SEC_CONTACT }}
       - run: python -m lab.etfs --salida resultados/etfs.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universo-metricas
+          path: |
+            resultados/universo.json
+            resultados/etfs.json
+            resultados/en_que_etfs.json
+  publicar:
+    needs: universo
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: motor-main
+      queue: max
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: universo-metricas
+          path: resultados/
       - name: Publicar solo métricas
         run: |
           git config user.name motor-bot
