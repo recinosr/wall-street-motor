@@ -1,0 +1,63 @@
+name: Enciclopedia semanal medida
+on:
+  schedule:
+    - cron: '35 3 * * 0'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  lotes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        batch: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_enciclopedia.py
+      - run: python -m lab.enciclopedia --batch ${{ matrix.batch }} --output partes/parte-${{ matrix.batch }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: enciclopedia-${{ matrix.batch }}
+          path: partes/parte-*.json
+          retention-days: 2
+  publicar:
+    needs: lotes
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    concurrency:
+      group: motor-main
+      queue: max
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: enciclopedia-*
+          path: partes
+          merge-multiple: true
+      - run: python -m lab.enciclopedia --merge partes
+      - name: Publicar solo métricas
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/enciclopedia.json
+          git diff --cached --quiet && exit 0
+          git commit -m "enciclopedia semanal $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin main
