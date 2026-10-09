@@ -9,3 +9,10 @@ dato histórico o demorado del motor en una cotización ejecutable.
 
 No se cambian series, cuentas, recibos ni rutinas del motor por una actualización
 de interfaz. Los resultados públicos siguen siendo experimentos ficticios.
+
+## Punto 3: Mercado
+
+La b?squeda combina nombres oficiales de `universo.json` y alias de la app.
+Acciones presenta primero S&P 500; ETFs, Cripto y Mis activos son segmentos
+separados. Buscar por nombre cruza todos los segmentos y muestra hasta 20
+coincidencias antes de recurrir al buscador externo.
