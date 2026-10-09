@@ -1,7 +1,8 @@
 import unittest
+import json
 import numpy as np
 import pandas as pd
-from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return
+from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return,measure_asset
 
 
 def fixture(n=260):
@@ -42,6 +43,21 @@ class EncyclopediaTest(unittest.TestCase):
                 for direction in [-1,1]:
                     stop=float(d.close.iat[i])*(.97 if direction==1 else 1.03)
                     self.assertEqual(trade(d,i,mode,direction,stop),trade(d,i,mode,direction,stop,prices))
+
+    def test_occupied_schedule_equals_pairwise_reference(self):
+        rng=np.random.default_rng(17)
+        for h in [1,5,10,20]:
+            chosen=[];fast=[];occupied=np.zeros(300,dtype=bool)
+            for j in rng.permutation(np.arange(280)):
+                if all(j>=end or j+h<=start for start,end in chosen): chosen.append((j,j+h))
+                if not occupied[j:j+h].any(): fast.append((j,j+h));occupied[j:j+h]=True
+            self.assertEqual(chosen,fast)
+
+    def test_derived_batch_is_json_serializable(self):
+        events=measure_asset('fixture',fixture(260))
+        restored=json.loads(json.dumps(events,allow_nan=False))
+        self.assertEqual(set(restored),set(events))
+        self.assertTrue(any(restored.values()))
 
     def test_split_prevents_leakage(self):
         d=fixture(30); d.index=pd.date_range('2015-12-25',periods=30,tz='UTC')

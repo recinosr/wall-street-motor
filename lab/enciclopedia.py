@@ -263,7 +263,7 @@ def net_return(entry, exit_price, direction=1):
     return direction*(ratio-1)-COST*(1+ratio)
 
 
-def trade(df, i, mode, direction, stop=None, prices=None):
+def trade(df, i, mode, direction, stop=None, prices=None, split=None):
     """Señal al cierre i; compra/short en open i+1. Empate stop/objetivo: stop.
     Brecha de salida: open real, nunca precio del stop si fue atravesado.
     No etiqueta inmadura ni cruza corte2016. R neto dividido riesgo inicial.
@@ -272,7 +272,8 @@ def trade(df, i, mode, direction, stop=None, prices=None):
     prices=prices if prices is not None else df[['open','high','low','close']].to_numpy(float)
     entry=float(prices[i+1,0]); h=int(mode.split('_')[1]) if mode.startswith('fijo') else 20
     if i+h>=len(df): return None
-    if df.index[i]<pd.Timestamp(SPLIT,tz='UTC')<=df.index[i+h]: return None
+    split=int(df.index.searchsorted(pd.Timestamp(SPLIT,tz='UTC'))) if split is None else split
+    if i<split<=i+h: return None
     if mode.startswith('fijo'):
         return net_return(entry,float(prices[i+h,3]),direction),h,None
     risk=direction*(entry-stop)
@@ -321,6 +322,9 @@ def measure_asset(symbol,df):
     Base: retorno normal neto direccional del activo y duración realmente observada.
     """
     patterns=detect(df); out={}; prices=df[['open','high','low','close']].to_numpy(float)
+    split=int(df.index.searchsorted(pd.Timestamp(SPLIT,tz='UTC')))
+    years=df.index.year.to_numpy();dates=[x.date().isoformat() for x in df.index]
+    candidate_cache={}
     forward={}
     for direction in [-1,1]:
         for h in [1,5,10,20]:
@@ -337,10 +341,10 @@ def measure_asset(symbol,df):
             key=p['id']+'|'+mode; events=[]; last_exit=-1
             for i in indices:
                 if i+1<=last_exit: continue
-                stop=float(stops[i]); result=trade(df,i,mode,direction,stop,prices)
+                stop=float(stops[i]); result=trade(df,i,mode,direction,stop,prices,split)
                 if result is None: continue
                 value,h,risk_r=result; last_exit=i+h
-                period='antes2016' if df.index[i].year<2016 else 'desde2016'
+                period='antes2016' if years[i]<2016 else 'desde2016'
                 # Exact normal return for every possible signal date of same duration/period.
                 if (direction,h,period) not in forward:
                     vals=pd.Series(net_return(df.open.shift(-1),df.close.shift(-h),direction),index=df.index)
@@ -348,20 +352,23 @@ def measure_asset(symbol,df):
                     if period=='antes2016': group=group & (np.arange(len(df))+h < np.searchsorted(df.index,pd.Timestamp(SPLIT,tz='UTC')))
                     forward[(direction,h,period)]=float(vals[group].mean())
                 risk=direction*(prices[i+1,0]-stop)/prices[i+1,0]
-                events.append(dict(date=df.index[i].date().isoformat(),net=value,normal=forward[(direction,h,period)],
-                                   period=period,r=risk_r,risk=risk,h=h))
+                events.append(dict(date=dates[i],net=float(value),normal=forward[(direction,h,period)],
+                                   period=period,r=float(risk_r) if risk_r is not None else None,risk=float(risk),h=int(h)))
             seed=int(hashlib.sha256((symbol+key).encode()).hexdigest()[:16],16)
             rng=np.random.default_rng(seed)
             for period in ['antes2016','desde2016']:
                 group=[e for e in events if e['period']==period]
                 if not group: continue
                 horizon=int(mode.split('_')[1]) if mode.startswith('fijo') else 20
-                candidates=[i for i in range(len(df)-horizon) if (df.index[i].year<2016)==(period=='antes2016') and
-                            (df.index[i+horizon].year<2016)==(period=='antes2016')]
+                if (horizon,period) not in candidate_cache:
+                    candidate_cache[(horizon,period)]=[i for i in range(len(df)-horizon) if (years[i]<2016)==(period=='antes2016') and
+                                                      (years[i+horizon]<2016)==(period=='antes2016')]
+                candidates=candidate_cache[(horizon,period)]
                 # Random control uses SAME nonoverlap convention and exactly n trades.
-                available=list(rng.permutation(candidates)); chosen=[]
+                available=list(rng.permutation(candidates)); chosen=[];occupied=np.zeros(len(df),dtype=bool)
                 for j in available:
-                    if all(j>=exit_i or j+horizon<=start_i for start_i,exit_i in chosen): chosen.append((j,j+horizon))
+                    if not occupied[j:j+horizon].any():
+                        chosen.append((j,j+horizon));occupied[j:j+horizon]=True
                     if len(chosen)==len(group): break
                 if len(chosen)<len(group) and mode.startswith('fijo'):
                     # Exact random schedule via random gaps; avoids greedy packing failure.
@@ -372,21 +379,22 @@ def measure_asset(symbol,df):
                         chosen=[(candidates[k],candidates[k]+horizon) for k in offsets]
                 if len(chosen)<len(group):
                     # Variable stop duration: randomize dates, enforce actual exits, same n.
-                    chosen=[]
+                    chosen=[];occupied[:]=False
                     rotation=int(rng.integers(0,len(candidates))) if candidates else 0
                     for j in np.roll(candidates,rotation):
-                        if any(start<=j<end for start,end in chosen): continue
+                        if occupied[j]: continue
                         e=group[len(chosen)]; entry=float(prices[j+1,0])
-                        trial=trade(df,j,mode,direction,entry*(1-direction*e['risk']),prices)
-                        if trial and all(j+trial[1]<=start or j>=end for start,end in chosen): chosen.append((j,j+trial[1]))
+                        trial=trade(df,j,mode,direction,entry*(1-direction*e['risk']),prices,split)
+                        if trial and not occupied[j:j+trial[1]].any():
+                            chosen.append((j,j+trial[1]));occupied[j:j+trial[1]]=True
                         if len(chosen)==len(group): break
                 if len(chosen)<len(group):
                     for e in group: e['random']=None
                     continue
                 for e,(j,_) in zip(group,chosen):
                     entry=float(prices[j+1,0]); stop=entry*(1-direction*e['risk'])
-                    result=trade(df,j,mode,direction,stop,prices)
-                    e['random']=result[0] if result else None
+                    result=trade(df,j,mode,direction,stop,prices,split)
+                    e['random']=float(result[0]) if result else None
             # Derived date-level metrics only, no raw OHLC.
             out[key]=[dict(e,symbol=symbol) for e in events if e.get('random') is not None]
     return out
