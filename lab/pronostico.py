@@ -133,6 +133,7 @@ def generate(kind,now=None):
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
+                    'contexto_previo':{k:float(v) for k,v in features(d).iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
             return result,None
         except Exception as e:return [],{'sim':a['sim'],'error':str(e)[:150]}
@@ -234,6 +235,7 @@ def score(now=None):
                     'predictor':name,'p':p,'y':y,'acierto':int((p>=.5)==bool(y)),
                     'siempre_acierto':always,'azar_acierto':random,'retorno_pct':ret*100,
                     'brecha_pct':float(b.open.iloc[0]/a.close.iloc[0]-1)*100,
+                    'contexto_previo':row.get('contexto_previo',{}),
                     'prueba':proof} for name,p in preds.items()]
                 save_once(dest,{'filas':rows,'medido':now.isoformat()})
             except Exception as e:failures.append({'sim':row['sim'],'error':str(e)[:120]})
@@ -246,8 +248,11 @@ def score(now=None):
         market=[r['retorno_pct'] for r in unique.values() if r['tipo']==row['tipo']]
         sector=[r['retorno_pct'] for r in unique.values() if r['sector']==row['sector']]
         model=next((r for r in today if r['sim']==row['sim'] and r['horizonte']==1 and r['predictor']=='logistica'),None)
+        prev=row.get('contexto_previo',{})
+        explanation=(f"Pronosticó {'subida' if model['p']>=.5 else 'no subida'} con p={model['p']:.2f}. " if model else 'Sin pronóstico logístico. ')
+        if prev:explanation+=f"Antes: retorno5d={prev.get('r5',0)*100:.2f}%, momentum12-1={prev.get('mom',0)*100:.2f}%. "
         surprises.append({'sim':row['sim'],'retorno_pct':row['retorno_pct'],
-            'texto':f"Movimiento {row['retorno_pct']:.2f}%; promedio equiponderado observado {np.mean(market):.2f}%, sector {np.mean(sector):.2f}%; brecha {row['brecha_pct']:.2f}%. "+
+            'texto':explanation+f"Movimiento {row['retorno_pct']:.2f}%; promedio equiponderado observado {np.mean(market):.2f}%, sector {np.mean(sector):.2f}%; brecha {row['brecha_pct']:.2f}%. "+
             ('La logística acertó. ' if model and model['acierto'] else 'La logística falló. ' if model else 'Sin pronóstico logístico. ')+
             'Resultados empresariales: fecha no disponible. Este contexto no demuestra la causa.'})
     r={'version':1,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
