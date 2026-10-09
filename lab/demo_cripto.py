@@ -37,6 +37,19 @@ def fresh(now,quote):
     except (KeyError,ValueError,TypeError): return False
 
 
+def corroborate(quote,rows,now):
+    """Dos exchanges, tiempos reales, diferencia máxima0.5%; sin claves."""
+    if rows.get('error'): raise ValueError('Kraken no corroboró la cotización')
+    trades=[v for k,v in rows.get('result',{}).items() if k!='last' and isinstance(v,list)]
+    if not trades or not trades[0]: raise ValueError('Sin segundo precio')
+    trade_row=trades[0][-1]
+    other=dict(price=float(trade_row[0]),time=datetime.fromtimestamp(float(trade_row[2]),UTC).isoformat())
+    if not fresh(now,other): raise ValueError('Segundo precio desactualizado')
+    difference=abs(other['price']/quote['price']-1)
+    if difference>.005: raise ValueError('Coinbase y Kraken difieren más de0.5%')
+    return dict(source='Kraken public Trades',price=other['price'],time=other['time'],relative_difference=difference,tolerance=.005)
+
+
 def market(asset,now):
     # Coinbase latest300 one-minute candles, plus public ticker timestamp.
     base=f'https://api.exchange.coinbase.com/products/{asset}-USD'
@@ -53,6 +66,9 @@ def market(asset,now):
     r=requests.get(base+'/ticker',timeout=20);r.raise_for_status();q=r.json()
     quote=dict(price=float(q['price']),time=q['time'])
     if not fresh(datetime.now(UTC),quote): raise ValueError('Ticker desactualizado')
+    second=requests.get('https://api.kraken.com/0/public/Trades',params={'pair':'XBTUSD' if asset=='BTC' else 'ETHUSD',
+                        'since':str(int((now-timedelta(minutes=3)).timestamp()*1e9))},headers={'Cache-Control':'no-cache'},timeout=20)
+    second.raise_for_status();quote['corroboration']=corroborate(quote,second.json(),datetime.now(UTC))
     daily=fetch_daily(asset,(now.date()-timedelta(days=400)).isoformat(),now.date().isoformat())
     if daily.index[-1].date()!=now.date()-timedelta(days=1): raise ValueError('Falta último día cerrado')
     return dict(quote=quote,daily=daily,minute=recent,coverage=dict(real_minutes=len(recent),last_minute=recent.index[-1].isoformat(),daily_last=daily.index[-1].isoformat()))
@@ -159,7 +175,7 @@ def execute(account,intent,quote,proof,now):
         gross=account['units']*price;fee=gross*COST;account['cash']+=gross-fee;account['units']=0.;account['position']=None
     else: return dict(action='cancelar',reason='Cuenta no coincide con la intención; no duplicar operación.')
     account['fees']+=fee
-    return dict(action=intent['action'],price=price,quote_time=quote['time'],fee=fee,receipt=proof,reason=intent['reason'],intent_id=intent['id'],rule=intent['rule'])
+    return dict(action=intent['action'],price=price,quote_time=quote['time'],corroboration=quote.get('corroboration'),fee=fee,receipt=proof,reason=intent['reason'],intent_id=intent['id'],rule=intent['rule'])
 
 
 def cycle(state,report,markets,now,run_id,receipts):
@@ -200,6 +216,7 @@ def cycle(state,report,markets,now,run_id,receipts):
         account['hold_equity']=account['hold_units']*price*(1-COST)
         account['gain']=account['net_liquidation']-account['initial'];account['vs_hold']=account['net_liquidation']-account['hold_equity']
         account['quote_time']=q['time'];account['last_price']=price
+        account['corroboration']=q.get('corroboration')
     state['decisions']=state['decisions'][-500:];state['observado_en']=now.isoformat();state['last_run_id']=str(run_id)
     state['approved_crypto_rules']={a:len(eligible(report,a)) for a in ['BTC','ETH']}
     return state,emitted

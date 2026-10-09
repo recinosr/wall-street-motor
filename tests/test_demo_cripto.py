@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime,timedelta,timezone
 import pandas as pd
-from lab.demo_cripto import initial,cycle,execute,new_account,eligible,digest,signal
+from lab.demo_cripto import initial,cycle,execute,new_account,eligible,digest,signal,corroborate
 UTC=timezone.utc
 
 
@@ -59,5 +59,14 @@ class CryptoDemoTest(unittest.TestCase):
         for i in range(260):
             state,events=cycle(state,{}, {},now,str(i),{});total+=len(events)
         self.assertEqual(len(state['decisions']),500);self.assertEqual(state['total_decisions'],total)
+
+    def test_second_exchange_freshness_and_disagreement(self):
+        now=datetime(2026,10,9,4,tzinfo=UTC);quote=dict(price=100,time=now.isoformat())
+        data={'error':[],'result':{'X':[['100.1','1',now.timestamp()]],'last':'cursor'}}
+        self.assertLess(corroborate(quote,data,now)['relative_difference'],.005)
+        data['result']['X'][0][0]='102'
+        with self.assertRaises(ValueError):corroborate(quote,data,now)
+        data['result']['X'][0]=['100','1',(now-timedelta(minutes=5)).timestamp()]
+        with self.assertRaises(ValueError):corroborate(quote,data,now)
 
 if __name__=='__main__': unittest.main()
