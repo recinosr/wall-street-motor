@@ -6,6 +6,8 @@ Laboratorio público y autocontenido de simulación con velas de un minuto de BT
 
 La app privada consulta `resultados/enciclopedia.json` mediante `/api/enciclopedia`, con caché de una hora. Su catálogo documenta75 reglas y siete salidas; los colores describen evidencia retrospectiva corregida, no promesas. Los datos fuente se descargan en ejecución: el reporte contiene métricas y cobertura, nunca OHLC. `enciclopedia.yml` ejecuta ocho lotes semanales y una BH global antes de publicar.
 
+`demo-cripto.yml` observa Coinbase aproximadamente cada10minutos24/7, con cuentas ficticias BTC/ETH de1000USD independientes. `resultados/demo_cripto.json` conserva últimas500decisiones; `resultados/demo_cripto_ledger/` conserva todas. Cada fill exige intención previa, recibo Actions exitoso y precio posterior. La biblioteca de70hipótesis de siete libros vive exclusivamente en el repo privado; el motor aporta la medición de patrones reutilizada para contrastar M01, sin contarla otra vez como ensayo independiente. Los filtros SEC descriptivos no se confunden con aprendizaje predictivo ni con resultados prospectivos.
+
 | Rutina | Frecuencia | Método |
 | --- | --- | --- |
 | `archivar` | diaria | Descarga el día UTC anterior de Coinbase y fusiona sin duplicar. |
