@@ -45,7 +45,7 @@ def history(sim, period='2y'):
     q = j['indicators']['quote'][0]
     d = pd.DataFrame(q, index=pd.to_datetime(j['timestamp'], unit='s', utc=True))
     # Solo velas de sesiones terminadas. No usar la vela intradía de Yahoo.
-    d = d[d.index + pd.Timedelta(hours=24) <= pd.Timestamp.now(tz='UTC')]
+    d = d[d.index.normalize() + pd.Timedelta(hours=21, minutes=15) <= pd.Timestamp.now(tz='UTC')]
     return d.dropna(subset=['close'])
 
 
@@ -71,7 +71,7 @@ def spark(symbols):
     for x in j.get('spark',{}).get('result',[]):
         a = x['response'][0]; q = a['indicators']['quote'][0]
         d = pd.DataFrame(q,index=pd.to_datetime(a['timestamp'],unit='s',utc=True))
-        d = d[d.index+pd.Timedelta(hours=24)<=pd.Timestamp.now(tz='UTC')].dropna(subset=['close'])
+        d = d[d.index.normalize()+pd.Timedelta(hours=21,minutes=15)<=pd.Timestamp.now(tz='UTC')].dropna(subset=['close'])
         if len(d)>1: out[x['symbol']] = metrics(d)
     return out
 

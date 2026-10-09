@@ -1,0 +1,46 @@
+name: Pronóstico prospectivo y marcador
+on:
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '45 21 * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: motor-main
+  queue: max
+  cancel-in-progress: false
+jobs:
+  registrar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_pronostico.py
+      - name: Calificar solo pronósticos publicados y con recibo exitoso
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m lab.pronostico calificar
+      - name: Registrar antes de la apertura; cripto solo ventana UTC00
+        if: github.event.schedule != '45 21 * * *'
+        run: |
+          python -m lab.pronostico registrar --tipo acción
+          python -m lab.pronostico registrar --tipo cripto
+      - name: Publicar cadena verificable sin reescribir pasado
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/pronosticos/ resultados/calificaciones/ resultados/marcador.json
+          git diff --cached --quiet && exit 0
+          git commit -m "pronósticos y marcador $GITHUB_RUN_ID"
+          git pull --rebase origin main
+          git push origin main
