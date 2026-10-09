@@ -30,7 +30,7 @@ def listed(text, source):
         name = r.get('Security Name', '')
         if not sim or 'File Creation' in sim or r.get('Test Issue') != 'N':
             continue
-        if any(x in name.lower() for x in ('warrant', ' rights', ' units')) or '$' in sim:
+        if any(x in name.lower() for x in ('warrant', ' rights')) or '$' in sim:
             continue
         out.append({'sim': sim.replace('.', '-'), 'nombre': name,
                     'tipo': 'ETF' if r.get('ETF') == 'Y' else 'acción',

@@ -25,6 +25,9 @@ class UniverseTests(unittest.TestCase):
         self.assertIn('top10',r['cobertura'])
     def test_xom_alternative(self):
         self.assertIn('RevenueFromContractWithCustomerIncludingAssessedTax',CONCEPTOS['ingresos'])
+    def test_common_partnership_units_are_equity_not_warrants(self):
+        text='Symbol|Security Name|Test Issue|ETF|Market Category\nET|Energy Transfer Common Units|N|N|Q\nW|Units with Warrants|N|N|Q\n'
+        self.assertEqual([r['sim'] for r in listed(text,'test')],['ET'])
     def test_xom_redomiciliation_even_if_wiki_updated(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)/'u.json';p.write_text(json.dumps({'datos':[{'sim':'XOM','tipo':'acción','cik':2115436,'fecha':'2026-10-08'}]}))
