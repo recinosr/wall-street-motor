@@ -1,0 +1,1 @@
+{"id":"estacionalidad_diaria","activo":["BTC","ETH"],"dias_semana":[0,1,2,3,4,5,6],"dias_fin_mes":[1,2,3,4,5],"regla":"entrada en apertura futura por día de semana o últimos N días del mes; salida al cierre de ese día","fuente":"https://api.exchange.coinbase.com/products/BTC-USD/candles"}

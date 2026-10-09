@@ -1,0 +1,1 @@
+{"id":"momentum_diario","activo":["BTC","ETH"],"dias":[20,40,60,90,120],"regla":"cierre mayor que cierre N días atrás, siguiente apertura","fuente":"https://api.exchange.coinbase.com/products/BTC-USD/candles"}

@@ -1,0 +1,1 @@
+{"id":"tendencia_mensual","activo":["BTC","ETH"],"meses":[6,7,8,9,10,11,12],"regla":"cierre mensual sobre media de N cierres, decisión al cierre y cambio en apertura posterior","fuente":"https://api.exchange.coinbase.com/products/BTC-USD/candles"}
