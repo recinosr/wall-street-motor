@@ -1,0 +1,43 @@
+{
+  "fecha": "2026-10-09T18:48:06.632Z",
+  "cerebros": [
+    {
+      "cerebro": "gemini",
+      "modelo": "gemini-3.8-flash",
+      "estado_http": null,
+      "mensaje": "timeout",
+      "latencia_ms": 12000,
+      "funciona": false,
+      "configurado": true
+    },
+    {
+      "cerebro": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "funciona": false,
+      "configurado": false,
+      "latencia_ms": 0
+    },
+    {
+      "cerebro": "cloudflare",
+      "modelo": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "funciona": true,
+      "configurado": true,
+      "estado_http": 200,
+      "latencia_ms": 371
+    },
+    {
+      "cerebro": "anthropic",
+      "modelo": "claude-sonnet-5",
+      "funciona": false,
+      "configurado": false,
+      "latencia_ms": 0
+    },
+    {
+      "cerebro": "openai",
+      "modelo": "gpt-5.6-terra",
+      "funciona": false,
+      "configurado": false,
+      "latencia_ms": 0
+    }
+  ]
+}
