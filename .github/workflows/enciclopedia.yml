@@ -2,11 +2,17 @@ name: Enciclopedia semanal medida
 on:
   schedule:
     - cron: '35 3 * * 0'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      reuse_run_id:
+        description: 'Solo reparación del corte cripto: reutilizar los ocho artefactos medidos de esta corrida'
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
   lotes:
+    if: ${{ inputs.reuse_run_id == '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 360
     strategy:
@@ -59,5 +65,43 @@ jobs:
           git add resultados/enciclopedia.json
           git diff --cached --quiet && exit 0
           git commit -m "enciclopedia semanal $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin main
+  reparar_corte:
+    if: ${{ inputs.reuse_run_id != '' && github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: motor-main
+      queue: max
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_enciclopedia.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: enciclopedia-*
+          path: partes
+          merge-multiple: true
+          run-id: ${{ inputs.reuse_run_id }}
+          github-token: ${{ github.token }}
+      - run: python -m lab.enciclopedia --repair-crypto partes
+      - name: Publicar corte verificado; mismas reglas y pruebas
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/enciclopedia.json
+          git diff --cached --quiet && exit 0
+          git commit -m "enciclopedia: corte cripto exclusivo verificado"
           git pull --rebase origin main
           git push origin main

@@ -309,6 +309,8 @@ def fetch_daily(symbol):
     factor=adj/df.close.to_numpy(float)
     df[['open','high','low','close']]=df[['open','high','low','close']].mul(factor,axis=0)
     df=df.dropna().sort_index(); df=df[~df.index.duplicated()]
+    # Yahoo may include a crypto candle at period2; enforce exclusivity locally.
+    df=df[(df.index>=pd.Timestamp(BEGIN,tz='UTC'))&(df.index<pd.Timestamp(END,tz='UTC'))]
     df=df[(df[['open','high','low','close']]>0).all(axis=1)&(df.low<=df[['open','close']].min(axis=1))&(df.high>=df[['open','close']].max(axis=1))]
     if symbol.endswith('-USD') and (df.index.to_series().diff().dropna()!=pd.Timedelta(days=1)).any():
         raise ValueError('Huecos cripto: no se saltan sesiones')
@@ -455,6 +457,31 @@ def bh(values):
     return q
 
 
+def opposite_book(stats,direction):
+    """Underperforming the baseline is not the same as moving opposite the book."""
+    net=stats.get('media_neta')
+    if not direction or net is None: return False
+    gross=direction*((net+direction+COST)/(direction-COST)-1)
+    return gross<0 and stats.get('exceso_normal',0)<0 and stats.get('exceso_azar',0)<0
+
+
+def add_bh_counts(report):
+    """Expose raw significance separately from positive, temporally stable rules."""
+    contrasts=groups=pool=0;patterns=set()
+    for pattern in report['items']:
+        for exit in pattern['salidas']:
+            for asset in ['universo','BTC-USD','ETH-USD']:
+                for period in ['total','antes2016','desde2016']:
+                    s=exit['grupos'][asset][period]
+                    contrasts+=sum(s.get('q_'+c,1)<=.05 for c in ['normal','azar'])
+                    groups+=bool(s.get('pasa_BH'))
+                    if asset=='universo' and period=='total' and s.get('pasa_BH'):
+                        pool+=1;patterns.add(pattern['id'])
+    report.update(pruebas_pasan_BH=contrasts,grupos_ambos_controles_BH=groups,
+                  combinaciones_universo_BH=pool,patrones_universo_BH=sorted(patterns))
+    return report
+
+
 def finalize(parts,output=ROOT/'resultados/enciclopedia.json'):
     combined={}; coverage={}; errors={}; minutes=0
     for part in parts:
@@ -498,7 +525,7 @@ def finalize(parts,output=ROOT/'resultados/enciclopedia.json'):
                     s['pasa_BH']=complete and max(s['q_normal'],s['q_azar'])<=.05
                 s=groups['total']; post=groups['desde2016']; pre=groups['antes2016']
                 good=lambda a: a.get('exceso_normal',0)>0 and a.get('exceso_azar',0)>0 and a.get('media_neta',0)>0
-                bad=lambda a: a.get('exceso_normal',0)<0 and a.get('exceso_azar',0)<0
+                bad=lambda a: opposite_book(a,p['direccion'])
                 status='sin_evidencia'
                 if s['n']<30: status='insuficiente'
                 elif p['direccion'] and s['pasa_BH'] and good(s) and post['pasa_BH'] and good(post) and pre['n']>=30 and good(pre): status='sirve_en_muestra'
@@ -515,6 +542,7 @@ def finalize(parts,output=ROOT/'resultados/enciclopedia.json'):
                 patrones=len(rows),velas=sum(p['familia']=='vela' for p in rows),combinaciones=len(rows)*len(EXITS),pruebas_BH=len(tests),
                 combinaciones_pasan=passed,combinaciones_contrarias=contrary,patrones_pasan=sum(p['estado']=='sirve_en_muestra' for p in rows),
                 patrones_contrarios=[p['id'] for p in rows if p['estado']=='contrario_al_libro'],items=rows)
+    add_bh_counts(report)
     output.parent.mkdir(parents=True,exist_ok=True); output.write_text(json.dumps(report,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n',encoding='utf8')
     return report
 
@@ -543,11 +571,45 @@ def batch(symbols,fetcher=fetch_daily):
     return result
 
 
+def repair_crypto(directory):
+    """Reuse already measured STOCK metrics; replace only the two crypto inputs.
+    No new variants/thresholds. Original artifacts contain derived metrics, no OHLC.
+    """
+    paths=sorted(directory.rglob('parte-*.json'))
+    if len(paths)!=8: raise ValueError('La reparación exige los ocho lotes originales')
+    crypto=['BTC-USD','ETH-USD']
+    def parts():
+        for path in paths:
+            part=json.loads(path.read_text(encoding='utf8'))
+            for symbol,coverage in part['coverage'].items():
+                if symbol not in crypto and coverage['last']>=END:
+                    raise ValueError('Hay acciones fuera del corte: no reutilizar este lote')
+            for symbol in crypto:
+                part['coverage'].pop(symbol,None);part['errors'].pop(symbol,None)
+            if 'events' in part:
+                for key,events in part['events'].items():
+                    part['events'][key]=[e for e in events if e['symbol'] not in crypto]
+            else:
+                for groups in part['aggregates'].values():
+                    pool=groups.get('universo',{})
+                    for symbol in crypto:
+                        for date,values in groups.pop(symbol,{}).items():
+                            for i,value in enumerate(values): pool[date][i]-=value
+                            if pool[date][0]==0: pool.pop(date)
+            yield part
+        yield batch(crypto)
+    return finalize(parts())
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(); parser.add_argument('--batch',type=int); parser.add_argument('--batches',type=int,default=8)
     parser.add_argument('--merge',type=Path); parser.add_argument('--output',type=Path); parser.add_argument('--symbols',nargs='+')
+    parser.add_argument('--repair-crypto',type=Path)
     args=parser.parse_args()
-    if args.merge:
+    if args.repair_crypto:
+        result=repair_crypto(args.repair_crypto)
+        print('Corte reparado:',result['patrones_pasan'],'reglas estables; BH',result['pruebas_pasan_BH'])
+    elif args.merge:
         paths=sorted(args.merge.rglob('parte-*.json'))
         if len(paths)!=args.batches: raise ValueError('Faltan lotes: no aplicar BH parcial')
         # Stream one batch at a time; do not load all large artifacts into RAM.

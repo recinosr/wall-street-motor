@@ -1,8 +1,9 @@
 import unittest
 import json
+from unittest.mock import patch
 import numpy as np
 import pandas as pd
-from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return,measure_asset,aggregate_dates,merge_dates
+from lab.enciclopedia import catalog,detect,trade,bh,summarize,net_return,measure_asset,aggregate_dates,merge_dates,opposite_book,fetch_daily,END
 
 
 def fixture(n=260):
@@ -76,5 +77,23 @@ class EncyclopediaTest(unittest.TestCase):
         events=[dict(date=f'2020-02-{i:02}',net=.01*i,normal=.002,random=-.003,r=i/2) for i in range(1,25)]*4
         a=aggregate_dates(events[:40]);merge_dates(a,aggregate_dates(events[40:]))
         self.assertEqual(summarize(events),summarize(a))
+
+    def test_lagging_positive_return_is_not_opposite_book(self):
+        s=dict(media_neta=.005,exceso_normal=-.01,exceso_azar=-.01)
+        self.assertFalse(opposite_book(s,1))
+        s['media_neta']=-.02
+        self.assertTrue(opposite_book(s,1));self.assertFalse(opposite_book(s,0))
+
+    def test_yahoo_extra_candle_does_not_cross_exclusive_cut(self):
+        d=fixture(500);d.index=pd.date_range('2024-01-01',periods=500,tz='UTC')
+        payload={'timestamp':[int(t.timestamp()) for t in d.index],
+                 'indicators':{'quote':[{k:d[k].tolist() for k in d.columns}]}}
+        class Response:
+            status_code=200
+            def raise_for_status(self):pass
+            def json(self):return {'chart':{'result':[payload]}}
+        with patch('lab.enciclopedia.requests.get',return_value=Response()):result=fetch_daily('BTC-USD')
+        self.assertLess(result.index[-1],pd.Timestamp(END,tz='UTC'))
+        self.assertEqual(result.index[-1].date().isoformat(),'2025-03-31')
 
 if __name__=='__main__': unittest.main()
