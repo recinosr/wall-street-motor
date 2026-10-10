@@ -2,28 +2,29 @@
   "version": "aprendiz-logistico-v1",
   "activo": "BTC",
   "pesos": [
-    -0.23612897275071687,
-    -0.12114907091173648,
-    0.3211074826065198,
-    -0.4210038497877165,
-    0.0156375590717077,
-    0.5672420316716769,
-    0.03754362980796364,
-    -0.08670832637731132,
-    -0.3919430233147143
+    -0.22481883774329986,
+    -0.14152933149909247,
+    0.25218350361745706,
+    -0.40883189883868215,
+    0.06176312193035054,
+    0.6458709262098922,
+    0.07707538771515565,
+    -0.07115122113080542,
+    -0.26867522726953763
   ],
-  "sesgo": -1.4041310916219953,
-  "ejemplos": 11277,
-  "positivos": 2593,
-  "dias": 179,
-  "ultimo_mes": "2022-03",
+  "sesgo": -1.3271622022645393,
+  "ejemplos": 13167,
+  "positivos": 2932,
+  "dias": 209,
+  "ultimo_mes": "2022-04",
   "ejecuciones": [
     "37848861843",
     "37874149769",
     "37911012836",
     "37959252290",
     "37995589983",
-    "38013109157"
+    "38013109157",
+    "38013713101"
   ],
   "lotes": [
     {
@@ -234,6 +235,42 @@
           "mantener": {
             "neto_compuesto": -0.13079314427883582,
             "pares": 31
+          },
+          "efectivo": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          }
+        }
+      }
+    },
+    {
+      "version": "aprendiz-logistico-v1",
+      "mes": "2022-04",
+      "dias": 30,
+      "ejemplos": 1890,
+      "mezcla_experiencias_actuales": false,
+      "pesos_antes_sha": "3ad8cc50e8c641325f7be40115005e75dcacfa5e552e2010261f2e308cdf4c91",
+      "pesos_despues_sha": "c829c5516752ad6105c3386a6c16badd475d6df7613c8dee67995750d07c1bb4",
+      "datos_sha": "f21647758be372ebf1191ed2f30192f4ce774df88846d6993a8199490a4309e6",
+      "metricas": {
+        "brier": 0.1480420684408641,
+        "brier_base": 0.14944035806306386,
+        "participantes": {
+          "ia": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          },
+          "congelado": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          },
+          "azar": {
+            "neto_compuesto": -0.4387518599195419,
+            "pares": 270
+          },
+          "mantener": {
+            "neto_compuesto": -0.11548887152959553,
+            "pares": 30
           },
           "efectivo": {
             "neto_compuesto": 0.0,
