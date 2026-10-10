@@ -1,0 +1,32 @@
+name: Comparar concentración y diversificación
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: motor-main
+  queue: max
+  cancel-in-progress: false
+jobs:
+  medir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_concentracion.py
+      - run: python -m lab.concentracion
+      - name: Publicar solo métricas
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/concentracion.json
+          git diff --cached --quiet && exit 0
+          git commit -m "concentración: métricas públicas"
+          git pull --rebase
+          git push
