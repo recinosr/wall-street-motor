@@ -1,24 +1,24 @@
 {
   "version": "aprendiz-logistico-v1",
-  "actualizado": "2026-10-10T04:45:42.266498+00:00",
+  "actualizado": "2026-10-10T04:55:42.461591+00:00",
   "activo": "BTC",
-  "ultimo_mes": "2023-11",
-  "dias": 788,
-  "ejemplos": 49551,
+  "ultimo_mes": "2023-12",
+  "dias": 819,
+  "ejemplos": 51504,
   "consultas_llm": 0,
-  "pesos_sha": "e08bf5abaa17b6417ff523f1da188216e268ae07a134845e8e656f50b960f4f7",
+  "pesos_sha": "eb971988779614297c77ffdb8f593a5dd3b5b2096105c1c77865a216ad815681",
   "pesos": {
-    "retorno_5m": -0.1830310790295548,
-    "retorno_15m": -0.28825993284768797,
-    "retorno_30m": -0.1359076033057138,
-    "distancia_media_60m": -0.3811941556264953,
-    "z_60m": 0.2039523212368164,
-    "rango_60m": 1.592362135484088,
-    "volumen_relativo": 0.47978134294951147,
-    "cuerpo_vela": -0.011014745375053423,
-    "hora": -0.10772981016520998
+    "retorno_5m": -0.17101512590396944,
+    "retorno_15m": -0.26953791887681533,
+    "retorno_30m": -0.123929862772102,
+    "distancia_media_60m": -0.3647901982942057,
+    "z_60m": 0.26962976110903597,
+    "rango_60m": 1.613327598922772,
+    "volumen_relativo": 0.43831426313544974,
+    "cuerpo_vela": -0.0029765522109106656,
+    "hora": -0.18540937578927102
   },
-  "sesgo": -1.7892248828979307,
+  "sesgo": -1.9453274520072572,
   "congelado_mes": "2021-10",
   "congelado_sha": "ef21673ad72b27334cfdd46937bc0b4463604ab0a37f305041567fd84eb31a61",
   "lotes": [
@@ -957,20 +957,56 @@
           }
         }
       }
+    },
+    {
+      "version": "aprendiz-logistico-v1",
+      "mes": "2023-12",
+      "dias": 31,
+      "ejemplos": 1953,
+      "mezcla_experiencias_actuales": false,
+      "pesos_antes_sha": "e08bf5abaa17b6417ff523f1da188216e268ae07a134845e8e656f50b960f4f7",
+      "pesos_despues_sha": "eb971988779614297c77ffdb8f593a5dd3b5b2096105c1c77865a216ad815681",
+      "datos_sha": "96c3bf6fd5f019c6776c77b0cb768483046c0e5ca6c1e6554512f338599ec6d2",
+      "metricas": {
+        "brier": 0.13150763278356647,
+        "brier_base": 0.1331233882339469,
+        "participantes": {
+          "ia": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          },
+          "congelado": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          },
+          "azar": {
+            "neto_compuesto": -0.4434875119653663,
+            "pares": 301
+          },
+          "mantener": {
+            "neto_compuesto": -0.00564020316683933,
+            "pares": 31
+          },
+          "efectivo": {
+            "neto_compuesto": 0.0,
+            "pares": 0
+          }
+        }
+      }
     }
   ],
   "ultimo_lote": {
     "version": "aprendiz-logistico-v1",
-    "mes": "2023-11",
-    "dias": 30,
-    "ejemplos": 1890,
+    "mes": "2023-12",
+    "dias": 31,
+    "ejemplos": 1953,
     "mezcla_experiencias_actuales": false,
-    "pesos_antes_sha": "b74fb0c4fc6ea996004dbca197ea0344add634861cf7ae3256bae2b0ceb908ad",
-    "pesos_despues_sha": "e08bf5abaa17b6417ff523f1da188216e268ae07a134845e8e656f50b960f4f7",
-    "datos_sha": "7724bbcdd1cde6c7f6cd3c1697b82145b52cf8e8b5538a4f90af6553f908b94a",
+    "pesos_antes_sha": "e08bf5abaa17b6417ff523f1da188216e268ae07a134845e8e656f50b960f4f7",
+    "pesos_despues_sha": "eb971988779614297c77ffdb8f593a5dd3b5b2096105c1c77865a216ad815681",
+    "datos_sha": "96c3bf6fd5f019c6776c77b0cb768483046c0e5ca6c1e6554512f338599ec6d2",
     "metricas": {
-      "brier": 0.14000263575199437,
-      "brier_base": 0.14172710485491005,
+      "brier": 0.13150763278356647,
+      "brier_base": 0.1331233882339469,
       "participantes": {
         "ia": {
           "neto_compuesto": 0.0,
@@ -981,12 +1017,12 @@
           "pares": 0
         },
         "azar": {
-          "neto_compuesto": -0.3736382127507235,
-          "pares": 277
+          "neto_compuesto": -0.4434875119653663,
+          "pares": 301
         },
         "mantener": {
-          "neto_compuesto": 0.039457797657784566,
-          "pares": 30
+          "neto_compuesto": -0.00564020316683933,
+          "pares": 31
         },
         "efectivo": {
           "neto_compuesto": 0.0,
@@ -996,7 +1032,7 @@
     }
   },
   "ejemplos_en_vivo": 0,
-  "run_id": "38025152879",
+  "run_id": "38025714503",
   "horario": "Práctica histórica cuatro veces al día, aproximadamente cada seis horas. Computadora apagada.",
   "informacion": "Velas BTC archivadas (precio OHLC y volumen). Sin noticias, balances ni acceso universal a internet.",
   "estado": "Práctica histórica incremental. No demuestra rentabilidad ni razonamiento de un LLM. Validación abril-diciembre 2025 y prueba 2026 permanecen reservadas."
