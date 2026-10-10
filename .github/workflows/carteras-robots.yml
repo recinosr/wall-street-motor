@@ -28,5 +28,4 @@ jobs:
           git add resultados/carteras_robots.json
           git diff --cached --quiet && exit 0
           git commit -m "robots sistemáticos $GITHUB_RUN_ID"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

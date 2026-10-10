@@ -28,5 +28,4 @@ jobs:
           git add resultados/fabrica_diaria.json
           git diff --cached --quiet && exit 0
           git commit -m "fabrica diaria $(date -u +%F)"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

@@ -26,5 +26,4 @@ jobs:
           git add resultados/vita_diario.json resultados/vita_diario/ resultados/indice_activos.json
           git diff --cached --quiet && exit 0
           git commit -m "diario Vita $GITHUB_RUN_ID"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

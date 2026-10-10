@@ -65,8 +65,7 @@ jobs:
           git add resultados/enciclopedia.json
           git diff --cached --quiet && exit 0
           git commit -m "enciclopedia semanal $(date -u +%F)"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh
   reparar_corte:
     if: ${{ inputs.reuse_run_id != '' && github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
@@ -103,5 +102,4 @@ jobs:
           git add resultados/enciclopedia.json
           git diff --cached --quiet && exit 0
           git commit -m "enciclopedia: corte cripto exclusivo verificado"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

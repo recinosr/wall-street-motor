@@ -41,7 +41,6 @@ jobs:
           git add "resultados/gimnasio_${ACTIVO}.json"
           git diff --cached --quiet && exit 0
           git commit -m "gimnasio ${ACTIVO} $(date -u +%F)"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh
         env:
           ACTIVO: ${{ matrix.activo }}

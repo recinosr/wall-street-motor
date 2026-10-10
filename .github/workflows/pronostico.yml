@@ -73,5 +73,4 @@ jobs:
           git add resultados/pronosticos/ resultados/calificaciones/ resultados/marcador.json
           git diff --cached --quiet && exit 0
           git commit -m "pronósticos y marcador $GITHUB_RUN_ID"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

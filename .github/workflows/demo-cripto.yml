@@ -32,5 +32,4 @@ jobs:
           git add resultados/demo_cripto.json resultados/demo_cripto_ledger/
           git diff --cached --quiet && exit 0
           git commit -m "demo cripto $GITHUB_RUN_ID"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh

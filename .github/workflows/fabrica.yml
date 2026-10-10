@@ -35,5 +35,4 @@ jobs:
           git add resultados/fabrica.json
           git diff --cached --quiet && exit 0
           git commit -m "fabrica $(date -u +%F)"
-          git pull --rebase origin main
-          git push origin main
+          bash scripts/push_results.sh
