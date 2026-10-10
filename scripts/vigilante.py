@@ -9,6 +9,9 @@ from urllib.error import HTTPError
 
 UTC = dt.timezone.utc
 PATH = 'contents/resultados/vigilante.json'
+# Ensayo completo (incluye instalación/pruebas): 34s, run 38077976946.
+# https://github.com/recinosr/wall-street-motor/actions/runs/38077976946
+BOVEDA_VERIFICADA_SEGUNDOS = 34
 
 
 def api(path, method='GET', data=None):
@@ -37,6 +40,8 @@ def due(now):
     daily=[(0,0,'pronostico.yml'),(10,0,'pronostico.yml'),(22,30,'universo.yml'),
            (22,30,'vita-diario.yml'),(2,20,'archivar.yml'),(5,10,'fabrica.yml')]
     if now.isoweekday()==7: daily.append((3,35,'enciclopedia.yml'))
+    if now.isoweekday()==7 and BOVEDA_VERIFICADA_SEGUNDOS < 20*60:
+        daily.append((4,40,'boveda.yml'))
     if now.day==1: daily.append((23,0,'carteras-robots.yml'))
     for hour,minute,flow in daily:
         if now.hour==hour and now.minute>=minute:

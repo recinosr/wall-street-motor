@@ -1,7 +1,6 @@
 name: Bóveda del tiempo semanal
 on:
-  schedule:
-    - cron: '40 4 * * 0'
+  # Semanal por el vigilante: domingo04:40UTC (sábado22:40GT), sin doble cron.
   workflow_dispatch: {}
 permissions:
   contents: write
