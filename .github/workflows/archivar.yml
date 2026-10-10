@@ -1,7 +1,5 @@
 name: archivar
 on:
-  schedule:
-    - cron: '20 2 * * *'
   workflow_dispatch:
 permissions:
   contents: write

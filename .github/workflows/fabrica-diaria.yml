@@ -1,7 +1,5 @@
 name: Fabrica diaria BTC ETH
 on:
-  schedule:
-    - cron: '20 4 * * *'
   workflow_dispatch: {}
 permissions:
   contents: write

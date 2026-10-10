@@ -1,7 +1,5 @@
 name: aprendiz
 on:
-  schedule:
-    - cron: '25 * * * *'
   workflow_dispatch:
 permissions:
   contents: write

@@ -1,7 +1,5 @@
 name: gimnasio
 on:
-  schedule:
-    - cron: '30 3 * * *'
   workflow_dispatch:
 permissions:
   contents: write

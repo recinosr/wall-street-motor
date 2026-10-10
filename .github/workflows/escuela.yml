@@ -1,7 +1,5 @@
 name: escuela
 on:
-  schedule:
-    - cron: '5 */3 * * *'
   workflow_dispatch:
 permissions:
   contents: write

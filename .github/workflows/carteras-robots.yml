@@ -1,7 +1,5 @@
 name: Robots sistemáticos y futuros gestionados
 on:
-  schedule:
-    - cron: '0 23 1 * *'
   workflow_dispatch: {}
 permissions:
   contents: write
