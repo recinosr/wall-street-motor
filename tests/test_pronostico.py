@@ -2,13 +2,29 @@ import datetime as dt
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary
+from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score
 from lab.enciclopedia import detect
 
 class ForecastTests(unittest.TestCase):
+    def test_score_mature_only_and_once(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'resultados/pronosticos').mkdir(parents=True)
+            rows=[dict(sim='A',tipo='acción',sector='prueba',horizonte=h,objetivo=day,
+                       ancla='2026-10-08',predicciones={'logistica':.6,'azar':.4})
+                  for h,day in [(1,'2026-10-09'),(5,'2026-10-15')]]
+            save_once(root/'resultados/pronosticos/f.json',dict(filas=rows,publicado='2026-10-09T06:00:00Z',tipo='acción'))
+            data=pd.DataFrame({'close':[100.,102.],'open':[100.,101.]},index=pd.to_datetime(['2026-10-08','2026-10-09']))
+            with patch('lab.pronostico.ROOT',root),patch('lab.pronostico.receipt',return_value={'commit':'previo'}),patch('lab.pronostico.fetch',return_value=data) as fetch:
+                now=dt.datetime(2026,10,10,1,tzinfo=dt.timezone.utc)
+                score(now);first=json.loads((root/'resultados/marcador.json').read_text())
+                self.assertEqual(first['etiquetas'],2)
+                self.assertEqual(first['acumulado'][0]['horizonte'],1)
+                score(now);self.assertEqual(fetch.call_count,1)
+                self.assertEqual(json.loads((root/'resultados/marcador.json').read_text())['etiquetas'],2)
     def test_holiday_and_weekend(self):
         dates,deadline=targets(dt.datetime(2026,7,3,tzinfo=dt.timezone.utc),'acción')
         self.assertEqual(dates[0],'2026-07-06')

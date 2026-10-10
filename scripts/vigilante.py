@@ -28,9 +28,10 @@ def due(now):
     if now.minute % 10 >= 3: tasks.append(('demo-cripto.yml', block.isoformat()))
     if now.minute % 20 >= 5: tasks.append(('aprendiz.yml', block.replace(minute=now.minute//20*20).isoformat()))
     if now.minute >= 7: tasks.append(('escuela.yml', block.replace(minute=0).isoformat()))
+    if now.minute >= 8: tasks.append(('pronostico.yml', block.replace(minute=8).isoformat()))
     for minute, flow in [(33,'gimnasio.yml'),(43,'fabrica-diaria.yml')]:
         if now.minute >= minute: tasks.append((flow, block.replace(minute=0).isoformat()))
-    daily=[(0,0,'pronostico.yml'),(21,45,'pronostico.yml'),(22,30,'universo.yml'),
+    daily=[(0,0,'pronostico.yml'),(10,0,'pronostico.yml'),(22,30,'universo.yml'),
            (22,30,'vita-diario.yml'),(2,20,'archivar.yml'),(5,10,'fabrica.yml')]
     if now.isoweekday()==7: daily.append((3,35,'enciclopedia.yml'))
     if now.day==1: daily.append((23,0,'carteras-robots.yml'))
@@ -76,7 +77,10 @@ def run(minutes=350):
             if any(x['workflow']==flow and x['slot']==slot and x['aceptado'] for x in state['despachos']):continue
             item={'workflow':flow,'slot':slot,'hora':now.isoformat(),'aceptado':False}
             try:
-                api('actions/workflows/'+flow+'/dispatches','POST',{'ref':'main'})
+                payload={'ref':'main'}
+                if flow=='pronostico.yml':
+                    payload['inputs']={'modo':'completo' if dt.datetime.fromisoformat(slot).minute==0 else 'calificar'}
+                api('actions/workflows/'+flow+'/dispatches','POST',payload)
                 item['aceptado']=True
             except Exception as e:item['error']=type(e).__name__
             state['despachos'].append(item);dirty=True

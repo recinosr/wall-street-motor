@@ -216,7 +216,23 @@ def score(now=None):
             'filas':len(payload['filas']),'tipo':payload['tipo'],'prueba':proof,
             'estado':'recibo verificado; etiquetas futuras pendientes' if proof else 'recibo aún no verificado'})
         if not proof:continue
-        cache={}
+        # Cada símbolo maduro se descarga una vez, con concurrencia acotada.
+        # Descargar miles en serie retrasaba el marcador y el siguiente registro.
+        ripe={}
+        for row in payload['filas']:
+            target=pd.Timestamp(row['objetivo'])
+            close=target.tz_localize('UTC')+pd.Timedelta(days=1) if row['tipo']=='cripto' else CAL.session_close(target)+pd.Timedelta(minutes=15)
+            key=digest({'forecast':payload['sha256'],'sim':row['sim'],'h':row['horizonte']})
+            if pd.Timestamp(now)>=close and not (evaluations/(key+'.json')).exists():
+                ripe[row['sim']]=row
+        def one(row):
+            try:return row['sim'],fetch(row),None
+            except Exception as e:return row['sim'],None,str(e)[:120]
+        cache={};errors={}
+        with cf.ThreadPoolExecutor(max_workers=8) as pool:
+            for sim,data,error in pool.map(one,ripe.values()):
+                cache[sim]=data
+                if error:errors[sim]=error
         for row in payload['filas']:
             target=pd.Timestamp(row['objetivo'])
             close=target.tz_localize('UTC')+pd.Timedelta(days=1) if row['tipo']=='cripto' else CAL.session_close(target)+pd.Timedelta(minutes=15)
@@ -225,7 +241,7 @@ def score(now=None):
             dest=evaluations/(key+'.json')
             if dest.exists():continue
             try:
-                if row['sim'] not in cache:cache[row['sim']]=fetch(row)
+                if row['sim'] in errors:raise ValueError(errors[row['sim']])
                 d=cache[row['sim']];dates=d.index.strftime('%Y-%m-%d')
                 a=d[dates==row['ancla']];b=d[dates==row['objetivo']]
                 if len(a)!=1 or len(b)!=1:raise ValueError('Falta cierre exacto; pendiente')

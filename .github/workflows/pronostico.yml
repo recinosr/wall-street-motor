@@ -1,9 +1,12 @@
 name: Pronóstico prospectivo y marcador
 on:
-  schedule:
-    - cron: '0 0 * * *'
-    - cron: '45 21 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      modo:
+        type: choice
+        options: [completo, calificar]
+        default: completo
+        description: Registrar y calificar o solo cierres maduros
 permissions:
   contents: write
   actions: read
@@ -31,7 +34,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python -m lab.pronostico calificar
       - name: Registrar antes de la apertura; cripto solo ventana UTC00
-        if: github.event.schedule != '45 21 * * *'
+        if: inputs.modo != 'calificar'
         run: |
           python -m lab.pronostico registrar --tipo cripto
           python -m lab.pronostico registrar --tipo acción
