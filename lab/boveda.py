@@ -207,3 +207,8 @@ class Pronosticador:
             value['ajuste_hasta'] = self.fit_date
             value['etiquetas_hasta'] = self.label_date
         return out
+
+
+# CLI 21B: el núcleo importado arriba permanece congelado.
+if __name__ == "__main__":
+    __import__("lab.boveda_examen", fromlist=["main"]).main()

@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements-boveda.txt
-      - run: python -m unittest discover -s tests -p test_boveda.py
-      - run: python -m lab.boveda_ejecutar extender
+      - run: python -m unittest discover -s tests -p 'test_boveda*.py'
+      - run: python -m lab.boveda_compat21 extender
       - name: Publicar solo resúmenes, preservar reserva inicial
         run: |
           git config user.name motor-bot
