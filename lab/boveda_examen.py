@@ -13,16 +13,19 @@ from lab.boveda_examen_modelos import MotorExamen, HORIZONTES, RONDAS, BASE, NUE
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'resultados'
-CONFIG = {'version': 1, 'entrenamiento': ['2005-01-01', '2018-12-31'],
+CONFIG = {'version': 4, 'entrenamiento': ['2005-01-01', '2018-12-31'],
           'validacion': ['2019-01-01', '2023-12-31'], 'reserva_desde': '2024-01-01',
           'horizontes_dias_naturales': HORIZONTES, 'rondas_predefinidas': RONDAS,
           'seleccion': 'mínimo Brier OOS de entrenamiento; empate orden fijo; sin afinar en validación',
           'parada': 'dos rondas consecutivas cuyo límite inferior IC95 de mejora apareada no supera cero; máximo6',
           'abstencion': 'política de comparación vuelve explícitamente al ingenuo; pronóstico ausente no se inventa',
-          'inferencia': 'bootstrap59999 de bloques de calendario max(60,2h); primaria30/60/90 bloque180 días; activos juntos',
+          'inferencia': 'bootstrap119999 de bloques de calendario max(60,2h); primaria30/60/90 bloque180 días; activos juntos',
           'busqueda': 'BH global y Bonferroni incluye todas las variantes diseñadas, celdas y976 contrastes previos',
           'reserva': 'ya abierta por21; NO se descarga ni evalúa otra vez; ganador requiere prueba prospectiva',
           'curva_tasas': 'abstención: no se dispone de vintages con publicación verificable; no retraso inventado'}
+CONFIG['caminata'] = 'simetría de log-retornos, precios positivos; p=.5, sin deriva logarítmica'
+CONFIG['intento_previo'] = 'v2 detenido antes de métricas; corrección de soporte físico y vectorización causal, misma semilla'
+CONFIG['variantes_previas_generadas'] = 44
 
 
 def firma():
@@ -82,10 +85,10 @@ def bootstrap_calendario(rows, differences, block):
     if len(groups) < 3: return {'p': 1., 'ic95': None, 'bloques': len(groups)}
     rng = np.random.default_rng(20261010)
     if not np.any(differences): return {'p': 1., 'ic95': [0., 0.], 'bloques': len(groups)}
-    sample = rng.integers(0, len(groups), (59999, len(groups)))
+    sample = rng.integers(0, len(groups), (119999, len(groups)))
     draws = totals[sample].sum(axis=1)/counts[sample].sum(axis=1)
     mean = float(np.mean(differences))
-    return {'p': float((1+np.count_nonzero(draws-mean >= mean))/60000),
+    return {'p': float((1+np.count_nonzero(draws-mean >= mean))/120000),
             'ic95': np.quantile(draws, [.025, .975]).tolist(), 'bloques': len(groups)}
 
 
@@ -137,14 +140,16 @@ def rondas(rows):
         incumbent = incumbent_next
         if number >= 3 and failures >= 2: break
     # Cuenta incluso variantes diseñadas pero no abiertas; ajuste de búsqueda conservador.
-    family = 976+sum(len(c) for c in RONDAS)*len(ASSETS)*len(HORIZONTES)+sum(len(c) for c in RONDAS)
+    designed = sum(map(len, RONDAS))+CONFIG['variantes_previas_generadas']
+    family = 976+designed*len(ASSETS)*len(HORIZONTES)+designed
     ranked = sorted(metrics, key=lambda m: m['p']); q = 1.
     for rank in range(len(ranked), 0, -1):
         m = ranked[rank-1]; q = min(q, m['p']*family/rank)
         m['q_bh'] = q; m['p_busqueda'] = min(1., m['p']*family)
         m['ventaja'] = bool(m['habilidad'] is not None and m['habilidad'] > 0 and q < .05 and m['p_busqueda'] < .05)
     return {'rondas': evaluated, 'ganador_congelado': incumbent, 'metricas': metrics,
-            'variantes_intentadas': len(tried), 'variantes_diseno': sum(map(len, RONDAS)),
+            'variantes_intentadas': len(tried)+CONFIG['variantes_previas_generadas'],
+            'variantes_evaluadas_validacion': len(tried), 'variantes_diseno': designed,
             'contrastes_calculados': len(metrics), 'familia_ajuste_busqueda': family,
             'parada': '2 rondas sin mejora mayor que IC' if failures >= 2 else 'máximo6',
             'reserva': {'estado': 'no reabierta; consumida en tarea21', 'evaluacion_final_nueva': False,
@@ -158,12 +163,12 @@ def ejecutar(n, seed):
     from lab.boveda_compat21 import firma_compatible
     old = json.loads((OUT/'boveda_protocolo_v2.json').read_text(encoding='utf8'))
     if firma_compatible() != old['firma']: raise ValueError('Núcleo21 alterado; examen bloqueado')
-    started = time.monotonic(); design = OUT/'boveda_examen_diseno_v2.json'
+    started = time.monotonic(); design = OUT/'boveda_examen_diseno_v4.json'
     if not design.exists(): write(design, {'config': CONFIG, 'firma': firma(), 'fecha': dt.datetime.now(dt.timezone.utc).isoformat()}, once=True)
     protocol = json.loads(design.read_text(encoding='utf8'))
     if protocol['firma'] != firma(): raise ValueError('Diseño del examen alterado; registrar una nueva versión, sin sustituir recibo')
     # Recibo antes de descarga/sorteo: intentos fallidos también son auditables.
-    receipt = OUT/f'boveda_examen_recibo_{seed}_{n}.json'
+    receipt = OUT/f'boveda_examen_v4_recibo_{seed}_{n}.json'
     write(receipt, {'semilla': seed, 'n': n, 'firma': firma(), 'inicio': dt.datetime.now(dt.timezone.utc).isoformat()}, once=True)
     frames = {}; sources = []; errors = []
     for sim in dict.fromkeys((*ASSETS, '^VIX', *EXOGENAS)):

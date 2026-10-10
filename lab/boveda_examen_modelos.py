@@ -53,12 +53,14 @@ def etiquetas(d, h):
     c, high, low = (d[k].to_numpy(float) for k in ('close', 'high', 'low'))
     targets = d.index.searchsorted(d.index+pd.Timedelta(days=h))
     ret = np.full(len(d), np.nan); peak = ret.copy(); trough = ret.copy()
+    # Prefijos de validez: mismos intervalos, evita revisar cada dato h veces.
+    good = np.isfinite(c) & np.isfinite(high) & np.isfinite(low) & (c > 0) & (high > 0) & (low > 0)
+    bad = np.r_[0, np.cumsum(~good)]
     for i, j in enumerate(targets):
         if j >= len(d) or d.index[j] >= pd.Timestamp('2019-01-01'): continue
         # T también está dentro del período de entrenamiento (2005–2018).
         if d.index[i] < pd.Timestamp('2005-01-01'): continue
-        if not np.isfinite(c[i:j+1]).all() or not np.isfinite(high[i+1:j+1]).all() or not np.isfinite(low[i+1:j+1]).all(): continue
-        if c[i] <= 0: continue
+        if bad[j+1] != bad[i]: continue
         ret[i] = c[j]/c[i]-1
         peak[i] = np.max(high[i+1:j+1])/c[i]-1
         trough[i] = np.min(low[i+1:j+1])/c[i]-1
@@ -89,9 +91,11 @@ class MotorExamen:
         self.constants = {'ingenuo': self.dist(valid)}
         recent = valid & (d.index >= d.index[-1]-pd.DateOffset(years=5))
         if recent.sum() >= 60: self.constants['base_5a'] = self.dist(recent)
-        # Caminata simétrica también en extremos: reflejar trayectoria intercambia picos.
-        self.constants['caminata'] = distribucion(np.r_[ret[valid], -ret[valid]],
-            np.r_[peak[valid], -trough[valid]], np.r_[trough[valid], -peak[valid]], .5)
+        # Simetría de LOG retornos: invertir razones de precio intercambia picos.
+        # Reflejar retornos simples puede caer debajo de−100% a largo plazo.
+        self.constants['caminata'] = distribucion(np.r_[ret[valid], 1/(1+ret[valid])-1],
+            np.r_[peak[valid], 1/(1+trough[valid])-1],
+            np.r_[trough[valid], 1/(1+peak[valid])-1], .5)
         self.buckets = {}
         for name in BASE:
             if name not in x: continue
@@ -139,11 +143,12 @@ class MotorExamen:
     def formas(close):
         # Forma acumulada de los últimos 60 días/sesiones, escala por vol local.
         c = close.to_numpy(float); out = np.full((len(c), 60), np.nan)
-        for i in range(59, len(c)):
-            path = c[i-59:i+1]
-            if np.isfinite(path).all() and (path > 0).all():
-                logpath = np.log(path/path[0]); scale = max(np.std(np.diff(logpath)), .00001)
-                out[i] = logpath/scale
+        if len(c) < 60: return out
+        paths = np.lib.stride_tricks.sliding_window_view(c, 60)
+        good = np.isfinite(paths).all(axis=1) & (paths > 0).all(axis=1)
+        logpath = np.log(paths[good]/paths[good, 0, None])
+        scale = np.maximum(np.std(np.diff(logpath, axis=1), axis=1), .00001)
+        out[59+np.flatnonzero(good)] = logpath/scale[:, None]
         return out
 
     def pronosticar(self, vista, pesos=None):

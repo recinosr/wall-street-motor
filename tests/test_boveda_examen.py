@@ -102,9 +102,26 @@ class ExamenTest(unittest.TestCase):
         from lab import boveda_examen as exam
         with tempfile.TemporaryDirectory() as td, patch.object(exam, 'OUT', Path(td)), patch.object(exam, 'descargar') as fetch:
             (Path(td)/'boveda_protocolo_v2.json').write_text(json.dumps(protocol), encoding='utf8')
-            (Path(td)/'boveda_examen_recibo_1_1000.json').write_text('{}')
+            (Path(td)/'boveda_examen_v4_recibo_1_1000.json').write_text('{}')
             with self.assertRaises(FileExistsError): ejecutar(1000, 1)
             fetch.assert_not_called()
+
+    def test_shapes_vectorized_byte_identical_to_each_past_window(self):
+        c = datos(850)['SPY'].close.copy(); c.iloc[320] = np.nan
+        expected = np.full((len(c), 60), np.nan)
+        for i in range(59, len(c)):
+            path = c.to_numpy()[i-59:i+1]
+            if np.isfinite(path).all() and (path > 0).all():
+                logpath = np.log(path/path[0]); scale = max(np.std(np.diff(logpath)), .00001)
+                expected[i] = logpath/scale
+        self.assertEqual(expected.tobytes(), MotorExamen.formas(c).tobytes())
+        self.assertEqual(MotorExamen.formas(c.iloc[:700]).tobytes(), MotorExamen.formas(c)[:700].tobytes())
+
+    def test_log_walk_valid_support_in_long_horizon_and_zero_probability_change(self):
+        p = MotorExamen('SPY', 1000).pronosticar(Boveda(datos(4300)).ver('2018-06-15'))['caminata']
+        self.assertEqual(p['p_sube'], .5)
+        self.assertGreater(p['minimo_esperado'], -1)
+        self.assertGreater(p['p10'], -1)
 
 
 if __name__ == '__main__': unittest.main()

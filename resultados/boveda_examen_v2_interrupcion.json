@@ -1,0 +1,12 @@
+{
+  "fecha": "2026-10-10T19:45:49.805950+00:00",
+  "estado": "detenido antes de calcular/inspeccionar métricas",
+  "motivo": "referencia simétrica de retornos simples fuera del soporte positivo de precios en1000d",
+  "progreso_publicado": 400,
+  "semilla": 20261011,
+  "n": 1000,
+  "repetir_semilla": true,
+  "metricas_creadas": false,
+  "registro": "boveda_examen_recibo_20261011_1000.json",
+  "log_sha256": "421413a400082a96e4611afca3838e0a0032da25c749170c631a5781103900d4"
+}
