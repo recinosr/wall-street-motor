@@ -4,7 +4,7 @@ Solo análisis/simulación; no brokers ni claves nuevas. No se reescribió histo
 
 | Control | Resultado y corrección |
 |---|---|
-| Secretos | Motor: gitleaks8.30.1, todos los refs,69 commits/78.71MB,0 hallazgos. Privado: gitleaks interrumpido por consumo; reemplazo de blobs únicos en curso, se completará antes de entrega. |
+| Secretos | Motor: gitleaks8.30.1, todos los refs,69 commits/78.71MB,0 hallazgos. Privado: escáner de firmas/asignaciones sobre todos los refs,13,625 blobs/3.61GB;1 falso positivo confirmado dentro de risk- en una URL científica,0 secretos identificados. Motor también pasó ese scanner:358 blobs/188MB,0 hallazgos. Se verificó el caso y se añadió límite de palabra a la firma. |
 | Autenticación | Pages verifica APP_CLAVE en servidor para todas las rutas API; entrar/salir son bootstrap/cierre. Worker solo service binding, workers_dev=false, sin rutas públicas configuradas. No confiar en un header del cliente como autenticación pública. |
 | Límites | Candado:10 intentos/IP por ventana15min, Durable Object atómico/persistente; hash de IP sin guardarla. Fallo del límite cierra acceso. Vita:200 reservas/candado/día GT, incluido diagnóstico. |
 | Cookies | HttpOnly,Secure,SameSite=Strict; cookie malformada devuelve401. Se retira del reenvío general al Worker; no logs de claves. Cookie actual es credencial compartida y debe protegerse. |
@@ -13,8 +13,10 @@ Solo análisis/simulación; no brokers ni claves nuevas. No se reescribió histo
 | Datos | Rutas de lectura explícitas y campos limitados; sin secretos. Métricas públicas del motor pueden cachearse internamente; Pages fuerza no-store. |
 | Dependencias | npm audit:0,Worker sin dependencias runtime. pip-audit resolviendo privado34 y motor35 paquetes:0 avisos. El entorno compartido tenía37 avisos en6 paquetes; urllib3/soupsieve usados por descargadores actualizados y mínimos seguros en ambos requirements. Quedan32 avisos en4 paquetes ajenos al proyecto: cryptography,pip,pyjwt,setuptools; no se modifican herramientas compartidas indiscriminadamente. |
 
-Evidencia en docs/qa/tarea15: pip-private.json,pip-motor.json,npm.json.
+Evidencia en docs/qa/tarea15: pip-private.json,pip-motor.json,npm.json,historial-privado.json,historial-motor.json.
 [Scanner PyPA](https://github.com/pypa/pip-audit),
 [gitleaks](https://github.com/gitleaks/gitleaks).
 No garantiza ausencia de vulnerabilidades, objetos Git inalcanzables ni servicios externos.
 Los JS/APK y estudios estáticos son públicos; el candado protege datos/API privada.
+
+Gitleaks privado interrumpido; primer scanner sin prefiltros también interrumpido por tiempo. Scanner optimizado completo una vez: sin exclusiones de blobs, incluidos binarios, solo firmas conocidas/asignaciones de alta entropía. La prueba incluye clave eliminada en otro ref y salida redactada. El análisis del historial fue exclusivamente de secretos, no de mercados ni evaluación del aprendiz.
