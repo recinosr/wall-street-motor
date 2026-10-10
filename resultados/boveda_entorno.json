@@ -1,0 +1,14 @@
+{
+  "python": "3.12.10",
+  "paquetes": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "requests": "2.34.2",
+    "exchange_calendars": "4.13.2"
+  },
+  "dependencias_sha256": "b9a3eb1cc170f9c3a46fe07f91f8b3be938e70d2b99aa0396ed06edbaa0464a8",
+  "hilos_OMP_OPENBLAS": 1,
+  "nota": "Versiones principales usadas en medición local y fijadas en workflow; no son nuevos parámetros estadísticos."
+}
