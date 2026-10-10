@@ -136,8 +136,8 @@ def cycle(state, markets, marker, now, run_id, proofs, report=None):
         for policy,a in state['accounts'][s].items():
             pending=a['pending']
             proof=proofs.get(str(pending['run_id'])) if pending else None
-            if pending and proof and qt>max(stamp(proof['completed_at']),stamp(pending['decided_at'])):
-                if policy=='activa' and a.get('execution_day')==day:continue
+            if (pending and proof and qt>max(stamp(proof['completed_at']),stamp(pending['decided_at']))
+                    and not (policy=='activa' and a.get('execution_day')==day)):
                 setup=pending.get('prudent_setup')
                 if setup and setup.get('stop') is not None and setup['stop']>=p:
                     log(s,policy,'cancelar',reason='Precio futuro fuera del stop; sin compra ni costo.',intent_id=pending['id'])

@@ -89,8 +89,11 @@ class VitaOperaTests(unittest.TestCase):
         self.assertEqual(sum(e['action']=='comprar' and e['account']=='activa' for e in events),1)
         self.assertIsNotNone(s['accounts']['BTC']['activa']['pending'])
         later=self.now+timedelta(minutes=1);self.market['BTC']['quote']['time']=later.isoformat()
-        _,events=cycle(s,self.market,{},later,'125',{'124':dict(completed_at=self.now.isoformat())})
+        self.market['BTC']['quote']['price']=950.
+        updated,events=cycle(s,self.market,{},later,'125',{'124':dict(completed_at=self.now.isoformat())})
         self.assertFalse(any(e['action'] in ('comprar','vender') and e['account']=='activa' for e in events))
+        self.assertEqual(updated['accounts']['BTC']['activa']['quote_time'],later.isoformat())
+        self.assertGreater(updated['accounts']['BTC']['activa']['equity'],s['accounts']['BTC']['activa']['equity'])
 
     def test_prudente_requires_asset_BH_and_stability(self):
         report={'version':1,'completo':True,'items':[{'direccion':1,'salidas':[{'id':'fijo_5','grupos':{'universo':{'estado':'sirve_en_muestra'}}}]}]}
