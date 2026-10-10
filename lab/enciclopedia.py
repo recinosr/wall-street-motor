@@ -120,7 +120,48 @@ def catalog():
                                    'Se interpreta como posible caída.' if direction == -1 else
                                    'Se interpreta como indecisión; no tiene dirección única.'),
                             prueba='Entrada en apertura posterior, siete salidas, costos y dos controles; definición v1 fija.'))
+    for name,drawing,direction,length in [
+        ('barrido_minimo_mismo','Rompe el mínimo de20 velas anteriores y cierra dentro del rango previo.',1,21),
+        ('barrido_maximo_mismo','Rompe el máximo de20 velas anteriores y cierra dentro del rango previo.',-1,21),
+        ('barrido_minimo_siguiente','Rompe abajo, cierra fuera y la vela siguiente cierra dentro del rango previo al barrido.',1,22),
+        ('barrido_maximo_siguiente','Rompe arriba, cierra fuera y la vela siguiente cierra dentro del rango previo al barrido.',-1,22),
+        ('brecha_valor_alcista','Tres velas: mínimo de la tercera mayor que máximo de la primera.',1,3),
+        ('brecha_valor_bajista','Tres velas: máximo de la tercera menor que mínimo de la primera.',-1,3),
+        ('bloque_ordenes_alcista','Última roja en las3 velas previas; impulso verde de1.5ATR rompe máximo20.',1,4),
+        ('bloque_ordenes_bajista','Última verde en las3 velas previas; impulso rojo de1.5ATR rompe mínimo20.',-1,4),
+        ('estructura_alcista','Cierre supera en0.5% el máximo de20 velas previas; primer cruce.',1,21),
+        ('estructura_bajista','Cierre pierde en0.5% el mínimo de20 velas previas; primer cruce.',-1,21),
+    ]:
+        title={'barrido_minimo_mismo':'Barrido de liquidez · mínimo · misma vela','barrido_maximo_mismo':'Barrido de liquidez · máximo · misma vela',
+               'barrido_minimo_siguiente':'Barrido de liquidez · mínimo · vela siguiente','barrido_maximo_siguiente':'Barrido de liquidez · máximo · vela siguiente',
+               'brecha_valor_alcista':'Brecha de valor justo (FVG) · alcista','brecha_valor_bajista':'Brecha de valor justo (FVG) · bajista',
+               'bloque_ordenes_alcista':'Bloque de órdenes · alcista','bloque_ordenes_bajista':'Bloque de órdenes · bajista',
+               'estructura_alcista':'Ruptura de estructura · alcista','estructura_bajista':'Ruptura de estructura · bajista'}[name]
+        out.append(dict(id=name,nombre=title,familia='ict',dibujo=drawing,direccion=direction,extremo_velas=length,
+                        libro='Hipótesis ICT de posible '+('subida.' if direction==1 else 'caída.'),
+                        prueba='Regla ICT v1 fija; señal solo al cierre confirmatorio, entrada en apertura posterior, siete salidas, costos y dos controles.'))
     return out
+
+def ict_signals(df):
+    o,h,l,c=(df[k] for k in ['open','high','low','close'])
+    lower=l.shift().rolling(20).min();upper=h.shift().rolling(20).max()
+    inside=(c>lower)&(c<upper)
+    previous_inside=(c>lower.shift())&(c<upper.shift())
+    tr=pd.concat([h-l,(h-c.shift()).abs(),(l-c.shift()).abs()],axis=1).max(axis=1)
+    atr=tr.shift().rolling(20).mean();body=(c-o).abs()
+    up=(c>o)&(body>=1.5*atr)&(c>upper)
+    down=(c<o)&(body>=1.5*atr)&(c<lower)
+    red=c<o;green=c>o
+    return {k:v.fillna(False).astype(bool) for k,v in dict(
+        barrido_minimo_mismo=(l<lower)&inside,
+        barrido_maximo_mismo=(h>upper)&inside,
+        barrido_minimo_siguiente=(l.shift()<lower.shift())&(c.shift()<=lower.shift())&previous_inside,
+        barrido_maximo_siguiente=(h.shift()>upper.shift())&(c.shift()>=upper.shift())&previous_inside,
+        brecha_valor_alcista=l>h.shift(2),brecha_valor_bajista=h<l.shift(2),
+        bloque_ordenes_alcista=up&(red.shift()|red.shift(2)|red.shift(3)),
+        bloque_ordenes_bajista=down&(green.shift()|green.shift(2)|green.shift(3)),
+        estructura_alcista=(c>upper*1.005)&(c.shift()<=upper.shift()*1.005),
+        estructura_bajista=(c<lower*.995)&(c.shift()>=lower.shift()*.995)).items()}
 
 
 def detect(df, last_only=False):
@@ -255,6 +296,7 @@ def detect(df, last_only=False):
                 arrays['taza_con_asa'][i]=(.1<=depth<=.4 and a+width/3<=bottom<=a+2*width/3 and
                     min(lv[bp:i+1])>hv[bp]*(1-depth/2) and cv[i]>max(hv[a],hv[bp])*1.005 and cv[i-1]<=max(hv[a],hv[bp])*1.005)
     P.update({k:pd.Series(v,index=df.index) for k,v in arrays.items()})
+    P.update(ict_signals(df))
     return {k:v.fillna(False).astype(bool) for k,v in P.items()}
 
 
@@ -319,14 +361,16 @@ def fetch_daily(symbol):
     return df
 
 
-def measure_asset(symbol,df):
+def measure_asset(symbol,df,selected_catalog=None):
     """Eventos no superpuestos por combinación. Azar estratificado antes/después2016,
     misma frecuencia sin reemplazo; conserva distribución de distancia del stop.
     Base: retorno normal neto direccional del activo y duración realmente observada.
     """
-    patterns=detect(df); out={}; prices=df[['open','high','low','close']].to_numpy(float)
+    selected_catalog=catalog() if selected_catalog is None else selected_catalog
+    patterns=ict_signals(df) if selected_catalog and all(p['familia']=='ict' for p in selected_catalog) else detect(df)
+    out={}; prices=df[['open','high','low','close']].to_numpy(float)
     split=int(df.index.searchsorted(pd.Timestamp(SPLIT,tz='UTC')))
-    years=df.index.year.to_numpy();dates=[x.date().isoformat() for x in df.index]
+    before=(df.index<pd.Timestamp(SPLIT,tz='UTC'));dates=[x.date().isoformat() for x in df.index]
     candidate_cache={}
     forward={}
     for direction in [-1,1]:
@@ -336,7 +380,7 @@ def measure_asset(symbol,df):
                 mask=(df.index<pd.Timestamp(SPLIT,tz='UTC')) if period=='antes2016' else (df.index>=pd.Timestamp(SPLIT,tz='UTC'))
                 valid=mask & (df.index+pd.to_timedelta(h*2,unit='D')<pd.Timestamp(SPLIT,tz='UTC')) if period=='antes2016' else mask
                 forward[(direction,h,period)]=float(vals[valid].mean())
-    for p in catalog():
+    for p in selected_catalog:
         direction=p['direccion'] or 1
         stop_series=(df.low.rolling(p['extremo_velas'],min_periods=1).min() if direction==1 else df.high.rolling(p['extremo_velas'],min_periods=1).max())
         indices=np.flatnonzero(patterns[p['id']].to_numpy()); stops=stop_series.to_numpy(float)
@@ -347,11 +391,11 @@ def measure_asset(symbol,df):
                 stop=float(stops[i]); result=trade(df,i,mode,direction,stop,prices,split)
                 if result is None: continue
                 value,h,risk_r=result; last_exit=i+h
-                period='antes2016' if years[i]<2016 else 'desde2016'
+                period='antes2016' if before[i] else 'desde2016'
                 # Exact normal return for every possible signal date of same duration/period.
                 if (direction,h,period) not in forward:
                     vals=pd.Series(net_return(df.open.shift(-1),df.close.shift(-h),direction),index=df.index)
-                    group=df.index.year<2016 if period=='antes2016' else df.index.year>=2016
+                    group=before.copy() if period=='antes2016' else ~before
                     if period=='antes2016': group=group & (np.arange(len(df))+h < np.searchsorted(df.index,pd.Timestamp(SPLIT,tz='UTC')))
                     forward[(direction,h,period)]=float(vals[group].mean())
                 risk=direction*(prices[i+1,0]-stop)/prices[i+1,0]
@@ -364,8 +408,8 @@ def measure_asset(symbol,df):
                 if not group: continue
                 horizon=int(mode.split('_')[1]) if mode.startswith('fijo') else 20
                 if (horizon,period) not in candidate_cache:
-                    candidate_cache[(horizon,period)]=[i for i in range(len(df)-horizon) if (years[i]<2016)==(period=='antes2016') and
-                                                      (years[i+horizon]<2016)==(period=='antes2016')]
+                    candidate_cache[(horizon,period)]=[i for i in range(len(df)-horizon) if before[i]==(period=='antes2016') and
+                                                      before[i+horizon]==(period=='antes2016')]
                 candidates=candidate_cache[(horizon,period)]
                 # Random control uses SAME nonoverlap convention and exactly n trades.
                 available=list(rng.permutation(candidates)); chosen=[];occupied=np.zeros(len(df),dtype=bool)
@@ -471,7 +515,7 @@ def add_bh_counts(report):
     contrasts=groups=pool=0;patterns=set()
     for pattern in report['items']:
         for exit in pattern['salidas']:
-            for asset in ['universo','BTC-USD','ETH-USD']:
+            for asset in exit['grupos']:
                 for period in ['total','antes2016','desde2016']:
                     s=exit['grupos'][asset][period]
                     contrasts+=sum(s.get('q_'+c,1)<=.05 for c in ['normal','azar'])

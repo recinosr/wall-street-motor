@@ -2,7 +2,7 @@
 
 Una corrida nueva: 144,036 recorridos intentados en108 celdas; 2,000 por celda aleatoria,36 recorridos de momentum. Semilla20261009. 498 acciones descargadas,5 fallas, más SPY/VOO. Seis inicios(2000,2003,2006,2009,2012,2015),5/10años; corte exclusivo1abr2025. Datos públicos nuevos en memoria; solo métricas publicadas.
 
-US$100 ficticios/mes,60/120aportes y liquidación en aniversario. $0.15/orden y0.1% por lado dentro del aporte. No cambia presupuesto personal50–100 ni ninguna cuenta. Dividendos brutos aproximados; faltan retenci?n y costos de fondeo/cambio.
+US$100 ficticios/mes,60/120aportes y liquidación en aniversario. $0.15/orden y0.1% por lado dentro del aporte. No cambia presupuesto personal50–100 ni ninguna cuenta. Dividendos brutos aproximados; faltan retención y costos de fondeo/cambio.
 
 **No demuestra que elegir acciones venza un ETF.** Se eligen miembros actuales: empresas desaparecidas faltan. En2000, sobrevivientes seleccionados en2026 pueden dominar al índice por ese sesgo. Las ausencias futuras invalidan recorridos, sin reemplazos retrospectivos; se publica cada exclusión.
 
@@ -21,10 +21,10 @@ Momentum12 anual usa12 meses terminados en el precio del mes anterior; ejecuta e
 
 ×5 = valor final >=5 veces TODOS los aportes, no retorno anual ni promesa. Bandas P10–P90 excluyen20% de resultados, no son límites.
 
-Bessembinder(2018) encontr? que la mayoría de acciones de EEUU rindió menos que letras del Tesoro durante su vida y aproximadamente4% explica la creación neta de riqueza. No repetimos ese estudio: no tenemos bajas hist?ricas ni comparaci?n con letras. [Fuente acad?mica original](https://asu.elsevierpure.com/en/publications/do-stocks-outperform-treasury-bills/).
+Bessembinder(2018) encontró que la mayoría de acciones de EEUU rindió menos que letras del Tesoro durante su vida y aproximadamente4% explica la creación neta de riqueza. No repetimos ese estudio: no tenemos bajas históricas ni comparación con letras. [Fuente académica original](https://asu.elsevierpure.com/en/publications/do-stocks-outperform-treasury-bills/).
 
 Yahoo Chart ajustado bruto, sin segunda fuente completa: la pantalla es exploratoria, no resultados corroborados de500activos. Ventanas y sorteos se solapan;108 comparaciones descriptivas,0tests de hipótesis/BH; no se escogió umbral tras ver ganancias.
 
-C?digo motor: `python -m lab.concentracion`; workflow manual `concentracion.yml` para repetir. API `/api/concentracion`; tarjeta Aprender→Carteras. No cambia cron existente, pesos ni ledgers.
+Código motor: `python -m lab.concentracion`; workflow manual `concentracion.yml` para repetir. API `/api/concentracion`; tarjeta Aprender→Carteras. No cambia cron existente, pesos ni ledgers.
 
 Control adicional de causalidad: segunda ejecución completa con los mismos parámetros/semilla. La elegibilidad de momentum usa solo precios anteriores; una ausencia en ejecución invalida el recorrido sin elegir reemplazo. Se intentaron288,072 recorridos en total (dos veces144,036),108 celdas únicas, sin hipótesis nuevas. Las diferencias de mediana por revisiones de fuente alcanzan US$0.0331; se actualizó la tabla con la segunda corrida. Las frecuencias y conclusiones se mantienen.

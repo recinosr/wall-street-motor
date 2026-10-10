@@ -58,6 +58,8 @@ jobs:
           path: partes
           merge-multiple: true
       - run: python -m lab.enciclopedia --merge partes
+      - run: python -m unittest discover -s tests -p test_ict.py
+      - run: python -m lab.ict --hourly-only
       - name: Publicar solo métricas
         run: |
           git config user.name motor-bot
