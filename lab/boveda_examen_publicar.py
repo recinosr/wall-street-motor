@@ -26,6 +26,16 @@ def empacar(out):
     return manifest
 
 
+def anotar_auditoria(out):
+    path=Path(out)/'boveda_examenes.json'; auditpath=Path(out)/'boveda_examen_auditoria.json'
+    if not auditpath.exists():return
+    manifest=json.loads(path.read_text(encoding='utf8')); audit=json.loads(auditpath.read_text(encoding='utf8'))
+    if manifest['firma']!=audit['firma_examen']:raise ValueError('Auditoría de otro protocolo')
+    manifest['auditoria']=audit
+    write(path,manifest)
+
+
 if __name__ == '__main__':
     from lab.boveda_examen import OUT
-    m = empacar(OUT); print(len(m['ejemplos']), 'casos;', len(m['fragmentos']), 'fragmentos; sin recalcular métricas')
+    m = empacar(OUT); anotar_auditoria(OUT)
+    print(len(m['ejemplos']), 'casos;', len(m['fragmentos']), 'fragmentos; sin recalcular métricas')
