@@ -23,6 +23,9 @@ class ConcentrationTest(unittest.TestCase):
         _,other=momentum_portfolio(changed,13,24,1)
         self.assertEqual(first[0]['indices'],[1]);self.assertEqual(first[0],other[0])
         self.assertEqual(first[0]['momento_conocido'],12)
+        missing=p.copy();missing[13,1]=np.nan
+        value,choice=momentum_portfolio(missing,13,24,1)
+        self.assertTrue(np.isnan(value));self.assertEqual(choice[0],first[0])
 
     def test_x5_is_total_contributions_and_nan_counted(self):
         d=statistics([499,500,np.nan,99],100,200)

@@ -10,7 +10,7 @@ Ejemplo2000→2010, $12,000 aportados; SPY como proxy de VOO aún inexistente:
 
 | Acciones |P10 USD|Mediana USD|P90 USD|Vence SPY|Pierde aportes|×5|
 |---|---:|---:|---:|---:|---:|---:|
-|1|10751.72|18014.81|30325.21|80.10|14.90|1.95|
+|1|10751.72|18014.81|30325.20|80.10|14.90|1.95|
 |3|13539.96|18883.33|29719.09|93.20|4.00|1.45|
 |5|14922.07|19726.30|30344.32|97.55|1.05|1.95|
 |10|16149.36|19826.42|27692.43|99.70|0.15|0.55|
@@ -26,3 +26,5 @@ Bessembinder(2018) encontr? que la mayoría de acciones de EEUU rindió menos qu
 Yahoo Chart ajustado bruto, sin segunda fuente completa: la pantalla es exploratoria, no resultados corroborados de500activos. Ventanas y sorteos se solapan;108 comparaciones descriptivas,0tests de hipótesis/BH; no se escogió umbral tras ver ganancias.
 
 C?digo motor: `python -m lab.concentracion`; workflow manual `concentracion.yml` para repetir. API `/api/concentracion`; tarjeta Aprender→Carteras. No cambia cron existente, pesos ni ledgers.
+
+Control adicional de causalidad: segunda ejecución completa con los mismos parámetros/semilla. La elegibilidad de momentum usa solo precios anteriores; una ausencia en ejecución invalida el recorrido sin elegir reemplazo. Se intentaron288,072 recorridos en total (dos veces144,036),108 celdas únicas, sin hipótesis nuevas. Las diferencias de mediana por revisiones de fuente alcanzan US$0.0331; se actualizó la tabla con la segunda corrida. Las frecuencias y conclusiones se mantienen.

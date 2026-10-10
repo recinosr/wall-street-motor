@@ -84,14 +84,15 @@ def momentum_portfolio(prices,start,months,n,monthly=100):
         if selected is None or (i-start)%12==0:
             if i<13:return np.nan,history
             score=prices[i-1]/prices[i-13]-1
-            known=np.isfinite(score)&np.isfinite(row)&(row>0)
+            known=np.isfinite(score)&(prices[i-1]>0)&(prices[i-13]>0)
             candidates=np.flatnonzero(known)
             if len(candidates)<n:return np.nan,history
             chosen=candidates[np.argsort(-score[candidates],kind='stable')[:n]]
+            history.append({'mes':i-start+1,'indices':chosen.tolist(),'momento_conocido':i-1})
+            if not np.isfinite(row[chosen]).all() or (row[chosen]<=0).any():return np.nan,history
             cash=float(np.where(units>0,units*row,0).sum())*(1-RATE)-FEE*np.count_nonzero(units)
             cash=max(0.,cash);units[:]=0;selected=chosen
             units[selected]=buy(cash+monthly,n)/n/row[selected]
-            history.append({'mes':i-start+1,'indices':chosen.tolist(),'momento_conocido':i-1})
         else:
             if not np.isfinite(row[selected]).all():return np.nan,history
             units[selected]+=buy(monthly,n)/n/row[selected]
