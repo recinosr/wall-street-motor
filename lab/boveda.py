@@ -32,6 +32,10 @@ class Boveda:
             if d.index.has_duplicates or not d.index.is_monotonic_increasing:
                 raise ValueError('Fechas duplicadas o desordenadas')
             self.__datos[sim] = d
+        # Transformaciones causales, verificadas por igualdad de prefijos. Los
+        # métodos nunca reciben estas tablas completas, solamente su copia hasta T.
+        self.__tablas = {sim: tabla(self.__datos, sim) for sim, d in self.__datos.items()
+                         if sim != '^VIX' and {'open', 'high', 'low', 'close', 'volume'} <= set(d.columns)}
 
     def ver(self, hasta):
         t = pd.Timestamp(hasta).normalize()
@@ -45,6 +49,8 @@ class Boveda:
                 view = view.loc[pd.to_datetime(view.filed) < t].copy(deep=True)
             if len(view):
                 out[sim] = view
+                if sim in self.__tablas:
+                    out.tablas[sim] = self.__tablas[sim].loc[self.__tablas[sim].index <= t].copy(deep=True)
         return out
 
 

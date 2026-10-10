@@ -68,9 +68,19 @@ class VaultTest(unittest.TestCase):
                 if isinstance(node.func,ast.Attribute) and node.func.attr=='shift':
                     self.assertFalse(any(isinstance(a,ast.UnaryOp) and isinstance(a.op,ast.USub) for a in node.args))
         data=prices(sim='BTC-USD'); t=data['BTC-USD'].index[600]
-        full=tabla(Boveda(data).ver(data['BTC-USD'].index[-1]),'BTC-USD')
-        past=tabla(Boveda(data).ver(t),'BTC-USD')
+        full=tabla(data,'BTC-USD')
+        past=tabla({s:d.loc[:t].copy() for s,d in data.items()},'BTC-USD')
         pd.testing.assert_frame_equal(past,full.loc[:t])
+        pd.testing.assert_frame_equal(past,tabla(Boveda(data).ver(t),'BTC-USD'))
+
+    def test_cached_forecasts_identical_to_indicators_recomputed_only_on_past(self):
+        data=prices(sim='BTC-USD');vault=Boveda(data)
+        for h in HORIZONTES:
+            a,b=Pronosticador('BTC-USD',h),Pronosticador('BTC-USD',h)
+            for i in (620,650,651):
+                view=vault.ver(data['BTC-USD'].index[i])
+                p=a.pronosticar(view);q=b.pronosticar(dict(view))
+                self.assertEqual(json.dumps(p,sort_keys=True),json.dumps(q,sort_keys=True))
 
     def test_mature_labels_monthly_scaler_past_only(self):
         data=prices(); dates=data['SPY'].index; model=Pronosticador('SPY',63); vault=Boveda(data)
@@ -105,7 +115,7 @@ class RunnerTest(unittest.TestCase):
         from lab import boveda_ejecutar as runner
         with tempfile.TemporaryDirectory() as td, patch.object(runner,'OUT',Path(td)), patch.object(runner,'descargar') as fetch:
             with self.assertRaises(FileNotFoundError):runner.ejecutar('final','2026-10-10')
-            runner.write(Path(td)/'boveda_protocolo.json',{'firma':runner.firma_codigo(),'commit_diseno':'test'})
+            runner.write(Path(td)/'boveda_protocolo_v2.json',{'firma':runner.firma_codigo(),'commit_diseno':'test'})
             runner.write(Path(td)/'boveda_reserva_apertura.json',{'abierta':'ya'})
             with self.assertRaises(FileExistsError):runner.ejecutar('final','2026-10-10')
             fetch.assert_not_called()

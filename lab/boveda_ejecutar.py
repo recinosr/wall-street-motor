@@ -55,7 +55,7 @@ def congelar():
         original = subprocess.check_output(['git', '-c', 'safe.directory=*', 'show', commit+':'+p], cwd=ROOT)
         if original.decode('utf8').replace('\r\n', '\n') != (ROOT/p).read_text(encoding='utf8'):
             raise ValueError('Congelar requiere código y pruebas ya comprometidos')
-    write(OUT/'boveda_protocolo.json', {'config': CONFIG, 'firma': firma_codigo(), 'commit_diseno': commit,
+    write(OUT/'boveda_protocolo_v2.json', {'config': CONFIG, 'firma': firma_codigo(), 'commit_diseno': commit,
            'congelado': dt.datetime.now(dt.timezone.utc).isoformat()}, once=True)
 
 
@@ -137,7 +137,7 @@ def evaluar(sim, d, exogenous, period, after=None):
 def ejecutar(mode, end):
     started = time.monotonic(); initial = OUT/'boveda_reserva_inicial.json'
     if mode != 'desarrollo':
-        protocol = json.loads((OUT/'boveda_protocolo.json').read_text(encoding='utf8'))
+        protocol = json.loads((OUT/'boveda_protocolo_v2.json').read_text(encoding='utf8'))
         if protocol['firma'] != firma_codigo(): raise ValueError('Código alterado tras congelación; reserva bloqueada')
         if mode == 'final' and initial.exists(): raise ValueError('La reserva inicial ya fue evaluada; usar extender')
         if mode == 'extender' and not initial.exists(): raise ValueError('Falta evaluación inicial')
@@ -148,7 +148,7 @@ def ejecutar(mode, end):
                 'firma': protocol['firma'], 'commit_diseno': protocol['commit_diseno'],
                 'abierta': dt.datetime.now(dt.timezone.utc).isoformat(), 'hasta': end}, once=True)
     else:
-        if (OUT/'boveda_protocolo.json').exists(): raise ValueError('Diseño ya congelado')
+        if (OUT/'boveda_protocolo_v2.json').exists(): raise ValueError('Diseño ya congelado')
         end = min(end, '2023-12-31')
     previous = json.loads((OUT/'boveda.json').read_text(encoding='utf8')) if (OUT/'boveda.json').exists() else {}
     frames = {}; sources = []; failures = []
