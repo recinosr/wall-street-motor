@@ -9,3 +9,5 @@ yfinance>=0.2.54
 exchange_calendars>=4.5
 
 TA-Lib>=0.6.5
+urllib3>=2.8.0
+soupsieve>=2.9.0
