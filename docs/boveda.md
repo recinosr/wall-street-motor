@@ -1,5 +1,7 @@
 # Bóveda del tiempo
 
+21B agrega [exámenes y rondas](boveda_examen.md). Para extender21 usar ahora `python -m lab.boveda_compat21 extender`: comprueba la misma firmaV2 retirando exclusivamente el despacho CLI agregado. El comando directo anterior rechaza el archivo con ese sufijo; la rutina semanal ya usa el adaptador. No hay nueva apertura de la reserva ni cambio de predictores21.
+
 Experimento de probabilidades de subida y rango P10–P90 del **retorno de precio**. No son retornos totales, operaciones ni ganancias después de costos. Sin dividendos, impuestos o instrucciones de compra. No usa el archivo reservado del aprendiz.
 
 El recolector descarga una serie pública independiente de Yahoo chart en una caché ignorada (`.boveda-cache`). Durante diseño limita la solicitud a diciembre de 2023. Solo admite sesiones terminadas; usa XNYS/XLON y días UTC para cripto. Reindexa el calendario conservando NaN: nunca rellena precios. No usa `adjclose`. El proveedor puede revisar su historia o ajustar por splits: no contamos con vintages históricos de precios, de modo que esto prueba causalidad del código sobre esa serie, no reproduce todas las pantallas que un inversor habría visto entonces.
