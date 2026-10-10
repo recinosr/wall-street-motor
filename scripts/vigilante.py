@@ -26,8 +26,8 @@ def due(now):
     block=now.replace(minute=now.minute//10*10, second=0, microsecond=0)
     tasks=[]
     if now.minute % 10 >= 3: tasks.append(('demo-cripto.yml', block.isoformat()))
-    if now.minute % 20 >= 5: tasks.append(('aprendiz.yml', block.replace(minute=now.minute//20*20).isoformat()))
-    if now.minute >= 7: tasks.append(('escuela.yml', block.replace(minute=0).isoformat()))
+    if now.minute % 10 >= 5: tasks.append(('aprendiz.yml', block.isoformat()))
+    if now.minute % 10 >= 7: tasks.append(('escuela.yml', block.isoformat()))
     if now.minute >= 8: tasks.append(('pronostico.yml', block.replace(minute=8).isoformat()))
     for minute, flow in [(33,'gimnasio.yml'),(43,'fabrica-diaria.yml')]:
         if now.minute >= minute: tasks.append((flow, block.replace(minute=0).isoformat()))
