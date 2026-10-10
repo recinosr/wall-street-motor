@@ -1,6 +1,7 @@
 name: vigilante
 # Motor sin parar. Los cron de GitHub se retrasan o se descartan cuando son frecuentes
-# (3 corridas de la demo en 30 h). Este job vive ~5 h 50 min, despacha cada flujo a su hora
+# (3 corridas de la demo en 30 h). Demo, aprendiz y escuela cada 10 min; gimnasio y fábrica cripto cada hora;
+# lo que depende de cierres diarios de bolsa, a su hora. GitHub limita cada job a 6 h: este vive ~5 h 50 min, despacha cada flujo a su hora
 # con workflow_dispatch (que no se descarta) y, antes de terminar, se despacha a sí mismo.
 # El cron cada 3 h solo es red de seguridad por si la cadena se corta.
 on:
@@ -41,14 +42,14 @@ jobs:
               ultimo=$clave
               m=$((10#$(date -u +%M))); h=$((10#$(date -u +%H))); dow=$(date -u +%u); dom=$((10#$(date -u +%d)))
               [ $((m % 10)) -eq 3 ] && lanzar demo-cripto.yml
-              [ $((m % 20)) -eq 5 ] && lanzar aprendiz.yml
-              [ "$m" -eq 7 ] && lanzar escuela.yml
+              [ $((m % 10)) -eq 5 ] && lanzar aprendiz.yml
+              [ $((m % 10)) -eq 7 ] && lanzar escuela.yml
+              [ "$m" -eq 33 ] && lanzar gimnasio.yml
+              [ "$m" -eq 43 ] && lanzar fabrica-diaria.yml
               [ "$h" -eq 0 ] && [ "$m" -eq 0 ] && lanzar pronostico.yml
               [ "$h" -eq 21 ] && [ "$m" -eq 45 ] && lanzar pronostico.yml
               [ "$h" -eq 22 ] && [ "$m" -eq 30 ] && { lanzar universo.yml; lanzar vita-diario.yml; }
               [ "$h" -eq 2 ] && [ "$m" -eq 20 ] && lanzar archivar.yml
-              [ "$h" -eq 3 ] && [ "$m" -eq 30 ] && lanzar gimnasio.yml
-              [ "$h" -eq 4 ] && [ "$m" -eq 20 ] && lanzar fabrica-diaria.yml
               [ "$h" -eq 5 ] && [ "$m" -eq 10 ] && lanzar fabrica.yml
               [ "$dow" -eq 7 ] && [ "$h" -eq 3 ] && [ "$m" -eq 35 ] && lanzar enciclopedia.yml
               [ "$dom" -eq 1 ] && [ "$h" -eq 23 ] && [ "$m" -eq 0 ] && lanzar carteras-robots.yml

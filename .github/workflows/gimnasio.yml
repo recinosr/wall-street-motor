@@ -6,8 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: motor-main
-  queue: max
+  group: motor-gimnasio
   cancel-in-progress: false
 jobs:
   gimnasio:

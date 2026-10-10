@@ -6,8 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: motor-main
-  queue: max
+  group: motor-escuela
   cancel-in-progress: false
 jobs:
   escuela:

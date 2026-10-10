@@ -7,8 +7,7 @@ permissions:
   contents: write
   actions: read
 concurrency:
-  group: motor-main
-  queue: max
+  group: motor-demo
   cancel-in-progress: false
 jobs:
   observar:
