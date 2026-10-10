@@ -1,0 +1,11 @@
+name: Vita papel al cierre de bolsa
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  actions: read
+jobs:
+  observar:
+    uses: ./.github/workflows/vita-opera.yml
+    with:
+      tipo: bolsa

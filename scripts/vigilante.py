@@ -28,6 +28,9 @@ def due(now):
     if now.minute % 10 >= 3: tasks.append(('demo-cripto.yml', block.isoformat()))
     if now.minute % 10 >= 5: tasks.append(('aprendiz.yml', block.isoformat()))
     if now.minute % 10 >= 7: tasks.append(('escuela.yml', block.isoformat()))
+    if now.minute % 10 >= 9: tasks.append(('vita-opera.yml', block.isoformat()))
+    if now.isoweekday()<=5 and now.hour==22 and now.minute>=40:
+        tasks.append(('vita-opera-bolsa.yml', now.replace(hour=22,minute=40,second=0,microsecond=0).isoformat()))
     if now.minute >= 8: tasks.append(('pronostico.yml', block.replace(minute=8).isoformat()))
     for minute, flow in [(33,'gimnasio.yml'),(43,'fabrica-diaria.yml')]:
         if now.minute >= minute: tasks.append((flow, block.replace(minute=0).isoformat()))
@@ -80,6 +83,8 @@ def run(minutes=350):
                 payload={'ref':'main'}
                 if flow=='pronostico.yml':
                     payload['inputs']={'modo':'completo' if dt.datetime.fromisoformat(slot).minute==0 else 'calificar'}
+                if flow=='vita-opera.yml':
+                    payload['inputs']={'tipo':'cripto'}
                 api('actions/workflows/'+flow+'/dispatches','POST',payload)
                 item['aceptado']=True
             except Exception as e:item['error']=type(e).__name__
