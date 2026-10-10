@@ -23,3 +23,14 @@ Completada en el orden **1 → 4 → 2 → 3**, con pull/rebase, commits y push 
 [Trazas Gemini](tarea15_punto1.md), [seguridad](seguridad_tarea15.md), [concentración](concentracion_tarea15.md), [ICT](ict_tarea15.md) y `docs/qa/tarea15/`. En el motor: `resultados/concentracion.json` y `resultados/enciclopedia.json`; solo métricas, sin publicar series descargadas.
 
 Sesgo de supervivencia, falta de corroboración independiente completa y costos/impuestos parciales limitan los estudios. No se eligió cartera personal, no se operó dinero real y no se alteraron cuentas ficticias, modelos, archivos reservados ni horarios de bots. Los archivos de otros encargos permanecen fuera de estos commits.
+
+## Publicación verificada
+
+| Punto | Privado | Motor público |
+|---|---|---|
+| 1 | `51f2bebe`, informe `8fa78232` | `4a73c73` |
+| 4 | `21406522`, escaneo `3452679b` | `5243d75`, escaneo `2b7bf86` |
+| 2 | `a6f53657`, revisión `9012578c` | `f632c1a`, revisión `d950cc1` |
+| 3 | `ed0c0db0` | `bf64bb9` |
+
+[Despliegue final de Worker y Pages aprobado](https://github.com/recinosr/proyecto-wall-street/actions/runs/38013133375). Tres archivos publicados comprobados por SHA-256 normalizando CRLF local a LF de Git: `sw.js` (v71), `enciclopedia.js` y `concentracion-ui.js`, contenido idéntico y con CSP/HSTS. Primer acceso urllib sin User-Agent: 403; con User-Agent de navegador: 200. La comparación binaria inicial difería solamente por finales de línea. Evidencia: `docs/qa/tarea15/despliegue-final.json`. El commit posterior solo registra esta verificación y no requiere otro despliegue.
