@@ -5,6 +5,7 @@ permissions:
   contents: write
 concurrency:
   group: motor-aprendiz
+  queue: max
   cancel-in-progress: false
 jobs:
   aprendiz:

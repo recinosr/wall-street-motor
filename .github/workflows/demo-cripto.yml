@@ -6,6 +6,7 @@ permissions:
   actions: read
 concurrency:
   group: motor-demo
+  queue: max
   cancel-in-progress: false
 jobs:
   observar:

@@ -19,6 +19,8 @@ import yfinance as yf
 RAIZ = Path(__file__).resolve().parents[1]
 # sim, nombre, grupo, domicilio, política (acumula/reparte), parte EE. UU. aproximada para el cálculo irlandés
 CATALOGO = [
+    ("IWMO.L", "iShares Edge MSCI World Momentum (Acc, USD)", "Momentum desarrollado", "Irlanda", "acumula", 0.72),
+    ("MTUM", "iShares MSCI USA Momentum Factor", "Momentum EEUU", "EE. UU.", "reparte", 1),
     ("VT", "Vanguard Total World Stock", "Mundo", "EE. UU.", "reparte", 0.62),
     ("VWRA.L", "Vanguard FTSE All-World (Acc, USD)", "Mundo", "Irlanda", "acumula", 0.62),
     ("VWRL.L", "Vanguard FTSE All-World (Dist)", "Mundo", "Irlanda", "reparte", 0.62),
@@ -48,10 +50,12 @@ CATALOGO = [
     ("ARKK", "ARK Innovation", "Temático", "EE. UU.", "reparte", 1),
     ("DIA", "SPDR Dow Jones Industrial", "EE. UU. grandes", "EE. UU.", "reparte", 1),
 ]
-CATALOGO += [('ITA', 'ITA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('XAR', 'XAR ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('PPA', 'PPA ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('SHLD', 'SHLD ? Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('CIBR', 'CIBR ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('HACK', 'HACK ? Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('BOTZ', 'BOTZ ? IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('AIQ', 'AIQ ? IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('XLV', 'XLV ? Salud', 'Salud', 'EE. UU.', 'reparte', 1), ('XLE', 'XLE ? Energía', 'Energía', 'EE. UU.', 'reparte', 1), ('XLF', 'XLF ? Finanzas', 'Finanzas', 'EE. UU.', 'reparte', 1), ('IWM', 'IWM ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VB', 'VB ? Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VIG', 'VIG ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('DGRO', 'DGRO ? Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('URA', 'URA ? Uranio', 'Uranio', 'EE. UU.', 'reparte', 1), ('EWZ', 'EWZ ? Brasil', 'Brasil', 'EE. UU.', 'reparte', 1), ('EWW', 'EWW ? México', 'México', 'EE. UU.', 'reparte', 1), ('INDA', 'INDA ? India', 'India', 'EE. UU.', 'reparte', 1), ('FXI', 'FXI ? China', 'China', 'EE. UU.', 'reparte', 1), ('EWJ', 'EWJ ? Japón', 'Japón', 'EE. UU.', 'reparte', 1), ('VNQ', 'VNQ ? Inmobiliario', 'Inmobiliario', 'EE. UU.', 'reparte', 1), ('SHY', 'SHY ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('BIL', 'BIL ? Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('GDX', 'GDX ? Oro minero', 'Oro minero', 'EE. UU.', 'reparte', 1), ('ETHA', 'ETHA ? Ethereum', 'Ethereum', 'EE. UU.', 'no paga', 1)]
+CATALOGO += [('ITA', 'ITA — Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('XAR', 'XAR — Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('PPA', 'PPA — Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('SHLD', 'SHLD — Defensa', 'Defensa', 'EE. UU.', 'reparte', 1), ('CIBR', 'CIBR — Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('HACK', 'HACK — Ciberseguridad', 'Ciberseguridad', 'EE. UU.', 'reparte', 1), ('BOTZ', 'BOTZ — IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('AIQ', 'AIQ — IA y robótica', 'IA y robótica', 'EE. UU.', 'reparte', 1), ('XLV', 'XLV — Salud', 'Salud', 'EE. UU.', 'reparte', 1), ('XLE', 'XLE — Energía', 'Energía', 'EE. UU.', 'reparte', 1), ('XLF', 'XLF — Finanzas', 'Finanzas', 'EE. UU.', 'reparte', 1), ('IWM', 'IWM — Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VB', 'VB — Small caps', 'Small caps', 'EE. UU.', 'reparte', 1), ('VIG', 'VIG — Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('DGRO', 'DGRO — Dividendos crecientes', 'Dividendos crecientes', 'EE. UU.', 'reparte', 1), ('URA', 'URA — Uranio', 'Uranio', 'EE. UU.', 'reparte', 1), ('EWZ', 'EWZ — Brasil', 'Brasil', 'EE. UU.', 'reparte', 1), ('EWW', 'EWW — México', 'México', 'EE. UU.', 'reparte', 1), ('INDA', 'INDA — India', 'India', 'EE. UU.', 'reparte', 1), ('FXI', 'FXI — China', 'China', 'EE. UU.', 'reparte', 1), ('EWJ', 'EWJ — Japón', 'Japón', 'EE. UU.', 'reparte', 1), ('VNQ', 'VNQ — Inmobiliario', 'Inmobiliario', 'EE. UU.', 'reparte', 1), ('SHY', 'SHY — Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('BIL', 'BIL — Bonos cortos', 'Bonos cortos', 'EE. UU.', 'reparte', 1), ('GDX', 'GDX — Oro minero', 'Oro minero', 'EE. UU.', 'reparte', 1), ('ETHA', 'ETHA — Ethereum', 'Ethereum', 'EE. UU.', 'no paga', 1)]
 
 # Gasto anual tomado de la ficha del emisor cuando la fuente automática no lo trae.
 TER_FICHA = {"VWRA.L": (0.14, "Vanguard, ficha 31-jul-2026 (bajó de 0.19 % el 28-jul-2026)"),
+             "IWMO.L": (0.25, "https://www.ishares.com/uk/individual/en/products/270051/IWMO — consulta 10-oct-2026"),
+             "MTUM": (0.15, "https://www.ishares.com/us/products/251614/MTUM — consulta 10-oct-2026"),
              "VWRL.L": (0.14, "Vanguard, misma clase de fondo; baja del 28-jul-2026"),
              "VUAA.L": (0.07, "Vanguard / etfstream")}
 # Rendimiento por dividendo aproximado de lo que hay dentro, para estimar la retención de los fondos irlandeses.
@@ -120,7 +124,10 @@ def ficha(sim, nombre, grupo, dom, pol, parte_us):
         f["categoria"] = (fd.fund_overview or {}).get("categoryName")
     except Exception:
         pass
-    if f.get("gasto_anual_pct") is None and sim in TER_FICHA:
+    if sim in ('IWMO.L','MTUM'):
+        f['gasto_proveedor_pct']=f.get('gasto_anual_pct')
+        f['gasto_anual_pct'],f['fuente_gasto']=TER_FICHA[sim]
+    elif f.get("gasto_anual_pct") is None and sim in TER_FICHA:
         f["gasto_anual_pct"], f["fuente_gasto"] = TER_FICHA[sim]
     # Costo estimado para un inversionista en Guatemala (puntos porcentuales por año)
     ter = f.get("gasto_anual_pct")
@@ -150,7 +157,8 @@ def construir():
             item=ficha(*fila)
             if not item.get('top') and saved.get(fila[0],{}).get('top'):
                 old=saved[fila[0]]
-                for key in ('top','sectores','peso_top10_pct','gasto_anual_pct','rend_dividendo_pct','retencion_estimada_pct','costo_total_guatemala_pct','nota_costo'):
+                fields=('top','sectores','peso_top10_pct') if fila[0] in ('IWMO.L','MTUM') else ('top','sectores','peso_top10_pct','gasto_anual_pct','rend_dividendo_pct','retencion_estimada_pct','costo_total_guatemala_pct','nota_costo')
+                for key in fields:
                     if key in old:item[key]=old[key]
                 item['posiciones_recuperadas_de']=old.get('posiciones_recuperadas_de',previous.get('actualizado'))
                 item['nota_cobertura']='La fuente no devolvió posiciones nuevas; última captura conservada, top10 parcial.'

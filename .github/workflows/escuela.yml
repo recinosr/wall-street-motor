@@ -5,6 +5,7 @@ permissions:
   contents: write
 concurrency:
   group: motor-escuela
+  queue: max
   cancel-in-progress: false
 jobs:
   escuela:

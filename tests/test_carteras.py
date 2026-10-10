@@ -32,7 +32,7 @@ class PortfolioTests(unittest.TestCase):
         self.assertAlmostEqual(p['peor_caida_pct'],-30)
         self.assertFalse(p['sin_recuperar'])
     def test_declared_weights(self):
-        self.assertEqual(len(PORTFOLIOS),27)
+        self.assertEqual(len(PORTFOLIOS),29)
         for alloc in PORTFOLIOS.values():self.assertAlmostEqual(sum(alloc.values()),1)
     def test_worst_window_not_truncated_by_benchmark_launch(self):
         idx=pd.bdate_range('1999-01-04','2020-01-06');f=pd.DataFrame({'A':1.},index=idx)

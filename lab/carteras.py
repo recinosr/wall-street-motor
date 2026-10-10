@@ -46,6 +46,30 @@ PORTFOLIOS['100% Nasdaq acumulación Irlanda']={'CNDX.L':1}
 for name,alloc in list(PORTFOLIOS.items()):
     if 'VWRA.L' in alloc and len(alloc)>1:
         PORTFOLIOS[name+' historia VT EEUU']={('VT' if s=='VWRA.L' else s):w for s,w in alloc.items()}
+PORTFOLIOS.update({'80/20 mundo/momentum Irlanda':{'VWRA.L':.8,'IWMO.L':.2},
+                   '80/20 mundo/momentum EEUU':{'VT':.8,'MTUM':.2}})
+
+
+def annual_relative(frame,weights,benchmark):
+    """Años completos, retorno sin aportes y comparación sobre idénticas sesiones."""
+    shared=frame.index.intersection(benchmark.index)
+    if not len(shared):return {'anios':[],'peor_anio_relativo_pp':None,'perdedores_seguidos':0,'negativos_seguidos':0}
+    f=frame.loc[shared];flags=calendar_flags(shared)
+    a=simulate(f,weights,flags=flags)['unit']
+    b=simulate(benchmark.loc[shared].to_frame(),[1.],flags=flags)['unit']
+    rows=[];streak=negative=worst=worstnegative=0
+    for year in sorted(set(shared.year)):
+        before=np.flatnonzero(shared.year==year-1);current=np.flatnonzero(shared.year==year)
+        last=CAL.date_to_session(pd.Timestamp(year,12,31),direction='previous').date()
+        previous=CAL.date_to_session(pd.Timestamp(year-1,12,31),direction='previous').date()
+        if not len(before) or not len(current) or shared[current[-1]].date()!=last or shared[before[-1]].date()!=previous:continue
+        ret=(a[current[-1]]/a[before[-1]]-1)*100;control=(b[current[-1]]/b[before[-1]]-1)*100
+        rows.append({'anio':int(year),'cartera_pct':float(ret),'mundo_pct':float(control),'diferencia_pp':float(ret-control)})
+        streak=streak+1 if ret<control-1e-10 else 0;worst=max(worst,streak)
+        negative=negative+1 if ret<0 else 0;worstnegative=max(worstnegative,negative)
+    return {'anios':rows,'peor_anio_relativo_pp':min((r['diferencia_pp'] for r in rows),default=None),
+            'perdedores_seguidos':worst,'negativos_seguidos':worstnegative,
+            'aviso':'Solo años completos con cierre previo; perdedores = menos que núcleo, negativos = retorno menor a cero.'}
 
 
 def net_index(hist,tax=.3):
@@ -189,7 +213,7 @@ def verify_quote(symbol,hist):
             refs=[float(r[4]) for r in rows if r[0]==int(start.timestamp())]
             ref=refs[0] if refs else None;url='Coinbase BTC-USD diario'
         else:
-            url=('https://markets.ft.com/data/etfs/tearsheet/historical?s='+symbol[:-2]+':LSE:USD') if symbol.endswith('.L') else 'https://chartexchange.com/symbol/'+('nasdaq' if symbol=='QQQ' else 'nyse')+'-'+symbol.lower()+'/historical/'
+            url=('https://markets.ft.com/data/etfs/tearsheet/historical?s='+symbol[:-2]+':LSE:USD') if symbol.endswith('.L') else 'https://chartexchange.com/symbol/'+('bats' if symbol=='MTUM' else 'nasdaq' if symbol=='QQQ' else 'nyse')+'-'+symbol.lower()+'/historical/'
             response=requests.get(url,headers={'User-Agent':'Mozilla/5.0'},timeout=25);ref=None
             if not symbol.endswith('.L') and (not response.ok or date not in response.text):
                 url=url.replace('/nyse-','/nasdaq-') if '/nyse-' in url else url.replace('/nasdaq-','/nyse-')
@@ -224,8 +248,9 @@ def verify_quote(symbol,hist):
     except Exception as e:return {'estado':'pendiente','fuente':'Stooq','error':str(e)[:80]}
 
 
-def build():
-    t=time.time();symbols=sorted({s for p in PORTFOLIOS.values() for s in p});prices={};verification={};failures=[]
+def build(names=None):
+    selected={n:a for n,a in PORTFOLIOS.items() if names is None or n in names}
+    t=time.time();symbols=sorted({s for p in selected.values() for s in p}|{'VT'});prices={};verification={};failures=[]
     def one(sym):
         try:
             series,h=download(sym);return sym,series,verify_quote(sym,h),None
@@ -235,7 +260,7 @@ def build():
             if error:failures.append({'sim':sym,'error':error})
             else:prices[sym]=series;verification[sym]=proof
     portfolios=[]
-    for name,alloc in PORTFOLIOS.items():
+    for name,alloc in selected.items():
         if any(s not in prices for s in alloc):failures.append({'cartera':name,'error':'Componente sin datos; no sustituir silenciosamente'});continue
         f=pd.concat({s:prices[s] for s in alloc},axis=1,join='inner').dropna();weights=np.asarray(list(alloc.values()))
         if len(f)<30:continue
@@ -255,10 +280,13 @@ def build():
             'comparacion_desde':common,'ventanas':win,'timing':timing,
             'verificacion':{s:verification[s] for s in alloc}})
         portfolios[-1]['sensibilidad_cierre_final_usd']=sum(sim['posiciones_finales'][i]*verification[s].get('diferencia_pct',0)/100 for i,s in enumerate(alloc) if verification[s]['estado']=='diverge')
+        if any(s in alloc for s in ('IWMO.L','MTUM')):
+            core='VWRA.L' if 'VWRA.L' in alloc else 'VT'
+            portfolios[-1]['momentum_relativo']={'comparador':core,**annual_relative(f,weights,prices[core])}
     if not portfolios:raise RuntimeError('No hay carteras con datos: '+str(failures))
     return {'version':1,'actualizado':dt.datetime.now(dt.timezone.utc).isoformat(),'corte':max(x['hasta'] for x in portfolios),
         'carteras':portfolios,'fallas':failures,'segundos':round(time.time()-t,2),
-        'comparaciones':len(PORTFOLIOS)*3,'carteras_declaradas':len(PORTFOLIOS),
+        'comparaciones':len(selected)*3,'carteras_declaradas':len(selected),
         'aviso':'Estudio retrospectivo, no cartera personal ni promesa. US$100 ficticios por mes; costos 0.1% por lado dentro del aporte, rebalanceo anual solo cambios. Dividendos EEUU netos de30% reinvertidos al exdividendo como aproximación; acumulación irlandesa sin doble retención. Retorno anual ponderado por tiempo y caída sin aportes; ventanas10años inician mensualmente y comparan capital final con VT sobre mismas fechas. Historia variable: no comparar valores finales de períodos distintos. Esperar caída =5% desde máximo20 sesiones conocido, comprar cierre posterior o fin de mes; efectivo sin interés. Pesos Jose asignados provisionalmente a activos explícitos. Fuera: fondeo/cambio/retiros, impuestos locales. Segunda fuente de precios con cobertura parcial; cifras provisionales donde no está verificada.'}
 
 
