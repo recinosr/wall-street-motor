@@ -9,3 +9,4 @@ datos/aprendiz/lotes/
 resultados/*.tmp
 resultados/parte-*.json
 partes/
+.boveda-cache/

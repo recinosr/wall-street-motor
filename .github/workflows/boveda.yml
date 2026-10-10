@@ -1,0 +1,36 @@
+name: Bóveda del tiempo semanal
+on:
+  schedule:
+    - cron: '40 4 * * 0'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: motor-main
+  queue: max
+  cancel-in-progress: false
+jobs:
+  extender:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -p test_boveda.py
+      - run: python -m lab.boveda_ejecutar extender
+      - name: Publicar solo resúmenes, preservar reserva inicial
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/boveda.json
+          git diff --cached --quiet && exit 0
+          git commit -m "bóveda: nuevas anclas sin repetir reserva inicial"
+          bash scripts/push_results.sh
