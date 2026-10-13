@@ -7,18 +7,19 @@ import re
 import subprocess
 import time
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import numpy as np
 import pandas as pd
 import requests
 from .boveda_ejecutar import descargar, sha
 from .boveda_meses import (ASSETS, METHODS, MODES, EFFECTS, CONFIG, BovedaMes,
                            MotorMes, jugar, calificar, calendario, seed)
+from .boveda_meses_lote import activo_job
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'resultados'
 PROTOCOL = OUT/'boveda_meses_diseno.json'
-FILES = ('lab/boveda_meses.py','lab/boveda_meses_ejecutar.py','tests/test_boveda_meses.py')
+FILES = ('lab/boveda_meses.py','lab/boveda_meses_ejecutar.py','lab/boveda_meses_lote.py','tests/test_boveda_meses.py')
 
 
 def write(path, data, once=False):
@@ -215,26 +216,15 @@ def ejecutar(limit=None):
     byyear={y:[] for y in range(2006,2027)};groups={};coverage=[];effects=[]
     spy=frames.get('SPY');months=list(pd.period_range('2006-01','2026-09',freq='M'))
     climates={str(m):climate(spy,m,dates) for m in months} if spy is not None else {}
-    for no,(sim,frame) in enumerate(frames.items(),1):
-        vault=BovedaMes(frame,sim.endswith('-USD'));model=None;year=None;missing=0;count=0
-        for month in months:
-            if month.year!=year:
-                year=month.year
-                try:model=MotorMes(sim,vault.ver(f'{min(year,2019)}-01-01'),dates)
-                except ValueError:model=None
-            if model is None:missing+=1;continue
-            for mode in MODES:
-                try:game=jugar(sim,frame,month,mode,model,dates,vault)
-                except ValueError:missing+=1;continue
-                stats=calificar(game)
-                if stats is None:missing+=1;continue
-                count+=1;byyear[month.year].append(game)
-                groups.setdefault((str(month),mode),[]).append(stats)
-        coverage.append(dict(sim=sim,desde=str(frame.index.min().date()),meses_modos=count,sin_historia=missing,
-            aviso='sin rellenar antes de creación ni huecos; modelos ausentes vuelven a moneda'))
-        # Calendario contrastado sobre SPY únicamente: no102 copias correlacionadas.
-        if sim=='SPY':
-            r=frame.close.pct_change(fill_method=None);flags=calendario(frame.index,dates)
+    with ProcessPoolExecutor(max_workers=4) as pool:
+        for no,(sim,games,summaries,cov) in enumerate(pool.map(activo_job,[(s,d,dates) for s,d in frames.items()]),1):
+            for game in games:byyear[int(game['mes'][:4])].append(game)
+            for month,mode,stats in summaries:groups.setdefault((month,mode),[]).append(stats)
+            coverage.append(cov)
+            print(no,sim,'juegos',cov['meses_modos'],'segundos',round(time.time()-begin),flush=True)
+    # Calendario contrastado sobre SPY únicamente: no102 copias correlacionadas.
+    if spy is not None:
+            frame=spy;r=frame.close.pct_change(fill_method=None);flags=calendario(frame.index,dates)
             for month in months:
                 mask=(frame.index.to_period('M')==month)&r.notna()
                 for effect in EFFECTS:
@@ -245,7 +235,6 @@ def ejecutar(limit=None):
                         retorno=float(own.mean()),acierto=float((own>0).mean()),
                         acierto_resto=float((other>0).mean()),delta_acierto=float((own>0).mean()-(other>0).mean()),
                         delta=float(own.mean()-other.mean())))
-        print(no,sim,'juegos',count,'segundos',round(time.time()-begin),flush=True)
     summary=[]
     for (month,mode),stats in sorted(groups.items()):
         methods={}
