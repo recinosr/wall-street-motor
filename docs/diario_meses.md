@@ -25,10 +25,10 @@ Reglas predefinidas: día de la semana; último y tres primeros días del mes; v
 Los cortes son por año de publicación, no por día exacto; el diario empieza en2006 y deja explícito n=0 cuando no hay período anterior:
 
 - [Ariel1987, A monthly effect in stock returns](https://www.sciencedirect.com/science/article/abs/pii/0304405X87900663): marzo1987. La regla último+3 es una adaptación, no réplica de su primera mitad del mes.
-- Lakonishok y Smidt1988, Are Seasonal Anomalies Real? A Ninety-Year Perspective: cambio de mes; antes de1988 no hay observaciones de este diario.
+- [Lakonishok y Smidt1988, Are Seasonal Anomalies Real? A Ninety-Year Perspective](https://doi.org/10.1093/rfs/1.4.403): cambio de mes; antes de1988 no hay observaciones de este diario.
 - [McConnell y Xu2008, Equity Returns at the Turn of the Month](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1135217): corte2008, con2006–2007 antes.
 - [Lucca y Moench2015](https://doi.org/10.1111/jofi.12196): corte2015; existen versiones de trabajo anteriores, por lo que “antes de2015” no implica que el efecto fuera desconocido.
-- Efecto lunes: corte1980 deFrench, no atribuido erróneamente aBouman/Jacobsen.
+- Efecto lunes: [corte1980 deFrench](https://www.sciencedirect.com/science/article/pii/0304405X80900215), no atribuido erróneamente aBouman/Jacobsen.
 - [Bouman y Jacobsen2002, Halloween/Sell in May](https://swlb2.aeaweb.org/articles?id=10.1257%2F000282802762024683): diciembre2002; no hay tramo anterior en2006–2026.
 - [Lista oficialFOMC](https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm) y archivos anuales2003–2020: `datos/fomc_calendario22.json` conserva fuentes/hash y correcciones verificadas.
 
@@ -47,3 +47,5 @@ Workflow `vita-meses.yml`: lunes–viernes12:00UTC, antes de la apertura deNY, c
 La clave se configura porJose únicamente como secreto `GEMINI_API_KEY` **del motor**. La variable `VITA_MESES_FREE_TIER_CONFIRMED=true` se establece solo después de verificar el nivel/cuota del proyecto enAIStudio: una llamada pequeña no demuestra que una clave pertenezca al [nivel gratuito](https://ai.google.dev/gemini-api/docs/pricing). Codex no copió claves entre repositorios ni habilitó facturación. Por ahora el piloto queda preparado, con cero pronósticosLLM y cero etiquetas; no se presenta como activo.
 
 El calificador exige forecast inmutable, commit anterior a apertura, recibo exitoso deActions también completado antes de apertura y cierres exactos maduros. Publica un marcador separado deVita y los nueve comparadores sobre los mismos diez activos/días. No crea resultados atrasados ni rellena huecos. `resultados/vita_meses.json` y `/api/vita-meses` alimentan la tarjeta. La comparación es descriptiva hasta reunir observaciones prospectivas suficientes; no demuestra ganancias.
+
+El empaque `python -m lab.boveda_meses_publicar` conserva los JSON originales y verifica que cada gzip reproduce sus bytes/hash. El Worker entrega gzip sin volver a comprimirlo; el navegador lo descomprime. No recalcula métricas.
