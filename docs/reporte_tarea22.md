@@ -2,7 +2,7 @@
 
 Instalado en **Aprender → Marcador**: elegir mes/activo, pronosticar todo el mes o día a día, inicio primero o al azar, apuesta personal fija, revelar, calificar, explicar y explorar calendario de calor/persistencia. Examen sorpresa añade “Mes completo”.
 
-**102 fuentes completas, 100 ETFs y BTC/ETH; 249 meses, enero de 2006–septiembre de 2026; 13,694,868 probabilidades diarias**. Se solapan activos/días/modos: no son 13.7 millones de pruebas independientes. En enero de 2006 eran elegibles 75 activos; los demás entran cuando tienen historia suficiente. Ningún OHLC público; 21 fragmentos anuales. Transporte gzip: 200.1 MB a 20.7 MB, sin modificar cifras.
+**102 fuentes completas, 100 ETFs y BTC/ETH; 249 meses, enero de 2006–septiembre de 2026; 13,694,868 probabilidades diarias**. Se solapan activos/días/modos: no son 13.7 millones de pruebas independientes. En enero de 2006 eran elegibles 75 activos; los demás entran cuando tienen historia suficiente. La fuente de ETH comienza el 9 de noviembre de 2017: no cubre 2015–2017; sus juegos comienzan en enero de 2019 tras el calentamiento y ajuste anual. Los juegos de BTC comienzan en enero de 2016. No se inventó cobertura anterior. Ningún OHLC público; 21 fragmentos anuales. Transporte gzip: 200.1 MB a 20.7 MB, sin modificar cifras.
 
 ## Tres meses más fáciles y tres más difíciles
 
