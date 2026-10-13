@@ -39,6 +39,7 @@ def congelar():
             raise ValueError('Código y pruebas deben estar comprometidos antes de medir')
     write(PROTOCOL,dict(config=CONFIG,firma=fingerprint(),commit=commit,
         fecha=dt.datetime.now(dt.timezone.utc).isoformat(),aperturas_previas=976,
+        intento_anterior='v1 detenido sin métricas tras3 activos: faltaban6 fuentes y corrección de calendario; misma semilla,36variantes previas contadas',
         aviso='Reserva21 consumida. Todo22 exploratorio; no reescribe reserva inicial.'),once=True)
 
 
@@ -57,7 +58,11 @@ def fomc():
             headings=re.findall(r'<h[45][^>]*>(.*?)</h[45]>',html,re.S|re.I)
             for h in headings:
                 text=re.sub('<[^>]*>','',h)
-                if 'Meeting' not in text or 'unscheduled' in text.lower():continue
+                if 'Meeting' not in text or any(w in text.lower() for w in ('unscheduled','conference')):continue
+                cross=re.search(r'([A-Z][a-z]{2})/([A-Z][a-z]{2})\s+\d+\s*[-–]\s*(\d+)',text)
+                if cross:
+                    dates.add(str(pd.to_datetime(f'{cross[2]} {cross[3]} {year}').date()))
+                    continue
                 found=re.search(r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+)(?:\s*[-–]\s*(\d+))?',text)
                 if found:
                     value=pd.to_datetime(f'{found[1]} {found[3] or found[2]} {year}')
@@ -65,10 +70,10 @@ def fomc():
         else:
             # Statement monetario (a), no notas de implementación(b) ni minutas.
             dates.update(f'{v[:4]}-{v[4:6]}-{v[6:]}' for v in
-                re.findall(r'pressreleases/monetary('+str(year)+r'\d{4})a\.htm',html))
+                re.findall(r'Statement:.*?pressreleases/monetary('+str(year)+r'\d{4})a\.htm',html,re.S))
         sources.append(dict(año=year,url=url,sha256=hashlib.sha256(html.encode()).hexdigest()))
     # Emergency2020 no se incluyó por encabezados "Conference Call".
-    if any(sum(d.startswith(str(y)) for d in dates)<6 for y in range(2006,2027)):
+    if any(sum(d.startswith(str(y)) for d in dates)!=8 for y in range(2006,2026)):
         raise ValueError('Calendario FOMC incompleto: revisar fuente antes de medir')
     data=dict(fechas=sorted(dates),fuentes=sources,
         advertencia='Lista oficial actual, no archivo de calendarios publicados en T. Programadas solamente; sin garantizar vintage.')
@@ -180,10 +185,11 @@ def inference(months, effects):
     previous=976
     old=OUT/'boveda_rondas.json'
     if old.exists():previous=max(previous,json.loads(old.read_text(encoding='utf8')).get('familia_ajuste_busqueda',976))
-    family=len(rows)+previous
+    # 36 variantes del intento22 interrumpido también se cuentan conservadoramente.
+    family=len(rows)+previous+36
     bh(rows,family)
     return dict(contrastes_nuevos=len(rows),familia_bh=family,contrastres_previos=previous,
-        persistencia=persist,histogramas=histograms,atribucion=attrib,
+        variantes_previas22=36,persistencia=persist,histogramas=histograms,atribucion=attrib,
         calendario=calendar_rows,ventajas=[r for r in rows if r['tipo']=='ventaja_brier'],
         efectos_superan_bh=[r for r in calendar_rows if r['q_bh']<.05 and r['n']>=18])
 
@@ -203,6 +209,9 @@ def ejecutar(limit=None):
             if error:failures.append(dict(sim=sim,error=error))
             else:frames[sim]=result[0];sources.append(result[1])
     print('Fuentes',len(frames),'fallas',len(failures),flush=True)
+    if failures or len(frames)!=len(assets):
+        write(ROOT/'.boveda-cache/fallas22.json',failures)
+        raise ValueError('Faltan fuentes: no se publica un universo incompleto. Ver caché/fallas22.json')
     byyear={y:[] for y in range(2006,2027)};groups={};coverage=[];effects=[]
     spy=frames.get('SPY');months=list(pd.period_range('2006-01','2026-09',freq='M'))
     climates={str(m):climate(spy,m,dates) for m in months} if spy is not None else {}

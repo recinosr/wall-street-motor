@@ -31,7 +31,7 @@ EFFECTS = ('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'cambio_mes',
            'pre_feriado', 'fomc', 'pre_fomc', 'tercer_viernes',
            'cuarto_miercoles', 'primer_dia', 'sell_may', 'halloween')
 COLS = ['r1', 'r5', 'mom', 'vol', 'dist']
-CONFIG = dict(version=1, desde='2006-01', hasta='2026-09', semilla=20261012,
+CONFIG = dict(version=2, desde='2006-01', hasta='2026-09', semilla=20261012,
     metodos=METHODS, modos=MODES, etf=ETF, cripto_desde='2015-01-01',
     ajuste='anual expansivo, solo etiquetas maduras, techo2018',
     boosting='21B:30 árboles, profundidad2, hoja60, learning_rate.05',
@@ -158,10 +158,11 @@ class MotorMes:
         for m, model in self.models.items():
             if available.any():
                 probabilities[available, METHODS.index(m)] = model.predict_proba(x.loc[available,COLS].to_numpy())[:,1]
-        flags = calendario(targets, fomc)
-        for j in range(len(targets)):
-            used = [self.calp[c] for c in EFFECTS if flags.iloc[j][c] == 1 and c in self.calp]
-            probabilities[j, -1] = np.mean(used) if used else base[j]
+        flags = calendario(targets, fomc).to_numpy()
+        values=np.array([self.calp.get(c,0.) for c in EFFECTS])
+        available=np.array([c in self.calp for c in EFFECTS],float)
+        counts=flags@available
+        probabilities[:, -1] = np.where(counts>0, (flags@values)/np.maximum(counts,1), base)
         probabilities[:, 7] = probabilities[:, [2,3,4,5,6,8]].mean(axis=1)
         return np.round(np.clip(probabilities, 0, 1), 5)
 
