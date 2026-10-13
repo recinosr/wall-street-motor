@@ -1,0 +1,37 @@
+# Tarea22 · diario de meses
+
+Instalado en **Aprender → Marcador**: elegir mes/activo, pronosticar todo el mes o día a día, inicio primero o al azar, apuesta personal fija, revelar, calificar, explicar y explorar calendario de calor/persistencia. Examen sorpresa añade “Mes completo”.
+
+**102 fuentes completas, 100 ETFs y BTC/ETH;249 meses, enero2006–septiembre2026; 13,694,868 probabilidades diarias**. Se solapan activos/días/modos: no son13.7 millones de pruebas independientes. En enero2006 eran elegibles75 activos; los demás entran cuando tienen historia suficiente. Ningún OHLC público;21 fragmentos anuales. Transporte gzip:200.1MB a20.7MB, sin modificar cifras.
+
+## Tres meses más fáciles y tres más difíciles
+
+“Fácil” significa mayor acierto de la **moneda en A con inicio primero**, sobre el universo disponible; no se seleccionó el mejor método para definir facilidad. El ganador sí se elige por menorBrier. Esta selección de extremos es retrospectiva y descriptiva.
+
+| Mes | Acierto moneda | Ganador por Brier | SPY: retorno / días de subida | Volatilidad vs mediana previa |
+|---|---:|---|---:|---:|
+| 2014-02 | 67.6% | boosting | 4.6% / 73.7% | 0.93 veces |
+| 2019-01 | 63.7% | calendario | 8.0% / 76.2% | 1.50 veces |
+| 2023-12 | 63.1% | calendario | 4.1% / 70.0% | 0.75 veces |
+
+| Mes | Acierto moneda | Ganador por Brier | SPY: retorno / días de subida | Volatilidad vs mediana previa |
+|---|---:|---|---:|---:|
+| 2010-05 | 37.9% | volatilidad | -7.9% / 35.0% | 2.38 veces |
+| 2012-05 | 38.0% | momentum | -6.0% / 36.4% | 0.93 veces |
+| 2008-10 | 38.5% | moneda | -16.5% / 34.8% | 7.54 veces |
+
+Los fáciles favorecieron el sesgo de subida: enSPY hubo más días positivos que negativos. Los difíciles castigaron ese sesgo y tuvieron más volatilidad que su mediana previa. Ganar el Brier no exige ganar el acierto: octubre2008 lo ganó la moneda pese a acertar menos del40% en el universo. Las explicaciones mensuales usan plantillas y números; describen asociaciones, no causas ni razonamientoLLM.
+
+## ¿Suerte o habilidad?
+
+**No hay persistencia demostrada.** En2019–2023, A/primero repite ganador 20.3%; azar por frecuencias 21.6%, referencia uniforme11.1%. qBH=1.00. Los otros modos tampoco pasan el ajuste. Comparar únicamente con1/9 confundiría la dominancia de ciertos métodos con habilidad.
+
+**Ningún efecto de calendario sobrevive BH; ningún método muestra mejora Brier ajustada contra moneda.** Se calcularon587 contrastes nuevos; familia conservadora5207, incluida búsqueda21B y36 variantes del intento22 interrumpido antes de métricas. No significante no significa efecto exactamente cero. Hay histogramas mensuales, regresiones de clima con intervalos y cortes por año de publicación; los tramos anteriores a publicaciones anteriores a2006 quedan con n=0.
+
+## Límites y entrega
+
+2024–2026 ya se abrió en21: se muestra como exploración, **sin otra prueba final independiente**. No se abrió el archivo reservado del aprendiz ni se cambiaron bots, ledgers o rutinas existentes. ETFs supervivientes y precios retrospectivos conservan sesgos; calendarioFOMC sin vintage verificable. A congela rasgos diarios, los rangos son aproximados y azar es apuesta direccional0/1, sin calibración. Las definiciones completas y fuentes están en [diario_meses.md](https://github.com/recinosr/wall-street-motor/blob/main/docs/diario_meses.md).
+
+Vita/Gemini quedó **preparado**, sin backtest ni llamadas: diez ETFs, prompt/modelo versionados, reserva publicada antes de consumir cuota, máximo una llamada por día, recibo anterior a apertura y etiquetas maduras. Marcador separado junto a los nueve controles, actualmente n=0. Para activarlo falta la clave del motor y confirmar el nivel gratuito enAIStudio; no se copiaron secretos ni se habilitó facturación. Google declara enero2025 como corte deGemini2.5Flash y restringe acceso a proyectos que ya lo usaban; no hay fallback silencioso.
+
+Verificación: suites completas una vez, **245 Python app conPyTorchCPU,165 Python motor,173 Node** correctas. Después,7 pruebas focales deVita (incluido recibo tardío) y3 de transporte/meses correctas. Futuro envenenado, igualdad deB con mañanas individuales, huecos, apuestas irreversibles y deduplicación comprobados. QA real a375/1280px, sin errores deJavaScript ni desbordamiento; [evidencia](qa/tarea22/interaccion.json).
