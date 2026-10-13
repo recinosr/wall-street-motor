@@ -1,0 +1,56 @@
+name: Vita · piloto prospectivo de diez ETFs
+on:
+  schedule:
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: motor-main
+  queue: max
+  cancel-in-progress: false
+jobs:
+  diario:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      VITA_MESES_FREE_TIER_CONFIRMED: ${{ vars.VITA_MESES_FREE_TIER_CONFIRMED }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements-boveda.txt
+      - run: python -m unittest discover -s tests -p test_vita_meses.py
+      - run: python -m lab.vita_meses calificar
+      - run: python -m lab.vita_meses reservar
+      - name: Publicar reserva durable antes de usar cuota
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          mkdir -p resultados/vita_meses/intentos
+          git add resultados/vita_meses/intentos/
+          if ! git diff --cached --quiet; then
+            git commit -m "reserva Vita22 $GITHUB_RUN_ID"
+            bash scripts/push_results.sh
+          fi
+      - run: python -m lab.vita_meses registrar
+      - run: python -m lab.vita_meses calificar
+      - name: Publicar intento y pronóstico una vez
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          mkdir -p resultados/vita_meses
+          git add resultados/vita_meses.json resultados/vita_meses/
+          git diff --cached --quiet && exit 0
+          git commit -m "Vita prospectiva22 $GITHUB_RUN_ID"
+          bash scripts/push_results.sh

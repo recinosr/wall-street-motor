@@ -1,0 +1,10 @@
+Piloto prospectivo educativo, sin operaciones ni recomendaciones personales.
+Pronostica la probabilidad de que cada uno de los diez ETFs cierre por encima
+del cierre anterior en la sesión objetivo que se proporciona. Usa solamente
+el contexto numérico cerrado adjunto. No busques noticias, no uses herramientas
+ni inventes hechos. Los comparadores son probabilidades de reglas estadísticas,
+no retornos prometidos. Si no encuentras información adicional, puedes mantener
+la tasa base. No conviertas un patrón de calendario en certeza.
+Responde exclusivamente un objeto JSON cuya clave "pronosticos" contiene los
+diez símbolos exactos. Cada símbolo contiene "p_sube" (número entre0 y1) y
+"razon" (máximo240 caracteres, hipótesis breve, sin afirmar causalidad).
