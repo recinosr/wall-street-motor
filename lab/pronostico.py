@@ -412,11 +412,15 @@ def summary(rows):
         if len(differences)>1:
             delta=1.96*np.std(differences,ddof=1)/np.sqrt(len(differences));ci=[mean-delta,mean+delta]
         wins=sum(r['acierto'] for r in group);n=len(group)
+        net=[r for r in group if 'retorno_neto_pct' in r]
         out.append(dict(zip(('predictor','tipo','sector','horizonte'),key),n=n,dias=len(daily),
             acierto_pct=100*wins/n,brier=float(np.mean([(r['p']-r['y'])**2 for r in group])),
             brier_tasa_base=float(np.mean([(r.get('p_base',.5)-r['y'])**2 for r in group])),
             ic95_descriptivo=wilson(wins,n),diferencia_sube_siempre=mean,ic95_por_dia=ci,
-            azar_pct=100*np.mean([r['azar_acierto'] for r in group])))
+            azar_pct=100*np.mean([r['azar_acierto'] for r in group]),
+            n_retorno_neto=len(net),retorno_neto_medio_pct=float(np.mean([r['retorno_neto_pct'] for r in net])) if net else None,
+            mantener_neto_medio_pct=float(np.mean([r['mantener_neto_pct'] for r in net])) if net else None,
+            exceso_medio_vs_mantener_pct=float(np.mean([r['exceso_sobre_mantener_pct'] for r in net])) if net else None))
         for control,field in (('siempre','siempre_acierto'),('azar','azar_acierto')):
             diffs=np.array([np.mean([r['acierto']-r[field] for r in g]) for g in daily.values()])
             mean=float(diffs.mean());z=diffs-mean;n_days=len(z)
@@ -478,6 +482,11 @@ def score(now=None):
                     'razon':row.get('razones',{}).get(name,''),
                     'siempre_acierto':int((preds.get('tasa_base',.5)>=.5)==bool(y)),'azar_acierto':random,'retorno_pct':ret*100,
                     'brecha_pct':float(b.open.iloc[0]/a.close.iloc[0]-1)*100,
+                    'retorno_neto_pct':100*((1+ret)*.995**2-1 if p>=.5 else 0.0),
+                    'mantener_neto_pct':100*((1+ret)*.995**2-1),
+                    'exceso_sobre_mantener_pct':100*((1+ret)*.995**2-1 if p>=.5 else 0.0)-100*((1+ret)*.995**2-1),
+                    'costo_xtb':{'comision_pct':0.0,'conversion_entrada_pct':.5,'conversion_salida_pct':.5,
+                                  'supuesto':'Conversión en entrada y salida; activos USD, sin spread/impuestos.'},
                     'contexto_previo':row.get('contexto_previo',{}),
                     'prueba':proof} for name,p in preds.items()]
                 save_once(dest,{'filas':rows,'medido':now.isoformat()})
