@@ -24,6 +24,7 @@ from lab.enciclopedia import catalog, detect
 ROOT=Path(__file__).resolve().parents[1]
 CAL=xc.get_calendar('XNYS')
 UTC=dt.timezone.utc
+WALK_FORWARD_WATCH={'TSLA','NVDA','AAPL','MSFT','GOOGL','AMZN','META','QQQ','SPY','VT','ACWI','SCHD','GLD','IBIT','BTC-USD'}
 
 
 def digest(obj):
@@ -141,6 +142,33 @@ def hedge_probability(preds, weights):
     return sum(active[name]*float(preds[name]) for name in active)/denom if denom else .5
 
 
+def walk_forward_report(d, sim, horizon, cutoff=None):
+    """Expanding walk-forward: every forecast uses only prices preceding its anchor."""
+    cutoff=pd.Timestamp(cutoff or d.index[-1]).tz_localize(None)
+    d=d[d.index.tz_localize(None)<=cutoff].dropna(subset=['close'])
+    c=d.close.to_numpy(dtype=float)
+    start=max(253,horizon+1)
+    names=('tasa_base','momentum_1m','momentum_3m','momentum_12m','tendencia_sma200')
+    losses={name:[] for name in names}; rows=[]
+    for i in range(start,len(c)-horizon):
+        y=int(c[i+horizon]>c[i]); past=c[1:i+1]/c[:i]-1
+        p={'tasa_base':float(np.mean(past>0)),
+           'momentum_1m':float(c[i]/c[i-21]>=1) if i>=21 else .5,
+           'momentum_3m':float(c[i]/c[i-63]>=1) if i>=63 else .5,
+           'momentum_12m':float(c[i]/c[i-252]>=1) if i>=252 else .5,
+           'tendencia_sma200':float(c[i]>=np.mean(c[i-200:i]))}
+        # Snapshot at anchor i is computed before its label can enter later weights.
+        rows.append({'fecha':d.index[i].date().isoformat(),'y':y,'p':p})
+        for name in names: losses[name].append((p[name]-y)**2)
+    if not rows:return {'sim':sim,'horizonte':horizon,'n':0,'pesos':{},'brier':{}}
+    eta=2.0; scores={name:-eta*float(np.sum(v)) for name,v in losses.items()}
+    high=max(scores.values()); exps={name:math.exp(v-high) for name,v in scores.items()}; total=sum(exps.values())
+    return {'sim':sim,'horizonte':horizon,'desde':rows[0]['fecha'],'hasta':rows[-1]['fecha'],'n':len(rows),
+            'pesos':{name:value/total for name,value in exps.items()},
+            'brier':{name:float(np.mean(v)) for name,v in losses.items()},
+            'aviso':'Walk-forward histórico con etiquetas maduras hasta el corte; separado del marcador en vivo.'}
+
+
 def generate(kind,now=None):
     now=now or dt.datetime.now(UTC)
     dates,deadline=targets(now,kind)
@@ -157,6 +185,8 @@ def generate(kind,now=None):
     def one(a):
         try:
             d=fetch(a)
+            # Yahoo max begins before 2010 for established listings. Walk-forward is isolated from live scores.
+            wf_data=history(a['sim'],'max') if a['sim'] in WALK_FORWARD_WATCH else d
             if len(d)<30:raise ValueError('historia insuficiente')
             liquidity=float((d.close*d.volume).tail(20).mean())
             if liquidity<=5e6:raise ValueError('volumen medio20 días no supera USD5M')
@@ -169,6 +199,11 @@ def generate(kind,now=None):
                 preds,brier=predict(d,a['sim'],h,patterns)
                 weights,hedge_reason=hedge_weights(a['sim'],h)
                 preds['ensamble_hedge']=hedge_probability(preds,weights)
+                wf=walk_forward_report(wf_data,a['sim'],h,cutoff=d.index[-1])
+                if not weights and wf['pesos']:
+                    weights=wf['pesos']
+                    preds['ensamble_hedge']=hedge_probability(preds,weights)
+                    hedge_reason='Inicialización histórica walk-forward; solo datos previos al ancla. '+hedge_reason
                 reasons={name:(f"Tasa base: frecuencia histórica de subida {p:.1%} antes de la fecha ancla." if name=='tasa_base' else
                     f"Momentum {name.split('_')[1]}: el retorno pasado correspondiente fue {'positivo' if p>=.5 else 'no positivo'}." if name.startswith('momentum_') else
                     f"Reversión tras caída de {name.split('_')[1]}: señal según caída de cinco sesiones/días y umbral fijado." if name.startswith('reversion_') else
@@ -180,7 +215,7 @@ def generate(kind,now=None):
                 result.append({'sim':a['sim'],'coinbase':a.get('coinbase'),'tipo':a['tipo'],
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
-                    'razones':reasons,'pesos_hedge':weights,
+                    'razones':reasons,'pesos_hedge':weights,'walk_forward':wf,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
                     'contexto_previo':{k:float(v) for k,v in features(d,crypto=a['tipo']=='cripto').iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
@@ -340,6 +375,7 @@ def score(now=None):
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
         'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,'curva_pesos_hedge':hedge_curve,
+        'walk_forward_inicializacion':[{'sim':row['sim'],'horizonte':row['horizonte'],**row['walk_forward']} for row in latest['filas'] if row.get('walk_forward')],
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
     from lab.enciclopedia import bh
     tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}
