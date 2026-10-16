@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
-          git add resultados/escaner_sp500.json
+          git add resultados/escaner_sp500.json datos/oraculo/escaner/
           git diff --cached --quiet && exit 0
           git commit -m "escaner S&P 500 top20 $GITHUB_RUN_ID"
           bash scripts/push_results.sh
