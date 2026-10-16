@@ -1,0 +1,15 @@
+{
+ "version": "oraculo-v2",
+ "prereg_sha256": "3d37ef51722ed117830352a6c26a34c93c7857ede5cbd5f2692608f99105e7a2",
+ "prereg_commit": "e8b5514d32d83ee2a03929c65f6eabe28aa8090e",
+ "aperturas": {
+  "nivel1": 1,
+  "nivel2": 1,
+  "nivel3": 1,
+  "nivel4": 0,
+  "nivel5": 1,
+  "nivel6": 0,
+  "nivel7": 0
+ },
+ "abierta_utc": "2026-10-16T17:04:41.704344+00:00"
+}

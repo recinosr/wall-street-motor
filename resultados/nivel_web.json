@@ -1,0 +1,371 @@
+{
+ "version": "oraculo-v2",
+ "corte_datos": "2026-10-15",
+ "particion": {
+  "entrenamiento": [
+   "inicio",
+   "2014-12-31"
+  ],
+  "validacion": [
+   "2015-01-01",
+   "2019-12-31"
+  ],
+  "prueba_sellada": [
+   "2020-01-01",
+   "2026-10-15"
+  ]
+ },
+ "prereg_sha256": "3d37ef51722ed117830352a6c26a34c93c7857ede5cbd5f2692608f99105e7a2",
+ "prereg_commit": "e8b5514d32d83ee2a03929c65f6eabe28aa8090e",
+ "aperturas_prueba_sellada": {
+  "nivel1": 1,
+  "nivel2": 1,
+  "nivel3": 1,
+  "nivel4": 0,
+  "nivel5": 1,
+  "nivel6": 0,
+  "nivel7": 0
+ },
+ "nivel_actual": 1,
+ "aprobados": [
+  5
+ ],
+ "nivel1": {
+  "estado": "no_aprobado",
+  "activo": "^GSPC",
+  "horizonte": 1,
+  "n": 1705,
+  "brier_modelo": 0.2499297741953322,
+  "brier_base": 0.24848452740700336,
+  "mejora": -0.0014452467883288448,
+  "ic95": [
+   -0.0029788631364035616,
+   -0.00015550721846200848
+  ],
+  "p": 0.9900049975012494,
+  "q": 0.9900049975012494,
+  "exactitud_modelo": 0.5407624633431085,
+  "exactitud_siempre_sube": 0.5401759530791789
+ },
+ "nivel2": {
+  "estado": "no_aprobado",
+  "familia_n": 36,
+  "celdas_aprobadas": 0,
+  "celdas_con_mejora_positiva": 18,
+  "mejores": [
+   {
+    "activo": "QQQ",
+    "horizonte": 1,
+    "n": 1705,
+    "brier_modelo": 0.24633480656931345,
+    "brier_base": 0.24711233898311244,
+    "mejora": 0.0007775324137990009,
+    "p": 0.013993003498250875,
+    "q": 1.0,
+    "mejora_validacion": 0.0006158417417497292
+   },
+   {
+    "activo": "^GSPC",
+    "horizonte": 21,
+    "n": 1685,
+    "brier_modelo": 0.22167940429153,
+    "brier_base": 0.22242219373869684,
+    "mejora": 0.0007427894471668297,
+    "p": 0.0734632683658171,
+    "q": 1.0,
+    "mejora_validacion": -0.00029321643338197045
+   },
+   {
+    "activo": "AAPL",
+    "horizonte": 1,
+    "n": 1705,
+    "brier_modelo": 0.24976576598313002,
+    "brier_base": 0.250428228703106,
+    "mejora": 0.0006624627199760139,
+    "p": 0.079960019990005,
+    "q": 1.0,
+    "mejora_validacion": 0.000541760790375242
+   },
+   {
+    "activo": "NVDA",
+    "horizonte": 21,
+    "n": 1685,
+    "brier_modelo": 0.23169869324578782,
+    "brier_base": 0.23343846626545534,
+    "mejora": 0.001739773019667521,
+    "p": 0.17991004497751126,
+    "q": 1.0,
+    "mejora_validacion": 0.0020773706330049447
+   },
+   {
+    "activo": "NVDA",
+    "horizonte": 1,
+    "n": 1705,
+    "brier_modelo": 0.24921909593964936,
+    "brier_base": 0.24939046051320632,
+    "mejora": 0.00017136457355688858,
+    "p": 0.21739130434782608,
+    "q": 1.0,
+    "mejora_validacion": 0.00038631852743004985
+   },
+   {
+    "activo": "NVDA",
+    "horizonte": 5,
+    "n": 1701,
+    "brier_modelo": 0.24461860433275837,
+    "brier_base": 0.24483950139400684,
+    "mejora": 0.00022089706124851086,
+    "p": 0.23488255872063968,
+    "q": 1.0,
+    "mejora_validacion": -0.0005490525593124119
+   }
+  ]
+ },
+ "nivel3": {
+  "estado": "no_aprobado",
+  "familia_n": 16,
+  "celdas_aprobadas": 0,
+  "celdas": [
+   {
+    "evento": "FOMC",
+    "tipo": "dirección",
+    "n": 53,
+    "mejora": -0.005270717543549571,
+    "p": 0.7526236881559221,
+    "q": 0.8630230339375767,
+    "mejora_validacion": 0.009619825917112256
+   },
+   {
+    "evento": "FOMC",
+    "tipo": "tamaño",
+    "n": 53,
+    "mejora": 0.22678078507112276,
+    "p": 0.030484757621189407,
+    "q": 0.24387806096951525,
+    "mejora_validacion": 0.3598342309849785
+   },
+   {
+    "evento": "CPI",
+    "tipo": "dirección",
+    "n": 81,
+    "mejora": -0.0029550848943213494,
+    "p": 0.7171414292853573,
+    "q": 0.8630230339375767,
+    "mejora_validacion": -0.00015631617566766361
+   },
+   {
+    "evento": "CPI",
+    "tipo": "tamaño",
+    "n": 81,
+    "mejora": 0.14785705161916837,
+    "p": 0.01999000499750125,
+    "q": 0.24387806096951525,
+    "mejora_validacion": 0.04314798732943806
+   },
+   {
+    "evento": "EMPLEO",
+    "tipo": "dirección",
+    "n": 82,
+    "mejora": 0.010212968202862096,
+    "p": 0.10844577711144428,
+    "q": 0.5472263868065967,
+    "mejora_validacion": 0.0045501314817200985
+   },
+   {
+    "evento": "EMPLEO",
+    "tipo": "tamaño",
+    "n": 82,
+    "mejora": 0.04388202054914914,
+    "p": 0.24587706146926536,
+    "q": 0.5901049475262369,
+    "mejora_validacion": 0.12068421736374932
+   },
+   {
+    "evento": "RES_NVDA",
+    "tipo": "dirección",
+    "n": 28,
+    "mejora": 0.010042640777845594,
+    "p": 0.23338330834582707,
+    "q": 0.5901049475262369,
+    "mejora_validacion": 0.003605651981562098
+   },
+   {
+    "evento": "RES_NVDA",
+    "tipo": "tamaño",
+    "n": 28,
+    "mejora": -0.0372971264003857,
+    "p": 0.8385807096451774,
+    "q": 0.8750407404993155,
+    "mejora_validacion": -0.1449768879098815
+   },
+   {
+    "evento": "RES_AAPL",
+    "tipo": "dirección",
+    "n": 27,
+    "mejora": -0.0018986064184421886,
+    "p": 0.5787106446776612,
+    "q": 0.8630230339375767,
+    "mejora_validacion": -0.0004378636991567543
+   },
+   {
+    "evento": "RES_AAPL",
+    "tipo": "tamaño",
+    "n": 27,
+    "mejora": 0.05843584735166923,
+    "p": 0.02048975512243878,
+    "q": 0.24387806096951525,
+    "mejora_validacion": 0.028027747273293338
+   },
+   {
+    "evento": "RES_MSFT",
+    "tipo": "dirección",
+    "n": 27,
+    "mejora": -0.016014591833882867,
+    "p": 0.7226386806596702,
+    "q": 0.8630230339375767,
+    "mejora_validacion": 0.0274450008794756
+   },
+   {
+    "evento": "RES_MSFT",
+    "tipo": "tamaño",
+    "n": 27,
+    "mejora": 0.07094966992227004,
+    "p": 0.18240879560219891,
+    "q": 0.5472263868065967,
+    "mejora_validacion": -0.004650799251594779
+   },
+   {
+    "evento": "RES_AMZN",
+    "tipo": "dirección",
+    "n": 27,
+    "mejora": 0.020140213678123884,
+    "p": 0.16841579210394803,
+    "q": 0.5472263868065967,
+    "mejora_validacion": 0.013638641631034976
+   },
+   {
+    "evento": "RES_AMZN",
+    "tipo": "tamaño",
+    "n": 27,
+    "mejora": -0.041705404022196975,
+    "p": 0.623688155922039,
+    "q": 0.8630230339375767,
+    "mejora_validacion": -0.6731784595169944
+   },
+   {
+    "evento": "RESULTADOS_7_acciones",
+    "tipo": "dirección",
+    "n": 219,
+    "mejora": -0.003505031054086766,
+    "p": 0.6931534232883558,
+    "q": 0.8630230339375767,
+    "mejora_validacion": 0.011656325568603314
+   },
+   {
+    "evento": "RESULTADOS_7_acciones",
+    "tipo": "tamaño",
+    "n": 219,
+    "mejora": 0.01716995032049855,
+    "p": 0.3103448275862069,
+    "q": 0.6206896551724138,
+    "mejora_validacion": 0.06465075123160681
+   }
+  ],
+  "insuficientes": [
+   "RES_TSLA",
+   "RES_GOOGL",
+   "RES_META"
+  ]
+ },
+ "nivel4": {
+  "estado": "sin_evaluacion",
+  "motivo": "GDELT entrega hora de indexación, no de publicación, y no hay corpus histórico clasificado y congelado."
+ },
+ "nivel5": {
+  "estado": "aprobado",
+  "reglas": {
+   "tendencia": {
+    "aprobada": true,
+    "ventanas_con_reduccion_30pct": 3,
+    "perdida_cagr_pp": 0.9743502043514374,
+    "q": 0.005997001499250375,
+    "p": 0.005997001499250375,
+    "reduccion_media": 0.45300174930411063,
+    "reduccion_media_aleatoria": 0.16854548758048424,
+    "cagr_mantener": 0.08170226312390194,
+    "cagr_regla": 0.07195876108038757,
+    "ventanas": {
+     "2000": {
+      "dd_mantener": 0.4914694788520222,
+      "dd_regla": 0.2556903383767767,
+      "ret_mantener": -0.3232031900049267,
+      "ret_regla": -0.1373948106503472
+     },
+     "2008": {
+      "dd_mantener": 0.5677538775030555,
+      "dd_regla": 0.16240838936927648,
+      "ret_mantener": -0.2725936922708715,
+      "ret_regla": 0.05779233523423799
+     },
+     "2020": {
+      "dd_mantener": 0.33924960006097205,
+      "dd_regla": 0.19561180630763098,
+      "ret_mantener": 0.1637376377438362,
+      "ret_regla": 0.03765289445570841
+     },
+     "2022": {
+      "dd_mantener": 0.25425096631735933,
+      "dd_regla": 0.2046925086026964,
+      "ret_mantener": -0.08748141560589207,
+      "ret_regla": -0.1158120825919835
+     }
+    }
+   },
+   "volatilidad": {
+    "aprobada": false,
+    "ventanas_con_reduccion_30pct": 2,
+    "perdida_cagr_pp": 0.5483228293201581,
+    "q": 0.001999000499750125,
+    "p": 0.0009995002498750624,
+    "reduccion_media": 0.28822951203806485,
+    "reduccion_media_aleatoria": 0.034716594696774614,
+    "cagr_mantener": 0.08318096565974842,
+    "cagr_regla": 0.07769773736654684,
+    "ventanas": {
+     "2000": {
+      "dd_mantener": 0.4914694788520222,
+      "dd_regla": 0.5760485662380586,
+      "ret_mantener": -0.3232031900049267,
+      "ret_regla": -0.43313546941749326
+     },
+     "2008": {
+      "dd_mantener": 0.5677538775030555,
+      "dd_regla": 0.32641598119166837,
+      "ret_mantener": -0.2725936922708715,
+      "ret_regla": -0.12768828153773915
+     },
+     "2020": {
+      "dd_mantener": 0.33924960006097205,
+      "dd_regla": 0.1275578292458006,
+      "ret_mantener": 0.1637376377438362,
+      "ret_regla": 0.15817285056831243
+     },
+     "2022": {
+      "dd_mantener": 0.25425096631735933,
+      "dd_regla": 0.1840936113562558,
+      "ret_mantener": -0.08748141560589207,
+      "ret_regla": -0.05022632378251535
+     }
+    }
+   }
+  }
+ },
+ "nivel6": {
+  "estado": "sin_evaluacion",
+  "motivo": "Falta un panel PIT sincronizado de tasas, dólar, oro y tecnología."
+ },
+ "nivel7": {
+  "estado": "sin_evaluacion",
+  "motivo": "Falta simulación completa con dividendos, spread, tarifas XTB y benchmark de aportes."
+ }
+}

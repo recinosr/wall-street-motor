@@ -413,6 +413,58 @@ def nivel5(pr, abrir):
     return res
 
 
+
+def resumen_web(r):
+    """Registro compacto del currículo para la pantalla Nivel (solo resume, no recalcula)."""
+    n1 = r["nivel1"]["celda"]["prueba"]
+    c2 = [x for x in r["nivel2"]["celdas"] if x.get("estado") == "evaluada"]
+    mejores = sorted(c2, key=lambda x: x["prueba"]["brier"]["p"])[:6]
+    c3 = [x for x in r["nivel3"]["celdas"] if x.get("estado") == "evaluada"]
+    n5 = r["nivel5"]["reglas"]
+    tend, vol = n5["tendencia"], n5["volatilidad"]
+
+    def fila(x):
+        t = x["prueba"]
+        return {"activo": x["activo"], "horizonte": x["horizonte"], "n": t["n"], "brier_modelo": t["brier_modelo"],
+                "brier_base": t["brier_tasa_base"], "mejora": t["brier"]["mejora"], "p": t["brier"]["p"],
+                "q": t["brier"]["q"], "mejora_validacion": x["validacion"]["brier"]["mejora"]}
+
+    def fila3(x):
+        t = x["prueba"]
+        if x["tipo"] == "direccion":
+            return {"evento": x["evento"], "tipo": "dirección", "n": t["n"], "mejora": t["brier"]["mejora"], "p": t["brier"]["p"],
+                    "q": t["brier"]["q"], "mejora_validacion": x["validacion"]["brier"]["mejora"]}
+        return {"evento": x["evento"], "tipo": "tamaño", "n": t["n"], "mejora": t["magnitud"]["mejora"], "p": t["magnitud"]["p"],
+                "q": t["magnitud"]["q"], "mejora_validacion": x["validacion"]["magnitud"]["mejora"]}
+
+    return {
+        "version": r["version"], "corte_datos": r["corte_datos"], "particion": r["particion"],
+        "prereg_sha256": r["prereg_sha256"], "prereg_commit": r["prereg_commit"],
+        "aperturas_prueba_sellada": json.loads(REGISTRO.read_text(encoding="utf-8"))["aperturas"],
+        "nivel_actual": 1, "aprobados": r["aprobados"],
+        "nivel1": {"estado": r["nivel1"]["estado"], "activo": "^GSPC", "horizonte": 1, "n": n1["n"],
+                   "brier_modelo": n1["brier_modelo"], "brier_base": n1["brier_tasa_base"], "mejora": n1["brier"]["mejora"],
+                   "ic95": n1["brier"]["ic95"], "p": n1["brier"]["p"], "q": n1["brier"]["q"],
+                   "exactitud_modelo": n1["exactitud_modelo"], "exactitud_siempre_sube": n1["exactitud_siempre_sube"]},
+        "nivel2": {"estado": r["nivel2"]["estado"], "familia_n": r["nivel2"]["familia_n"], "celdas_aprobadas": r["nivel2"]["celdas_aprobadas"],
+                   "celdas_con_mejora_positiva": sum(1 for x in c2 if x["prueba"]["brier"]["mejora"] > 0),
+                   "mejores": [fila(x) for x in mejores]},
+        "nivel3": {"estado": r["nivel3"]["estado"], "familia_n": r["nivel3"]["familia_n"], "celdas_aprobadas": r["nivel3"]["celdas_aprobadas"],
+                   "celdas": [fila3(x) for x in c3],
+                   "insuficientes": [x["evento"] for x in r["nivel3"]["celdas"] if x.get("estado") == "datos_insuficientes"]},
+        "nivel4": {"estado": "sin_evaluacion", "motivo": "GDELT entrega hora de indexación, no de publicación, y no hay corpus histórico clasificado y congelado."},
+        "nivel5": {"estado": "aprobado" if r["nivel5"]["aprobado"] else "no_aprobado",
+                   "reglas": {k: {"aprobada": v["aprobada"], "ventanas_con_reduccion_30pct": v["ventanas_con_reduccion_30pct"],
+                                  "perdida_cagr_pp": v["perdida_cagr_pp"], "q": v["q_bh"], "p": v["p_temporizacion_aleatoria"],
+                                  "reduccion_media": v["reduccion_media_obs"], "reduccion_media_aleatoria": v["reduccion_media_aleatoria"],
+                                  "cagr_mantener": v["cagr_mantener_1950_2026"], "cagr_regla": v["cagr_regla_1950_2026"],
+                                  "ventanas": {w: {"dd_mantener": y["mantener"]["caida_max"], "dd_regla": y["regla"]["caida_max"],
+                                                   "ret_mantener": y["mantener"]["retorno_total"], "ret_regla": y["regla"]["retorno_total"]}
+                                               for w, y in v["ventanas"].items()}} for k, v in n5.items()}},
+        "nivel6": {"estado": "sin_evaluacion", "motivo": "Falta un panel PIT sincronizado de tasas, dólar, oro y tecnología."},
+        "nivel7": {"estado": "sin_evaluacion", "motivo": "Falta simulación completa con dividendos, spread, tarifas XTB y benchmark de aportes."},
+    }
+
 # ----------------------------------------------------------------- principal
 def commit_prereg():
     try:
@@ -507,6 +559,10 @@ def ejecutar(abrir):
 
 if __name__ == "__main__":
     modo = sys.argv[1] if len(sys.argv) > 1 else ""
+    if modo == "--resumen":
+        out = resumen_web(json.loads(SALIDA.read_text(encoding="utf-8")))
+        (ROOT / "resultados" / "nivel_web.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+        sys.exit(0)
     if modo not in ("--validacion", "--abrir-prueba"):
         sys.exit("uso: python -m lab.oraculo_v2 --validacion | --abrir-prueba")
     r = ejecutar(modo == "--abrir-prueba")

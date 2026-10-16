@@ -1,0 +1,1854 @@
+{
+ "version": "oraculo-v2",
+ "prereg_sha256": "3d37ef51722ed117830352a6c26a34c93c7857ede5cbd5f2692608f99105e7a2",
+ "prereg_commit": "0a9ad6d9a2a3d26b8b4a428114e7149609e84211",
+ "generado_utc": "2026-10-16T17:04:13.569385+00:00",
+ "modo": "solo_validacion",
+ "corte_datos": "2026-10-15",
+ "particion": {
+  "entrenamiento": [
+   "inicio",
+   "2014-12-31"
+  ],
+  "validacion": [
+   "2015-01-01",
+   "2019-12-31"
+  ],
+  "prueba_sellada": [
+   "2020-01-01",
+   "2026-10-15"
+  ]
+ },
+ "manifiesto_datos_sha256": {
+  "^GSPC": "ddeff5782ffd596e57fb0a41d62e16e627316bbc44da12d74f81f2195487348d",
+  "SPY": "05e995deb715decca0d66abb7a7d30b661fdc644df9ef5e380a5669378d2d3b7",
+  "QQQ": "48a4d172526b82d294b3e62cfd720751c645d00ad8b43eb45373a315e866a66e",
+  "GLD": "6ff2ec8fa110b323fafce54412185a63f5a4f7a8117f2f4d982ecdec7cc54993",
+  "TLT": "9d562495b96a5a8598d041b4421a606aee8f0e709d23f7c84a0b881fc7326c92",
+  "VT": "25fdd2dbbfa18414c227f0ee23b8d65ccd5c2e2f03d616bc9b678efe7fcc28d2",
+  "TSLA": "c650acff0b9d25ef05ce90a3c053f2e7b379291cf28806148d24d04aee0141d5",
+  "NVDA": "4c243401539409ac832a7fc06a79e789df690fa0421cbd9a54eddb8eda499cb4",
+  "AAPL": "06e3692446ea8502367c8215bf5098204da061da8f6f4c6f7ab40f8ff8422b9d",
+  "MSFT": "e649487b0a3faa54ba4f87573d7da4379eea489c2bea190879ef0b48cece131c",
+  "GOOGL": "ef5df232e93d5411920e203bf326d7a872124b1ddf12f9706cdb78fe458f0b75",
+  "AMZN": "17ae63db5c36dd92fbd8c7488c5117b0f9f2c929109402d68349d61685142a0d",
+  "META": "98bb60ddb9262c93c89b94d178810f20cec7d4636104e4a9de87d6d079828af1"
+ },
+ "nivel1": {
+  "estado": "no_aprobado",
+  "celda": {
+   "horizonte": 1,
+   "n_entrenamiento": 16333,
+   "n_validacion": 1257,
+   "inicio_datos": "1950-01-03",
+   "validacion": {
+    "n": 1257,
+    "tasa_base_ajuste": 0.5297250964305394,
+    "tasa_alza": 0.5369928400954654,
+    "brier_modelo": 0.24965749143577023,
+    "brier_tasa_base": 0.24868434987965038,
+    "exactitud_modelo": 0.5258552108194113,
+    "exactitud_siempre_sube": 0.5369928400954654,
+    "brier": {
+     "mejora": -0.0009731415561197981,
+     "ic95": [
+      -0.001949771788972857,
+      6.11768014915334e-05
+     ],
+     "p": 0.967016491754123,
+     "q": 0.967016491754123
+    },
+    "exactitud": {
+     "mejora": -0.011137629276054098,
+     "ic95": [
+      -0.023886237072394588,
+      0.0015910898965791568
+     ],
+     "p": 0.9645177411294353,
+     "q": 0.967016491754123
+    }
+   },
+   "estado": "evaluada",
+   "activo": "^GSPC"
+  }
+ },
+ "nivel2": {
+  "estado": "no_aprobado",
+  "celdas_aprobadas": 0,
+  "celdas": [
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 16333,
+    "n_validacion": 1257,
+    "inicio_datos": "1950-01-03",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5297250964305394,
+     "tasa_alza": 0.5369928400954654,
+     "brier_modelo": 0.24965749143577023,
+     "brier_tasa_base": 0.24868434987965038,
+     "exactitud_modelo": 0.5258552108194113,
+     "exactitud_siempre_sube": 0.5369928400954654,
+     "brier": {
+      "mejora": -0.0009731415561197981,
+      "ic95": [
+       -0.001949771788972857,
+       6.11768014915334e-05
+      ],
+      "p": 0.967016491754123,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.011137629276054098,
+      "ic95": [
+       -0.023886237072394588,
+       0.0015910898965791568
+      ],
+      "p": 0.9645177411294353,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "^GSPC"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 16329,
+    "n_validacion": 1253,
+    "inicio_datos": "1950-01-03",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5617000428685162,
+     "tasa_alza": 0.6169193934557063,
+     "brier_modelo": 0.2399961878782783,
+     "brier_tasa_base": 0.23937903211322079,
+     "exactitud_modelo": 0.6161213088587391,
+     "exactitud_siempre_sube": 0.6169193934557063,
+     "brier": {
+      "mejora": -0.0006171557650575279,
+      "ic95": [
+       -0.0014314122480633103,
+       0.00019925911099135334
+      ],
+      "p": 0.9325337331334332,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.0007980845969672786,
+      "ic95": [
+       -0.0023942537909018356,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "^GSPC"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 16313,
+    "n_validacion": 1237,
+    "inicio_datos": "1950-01-03",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.6085943725862809,
+     "tasa_alza": 0.6612772837510105,
+     "brier_modelo": 0.22705834330806882,
+     "brier_tasa_base": 0.22676512687468686,
+     "exactitud_modelo": 0.6612772837510105,
+     "exactitud_siempre_sube": 0.6612772837510105,
+     "brier": {
+      "mejora": -0.00029321643338197045,
+      "ic95": [
+       -0.0016470960588355627,
+       0.0010669364323772938
+      ],
+      "p": 0.6501749125437282,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "^GSPC"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 5500,
+    "n_validacion": 1257,
+    "inicio_datos": "1993-01-29",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5318181818181819,
+     "tasa_alza": 0.5401750198886237,
+     "brier_modelo": 0.24785366215665658,
+     "brier_tasa_base": 0.24845580451948426,
+     "exactitud_modelo": 0.5369928400954654,
+     "exactitud_siempre_sube": 0.5401750198886237,
+     "brier": {
+      "mejora": 0.000602142362827706,
+      "ic95": [
+       -0.0004379098267823901,
+       0.001660521337609398
+      ],
+      "p": 0.13193403298350825,
+      "q": 0.7890340544013706
+     },
+     "exactitud": {
+      "mejora": -0.0031821797931583136,
+      "ic95": [
+       -0.012728719172633254,
+       0.005568814638027049
+      ],
+      "p": 0.7886056971514243,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "SPY"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 5496,
+    "n_validacion": 1253,
+    "inicio_datos": "1993-01-29",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5644104803493449,
+     "tasa_alza": 0.6137270550678372,
+     "brier_modelo": 0.23993920830858187,
+     "brier_tasa_base": 0.23949828148756178,
+     "exactitud_modelo": 0.6073423782920989,
+     "exactitud_siempre_sube": 0.6137270550678372,
+     "brier": {
+      "mejora": -0.0004409268210200826,
+      "ic95": [
+       -0.0025674027366822524,
+       0.0013547765063093083
+      ],
+      "p": 0.672663668165917,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.006384676775738229,
+      "ic95": [
+       -0.013567438148443736,
+       -0.0007980845969672786
+      ],
+      "p": 0.9960019990004998,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "SPY"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 5480,
+    "n_validacion": 1237,
+    "inicio_datos": "1993-01-29",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.6237226277372263,
+     "tasa_alza": 0.6580436540016168,
+     "brier_modelo": 0.2258979884382577,
+     "brier_tasa_base": 0.2262001362736582,
+     "exactitud_modelo": 0.6580436540016168,
+     "exactitud_siempre_sube": 0.6580436540016168,
+     "brier": {
+      "mejora": 0.0003021478354004546,
+      "ic95": [
+       -0.004083295300752045,
+       0.004610289537228123
+      ],
+      "p": 0.45177411294352826,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "SPY"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 3958,
+    "n_validacion": 1257,
+    "inicio_datos": "1999-03-10",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5323395654370895,
+     "tasa_alza": 0.5592680986475735,
+     "brier_modelo": 0.2465965966418199,
+     "brier_tasa_base": 0.24721243838356957,
+     "exactitud_modelo": 0.5584725536992841,
+     "exactitud_siempre_sube": 0.5592680986475735,
+     "brier": {
+      "mejora": 0.0006158417417497292,
+      "ic95": [
+       -0.0005550342109034747,
+       0.001822566718294
+      ],
+      "p": 0.14342828585707146,
+      "q": 0.7890340544013706
+     },
+     "exactitud": {
+      "mejora": -0.0007955449482895784,
+      "ic95": [
+       -0.002386634844868735,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "QQQ"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 3954,
+    "n_validacion": 1253,
+    "inicio_datos": "1999-03-10",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5543753161355589,
+     "tasa_alza": 0.6129289704708699,
+     "brier_modelo": 0.23965080315753076,
+     "brier_tasa_base": 0.24067557806440848,
+     "exactitud_modelo": 0.6049481245011972,
+     "exactitud_siempre_sube": 0.6129289704708699,
+     "brier": {
+      "mejora": 0.0010247749068777391,
+      "ic95": [
+       -0.002369725476307125,
+       0.004527792815527289
+      ],
+      "p": 0.2893553223388306,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.007980845969672785,
+      "ic95": [
+       -0.019972067039106145,
+       0.0007980845969672786
+      ],
+      "p": 0.9735132433783108,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "QQQ"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 3938,
+    "n_validacion": 1237,
+    "inicio_datos": "1999-03-10",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5914169629253428,
+     "tasa_alza": 0.6903799514955538,
+     "brier_modelo": 0.2202443252078354,
+     "brier_tasa_base": 0.22354914717529822,
+     "exactitud_modelo": 0.6895715440582053,
+     "exactitud_siempre_sube": 0.6903799514955538,
+     "brier": {
+      "mejora": 0.0033048219674628545,
+      "ic95": [
+       -0.005030528235783465,
+       0.011886418431325485
+      ],
+      "p": 0.24587706146926536,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.0008084074373484236,
+      "ic95": [
+       -0.002425222312045271,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "QQQ"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 2525,
+    "n_validacion": 1257,
+    "inicio_datos": "2004-11-18",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5322772277227723,
+     "tasa_alza": 0.5139220365950676,
+     "brier_modelo": 0.25006641191426054,
+     "brier_tasa_base": 0.25014308993838014,
+     "exactitud_modelo": 0.513126491646778,
+     "exactitud_siempre_sube": 0.5139220365950676,
+     "brier": {
+      "mejora": 7.667802411963194e-05,
+      "ic95": [
+       -0.000729697741735928,
+       0.0008731160998463083
+      ],
+      "p": 0.4107946026986507,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.0007955449482895784,
+      "ic95": [
+       -0.006364359586316627,
+       0.00477326968973747
+      ],
+      "p": 0.679160419790105,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GLD"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 2521,
+    "n_validacion": 1253,
+    "inicio_datos": "2004-11-18",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5604918683062277,
+     "tasa_alza": 0.5147645650438947,
+     "brier_modelo": 0.2535239731347953,
+     "brier_tasa_base": 0.25187299388271,
+     "exactitud_modelo": 0.5139664804469274,
+     "exactitud_siempre_sube": 0.5147645650438947,
+     "brier": {
+      "mejora": -0.001650979252085293,
+      "ic95": [
+       -0.004325359713260886,
+       0.0007768775571337756
+      ],
+      "p": 0.9020489755122438,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.0007980845969672786,
+      "ic95": [
+       -0.0023942537909018356,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GLD"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 2505,
+    "n_validacion": 1237,
+    "inicio_datos": "2004-11-18",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5672654690618762,
+     "tasa_alza": 0.5084882780921585,
+     "brier_modelo": 0.25650614428210977,
+     "brier_tasa_base": 0.2533827073133209,
+     "exactitud_modelo": 0.5214227970897333,
+     "exactitud_siempre_sube": 0.5084882780921585,
+     "brier": {
+      "mejora": -0.0031234369687888758,
+      "ic95": [
+       -0.011809183258442858,
+       0.005119837962324638
+      ],
+      "p": 0.7436281859070465,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.012934518997574777,
+      "ic95": [
+       -0.005658852061438965,
+       0.037186742118027485
+      ],
+      "p": 0.11944027986006997,
+      "q": 0.7890340544013706
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GLD"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 3107,
+    "n_validacion": 1257,
+    "inicio_datos": "2002-07-30",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5210814290312198,
+     "tasa_alza": 0.5290373906125696,
+     "brier_modelo": 0.24844348631632263,
+     "brier_tasa_base": 0.249220127271097,
+     "exactitud_modelo": 0.5481304693715194,
+     "exactitud_siempre_sube": 0.5290373906125696,
+     "brier": {
+      "mejora": 0.0007766409547743034,
+      "ic95": [
+       -0.0003052430181594219,
+       0.0018523383419759669
+      ],
+      "p": 0.08095952023988005,
+      "q": 0.7476261869065467
+     },
+     "exactitud": {
+      "mejora": 0.01909307875894988,
+      "ic95": [
+       0.0015910898965791568,
+       0.03579952267303103
+      ],
+      "p": 0.017991004497751123,
+      "q": 0.21589205397301348
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TLT"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 3103,
+    "n_validacion": 1253,
+    "inicio_datos": "2002-07-30",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5278762487914921,
+     "tasa_alza": 0.5219473264166001,
+     "brier_modelo": 0.25081675736795095,
+     "brier_tasa_base": 0.24955346698369074,
+     "exactitud_modelo": 0.5163607342378292,
+     "exactitud_siempre_sube": 0.5219473264166001,
+     "brier": {
+      "mejora": -0.00126329038426023,
+      "ic95": [
+       -0.0033513051131796798,
+       0.0006247660249031398
+      ],
+      "p": 0.904047976011994,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.00558659217877095,
+      "ic95": [
+       -0.031145251396648043,
+       0.019952114924181964
+      ],
+      "p": 0.6696651674162919,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TLT"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 3087,
+    "n_validacion": 1237,
+    "inicio_datos": "2002-07-30",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5383867832847424,
+     "tasa_alza": 0.5214227970897333,
+     "brier_modelo": 0.2501787286692411,
+     "brier_tasa_base": 0.24982884059247654,
+     "exactitud_modelo": 0.5214227970897333,
+     "exactitud_siempre_sube": 0.5214227970897333,
+     "brier": {
+      "mejora": -0.00034988807676454147,
+      "ic95": [
+       -0.0014087580677794222,
+       0.0007000888448982653
+      ],
+      "p": 0.729135432283858,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TLT"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 1619,
+    "n_validacion": 1257,
+    "inicio_datos": "2008-06-26",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.535515750463249,
+     "tasa_alza": 0.5330151153540175,
+     "brier_modelo": 0.24913307693886488,
+     "brier_tasa_base": 0.2489162553341104,
+     "exactitud_modelo": 0.5330151153540175,
+     "exactitud_siempre_sube": 0.5330151153540175,
+     "brier": {
+      "mejora": -0.00021682160475447918,
+      "ic95": [
+       -0.0012501509866424461,
+       0.0007825740741455372
+      ],
+      "p": 0.6451774112943528,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       -0.0031821797931583136,
+       0.0031821797931583136
+      ],
+      "p": 0.6051974012993503,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "VT"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 1615,
+    "n_validacion": 1253,
+    "inicio_datos": "2008-06-26",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5529411764705883,
+     "tasa_alza": 0.5841979249800479,
+     "brier_modelo": 0.2440460095859087,
+     "brier_tasa_base": 0.24388769375643785,
+     "exactitud_modelo": 0.5841979249800479,
+     "exactitud_siempre_sube": 0.5841979249800479,
+     "brier": {
+      "mejora": -0.00015831582947084804,
+      "ic95": [
+       -0.0015939306334366674,
+       0.0012837071316655288
+      ],
+      "p": 0.5747126436781609,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "VT"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 1599,
+    "n_validacion": 1237,
+    "inicio_datos": "2008-06-26",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.608505315822389,
+     "tasa_alza": 0.629749393694422,
+     "brier_modelo": 0.23353833191167625,
+     "brier_tasa_base": 0.2336164056805629,
+     "exactitud_modelo": 0.629749393694422,
+     "exactitud_siempre_sube": 0.629749393694422,
+     "brier": {
+      "mejora": 7.807376888661271e-05,
+      "ic95": [
+       -0.003798397168832197,
+       0.004186490170824379
+      ],
+      "p": 0.49725137431284355,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "VT"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 1114,
+    "n_validacion": 1257,
+    "inicio_datos": "2010-06-29",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5170556552962298,
+     "tasa_alza": 0.5051710421638823,
+     "brier_modelo": 0.24970448454037952,
+     "brier_tasa_base": 0.2501145043522449,
+     "exactitud_modelo": 0.5099443118536198,
+     "exactitud_siempre_sube": 0.5051710421638823,
+     "brier": {
+      "mejora": 0.00041001981186535296,
+      "ic95": [
+       -0.0005559197423290788,
+       0.0013651245624350461
+      ],
+      "p": 0.1924037981009495,
+      "q": 0.9235382308845577
+     },
+     "exactitud": {
+      "mejora": 0.00477326968973747,
+      "ic95": [
+       -0.023070803500397773,
+       0.03261734287987271
+      ],
+      "p": 0.37031484257871067,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TSLA"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 1110,
+    "n_validacion": 1253,
+    "inicio_datos": "2010-06-29",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5531531531531532,
+     "tasa_alza": 0.5490822027134876,
+     "brier_modelo": 0.24864332140519604,
+     "brier_tasa_base": 0.24760751001427428,
+     "exactitud_modelo": 0.5403032721468476,
+     "exactitud_siempre_sube": 0.5490822027134876,
+     "brier": {
+      "mejora": -0.0010358113909216863,
+      "ic95": [
+       -0.0031835171598509054,
+       0.0010813505771793774
+      ],
+      "p": 0.8195902048975512,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.008778930566640064,
+      "ic95": [
+       -0.023942537909018357,
+       0.0023942537909018356
+      ],
+      "p": 0.927536231884058,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TSLA"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 1094,
+    "n_validacion": 1237,
+    "inicio_datos": "2010-06-29",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.6042047531992687,
+     "tasa_alza": 0.5222312045270816,
+     "brier_modelo": 0.24922327795574495,
+     "brier_tasa_base": 0.2562254362271865,
+     "exactitud_modelo": 0.5521422797089733,
+     "exactitud_siempre_sube": 0.5222312045270816,
+     "brier": {
+      "mejora": 0.007002158271441494,
+      "ic95": [
+       -0.006610268333267166,
+       0.02046620026861987
+      ],
+      "p": 0.15342328835582209,
+      "q": 0.7890340544013706
+     },
+     "exactitud": {
+      "mejora": 0.029911075181891674,
+      "ic95": [
+       -0.021018593371059015,
+       0.08730800323362975
+      ],
+      "p": 0.14192903548225888,
+      "q": 0.7890340544013706
+     }
+    },
+    "estado": "evaluada",
+    "activo": "TSLA"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 3990,
+    "n_validacion": 1257,
+    "inicio_datos": "1999-01-22",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.49699248120300754,
+     "tasa_alza": 0.5449482895783612,
+     "brier_modelo": 0.2498930922934834,
+     "brier_tasa_base": 0.2502794108209135,
+     "exactitud_modelo": 0.5147175815433572,
+     "exactitud_siempre_sube": 0.5449482895783612,
+     "brier": {
+      "mejora": 0.00038631852743004985,
+      "ic95": [
+       3.022732857529151e-05,
+       0.0007364399970768942
+      ],
+      "p": 0.01649175412293853,
+      "q": 0.21589205397301348
+     },
+     "exactitud": {
+      "mejora": -0.030230708035003977,
+      "ic95": [
+       -0.06443914081145585,
+       0.00477326968973747
+      ],
+      "p": 0.95952023988006,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "NVDA"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 3986,
+    "n_validacion": 1253,
+    "inicio_datos": "1999-01-22",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5178123432012042,
+     "tasa_alza": 0.6089385474860335,
+     "brier_modelo": 0.24698543053830607,
+     "brier_tasa_base": 0.24643637797899368,
+     "exactitud_modelo": 0.6025538707102953,
+     "exactitud_siempre_sube": 0.6089385474860335,
+     "brier": {
+      "mejora": -0.0005490525593124119,
+      "ic95": [
+       -0.0012552166579573821,
+       0.00017902397596144065
+      ],
+      "p": 0.9245377311344328,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.006384676775738229,
+      "ic95": [
+       -0.018355945730247406,
+       0.0031923383878691143
+      ],
+      "p": 0.9180409795102449,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "NVDA"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 3970,
+    "n_validacion": 1237,
+    "inicio_datos": "1999-01-22",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5380352644836272,
+     "tasa_alza": 0.6879547291835085,
+     "brier_modelo": 0.23507149504044803,
+     "brier_tasa_base": 0.23714886567345297,
+     "exactitud_modelo": 0.6903799514955538,
+     "exactitud_siempre_sube": 0.6879547291835085,
+     "brier": {
+      "mejora": 0.0020773706330049447,
+      "ic95": [
+       -0.0009391675469933087,
+       0.005616921720056085
+      ],
+      "p": 0.08545727136431784,
+      "q": 0.7476261869065467
+     },
+     "exactitud": {
+      "mejora": 0.002425222312045271,
+      "ic95": [
+       -0.0202303961196443,
+       0.029931285367825276
+      ],
+      "p": 0.4657671164417791,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "NVDA"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 8567,
+    "n_validacion": 1257,
+    "inicio_datos": "1980-12-12",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.4885023929029999,
+     "tasa_alza": 0.5298329355608592,
+     "brier_modelo": 0.25027644892183953,
+     "brier_tasa_base": 0.2508182097122147,
+     "exactitud_modelo": 0.5202863961813843,
+     "exactitud_siempre_sube": 0.5298329355608592,
+     "brier": {
+      "mejora": 0.000541760790375242,
+      "ic95": [
+       -0.0009693861927379987,
+       0.002011907791326848
+      ],
+      "p": 0.2283858070964518,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.00954653937947494,
+      "ic95": [
+       -0.03579952267303103,
+       0.015115354017501989
+      ],
+      "p": 0.791104447776112,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AAPL"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 8563,
+    "n_validacion": 1253,
+    "inicio_datos": "1980-12-12",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5246992876328389,
+     "tasa_alza": 0.5841979249800479,
+     "brier_modelo": 0.2435062926431768,
+     "brier_tasa_base": 0.24645079727522895,
+     "exactitud_modelo": 0.5810055865921788,
+     "exactitud_siempre_sube": 0.5841979249800479,
+     "brier": {
+      "mejora": 0.002944504632052113,
+      "ic95": [
+       -0.0014317923845285471,
+       0.007589879622415075
+      ],
+      "p": 0.09345327336331834,
+      "q": 0.7476261869065467
+     },
+     "exactitud": {
+      "mejora": -0.0031923383878691143,
+      "ic95": [
+       -0.01675977653631285,
+       0.008778930566640064
+      ],
+      "p": 0.7061469265367316,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AAPL"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 8547,
+    "n_validacion": 1237,
+    "inicio_datos": "1980-12-12",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5596115596115596,
+     "tasa_alza": 0.6265157639450283,
+     "brier_modelo": 0.23350296975522883,
+     "brier_tasa_base": 0.2384699340309004,
+     "exactitud_modelo": 0.6208569118835894,
+     "exactitud_siempre_sube": 0.6265157639450283,
+     "brier": {
+      "mejora": 0.004966964275671544,
+      "ic95": [
+       -0.013208256561751794,
+       0.023003381490097344
+      ],
+      "p": 0.29735132433783107,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.005658852061438965,
+      "ic95": [
+       -0.025060630557801132,
+       0.0064672594987873885
+      ],
+      "p": 0.8130934532733634,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AAPL"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 7241,
+    "n_validacion": 1257,
+    "inicio_datos": "1986-03-13",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.49578787460295537,
+     "tasa_alza": 0.5369928400954654,
+     "brier_modelo": 0.24975154710616973,
+     "brier_tasa_base": 0.25032937896291024,
+     "exactitud_modelo": 0.5083532219570406,
+     "exactitud_siempre_sube": 0.5369928400954654,
+     "brier": {
+      "mejora": 0.0005778318567405122,
+      "ic95": [
+       0.0002505521848873459,
+       0.0009037604251711933
+      ],
+      "p": 0.0004997501249375312,
+      "q": 0.017991004497751123
+     },
+     "exactitud": {
+      "mejora": -0.028639618138424822,
+      "ic95": [
+       -0.07082338902147971,
+       0.013524264120922832
+      ],
+      "p": 0.9130434782608695,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "MSFT"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 7237,
+    "n_validacion": 1253,
+    "inicio_datos": "1986-03-13",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5336465386209756,
+     "tasa_alza": 0.5993615323224262,
+     "brier_modelo": 0.24178678232972498,
+     "brier_tasa_base": 0.2444457462917211,
+     "exactitud_modelo": 0.5985634477254589,
+     "exactitud_siempre_sube": 0.5993615323224262,
+     "brier": {
+      "mejora": 0.0026589639619961883,
+      "ic95": [
+       0.001399461483832442,
+       0.003808560669677587
+      ],
+      "p": 0.0004997501249375312,
+      "q": 0.017991004497751123
+     },
+     "exactitud": {
+      "mejora": -0.0007980845969672786,
+      "ic95": [
+       -0.00558659217877095,
+       0.0039904229848363925
+      ],
+      "p": 0.6871564217891054,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "MSFT"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 7221,
+    "n_validacion": 1237,
+    "inicio_datos": "1986-03-13",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5884226561418087,
+     "tasa_alza": 0.6919967663702506,
+     "brier_modelo": 0.22236510541860394,
+     "brier_tasa_base": 0.22386483801298082,
+     "exactitud_modelo": 0.6919967663702506,
+     "exactitud_siempre_sube": 0.6919967663702506,
+     "brier": {
+      "mejora": 0.0014997325943768678,
+      "ic95": [
+       0.0003323709230313682,
+       0.0027471015838628535
+      ],
+      "p": 0.00399800099950025,
+      "q": 0.095952023988006
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "MSFT"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 2589,
+    "n_validacion": 1257,
+    "inicio_datos": "2004-08-19",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.5144843568945539,
+     "tasa_alza": 0.52824184566428,
+     "brier_modelo": 0.2500456753314367,
+     "brier_tasa_base": 0.24939166665072413,
+     "exactitud_modelo": 0.5115354017501988,
+     "exactitud_siempre_sube": 0.52824184566428,
+     "brier": {
+      "mejora": -0.0006540086807125386,
+      "ic95": [
+       -0.001297327400784921,
+       -2.9770736800793234e-05
+      ],
+      "p": 0.9775112443778111,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.016706443914081145,
+      "ic95": [
+       -0.03261734287987271,
+       -0.002386634844868735
+      ],
+      "p": 0.9940029985007496,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GOOGL"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 2585,
+    "n_validacion": 1253,
+    "inicio_datos": "2004-08-19",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5620889748549323,
+     "tasa_alza": 0.5841979249800479,
+     "brier_modelo": 0.24342632627317792,
+     "brier_tasa_base": 0.24339951510468913,
+     "exactitud_modelo": 0.5841979249800479,
+     "exactitud_siempre_sube": 0.5841979249800479,
+     "brier": {
+      "mejora": -2.6811168488830938e-05,
+      "ic95": [
+       -0.0015989496189218013,
+       0.0016563514258479248
+      ],
+      "p": 0.5252373813093453,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GOOGL"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 2569,
+    "n_validacion": 1237,
+    "inicio_datos": "2004-08-19",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5807707279096925,
+     "tasa_alza": 0.6386418755052546,
+     "brier_modelo": 0.23562160267276236,
+     "brier_tasa_base": 0.23412750008041278,
+     "exactitud_modelo": 0.6345998383185125,
+     "exactitud_siempre_sube": 0.6386418755052546,
+     "brier": {
+      "mejora": -0.0014941025923495372,
+      "ic95": [
+       -0.007161707428212409,
+       0.004121740866629383
+      ],
+      "p": 0.7011494252873564,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.004042037186742118,
+      "ic95": [
+       -0.00889248181083266,
+       0.0
+      ],
+      "p": 0.9960019990004998,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "GOOGL"
+   },
+   {
+    "horizonte": 1,
+    "n_entrenamiento": 4415,
+    "n_validacion": 1257,
+    "inicio_datos": "1997-05-15",
+    "validacion": {
+     "n": 1257,
+     "tasa_base_ajuste": 0.4958097395243488,
+     "tasa_alza": 0.548926014319809,
+     "brier_modelo": 0.2500181297249862,
+     "brier_tasa_base": 0.2504275837709247,
+     "exactitud_modelo": 0.49482895783611774,
+     "exactitud_siempre_sube": 0.548926014319809,
+     "brier": {
+      "mejora": 0.000409454045938465,
+      "ic95": [
+       7.005791674753369e-05,
+       0.0007533302175936853
+      ],
+      "p": 0.009995002498750625,
+      "q": 0.17991004497751126
+     },
+     "exactitud": {
+      "mejora": -0.05409705648369133,
+      "ic95": [
+       -0.09466984884645982,
+       -0.014299920445505281
+      ],
+      "p": 0.9960019990004998,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AMZN"
+   },
+   {
+    "horizonte": 5,
+    "n_entrenamiento": 4411,
+    "n_validacion": 1253,
+    "inicio_datos": "1997-05-15",
+    "validacion": {
+     "n": 1253,
+     "tasa_base_ajuste": 0.5261845386533666,
+     "tasa_alza": 0.6065442936951316,
+     "brier_modelo": 0.2450128574005687,
+     "brier_tasa_base": 0.24510600371137808,
+     "exactitud_modelo": 0.6041500399042299,
+     "exactitud_siempre_sube": 0.6065442936951316,
+     "brier": {
+      "mejora": 9.314631080934994e-05,
+      "ic95": [
+       -0.0007576706038670703,
+       0.000921812468016891
+      ],
+      "p": 0.3988005997001499,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": -0.0023942537909018356,
+      "ic95": [
+       -0.009577015163607342,
+       0.0023942537909018356
+      ],
+      "p": 0.8175912043978011,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AMZN"
+   },
+   {
+    "horizonte": 21,
+    "n_entrenamiento": 4395,
+    "n_validacion": 1237,
+    "inicio_datos": "1997-05-15",
+    "validacion": {
+     "n": 1237,
+     "tasa_base_ajuste": 0.5699658703071673,
+     "tasa_alza": 0.7025060630557801,
+     "brier_modelo": 0.2272615152297686,
+     "brier_tasa_base": 0.22655819711948783,
+     "exactitud_modelo": 0.7025060630557801,
+     "exactitud_siempre_sube": 0.7025060630557801,
+     "brier": {
+      "mejora": -0.0007033181102807185,
+      "ic95": [
+       -0.0015619063726255483,
+       0.00013508555767972796
+      ],
+      "p": 0.9475262368815592,
+      "q": 1.0
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    },
+    "estado": "evaluada",
+    "activo": "AMZN"
+   },
+   {
+    "estado": "datos_insuficientes",
+    "n_entrenamiento": 637,
+    "n_validacion": 1257,
+    "activo": "META",
+    "horizonte": 1
+   },
+   {
+    "estado": "datos_insuficientes",
+    "n_entrenamiento": 633,
+    "n_validacion": 1253,
+    "activo": "META",
+    "horizonte": 5
+   },
+   {
+    "estado": "datos_insuficientes",
+    "n_entrenamiento": 617,
+    "n_validacion": 1237,
+    "activo": "META",
+    "horizonte": 21
+   }
+  ],
+  "familia_n": 36
+ },
+ "nivel3": {
+  "estado": "no_aprobado",
+  "celdas_aprobadas": 0,
+  "celdas": [
+   {
+    "evento": "FOMC",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 169,
+    "n_validacion": 40,
+    "validacion": {
+     "n": 40,
+     "tasa_base_ajuste": 0.591715976331361,
+     "tasa_alza": 0.475,
+     "brier_modelo": 0.2533777932138706,
+     "brier_tasa_base": 0.26299761913098285,
+     "exactitud_modelo": 0.525,
+     "exactitud_siempre_sube": 0.475,
+     "brier": {
+      "mejora": 0.009619825917112256,
+      "ic95": [
+       -0.0027704825802816486,
+       0.022933097740772568
+      ],
+      "p": 0.0704647676161919,
+      "q": 0.277575497965303
+     },
+     "exactitud": {
+      "mejora": 0.05,
+      "ic95": [
+       0.0,
+       0.125
+      ],
+      "p": 0.13393303348325838,
+      "q": 0.32143928035982017
+     }
+    }
+   },
+   {
+    "evento": "FOMC",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 169,
+    "n_validacion": 40,
+    "validacion": {
+     "n": 40,
+     "mse_modelo": 1.2774262673599075,
+     "mse_referencia_media": 1.6372604983448862,
+     "abs_retorno_medio": 0.005259208571326601,
+     "pendiente_lvol": 0.775641945408935,
+     "magnitud": {
+      "mejora": 0.3598342309849785,
+      "ic95": [
+       0.06493651437588,
+       0.6873167683595932
+      ],
+      "p": 0.005997001499250375,
+      "q": 0.14392803598200898
+     }
+    }
+   },
+   {
+    "evento": "CPI",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 180,
+    "n_validacion": 60,
+    "validacion": {
+     "n": 60,
+     "tasa_base_ajuste": 0.5444444444444444,
+     "tasa_alza": 0.6166666666666667,
+     "brier_modelo": 0.24176125444727262,
+     "brier_tasa_base": 0.24160493827160498,
+     "exactitud_modelo": 0.6333333333333333,
+     "exactitud_siempre_sube": 0.6166666666666667,
+     "brier": {
+      "mejora": -0.00015631617566766361,
+      "ic95": [
+       -0.008490733661924349,
+       0.00797622111472111
+      ],
+      "p": 0.5157421289355323,
+      "q": 0.635111015920611
+     },
+     "exactitud": {
+      "mejora": 0.016666666666666666,
+      "ic95": [
+       -0.03333333333333333,
+       0.06666666666666667
+      ],
+      "p": 0.3938030984507746,
+      "q": 0.5771232031043302
+     }
+    }
+   },
+   {
+    "evento": "CPI",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 180,
+    "n_validacion": 60,
+    "validacion": {
+     "n": 60,
+     "mse_modelo": 1.4125092660235998,
+     "mse_referencia_media": 1.455657253353038,
+     "abs_retorno_medio": 0.005505660136244516,
+     "pendiente_lvol": 0.7901403582282842,
+     "magnitud": {
+      "mejora": 0.04314798732943806,
+      "ic95": [
+       -0.21694646540362786,
+       0.3062003240345263
+      ],
+      "p": 0.383808095952024,
+      "q": 0.5771232031043302
+     }
+    }
+   },
+   {
+    "evento": "EMPLEO",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 180,
+    "n_validacion": 60,
+    "validacion": {
+     "n": 60,
+     "tasa_base_ajuste": 0.5555555555555556,
+     "tasa_alza": 0.6,
+     "brier_modelo": 0.23742517716025527,
+     "brier_tasa_base": 0.2419753086419754,
+     "exactitud_modelo": 0.65,
+     "exactitud_siempre_sube": 0.6,
+     "brier": {
+      "mejora": 0.0045501314817200985,
+      "ic95": [
+       -0.008982863078600344,
+       0.0170251191436311
+      ],
+      "p": 0.2288855572213893,
+      "q": 0.4577711144427787
+     },
+     "exactitud": {
+      "mejora": 0.05,
+      "ic95": [
+       -0.016666666666666666,
+       0.13333333333333333
+      ],
+      "p": 0.11894052973513243,
+      "q": 0.32143928035982017
+     }
+    }
+   },
+   {
+    "evento": "EMPLEO",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 180,
+    "n_validacion": 60,
+    "validacion": {
+     "n": 60,
+     "mse_modelo": 1.0463648833224886,
+     "mse_referencia_media": 1.1670491006862376,
+     "abs_retorno_medio": 0.0078080381193762205,
+     "pendiente_lvol": 0.562830780067545,
+     "magnitud": {
+      "mejora": 0.12068421736374932,
+      "ic95": [
+       -0.02158033887041654,
+       0.26131507327974984
+      ],
+      "p": 0.054972513743128434,
+      "q": 0.277575497965303
+     }
+    }
+   },
+   {
+    "evento": "RES_TSLA",
+    "tipo": "ambas",
+    "estado": "datos_insuficientes",
+    "n_ajuste": 19,
+    "n_validacion": 42,
+    "n_prueba": null
+   },
+   {
+    "evento": "RES_NVDA",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 45,
+    "n_validacion": 21,
+    "validacion": {
+     "n": 21,
+     "tasa_base_ajuste": 0.5111111111111111,
+     "tasa_alza": 0.5714285714285714,
+     "brier_modelo": 0.24493050322125975,
+     "brier_tasa_base": 0.24853615520282185,
+     "exactitud_modelo": 0.6190476190476191,
+     "exactitud_siempre_sube": 0.5714285714285714,
+     "brier": {
+      "mejora": 0.003605651981562098,
+      "ic95": [
+       -0.03361649540102723,
+       0.038626951800601675
+      ],
+      "p": 0.4062968515742129,
+      "q": 0.5771232031043302
+     },
+     "exactitud": {
+      "mejora": 0.047619047619047616,
+      "ic95": [
+       -0.14285714285714285,
+       0.23809523809523808
+      ],
+      "p": 0.40879560219890054,
+      "q": 0.5771232031043302
+     }
+    }
+   },
+   {
+    "evento": "RES_NVDA",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 45,
+    "n_validacion": 21,
+    "validacion": {
+     "n": 21,
+     "mse_modelo": 0.9349056242687238,
+     "mse_referencia_media": 0.7899287363588419,
+     "abs_retorno_medio": 0.08844647100749702,
+     "pendiente_lvol": 0.4756235360317227,
+     "magnitud": {
+      "mejora": -0.1449768879098815,
+      "ic95": [
+       -0.3035314744123563,
+       0.02454660164593029
+      ],
+      "p": 0.9575212393803099,
+      "q": 1.0
+     }
+    }
+   },
+   {
+    "evento": "RES_AAPL",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 46,
+    "n_validacion": 21,
+    "validacion": {
+     "n": 21,
+     "tasa_base_ajuste": 0.6304347826086957,
+     "tasa_alza": 0.5714285714285714,
+     "brier_modelo": 0.24881755584066367,
+     "brier_tasa_base": 0.24837969214150685,
+     "exactitud_modelo": 0.5714285714285714,
+     "exactitud_siempre_sube": 0.5714285714285714,
+     "brier": {
+      "mejora": -0.0004378636991567543,
+      "ic95": [
+       -0.011820700179958118,
+       0.010723425985973938
+      ],
+      "p": 0.5232383808095952,
+      "q": 0.635111015920611
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       0.0,
+       0.0
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    }
+   },
+   {
+    "evento": "RES_AAPL",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 46,
+    "n_validacion": 21,
+    "validacion": {
+     "n": 21,
+     "mse_modelo": 0.5190640089742254,
+     "mse_referencia_media": 0.5470917562475189,
+     "abs_retorno_medio": 0.046757250080445074,
+     "pendiente_lvol": 0.1415249996935005,
+     "magnitud": {
+      "mejora": 0.028027747273293338,
+      "ic95": [
+       -0.029017305249163426,
+       0.10086395137251468
+      ],
+      "p": 0.21539230384807595,
+      "q": 0.4577711144427787
+     }
+    }
+   },
+   {
+    "evento": "RES_MSFT",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 43,
+    "n_validacion": 20,
+    "validacion": {
+     "n": 20,
+     "tasa_base_ajuste": 0.5581395348837209,
+     "tasa_alza": 0.7,
+     "brier_modelo": 0.20267939068353144,
+     "brier_tasa_base": 0.23012439156300704,
+     "exactitud_modelo": 0.75,
+     "exactitud_siempre_sube": 0.7,
+     "brier": {
+      "mejora": 0.0274450008794756,
+      "ic95": [
+       -0.010820894777655918,
+       0.06237070833056947
+      ],
+      "p": 0.08095952023988005,
+      "q": 0.277575497965303
+     },
+     "exactitud": {
+      "mejora": 0.05,
+      "ic95": [
+       -0.1,
+       0.2
+      ],
+      "p": 0.3918040979510245,
+      "q": 0.5771232031043302
+     }
+    }
+   },
+   {
+    "evento": "RES_MSFT",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 43,
+    "n_validacion": 20,
+    "validacion": {
+     "n": 20,
+     "mse_modelo": 1.39085952365444,
+     "mse_referencia_media": 1.3862087244028456,
+     "abs_retorno_medio": 0.04094355186965766,
+     "pendiente_lvol": 0.5713082004288377,
+     "magnitud": {
+      "mejora": -0.004650799251594779,
+      "ic95": [
+       -0.2690866141601174,
+       0.2741805300450445
+      ],
+      "p": 0.5347326336831584,
+      "q": 0.635111015920611
+     }
+    }
+   },
+   {
+    "evento": "RES_GOOGL",
+    "tipo": "ambas",
+    "estado": "datos_insuficientes",
+    "n_ajuste": 0,
+    "n_validacion": 17,
+    "n_prueba": null
+   },
+   {
+    "evento": "RES_AMZN",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 41,
+    "n_validacion": 20,
+    "validacion": {
+     "n": 20,
+     "tasa_base_ajuste": 0.4878048780487805,
+     "tasa_alza": 0.6,
+     "brier_modelo": 0.23894910375861408,
+     "brier_tasa_base": 0.25258774538964895,
+     "exactitud_modelo": 0.6,
+     "exactitud_siempre_sube": 0.6,
+     "brier": {
+      "mejora": 0.013638641631034976,
+      "ic95": [
+       -0.011376086324430195,
+       0.039112427440757914
+      ],
+      "p": 0.13043478260869565,
+      "q": 0.32143928035982017
+     },
+     "exactitud": {
+      "mejora": 0.0,
+      "ic95": [
+       -0.3512499999999999,
+       0.4
+      ],
+      "p": 0.5557221389305347,
+      "q": 0.635111015920611
+     }
+    }
+   },
+   {
+    "evento": "RES_AMZN",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 41,
+    "n_validacion": 20,
+    "validacion": {
+     "n": 20,
+     "mse_modelo": 2.0116500297797746,
+     "mse_referencia_media": 1.3384715702627799,
+     "abs_retorno_medio": 0.05479415236874642,
+     "pendiente_lvol": -0.6577341599183696,
+     "magnitud": {
+      "mejora": -0.6731784595169944,
+      "ic95": [
+       -1.0759592475157689,
+       -0.2738751686835566
+      ],
+      "p": 1.0,
+      "q": 1.0
+     }
+    }
+   },
+   {
+    "evento": "RES_META",
+    "tipo": "ambas",
+    "estado": "datos_insuficientes",
+    "n_ajuste": 10,
+    "n_validacion": 20,
+    "n_prueba": null
+   },
+   {
+    "evento": "RESULTADOS_7_acciones",
+    "tipo": "direccion",
+    "estado": "evaluada",
+    "n_ajuste": 204,
+    "n_validacion": 161,
+    "validacion": {
+     "n": 161,
+     "tasa_base_ajuste": 0.5588235294117647,
+     "tasa_alza": 0.5590062111801242,
+     "brier_modelo": 0.23486197484619176,
+     "brier_tasa_base": 0.24651830041479508,
+     "exactitud_modelo": 0.6149068322981367,
+     "exactitud_siempre_sube": 0.5590062111801242,
+     "brier": {
+      "mejora": 0.011656325568603314,
+      "ic95": [
+       -0.00047669991314139764,
+       0.024252637932546443
+      ],
+      "p": 0.02798600699650175,
+      "q": 0.255872063968016
+     },
+     "exactitud": {
+      "mejora": 0.055900621118012424,
+      "ic95": [
+       0.0,
+       0.11180124223602485
+      ],
+      "p": 0.031984007996002,
+      "q": 0.255872063968016
+     }
+    }
+   },
+   {
+    "evento": "RESULTADOS_7_acciones",
+    "tipo": "tamano",
+    "estado": "evaluada",
+    "n_ajuste": 204,
+    "n_validacion": 161,
+    "validacion": {
+     "n": 161,
+     "mse_modelo": 0.8167358044827979,
+     "mse_referencia_media": 0.8813865557144048,
+     "abs_retorno_medio": 0.055272021296838274,
+     "pendiente_lvol": 0.5201524438096184,
+     "magnitud": {
+      "mejora": 0.06465075123160681,
+      "ic95": [
+       -0.025147390331822846,
+       0.15765893495062336
+      ],
+      "p": 0.07646176911544228,
+      "q": 0.277575497965303
+     }
+    }
+   }
+  ],
+  "familia_n": 16
+ },
+ "nivel5": {
+  "estado": "no_abierta"
+ },
+ "aprobados": []
+}
