@@ -6,6 +6,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import subprocess
 import time
 import urllib.parse
@@ -214,6 +215,48 @@ def classify_news(sim, api_key):
             'titulares':items,'modelo':None}
 
 
+def event_calendar(symbols):
+    """Fetch dated macro releases from BLS ICS and FOMC dates from the Fed calendar."""
+    events=[]
+    try:
+        raw=requests.get('https://www.bls.gov/schedule/news_release/bls.ics',timeout=20).text
+        raw=raw.replace('\r\n ','').replace('\n ','')
+        for block in raw.split('BEGIN:VEVENT')[1:]:
+            summary=re.search(r'(?m)^SUMMARY[^:]*:(.*)$',block)
+            start=re.search(r'(?m)^DTSTART(?:;[^:]*)?:(\d{8})',block)
+            if not (summary and start):continue
+            title=summary.group(1);kind='CPI' if 'consumer price index' in title.lower() else 'empleo' if 'employment situation' in title.lower() else None
+            if kind:events.append({'fecha':dt.datetime.strptime(start.group(1),'%Y%m%d').date().isoformat(),'tipo':kind,'titulo':title,'fuente':'BLS'})
+    except Exception:pass
+    try:
+        html=requests.get('https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',timeout=20).text
+        plain=re.sub(r'<[^>]+>',' ',html);plain=re.sub(r'\s+',' ',plain)
+        for section in re.finditer(r'(20\d{2}) FOMC Meetings(.*?)(?=20\d{2} FOMC Meetings|$)',plain,re.I):
+            year=int(section.group(1));body=section.group(2)
+            for month,day in re.findall(r'\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:\s*[-–]\s*\d{1,2})?',body,re.I):
+                try:
+                    date=dt.date(year,dt.datetime.strptime(month,'%B').month,int(day))
+                    events.append({'fecha':date.isoformat(),'tipo':'FOMC','titulo':'FOMC meeting','fuente':'Federal Reserve'})
+                except ValueError:continue
+    except Exception:pass
+    for symbol in symbols:
+        try:
+            import yfinance as yf
+            frame=yf.Ticker(symbol).get_earnings_dates(limit=8)
+            if frame is None:continue
+            for stamp in frame.index:
+                date=pd.Timestamp(stamp).date().isoformat()
+                events.append({'fecha':date,'tipo':'resultados','titulo':'Fecha estimada/publicada de resultados '+symbol,'sim':symbol,'fuente':'Yahoo Finance'})
+        except Exception:continue
+    return sorted({(e['fecha'],e['tipo'],e.get('sim','')):e for e in events}.values(),key=lambda e:(e['fecha'],e['tipo']))
+
+
+def calendar_context(events, sim, anchor, target):
+    relevant=[e for e in events if anchor<e['fecha']<=target and (e['tipo']!='resultados' or e.get('sim')==sim)]
+    return {'eventos':relevant,'probabilidad':.5,
+            'razon':('Dentro del horizonte: '+', '.join(e['tipo']+' '+e['fecha'] for e in relevant)+'. El calendario aporta contexto de volatilidad, no una dirección validada; p=50%.') if relevant else 'Sin FOMC, CPI, empleo ni resultados programados en el horizonte; señal neutral p=50%.'}
+
+
 def generate(kind,now=None):
     now=now or dt.datetime.now(UTC)
     dates,deadline=targets(now,kind)
@@ -228,6 +271,7 @@ def generate(kind,now=None):
             (a.get('volumen_medio_usd') or a.get('volumen_24h_usd') or 0)>5e6]
     failures=[]; rows=[]
     news_by_symbol={a['sim']:classify_news(a['sim'],os.environ.get('API_1','')) for a in assets if a['sim'] in WALK_FORWARD_WATCH}
+    calendar_events=event_calendar([s for s in WALK_FORWARD_WATCH if not s.endswith('-USD')])
     def one(a):
         try:
             d=fetch(a)
@@ -243,6 +287,8 @@ def generate(kind,now=None):
             result=[];patterns=detect(d.tail(300),last_only=True)
             for h,target in zip((1,5,21),dates):
                 preds,brier=predict(d,a['sim'],h,patterns)
+                calendar=calendar_context(calendar_events,a['sim'],d.index[-1].date().isoformat(),target)
+                preds['calendario_macro']=calendar['probabilidad']
                 news=news_by_symbol.get(a['sim'])
                 if news:preds['noticias_gemini']={'positivo':.65,'neutro':.5,'negativo':.35}[news['sentimiento']]
                 weights,hedge_reason=hedge_weights(a['sim'],h)
@@ -260,11 +306,12 @@ def generate(kind,now=None):
                     f"Estimación logística con datos anteriores al ancla; validación cronológica Brier {brier if brier is not None else 'no disponible'}." if name=='logistica' else
                     f"Patrón técnico registrado antes del cierre objetivo: {name.removeprefix('patron:')}.") for name,p in preds.items()}
                 reasons['ensamble_hedge']=hedge_reason
+                reasons['calendario_macro']=calendar['razon']
                 if news:reasons['noticias_gemini']=f"Gemini clasificó {news['sentimiento']} los titulares RSS recientes: {news['razon']}"
                 result.append({'sim':a['sim'],'coinbase':a.get('coinbase'),'tipo':a['tipo'],
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
-                    'razones':reasons,'pesos_hedge':weights,'walk_forward':wf,'noticias':news,
+                    'razones':reasons,'pesos_hedge':weights,'walk_forward':wf,'noticias':news,'calendario':calendar['eventos'],
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
                     'contexto_previo':{k:float(v) for k,v in features(d,crypto=a['tipo']=='cripto').iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
@@ -350,7 +397,7 @@ def score(now=None):
             'estado':'recibo verificado; etiquetas futuras pendientes' if proof else 'recibo aún no verificado'})
         forecast_views.append({'publicado':payload['publicado'],'sha256':payload['sha256'],'tipo':payload['tipo'],
             'filas':[{'sim':row['sim'],'tipo':row['tipo'],'horizonte':row['horizonte'],'objetivo':row['objetivo'],
-                'predicciones':row['predicciones'],'razones':row.get('razones',{}),'pesos_hedge':row.get('pesos_hedge',{}),'noticias':row.get('noticias'),'ancla':row['ancla']} for row in payload['filas']]})
+                'predicciones':row['predicciones'],'razones':row.get('razones',{}),'pesos_hedge':row.get('pesos_hedge',{}),'noticias':row.get('noticias'),'calendario':row.get('calendario',[]),'ancla':row['ancla']} for row in payload['filas']]})
         if not proof:continue
         # Cada símbolo maduro se descarga una vez, con concurrencia acotada.
         # Descargar miles en serie retrasaba el marcador y el siguiente registro.
