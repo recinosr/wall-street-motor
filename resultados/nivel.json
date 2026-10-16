@@ -1,0 +1,1082 @@
+{
+  "version": "oraculo-pit-v1",
+  "generado_utc": "2026-10-16T16:24:54.125938+00:00",
+  "fuente": "datos/cache/y_*_1d.csv local (Yahoo Finance, cierre OHLC crudo; precios sin dividendos)",
+  "corte_datos": "2026-10-09",
+  "inicio_prueba_sellada": "2025-10-08",
+  "aperturas_prueba_sellada": {
+    "nivel1": 2,
+    "nivel2": 2,
+    "nivel3": 0,
+    "nivel4": 0,
+    "nivel5": 0,
+    "nivel6": 0,
+    "nivel7": 0
+  },
+  "familias_de_comparaciones_nivel2": 30,
+  "nivel_actual": 1,
+  "aprobados": [],
+  "nivel1": {
+    "estado": "exploratorio_no_aprobado",
+    "resultado": {
+      "activo": "SPY",
+      "horizonte_sesiones": 1,
+      "entrenamiento": [
+        "2021-10-15",
+        "2024-10-07"
+      ],
+      "validacion": [
+        "2024-10-08",
+        "2025-10-07"
+      ],
+      "prueba_sellada": [
+        "2025-10-08",
+        "2026-10-07"
+      ],
+      "n_train": 748,
+      "n_valid": 250,
+      "n_test": 251,
+      "brier_modelo_validacion": 0.24669770003373737,
+      "brier_modelo_prueba": 0.25012127066779727,
+      "brier_referencia_base_prueba": 0.24955782549119487,
+      "tasa_alza_prueba": 0.5219123505976095,
+      "tasa_base_entrenamiento": 0.5280748663101604,
+      "mejora_brier": -0.0005634451766024097,
+      "ic95": [
+        -0.0013999178183367745,
+        0.0003280585546851028
+      ],
+      "p": 0.9026991002999001
+    },
+    "metodo": "regresión logística de retorno logarítmico de 5 sesiones, ajustada antes de prueba; base: tasa alcista de entrenamiento"
+  },
+  "nivel2": {
+    "estado": "exploratorio_no_aprobado",
+    "resultados": [
+      {
+        "activo": "SPY",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.24669770003373737,
+        "brier_modelo_prueba": 0.25012127066779727,
+        "brier_referencia_base_prueba": 0.24955782549119487,
+        "tasa_alza_prueba": 0.5219123505976095,
+        "tasa_base_entrenamiento": 0.5280748663101604,
+        "mejora_brier": -0.0005634451766024097,
+        "ic95": [
+          -0.0013999178183367745,
+          0.0003280585546851028
+        ],
+        "p": 0.9026991002999001,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "SPY",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.23993978667071603,
+        "brier_modelo_prueba": 0.24712411355412364,
+        "brier_referencia_base_prueba": 0.2465230844138064,
+        "tasa_alza_prueba": 0.562753036437247,
+        "tasa_base_entrenamiento": 0.5842245989304813,
+        "mejora_brier": -0.0006010291403171793,
+        "ic95": [
+          -0.0019939568929602286,
+          0.0009301082067508349
+        ],
+        "p": 0.7874041986004665,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "SPY",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.20739904378562776,
+        "brier_modelo_prueba": 0.23025419336870867,
+        "brier_referencia_base_prueba": 0.22869950119085067,
+        "tasa_alza_prueba": 0.6493506493506493,
+        "tasa_base_entrenamiento": 0.6176470588235294,
+        "mejora_brier": -0.0015546921778580045,
+        "ic95": [
+          -0.003451498974569193,
+          0.0005038165097888936
+        ],
+        "p": 0.9336887704098634,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "NVDA",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2016-10-17",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-08"
+        ],
+        "n_train": 2006,
+        "n_valid": 250,
+        "n_test": 252,
+        "brier_modelo_validacion": 0.2473066435465859,
+        "brier_modelo_prueba": 0.25047364769797625,
+        "brier_referencia_base_prueba": 0.2508483309507455,
+        "tasa_alza_prueba": 0.5119047619047619,
+        "tasa_base_entrenamiento": 0.543369890329013,
+        "mejora_brier": 0.00037468325276932246,
+        "ic95": [
+          -0.00044447066500734106,
+          0.0011748589329759042
+        ],
+        "p": 0.17360879706764412,
+        "p_ajustado_bh": 0.9871709430189937
+      },
+      {
+        "activo": "NVDA",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2016-10-17",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-02"
+        ],
+        "n_train": 2006,
+        "n_valid": 250,
+        "n_test": 248,
+        "brier_modelo_validacion": 0.24046416013729033,
+        "brier_modelo_prueba": 0.25211367796040185,
+        "brier_referencia_base_prueba": 0.2515536159347513,
+        "tasa_alza_prueba": 0.5403225806451613,
+        "tasa_base_entrenamiento": 0.5967098703888335,
+        "mejora_brier": -0.0005600620256505462,
+        "ic95": [
+          -0.0010102890043237028,
+          -6.134716947409042e-05
+        ],
+        "p": 0.9860046651116294,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "NVDA",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2016-10-17",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-10"
+        ],
+        "n_train": 2006,
+        "n_valid": 250,
+        "n_test": 232,
+        "brier_modelo_validacion": 0.24402013187003,
+        "brier_modelo_prueba": 0.24898617826489172,
+        "brier_referencia_base_prueba": 0.24804356655340812,
+        "tasa_alza_prueba": 0.5905172413793104,
+        "tasa_base_entrenamiento": 0.6694915254237288,
+        "mejora_brier": -0.0009426117114835173,
+        "ic95": [
+          -0.0021283252708759535,
+          0.00024658935837018966
+        ],
+        "p": 0.9480173275574808,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "TSLA",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.2503887065194239,
+        "brier_modelo_prueba": 0.2503136999221415,
+        "brier_referencia_base_prueba": 0.25023281149758253,
+        "tasa_alza_prueba": 0.50199203187251,
+        "tasa_base_entrenamiento": 0.517379679144385,
+        "mejora_brier": -8.088842455892118e-05,
+        "ic95": [
+          -0.00024251500537025267,
+          0.00011128997876200943
+        ],
+        "p": 0.8190603132289237,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "TSLA",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.2522978343019143,
+        "brier_modelo_prueba": 0.253853681136274,
+        "brier_referencia_base_prueba": 0.2499571627524807,
+        "tasa_alza_prueba": 0.48582995951417,
+        "tasa_base_entrenamiento": 0.4732620320855615,
+        "mejora_brier": -0.0038965183837933004,
+        "ic95": [
+          -0.007832102134050733,
+          -0.0001739362470053539
+        ],
+        "p": 0.9800066644451849,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "TSLA",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.264943293143616,
+        "brier_modelo_prueba": 0.24306151255320538,
+        "brier_referencia_base_prueba": 0.24307422288312505,
+        "tasa_alza_prueba": 0.4025974025974026,
+        "tasa_base_entrenamiento": 0.4532085561497326,
+        "mejora_brier": 1.2710329919671381e-05,
+        "ic95": [
+          -5.680677681148371e-06,
+          3.1206084438094536e-05
+        ],
+        "p": 0.08897034321892702,
+        "p_ajustado_bh": 0.6672775741419527
+      },
+      {
+        "activo": "META",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.25030986086773716,
+        "brier_modelo_prueba": 0.249761624014618,
+        "brier_referencia_base_prueba": 0.24952330430629568,
+        "tasa_alza_prueba": 0.5219123505976095,
+        "tasa_base_entrenamiento": 0.5200534759358288,
+        "mejora_brier": -0.00023831970832233196,
+        "ic95": [
+          -0.0006743785740563477,
+          0.00017519293688492986
+        ],
+        "p": 0.85838053982006,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "META",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.24700793544623856,
+        "brier_modelo_prueba": 0.26035980115427904,
+        "brier_referencia_base_prueba": 0.25602895907919826,
+        "tasa_alza_prueba": 0.4898785425101215,
+        "tasa_base_entrenamiento": 0.5681818181818182,
+        "mejora_brier": -0.0043308420750807234,
+        "ic95": [
+          -0.009393570602510809,
+          5.672286600728257e-05
+        ],
+        "p": 0.9736754415194935,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "META",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.2505230591182388,
+        "brier_modelo_prueba": 0.27553832101013176,
+        "brier_referencia_base_prueba": 0.2746082754929877,
+        "tasa_alza_prueba": 0.46320346320346323,
+        "tasa_base_entrenamiento": 0.6243315508021391,
+        "mejora_brier": -0.000930045517144049,
+        "ic95": [
+          -0.0016711075581419645,
+          -0.00012468448155215342
+        ],
+        "p": 0.988003998667111,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "NFLX",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.24981396000874143,
+        "brier_modelo_prueba": 0.24848116460581557,
+        "brier_referencia_base_prueba": 0.24913756851686167,
+        "tasa_alza_prueba": 0.44223107569721115,
+        "tasa_base_entrenamiento": 0.4919786096256685,
+        "mejora_brier": 0.0006564039110461582,
+        "ic95": [
+          -0.001240198514165592,
+          0.0029101396596453205
+        ],
+        "p": 0.263245584805065,
+        "p_ajustado_bh": 0.9871709430189937
+      },
+      {
+        "activo": "NFLX",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.2446289045983797,
+        "brier_modelo_prueba": 0.2588092624841277,
+        "brier_referencia_base_prueba": 0.25973285418907177,
+        "tasa_alza_prueba": 0.3643724696356275,
+        "tasa_base_entrenamiento": 0.5320855614973262,
+        "mejora_brier": 0.0009235917049440477,
+        "ic95": [
+          0.00013608127207242094,
+          0.0017577250492379537
+        ],
+        "p": 0.011996001332889037,
+        "p_ajustado_bh": 0.11996001332889038
+      },
+      {
+        "activo": "NFLX",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.23114642238245048,
+        "brier_modelo_prueba": 0.30389180531717935,
+        "brier_referencia_base_prueba": 0.3046205720985527,
+        "tasa_alza_prueba": 0.2597402597402597,
+        "tasa_base_entrenamiento": 0.5949197860962567,
+        "mejora_brier": 0.0007287667813732633,
+        "ic95": [
+          -0.004170957363995092,
+          0.005049362681161954
+        ],
+        "p": 0.3702099300233256,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "KO",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.25426977464491346,
+        "brier_modelo_prueba": 0.25075631014901556,
+        "brier_referencia_base_prueba": 0.2505617881358549,
+        "tasa_alza_prueba": 0.5139442231075697,
+        "tasa_base_entrenamiento": 0.5414438502673797,
+        "mejora_brier": -0.00019452201316068468,
+        "ic95": [
+          -0.000647383151548159,
+          0.00019403919985956487
+        ],
+        "p": 0.838053982005998,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "KO",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.2569180228022421,
+        "brier_modelo_prueba": 0.24873599324518592,
+        "brier_referencia_base_prueba": 0.24719296634393242,
+        "tasa_alza_prueba": 0.5587044534412956,
+        "tasa_base_entrenamiento": 0.5334224598930482,
+        "mejora_brier": -0.0015430269012534927,
+        "ic95": [
+          -0.003100471041626519,
+          -9.332572966811948e-05
+        ],
+        "p": 0.9816727757414195,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "KO",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.2688408393915029,
+        "brier_modelo_prueba": 0.23208990732676646,
+        "brier_referencia_base_prueba": 0.23177978045861022,
+        "tasa_alza_prueba": 0.6536796536796536,
+        "tasa_base_entrenamiento": 0.5802139037433155,
+        "mejora_brier": -0.00031012686815614813,
+        "ic95": [
+          -0.0009928975012292952,
+          0.0004413924535016613
+        ],
+        "p": 0.8100633122292569,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "MA",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.24777825581591537,
+        "brier_modelo_prueba": 0.2502093175681318,
+        "brier_referencia_base_prueba": 0.25131299418414876,
+        "tasa_alza_prueba": 0.4940239043824701,
+        "tasa_base_entrenamiento": 0.5307486631016043,
+        "mejora_brier": 0.001103676616016912,
+        "ic95": [
+          0.0003673770643231981,
+          0.0017824791677691302
+        ],
+        "p": 0.0036654448517160947,
+        "p_ajustado_bh": 0.05498167277574142
+      },
+      {
+        "activo": "MA",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.24143659470042184,
+        "brier_modelo_prueba": 0.25775700328401485,
+        "brier_referencia_base_prueba": 0.25921941504464974,
+        "tasa_alza_prueba": 0.48582995951417,
+        "tasa_base_entrenamiento": 0.5828877005347594,
+        "mejora_brier": 0.0014624117606348939,
+        "ic95": [
+          -0.003365409358783483,
+          0.005887572281839753
+        ],
+        "p": 0.26124625124958345,
+        "p_ajustado_bh": 0.9871709430189937
+      },
+      {
+        "activo": "MA",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.252037803101052,
+        "brier_modelo_prueba": 0.2714215259843075,
+        "brier_referencia_base_prueba": 0.2700436883552643,
+        "tasa_alza_prueba": 0.4329004329004329,
+        "tasa_base_entrenamiento": 0.589572192513369,
+        "mejora_brier": -0.001377837629043229,
+        "ic95": [
+          -0.005180404550923525,
+          0.0022771078098808976
+        ],
+        "p": 0.7520826391202933,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "MCD",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.25051513207696163,
+        "brier_modelo_prueba": 0.2514446775037019,
+        "brier_referencia_base_prueba": 0.2512972503021743,
+        "tasa_alza_prueba": 0.4581673306772908,
+        "tasa_base_entrenamiento": 0.5133689839572193,
+        "mejora_brier": -0.00014742720152756454,
+        "ic95": [
+          -0.0007664548358565156,
+          0.0004629612196547357
+        ],
+        "p": 0.6814395201599467,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "MCD",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.25119764032900255,
+        "brier_modelo_prueba": 0.25754707200900967,
+        "brier_referencia_base_prueba": 0.2572061729515662,
+        "tasa_alza_prueba": 0.4089068825910931,
+        "tasa_base_entrenamiento": 0.5334224598930482,
+        "mejora_brier": -0.00034089905744341247,
+        "ic95": [
+          -0.0013267680898769794,
+          0.0006421154369460305
+        ],
+        "p": 0.740753082305898,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "MCD",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.2527484187681486,
+        "brier_modelo_prueba": 0.253144033526275,
+        "brier_referencia_base_prueba": 0.25293865723246034,
+        "tasa_alza_prueba": 0.36796536796536794,
+        "tasa_base_entrenamiento": 0.5106951871657754,
+        "mejora_brier": -0.00020537629381470708,
+        "ic95": [
+          -0.004076056458604873,
+          0.00393357067589272
+        ],
+        "p": 0.5474841719426857,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "V",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-07"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.24675796233067324,
+        "brier_modelo_prueba": 0.25040280872616727,
+        "brier_referencia_base_prueba": 0.2523096082597461,
+        "tasa_alza_prueba": 0.4860557768924303,
+        "tasa_base_entrenamiento": 0.536096256684492,
+        "mejora_brier": 0.0019067995335787628,
+        "ic95": [
+          0.000585211856689216,
+          0.0033567811262591504
+        ],
+        "p": 0.002999000333222259,
+        "p_ajustado_bh": 0.05498167277574142
+      },
+      {
+        "activo": "V",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-01"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.23844882446775006,
+        "brier_modelo_prueba": 0.2558686793708019,
+        "brier_referencia_base_prueba": 0.25750879060840814,
+        "tasa_alza_prueba": 0.46558704453441296,
+        "tasa_base_entrenamiento": 0.5588235294117647,
+        "mejora_brier": 0.0016401112376062607,
+        "ic95": [
+          -0.003502513573211224,
+          0.0067264830951490225
+        ],
+        "p": 0.26291236254581807,
+        "p_ajustado_bh": 0.9871709430189937
+      },
+      {
+        "activo": "V",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-09"
+        ],
+        "n_train": 748,
+        "n_valid": 250,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.24319275181757893,
+        "brier_modelo_prueba": 0.2511160669120177,
+        "brier_referencia_base_prueba": 0.2503210326425174,
+        "tasa_alza_prueba": 0.5281385281385281,
+        "tasa_base_entrenamiento": 0.5614973262032086,
+        "mejora_brier": -0.0007950342695003044,
+        "ic95": [
+          -0.011364575271580158,
+          0.008814623420177166
+        ],
+        "p": 0.5511496167944019,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "VWRA.L",
+        "horizonte_sesiones": 1,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-10-06"
+        ],
+        "n_train": 750,
+        "n_valid": 253,
+        "n_test": 251,
+        "brier_modelo_validacion": 0.24702190305602229,
+        "brier_modelo_prueba": 0.2500219862163321,
+        "brier_referencia_base_prueba": 0.24918021071270474,
+        "tasa_alza_prueba": 0.5298804780876494,
+        "tasa_base_entrenamiento": 0.5213333333333333,
+        "mejora_brier": -0.0008417755036273228,
+        "ic95": [
+          -0.0023091125886700106,
+          0.0007706582773120876
+        ],
+        "p": 0.8593802065978007,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "VWRA.L",
+        "horizonte_sesiones": 5,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-30"
+        ],
+        "n_train": 750,
+        "n_valid": 253,
+        "n_test": 247,
+        "brier_modelo_validacion": 0.2381030754580424,
+        "brier_modelo_prueba": 0.24524425432585112,
+        "brier_referencia_base_prueba": 0.24377300584795322,
+        "tasa_alza_prueba": 0.5789473684210527,
+        "tasa_base_entrenamiento": 0.5813333333333334,
+        "mejora_brier": -0.001471248477897888,
+        "ic95": [
+          -0.004339391716939599,
+          0.0015803357983801996
+        ],
+        "p": 0.8307230923025658,
+        "p_ajustado_bh": 0.988003998667111
+      },
+      {
+        "activo": "VWRA.L",
+        "horizonte_sesiones": 21,
+        "entrenamiento": [
+          "2021-10-15",
+          "2024-10-07"
+        ],
+        "validacion": [
+          "2024-10-08",
+          "2025-10-07"
+        ],
+        "prueba_sellada": [
+          "2025-10-08",
+          "2026-09-08"
+        ],
+        "n_train": 750,
+        "n_valid": 253,
+        "n_test": 231,
+        "brier_modelo_validacion": 0.21497026083960333,
+        "brier_modelo_prueba": 0.22737415048502108,
+        "brier_referencia_base_prueba": 0.22674574314574317,
+        "tasa_alza_prueba": 0.6623376623376623,
+        "tasa_base_entrenamiento": 0.6066666666666667,
+        "mejora_brier": -0.0006284073392779502,
+        "ic95": [
+          -0.0019424990344204499,
+          0.0005580923456665623
+        ],
+        "p": 0.8350549816727757,
+        "p_ajustado_bh": 0.988003998667111
+      }
+    ],
+    "metodo": "misma regla fija para 10 activos locales y horizontes 1/5/21; Brier contra prevalencia de entrenamiento; IC bootstrap circular con bloques max(10, 2 ? horizonte) y ajuste BH de 30 comparaciones"
+  },
+  "nivel3": {
+    "estado": "sin_evaluacion",
+    "motivo": "El entorno bloque? la descarga del calendario FOMC/BLS y de EDGAR (WinError 10061), as? que no hay eventos PIT cacheados para unir. La rama datos s? contiene velas SPY de 1 minuto desde 2021-10 hasta 2026-10."
+  },
+  "nota": "La ventana 2025-10-08 a 2026-10-08 se abri? dos veces para niveles 1 y 2 tras corregir la longitud del bootstrap. Resultados exploratorios, no aprobaci?n; Yahoo no conserva vintages de cierres. El script bloquea reaperturas adicionales de esta versi?n.",
+  "manifiesto_datos": [
+    {
+      "archivo": "y_SPY_5y_1d.csv",
+      "sha256": "296b495249b3491bd681d8f533bc753cf0c65881b7d25cf591dc2976159e1fc7",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_NVDA_10y_1d.csv",
+      "sha256": "78bd99836a6d8f2304eb25a0ee6e57dd75ca86da8995dcffd76e1394dc0014af",
+      "primera_fecha": "2016-10-10",
+      "última_fecha": "2026-10-09",
+      "filas": 2514
+    },
+    {
+      "archivo": "y_TSLA_5y_1d.csv",
+      "sha256": "df61238f5d666c204407131fb52eccdc3e499112038b9a956c0200bc72c1b3e2",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_META_5y_1d.csv",
+      "sha256": "046691cb3f67640f3df4b2ed14f64a7f20c7ad065b007d6796939d611c94b974",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_NFLX_5y_1d.csv",
+      "sha256": "ff97308fd75df07a3c670191d14a5491d3d4007263c8cea7cad6e721f8ee4a05",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_KO_5y_1d.csv",
+      "sha256": "2fe2c4cfef3814759182f85e57f379a0a3e2a7a63234a39de4acd44139be0934",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_MA_5y_1d.csv",
+      "sha256": "ef2af0dc4e051cf1dd732a10f4a8e926752ac6f32feed04a58a836c17cb2016c",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_MCD_5y_1d.csv",
+      "sha256": "9e72839ad3fcb73ae001a187569e7b23fb6037452c4e25a06f1714c996983993",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_V_5y_1d.csv",
+      "sha256": "44967cb09a9ac7f86ca873b834d5dbb8d0cba22f27e8e3ba23d86458bba343f9",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1255
+    },
+    {
+      "archivo": "y_VWRA.L_5y_1d.csv",
+      "sha256": "40e19d82ef1dcfc2142ddf3c658bdafc06ff4c7285a86867cbe7550697dc76ac",
+      "primera_fecha": "2021-10-08",
+      "última_fecha": "2026-10-08",
+      "filas": 1260
+    }
+  ],
+  "nivel4": {
+    "estado": "sin_evaluacion",
+    "motivo": "GDELT DOC ofrece hora de indexaci?n (no publicaci?n original) y no existe un corpus hist?rico clasificado y congelado para los activos de la prueba."
+  },
+  "nivel5": {
+    "estado": "sin_evaluacion",
+    "motivo": "No hay vintages de precios PIT ni detector de r?gimen fijado antes de reservar crisis completas de 2000?02, 2008, 2020 y 2022."
+  },
+  "nivel6": {
+    "estado": "sin_evaluacion",
+    "motivo": "Falta un panel PIT com?n y sincronizado de tasas, d?lar, oro y tecnolog?a para separar se?al de correlaci?n contempor?nea."
+  },
+  "nivel7": {
+    "estado": "sin_evaluacion",
+    "motivo": "No hay simulaci?n completa con dividendos, conversi?n, spread, tarifas XTB y benchmark de aportes mensuales para esa misma prueba."
+  }
+}

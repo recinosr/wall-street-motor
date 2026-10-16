@@ -10,3 +10,6 @@ resultados/*.tmp
 resultados/parte-*.json
 partes/
 .boveda-cache/
+
+datos/cache/oraculo-pit/
+datos/cache/y_*_1d.csv
