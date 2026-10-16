@@ -1,0 +1,36 @@
+name: datos-pit
+on:
+  schedule:
+    - cron: '30 22 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: datos-pit
+  queue: max
+  cancel-in-progress: false
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Precios y eventos con hora de disponibilidad (Yahoo, Fed, ALFRED, EDGAR)
+        env:
+          SEC_USER_AGENT: ${{ vars.SEC_USER_AGENT }}
+        run: python -m lab.oraculo_datos
+      - name: Publicar caché PIT
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add datos/pit
+          git diff --cached --quiet && exit 0
+          git commit -m "datos pit $(date -u +%F)"
+          bash scripts/push_results.sh

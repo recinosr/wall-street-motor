@@ -1,0 +1,148 @@
+{
+ "eventos": {
+  "8-K AAPL": 233,
+  "8-K AMZN": 269,
+  "8-K GOOGL": 113,
+  "8-K META": 131,
+  "8-K MSFT": 281,
+  "8-K NVDA": 243,
+  "8-K TSLA": 246,
+  "CPI": 461,
+  "EMPLEO": 449,
+  "FOMC": 272
+ },
+ "eventos_sha256": "64b7d2102d63d1034738ca6e7105002aa3908836741b952971e83d291aacc630",
+ "fuentes": {
+  "8-K": "SEC EDGAR submissions",
+  "CPI/EMPLEO": "ALFRED (St. Louis Fed) release dates rid=10 y rid=50",
+  "FOMC": "federalreserve.gov calendarios y páginas históricas",
+  "precios": "Yahoo Finance chart API"
+ },
+ "precios": {
+  "AAPL": {
+   "archivo": "datos/pit/precios/AAPL.csv.gz",
+   "filas": 11553,
+   "primera": "1980-12-12",
+   "sha256": "308b8e5d2f151291244f226378a3e9800b4e4bf75aac6d1dcf8483c65f5f9064",
+   "ultima": "2026-10-15"
+  },
+  "AMZN": {
+   "archivo": "datos/pit/precios/AMZN.csv.gz",
+   "filas": 7401,
+   "primera": "1997-05-15",
+   "sha256": "7797c6bfa180d26fb9fa4307eb3f52604bf75c0423c0c687293aea58fc62af6c",
+   "ultima": "2026-10-15"
+  },
+  "BTC-USD": {
+   "archivo": "datos/pit/precios/BTC-USD.csv.gz",
+   "filas": 4412,
+   "primera": "2014-09-17",
+   "sha256": "7e72361cd2d08de4b60ffb5f40e89608d461de6c9a86f997e1cf1260088ab78b",
+   "ultima": "2026-10-15"
+  },
+  "GLD": {
+   "archivo": "datos/pit/precios/GLD.csv.gz",
+   "filas": 5511,
+   "primera": "2004-11-18",
+   "sha256": "73c6633232f7066d308bf2021d0dfd003252c9fc64769a2f2b02b043ce1854d1",
+   "ultima": "2026-10-15"
+  },
+  "GOOGL": {
+   "archivo": "datos/pit/precios/GOOGL.csv.gz",
+   "filas": 5575,
+   "primera": "2004-08-19",
+   "sha256": "3b64b4c09f9e55a16b6d7092303e4ed6bd46da71b85306004c04351b36fdd4a4",
+   "ultima": "2026-10-15"
+  },
+  "IBIT": {
+   "archivo": "datos/pit/precios/IBIT.csv.gz",
+   "filas": 693,
+   "primera": "2024-01-11",
+   "sha256": "6d75525cc90d4aa180237bf346e67e106ff883143bbd84b0b8e26529f07b5e54",
+   "ultima": "2026-10-15"
+  },
+  "META": {
+   "archivo": "datos/pit/precios/META.csv.gz",
+   "filas": 3623,
+   "primera": "2012-05-18",
+   "sha256": "9fd0ab9219c0cd3d26e35ac4c586a0cb848cd275319f1c34f8f68c8914f9490f",
+   "ultima": "2026-10-15"
+  },
+  "MSFT": {
+   "archivo": "datos/pit/precios/MSFT.csv.gz",
+   "filas": 10227,
+   "primera": "1986-03-13",
+   "sha256": "ee41d4349b8c2fb21792c562b027799441aafc8bf46a3bcd3236cbf07844cc98",
+   "ultima": "2026-10-15"
+  },
+  "NVDA": {
+   "archivo": "datos/pit/precios/NVDA.csv.gz",
+   "filas": 6976,
+   "primera": "1999-01-22",
+   "sha256": "0fb4cacc282899a296eca25d351168858ba7f8c89eb54dfbe3c254f576b6d070",
+   "ultima": "2026-10-15"
+  },
+  "QQQ": {
+   "archivo": "datos/pit/precios/QQQ.csv.gz",
+   "filas": 6944,
+   "primera": "1999-03-10",
+   "sha256": "5786fe6de000b31b0e918edb01fbc08b4831d8bf9cd359e54aa866751039c5c3",
+   "ultima": "2026-10-15"
+  },
+  "SCHD": {
+   "archivo": "datos/pit/precios/SCHD.csv.gz",
+   "filas": 3768,
+   "primera": "2011-10-20",
+   "sha256": "74d2ae023ad2d45055ef64b5eed1a54cbb44269fd18270c8efd34a1e372bd617",
+   "ultima": "2026-10-15"
+  },
+  "SPY": {
+   "archivo": "datos/pit/precios/SPY.csv.gz",
+   "filas": 8486,
+   "primera": "1993-01-29",
+   "sha256": "7c225a5df4a9fdab7c0151e0e68ac0bb1d0cc302a43c8ebc8ac928a28f335d44",
+   "ultima": "2026-10-15"
+  },
+  "TLT": {
+   "archivo": "datos/pit/precios/TLT.csv.gz",
+   "filas": 6093,
+   "primera": "2002-07-30",
+   "sha256": "9985eb4a785607136b6a0a45889e2dfb775ae81e0bf7336b553cd8cdeb35ef5e",
+   "ultima": "2026-10-15"
+  },
+  "TSLA": {
+   "archivo": "datos/pit/precios/TSLA.csv.gz",
+   "filas": 4100,
+   "primera": "2010-06-29",
+   "sha256": "8db05dcd751daaa8933f65624d8084a2616064e3faa13008da06badc5812f99a",
+   "ultima": "2026-10-15"
+  },
+  "VT": {
+   "archivo": "datos/pit/precios/VT.csv.gz",
+   "filas": 4605,
+   "primera": "2008-06-26",
+   "sha256": "0a1e4ff3220d7884424713b14293d4b8cb2f9571ce971175a3aa49504dda07d0",
+   "ultima": "2026-10-15"
+  },
+  "VWRA.L": {
+   "archivo": "datos/pit/precios/VWRA.L.csv.gz",
+   "filas": 1827,
+   "primera": "2019-07-23",
+   "sha256": "ff24e490d614285030683607dde803c1ca073ed6623c69c24b937d9095700b71",
+   "ultima": "2026-10-16"
+  },
+  "^GSPC": {
+   "archivo": "datos/pit/precios/_GSPC.csv.gz",
+   "filas": 19319,
+   "primera": "1950-01-03",
+   "sha256": "87348ba9d3c61535650804d62a494b2c999bdcb7ac79416340be23fb660f3771",
+   "ultima": "2026-10-15"
+  }
+ },
+ "reglas_disponibilidad": {
+  "8-K": "acceptanceDateTime de EDGAR convertido a UTC",
+  "CPI/EMPLEO": "08:30 ET de la fecha de release de ALFRED (incluye fechas de revisión de la serie)",
+  "FOMC": "14:30 ET del último día de reunión programada desde 1999; 16:00 ET antes. Sin llamadas de emergencia",
+  "precios": "cierre de la bolsa (NY 16:00, Londres 16:30, BTC 23:59 UTC); OHLC con splits ajustados, sin ajuste por dividendos"
+ }
+}
