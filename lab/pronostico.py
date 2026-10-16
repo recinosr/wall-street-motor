@@ -112,6 +112,35 @@ def save_once(path,payload):
     with path.open('x',encoding='utf8') as f:json.dump(payload,f,ensure_ascii=False,allow_nan=False)
 
 
+def hedge_weights(sim, horizon):
+    """Hedge weights from mature labels only, partitioned by asset and horizon."""
+    rows=[]
+    for path in (ROOT/'resultados/calificaciones').glob('*.json'):
+        try:
+            rows.extend(r for r in json.loads(path.read_text(encoding='utf8')).get('filas', [])
+                        if r.get('sim')==sim and r.get('horizonte')==horizon)
+        except (OSError, ValueError):
+            continue
+    names=sorted({r['predictor'] for r in rows if r.get('predictor') not in ('ensamble_hedge', 'azar')})
+    if not names:
+        return {}, 'Pesos iguales hasta que maduren etiquetas prospectivas.'
+    eta=2.0
+    losses={name:sum((float(r['p'])-int(r['y']))**2 for r in rows if r['predictor']==name) for name in names}
+    floor=min(eta*loss for loss in losses.values())
+    raw={name:math.exp(-eta*loss+floor) for name,loss in losses.items()}
+    total=sum(raw.values())
+    return {name:value/total for name,value in raw.items()}, f'Hedge eta={eta:g}; Brier de {len(rows)} etiquetas maduras previas para {sim}, horizonte {horizon}.'
+
+
+def hedge_probability(preds, weights):
+    active={name:weights[name] for name in preds if name in weights and name not in ('azar','tasa_base')}
+    denom=sum(active.values())
+    if denom<=0:
+        active={name:1.0 for name in preds if name not in ('azar','ensamble_hedge')}
+        denom=sum(active.values())
+    return sum(active[name]*float(preds[name]) for name in active)/denom if denom else .5
+
+
 def generate(kind,now=None):
     now=now or dt.datetime.now(UTC)
     dates,deadline=targets(now,kind)
@@ -138,6 +167,8 @@ def generate(kind,now=None):
             result=[];patterns=detect(d.tail(300),last_only=True)
             for h,target in zip((1,5,21),dates):
                 preds,brier=predict(d,a['sim'],h,patterns)
+                weights,hedge_reason=hedge_weights(a['sim'],h)
+                preds['ensamble_hedge']=hedge_probability(preds,weights)
                 reasons={name:(f"Tasa base: frecuencia histórica de subida {p:.1%} antes de la fecha ancla." if name=='tasa_base' else
                     f"Momentum {name.split('_')[1]}: el retorno pasado correspondiente fue {'positivo' if p>=.5 else 'no positivo'}." if name.startswith('momentum_') else
                     f"Reversión tras caída de {name.split('_')[1]}: señal según caída de cinco sesiones/días y umbral fijado." if name.startswith('reversion_') else
@@ -145,10 +176,11 @@ def generate(kind,now=None):
                     "Control aleatorio reproducible por hash; no es una señal de mercado." if name=='azar' else
                     f"Estimación logística con datos anteriores al ancla; validación cronológica Brier {brier if brier is not None else 'no disponible'}." if name=='logistica' else
                     f"Patrón técnico registrado antes del cierre objetivo: {name.removeprefix('patron:')}.") for name,p in preds.items()}
+                reasons['ensamble_hedge']=hedge_reason
                 result.append({'sim':a['sim'],'coinbase':a.get('coinbase'),'tipo':a['tipo'],
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
-                    'razones':reasons,
+                    'razones':reasons,'pesos_hedge':weights,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
                     'contexto_previo':{k:float(v) for k,v in features(d,crypto=a['tipo']=='cripto').iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
@@ -234,7 +266,7 @@ def score(now=None):
             'estado':'recibo verificado; etiquetas futuras pendientes' if proof else 'recibo aún no verificado'})
         forecast_views.append({'publicado':payload['publicado'],'sha256':payload['sha256'],'tipo':payload['tipo'],
             'filas':[{'sim':row['sim'],'tipo':row['tipo'],'horizonte':row['horizonte'],'objetivo':row['objetivo'],
-                'predicciones':row['predicciones'],'razones':row.get('razones',{}),'ancla':row['ancla']} for row in payload['filas']]})
+                'predicciones':row['predicciones'],'razones':row.get('razones',{}),'pesos_hedge':row.get('pesos_hedge',{}),'ancla':row['ancla']} for row in payload['filas']]})
         if not proof:continue
         # Cada símbolo maduro se descarga una vez, con concurrencia acotada.
         # Descargar miles en serie retrasaba el marcador y el siguiente registro.
@@ -299,10 +331,15 @@ def score(now=None):
     for (day,predictor,horizon),group in pd.DataFrame(allrows).groupby(['objetivo','predictor','horizonte']) if allrows else []:
         curve.append({'fecha':day,'predictor':predictor,'horizonte':int(horizon),
             'brier':float(np.mean([(r['p']-r['y'])**2 for r in group.to_dict('records')])),'n':len(group)})
+    hedge_curve=[]
+    for forecast in forecast_views:
+        for row in forecast['filas']:
+            for predictor,weight in row.get('pesos_hedge',{}).items():
+                hedge_curve.append({'fecha':forecast['publicado'],'sim':row['sim'],'horizonte':row['horizonte'],'predictor':predictor,'peso':weight})
     r={'version':2,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
-        'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,
+        'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,'curva_pesos_hedge':hedge_curve,
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
     from lab.enciclopedia import bh
     tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}
