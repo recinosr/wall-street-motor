@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "fecha": "2026-10-15",
+  "fecha": "2026-10-16",
   "fuentes": {
     "marcador": {
-      "sha256": "2dcc9f62844f8e0b5c6d2399ed29fa0b87aa8011276efcc5279624d637ac5ec3",
-      "fecha": "2026-10-15T22:10:40.190430+00:00",
+      "sha256": "68fdc55864b97c957bdc8aeb38ab18c1bccb5cc4895fb2ad47ac06dbdd302767",
+      "fecha": "2026-10-16T22:10:48.230164+00:00",
       "actualizado_hoy": true
     },
     "enciclopedia": {
@@ -13,8 +13,8 @@
       "actualizado_hoy": false
     },
     "demo_cripto": {
-      "sha256": "68d6e0c700e5da24f16f60bdc474a3deb6d11f0225daa969a3e3a66122abf2ae",
-      "fecha": "2026-10-15T22:23:57.348030+00:00",
+      "sha256": "322ad945ab9fefc7a28b87e424d6967a33b9789892b68bb75b6e6963c96d029a",
+      "fecha": "2026-10-16T22:23:40.390395+00:00",
       "actualizado_hoy": true
     },
     "robots": {
@@ -32,24 +32,24 @@
   "frases": [
     "En el estudio histórico desde 2000-01-01 hasta antes de 2025-04-01 medí 85 patrones: 0 pasan todos los criterios después de costos. No es una medición de esta semana.",
     "Probé 3 robots en 24 casos históricos: 0 superan a mantener y al azar con corrección por pruebas múltiples.",
-    "En la demo BTC llevo US$984.00 frente a US$999.33 si hubiera mantenido, al corte 2026-10-15T22:23:55.224189972Z; son cuentas ficticias con reglas, no decisiones del chat.",
-    "Tengo 177449 etiquetas maduras de pronósticos y 5 archivos registrados; sin etiquetas no puedo medir aciertos.",
+    "En la demo BTC llevo US$974.24 frente a US$989.42 si hubiera mantenido, al corte 2026-10-16T22:23:38.730564574Z; son cuentas ficticias con reglas, no decisiones del chat.",
+    "Tengo 177464 etiquetas maduras de pronósticos y 6 archivos registrados; sin etiquetas no puedo medir aciertos.",
     "Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada."
   ],
   "que_probo_hoy": [
     {
       "fuente": "marcador",
       "descripcion": "Registro y calificación de pronósticos publicados con recibo",
-      "fecha_resultado": "2026-10-15T22:10:40.190430+00:00"
+      "fecha_resultado": "2026-10-16T22:10:48.230164+00:00"
     },
     {
       "fuente": "demo_cripto",
       "descripcion": "Observación de reglas cripto en cuentas ficticias",
-      "fecha_resultado": "2026-10-15T22:23:57.348030+00:00"
+      "fecha_resultado": "2026-10-16T22:23:40.390395+00:00"
     }
   ],
   "que_aprendio": {
-    "etiquetas_pronostico": 177449,
+    "etiquetas_pronostico": 177464,
     "aciertos": [
       {
         "predictor": "azar",
@@ -67,36 +67,36 @@
         "predictor": "azar",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 50.97250167672703,
-        "brier": 0.4902749832327297,
+        "n": 1492,
+        "acierto_pct": 51.0053619302949,
+        "brier": 0.48994638069705093,
         "ic95_descriptivo": [
-          0.4843576947437385,
-          0.5350423540641086
+          0.48469427101168516,
+          0.5353613284582052
         ]
       },
       {
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 50.41128828144773,
-        "brier": 0.49588711718552264,
+        "n": 15805,
+        "acierto_pct": 50.408098702942105,
+        "brier": 0.49591901297057894,
         "ic95_descriptivo": [
-          0.49631761955103876,
-          0.5119061470636266
+          0.49628597402664065,
+          0.5118740166459207
         ]
       },
       {
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 47.903430749682336,
-        "brier": 0.5209656925031766,
+        "n": 3149,
+        "acierto_pct": 47.91997459510956,
+        "brier": 0.5208002540489044,
         "ic95_descriptivo": [
-          0.46161922944553097,
-          0.49650049332226287
+          0.4617869831909775,
+          0.49666319711620954
         ]
       },
       {
@@ -127,24 +127,24 @@
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 14896,
-        "acierto_pct": 51.52389903329753,
-        "brier": 0.2500179947924779,
+        "n": 14897,
+        "acierto_pct": 51.527153118077464,
+        "brier": 0.25001567202090835,
         "ic95_descriptivo": [
-          0.5072102745724302,
-          0.5232598480092756
+          0.5072430925168508,
+          0.5232920955090389
         ]
       },
       {
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 2968,
-        "acierto_pct": 48.14690026954178,
-        "brier": 0.25862795615456197,
+        "n": 2969,
+        "acierto_pct": 48.13068373189626,
+        "brier": 0.2588259370883475,
         "ic95_descriptivo": [
-          0.4635284561769057,
-          0.4994574580117913
+          0.4633697308598282,
+          0.49929225557093226
         ]
       },
       {
@@ -175,24 +175,24 @@
         "predictor": "momentum_12_1",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15213,
-        "acierto_pct": 50.239926378755015,
-        "brier": 0.4976007362124499,
+        "n": 15214,
+        "acierto_pct": 50.236624161956094,
+        "brier": 0.49763375838043905,
         "ic95_descriptivo": [
-          0.4944542998889031,
-          0.5103430162637472
+          0.49442154462261934,
+          0.510309743945925
         ]
       },
       {
         "predictor": "momentum_12_1",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3031,
-        "acierto_pct": 47.34411085450346,
-        "brier": 0.5265588914549654,
+        "n": 3032,
+        "acierto_pct": 47.32849604221636,
+        "brier": 0.5267150395778364,
         "ic95_descriptivo": [
-          0.4557105424320882,
-          0.4912389128541447
+          0.45555780278291913,
+          0.4910797292938533
         ]
       },
       {
@@ -1975,12 +1975,12 @@
         "predictor": "patron:marubozu_alcista",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 72,
-        "acierto_pct": 90.27777777777777,
-        "brier": 0.09722222222222222,
+        "n": 73,
+        "acierto_pct": 89.04109589041096,
+        "brier": 0.1095890410958904,
         "ic95_descriptivo": [
-          0.812647509746432,
-          0.952104288738832
+          0.7983717410229372,
+          0.9434139583898808
         ]
       },
       {
@@ -2215,12 +2215,12 @@
         "predictor": "patron:resistencia",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 256,
-        "acierto_pct": 76.5625,
-        "brier": 0.234375,
+        "n": 257,
+        "acierto_pct": 76.65369649805447,
+        "brier": 0.23346303501945526,
         "ic95_descriptivo": [
-          0.7100415017359011,
-          0.8133542901619322
+          0.7111231178351913,
+          0.8140998527339204
         ]
       },
       {
@@ -3223,36 +3223,36 @@
         "predictor": "reversion_5d",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 38.497652582159624,
-        "brier": 0.6150234741784038,
+        "n": 1492,
+        "acierto_pct": 38.53887399463807,
+        "brier": 0.6146112600536193,
         "ic95_descriptivo": [
-          0.3606030632343883,
-          0.4099411870728015
+          0.36101735379799155,
+          0.4103488122452579
         ]
       },
       {
         "predictor": "reversion_5d",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 44.36851430017717,
-        "brier": 0.5563148569982282,
+        "n": 15805,
+        "acierto_pct": 44.37203416640304,
+        "brier": 0.5562796583359696,
         "ic95_descriptivo": [
-          0.43595388541509633,
-          0.4514437717071764
+          0.4359892574585889,
+          0.4514787781500416
         ]
       },
       {
         "predictor": "reversion_5d",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 41.39135959339263,
-        "brier": 0.5860864040660737,
+        "n": 3149,
+        "acierto_pct": 41.409971419498255,
+        "brier": 0.5859002858050175,
         "ic95_descriptivo": [
-          0.3968229098556873,
-          0.43121413363025435
+          0.3970103625329396,
+          0.43139839736162666
         ]
       },
       {
@@ -3271,36 +3271,36 @@
         "predictor": "sube_siempre",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 55.197853789403084,
-        "brier": 0.44802146210596916,
+        "n": 1492,
+        "acierto_pct": 55.160857908847184,
+        "brier": 0.44839142091152817,
         "ic95_descriptivo": [
-          0.5266348279890051,
-          0.5770550880529355
+          0.5262723894244211,
+          0.5766796878543495
         ]
       },
       {
         "predictor": "sube_siempre",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 49.076183244748165,
-        "brier": 0.5092381675525184,
+        "n": 15805,
+        "acierto_pct": 49.07307813982917,
+        "brier": 0.5092692186017084,
         "ic95_descriptivo": [
-          0.48297088031464297,
-          0.49855727467395466
+          0.48294009211279343,
+          0.4985259755844122
         ]
       },
       {
         "predictor": "sube_siempre",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 52.287166454891995,
-        "brier": 0.4771283354510801,
+        "n": 3149,
+        "acierto_pct": 52.270562083201014,
+        "brier": 0.47729437916798984,
         "ic95_descriptivo": [
-          0.5054060718816593,
-          0.5402815032807473
+          0.5052427408291021,
+          0.5401131692172508
         ]
       }
     ],
@@ -3308,23 +3308,23 @@
     "patrones_pasan": 159,
     "robots_contrastes": 48,
     "robots_casos": 24,
-    "decisiones_demo_acumuladas": 1710,
+    "decisiones_demo_acumuladas": 1998,
     "cuentas_demo": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 983.9973522124661,
-        "hold_equity": 999.3295262709822,
-        "vs_hold": -15.332174058516102,
+        "net_liquidation": 974.2376085575368,
+        "hold_equity": 989.4177109787183,
+        "vs_hold": -15.180102421181573,
         "fees": 0.9990009990009991,
-        "quote_time": "2026-10-15T22:23:55.224189972Z"
+        "quote_time": "2026-10-16T22:23:38.730564574Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 986.0118679906666,
-        "vs_hold": 13.988132009333412,
+        "hold_equity": 970.3429480894949,
+        "vs_hold": 29.65705191050506,
         "fees": 0.0,
-        "quote_time": "2026-10-15T22:23:53.262750068Z"
+        "quote_time": "2026-10-16T22:23:36.609732254Z"
       }
     }
   },
@@ -3349,36 +3349,36 @@
         "predictor": "azar",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 50.97250167672703,
-        "brier": 0.4902749832327297,
+        "n": 1492,
+        "acierto_pct": 51.0053619302949,
+        "brier": 0.48994638069705093,
         "ic95_descriptivo": [
-          0.4843576947437385,
-          0.5350423540641086
+          0.48469427101168516,
+          0.5353613284582052
         ]
       },
       {
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 50.41128828144773,
-        "brier": 0.49588711718552264,
+        "n": 15805,
+        "acierto_pct": 50.408098702942105,
+        "brier": 0.49591901297057894,
         "ic95_descriptivo": [
-          0.49631761955103876,
-          0.5119061470636266
+          0.49628597402664065,
+          0.5118740166459207
         ]
       },
       {
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 47.903430749682336,
-        "brier": 0.5209656925031766,
+        "n": 3149,
+        "acierto_pct": 47.91997459510956,
+        "brier": 0.5208002540489044,
         "ic95_descriptivo": [
-          0.46161922944553097,
-          0.49650049332226287
+          0.4617869831909775,
+          0.49666319711620954
         ]
       },
       {
@@ -3409,24 +3409,24 @@
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 14896,
-        "acierto_pct": 51.52389903329753,
-        "brier": 0.2500179947924779,
+        "n": 14897,
+        "acierto_pct": 51.527153118077464,
+        "brier": 0.25001567202090835,
         "ic95_descriptivo": [
-          0.5072102745724302,
-          0.5232598480092756
+          0.5072430925168508,
+          0.5232920955090389
         ]
       },
       {
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 2968,
-        "acierto_pct": 48.14690026954178,
-        "brier": 0.25862795615456197,
+        "n": 2969,
+        "acierto_pct": 48.13068373189626,
+        "brier": 0.2588259370883475,
         "ic95_descriptivo": [
-          0.4635284561769057,
-          0.4994574580117913
+          0.4633697308598282,
+          0.49929225557093226
         ]
       },
       {
@@ -3457,24 +3457,24 @@
         "predictor": "momentum_12_1",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15213,
-        "acierto_pct": 50.239926378755015,
-        "brier": 0.4976007362124499,
+        "n": 15214,
+        "acierto_pct": 50.236624161956094,
+        "brier": 0.49763375838043905,
         "ic95_descriptivo": [
-          0.4944542998889031,
-          0.5103430162637472
+          0.49442154462261934,
+          0.510309743945925
         ]
       },
       {
         "predictor": "momentum_12_1",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3031,
-        "acierto_pct": 47.34411085450346,
-        "brier": 0.5265588914549654,
+        "n": 3032,
+        "acierto_pct": 47.32849604221636,
+        "brier": 0.5267150395778364,
         "ic95_descriptivo": [
-          0.4557105424320882,
-          0.4912389128541447
+          0.45555780278291913,
+          0.4910797292938533
         ]
       },
       {
@@ -5257,12 +5257,12 @@
         "predictor": "patron:marubozu_alcista",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 72,
-        "acierto_pct": 90.27777777777777,
-        "brier": 0.09722222222222222,
+        "n": 73,
+        "acierto_pct": 89.04109589041096,
+        "brier": 0.1095890410958904,
         "ic95_descriptivo": [
-          0.812647509746432,
-          0.952104288738832
+          0.7983717410229372,
+          0.9434139583898808
         ]
       },
       {
@@ -5497,12 +5497,12 @@
         "predictor": "patron:resistencia",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 256,
-        "acierto_pct": 76.5625,
-        "brier": 0.234375,
+        "n": 257,
+        "acierto_pct": 76.65369649805447,
+        "brier": 0.23346303501945526,
         "ic95_descriptivo": [
-          0.7100415017359011,
-          0.8133542901619322
+          0.7111231178351913,
+          0.8140998527339204
         ]
       },
       {
@@ -6505,36 +6505,36 @@
         "predictor": "reversion_5d",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 38.497652582159624,
-        "brier": 0.6150234741784038,
+        "n": 1492,
+        "acierto_pct": 38.53887399463807,
+        "brier": 0.6146112600536193,
         "ic95_descriptivo": [
-          0.3606030632343883,
-          0.4099411870728015
+          0.36101735379799155,
+          0.4103488122452579
         ]
       },
       {
         "predictor": "reversion_5d",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 44.36851430017717,
-        "brier": 0.5563148569982282,
+        "n": 15805,
+        "acierto_pct": 44.37203416640304,
+        "brier": 0.5562796583359696,
         "ic95_descriptivo": [
-          0.43595388541509633,
-          0.4514437717071764
+          0.4359892574585889,
+          0.4514787781500416
         ]
       },
       {
         "predictor": "reversion_5d",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 41.39135959339263,
-        "brier": 0.5860864040660737,
+        "n": 3149,
+        "acierto_pct": 41.409971419498255,
+        "brier": 0.5859002858050175,
         "ic95_descriptivo": [
-          0.3968229098556873,
-          0.43121413363025435
+          0.3970103625329396,
+          0.43139839736162666
         ]
       },
       {
@@ -6553,55 +6553,55 @@
         "predictor": "sube_siempre",
         "tipo": "ETF",
         "horizonte": 5,
-        "n": 1491,
-        "acierto_pct": 55.197853789403084,
-        "brier": 0.44802146210596916,
+        "n": 1492,
+        "acierto_pct": 55.160857908847184,
+        "brier": 0.44839142091152817,
         "ic95_descriptivo": [
-          0.5266348279890051,
-          0.5770550880529355
+          0.5262723894244211,
+          0.5766796878543495
         ]
       },
       {
         "predictor": "sube_siempre",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 15804,
-        "acierto_pct": 49.076183244748165,
-        "brier": 0.5092381675525184,
+        "n": 15805,
+        "acierto_pct": 49.07307813982917,
+        "brier": 0.5092692186017084,
         "ic95_descriptivo": [
-          0.48297088031464297,
-          0.49855727467395466
+          0.48294009211279343,
+          0.4985259755844122
         ]
       },
       {
         "predictor": "sube_siempre",
         "tipo": "acción",
         "horizonte": 5,
-        "n": 3148,
-        "acierto_pct": 52.287166454891995,
-        "brier": 0.4771283354510801,
+        "n": 3149,
+        "acierto_pct": 52.270562083201014,
+        "brier": 0.47729437916798984,
         "ic95_descriptivo": [
-          0.5054060718816593,
-          0.5402815032807473
+          0.5052427408291021,
+          0.5401131692172508
         ]
       }
     ],
     "demo_contra_mantener": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 983.9973522124661,
-        "hold_equity": 999.3295262709822,
-        "vs_hold": -15.332174058516102,
+        "net_liquidation": 974.2376085575368,
+        "hold_equity": 989.4177109787183,
+        "vs_hold": -15.180102421181573,
         "fees": 0.9990009990009991,
-        "quote_time": "2026-10-15T22:23:55.224189972Z"
+        "quote_time": "2026-10-16T22:23:38.730564574Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 986.0118679906666,
-        "vs_hold": 13.988132009333412,
+        "hold_equity": 970.3429480894949,
+        "vs_hold": 29.65705191050506,
         "fees": 0.0,
-        "quote_time": "2026-10-15T22:23:53.262750068Z"
+        "quote_time": "2026-10-16T22:23:36.609732254Z"
       }
     }
   },
