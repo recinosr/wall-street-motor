@@ -1,6 +1,6 @@
-﻿"""Ensayos cronolÃ³gicos de precio para niveles 1 y 2 del OrÃ¡culo.
+"""Ensayos cronológicos de precio para niveles 1 y 2 del Oráculo.
 
-El Ãºltimo aÃ±o de datos es una prueba sellada: el cÃ³digo nunca ajusta pesos,
+El último año de datos es una prueba sellada: el código nunca ajusta pesos,
 escalas ni probabilidades con observaciones posteriores al inicio de prueba.
 """
 from __future__ import annotations
@@ -33,7 +33,7 @@ def _serie(simbolo):
         if "close" not in df:
             continue
         close = pd.to_numeric(df["close"], errors="coerce")
-        # Niveles 1â€“2 son de direcciÃ³n; se usa cierre crudo, sin ajuste futuro.
+        # Niveles 1–2 son de dirección; se usa cierre crudo, sin ajuste futuro.
         frames.append(close.rename("close"))
     if not frames:
         return None
@@ -49,13 +49,13 @@ def _manifest():
             if close is None:
                 continue
             rows.append({"archivo": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-                         "primera_fecha": str(close.index.min().date()), "Ãºltima_fecha": str(close.index.max().date()),
+                         "primera_fecha": str(close.index.min().date()), "última_fecha": str(close.index.max().date()),
                          "filas": int(len(close))})
     return rows
 
 
 def _fit_logit(x, y):
-    """LogÃ­stica univariada con Newton y penalizaciÃ³n L2 fija."""
+    """Logística univariada con Newton y penalización L2 fija."""
     mu, sd = float(np.mean(x)), float(np.std(x))
     if not np.isfinite(sd) or sd < 1e-12:
         sd = 1.
@@ -151,8 +151,8 @@ def _ensayo(simbolo, h):
 
 
 def ejecutar():
-    # El artefacto publicado registra las aperturas. Una versiÃ³n no puede
-    # volver a consultar su ventana despuÃ©s de mostrarla al investigador.
+    # El artefacto publicado registra las aperturas. Una versión no puede
+    # volver a consultar su ventana después de mostrarla al investigador.
     if OUTPUT.exists():
         try:
             prior = json.loads(OUTPUT.read_text(encoding="utf-8"))
@@ -160,7 +160,7 @@ def ejecutar():
             prior = {}
         if prior.get("version") == VERSION and any(
                 int(v) > 0 for v in (prior.get("aperturas_prueba_sellada") or {}).values()):
-            raise RuntimeError("La prueba de esta versiÃ³n ya se abriÃ³; fija una versiÃ³n nueva y una ventana nueva")
+            raise RuntimeError("La prueba de esta versión ya se abrió; fija una versión nueva y una ventana nueva")
     res1 = _ensayo("SPY", 1)
     res2 = [_ensayo(s, h) for s in ACTIVOS for h in HORIZONTES]
     res2 = [x for x in res2 if x is not None]
@@ -179,15 +179,15 @@ def ejecutar():
         "nivel_actual": 3 if level2_pass else 2 if level1_pass else 1,
         "aprobados": [n for n, ok in [(1, level1_pass), (2, level2_pass)] if ok],
         "nivel1": {"estado": "aprobado" if level1_pass else "no_aprobado", "resultado": res1,
-                   "metodo": "regresiÃ³n logÃ­stica de retorno logarÃ­tmico de 5 sesiones, ajustada antes de prueba; base: tasa alcista de entrenamiento"},
+                   "metodo": "regresión logística de retorno logarítmico de 5 sesiones, ajustada antes de prueba; base: tasa alcista de entrenamiento"},
         "nivel2": {"estado": "aprobado" if level2_pass else "no_aprobado", "resultados": res2,
-                   "metodo": "misma regla fija para 10 activos locales y horizontes 1/5/21; Brier contra prevalencia de entrenamiento; IC bootstrap circular con bloques max(10, 2 Ã— horizonte) y ajuste BH de 30 comparaciones"},
-        "nivel3": {"estado": "sin_evaluacion", "motivo": "El entorno bloqueÃ³ la descarga del calendario FOMC/BLS y de EDGAR (WinError 10061), asÃ­ que no hay eventos PIT cacheados para unir. La rama datos sÃ­ contiene velas SPY de 1 minuto desde 2021-10 hasta 2026-10."},
-        "nivel4": {"estado": "sin_evaluacion", "motivo": "GDELT DOC ofrece hora de indexaciÃ³n (no publicaciÃ³n original) y no existe un corpus histÃ³rico clasificado y congelado para los activos de la prueba."},
-        "nivel5": {"estado": "sin_evaluacion", "motivo": "No hay vintages de precios PIT ni detector de rÃ©gimen fijado antes de reservar crisis completas de 2000â€“02, 2008, 2020 y 2022."},
-        "nivel6": {"estado": "sin_evaluacion", "motivo": "Falta un panel PIT comÃºn y sincronizado de tasas, dÃ³lar, oro y tecnologÃ­a para separar seÃ±al de correlaciÃ³n contemporÃ¡nea."},
-        "nivel7": {"estado": "sin_evaluacion", "motivo": "No hay simulaciÃ³n completa con dividendos, conversiÃ³n, spread, tarifas XTB y benchmark de aportes mensuales para esa misma prueba."},
-        "nota": "Solo precios locales con cierre hasta 2026-10-09. La ventana 2025-10-08 a 2026-10-08 se considera reservada para esta versiÃ³n. El artefacto publicado bloquea su reapertura.",
+                   "metodo": "misma regla fija para 10 activos locales y horizontes 1/5/21; Brier contra prevalencia de entrenamiento; IC bootstrap circular con bloques max(10, 2 × horizonte) y ajuste BH de 30 comparaciones"},
+        "nivel3": {"estado": "sin_evaluacion", "motivo": "El entorno bloqueó la descarga del calendario FOMC/BLS y de EDGAR (WinError 10061), así que no hay eventos PIT cacheados para unir. La rama datos sí contiene velas SPY de 1 minuto desde 2021-10 hasta 2026-10."},
+        "nivel4": {"estado": "sin_evaluacion", "motivo": "GDELT DOC ofrece hora de indexación (no publicación original) y no existe un corpus histórico clasificado y congelado para los activos de la prueba."},
+        "nivel5": {"estado": "sin_evaluacion", "motivo": "No hay vintages de precios PIT ni detector de régimen fijado antes de reservar crisis completas de 2000–02, 2008, 2020 y 2022."},
+        "nivel6": {"estado": "sin_evaluacion", "motivo": "Falta un panel PIT común y sincronizado de tasas, dólar, oro y tecnología para separar señal de correlación contemporánea."},
+        "nivel7": {"estado": "sin_evaluacion", "motivo": "No hay simulación completa con dividendos, conversión, spread, tarifas XTB y benchmark de aportes mensuales para esa misma prueba."},
+        "nota": "Solo precios locales con cierre hasta 2026-10-09. La ventana 2025-10-08 a 2026-10-08 se considera reservada para esta versión. El artefacto publicado bloquea su reapertura.",
     }
     OUTPUT.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     return result

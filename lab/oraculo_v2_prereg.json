@@ -5,7 +5,8 @@
  "datos": {
   "corte_datos": "2026-10-15",
   "precio": "close diario de datos/pit/precios (splits ajustados, sin dividendos); nunca adj_close",
-  "evento_macro_filtro": "se descartan fechas de CPI/EMPLEO a menos de 10 dias de la fecha previa conservada (revisiones estacionales de ALFRED)",
+  "evento_macro_filtro": "se descartan fechas de CPI/EMPLEO a menos de 14 dias de la fecha previa conservada (revisiones estacionales de ALFRED)",
+  "evento_macro_min_dias": 14,
   "particion": {"entrenamiento": ["inicio", "2014-12-31"], "validacion": ["2015-01-01", "2019-12-31"], "prueba_sellada": ["2020-01-01", "2026-10-15"]},
   "purga": "una muestra pertenece a un tramo por su fecha t; si t+h cruza el fin del tramo se descarta",
   "ajuste_final": "la prueba usa el modelo reajustado con entrenamiento+validacion (<=2019) y los mismos hiperparametros; la validacion usa el modelo ajustado solo con entrenamiento"
@@ -70,5 +71,6 @@
   "6": "sin panel PIT sincronizado de tasas, dolar, oro y tecnologia",
   "7": "sin simulacion completa de costos XTB, dividendos y aportes"
  },
+ "enmiendas": [{"n": 1, "antes_de_abrir_prueba": true, "cambio": "umbral de limpieza de fechas ALFRED de 10 a 14 dias: con 10 quedaban fechas de revision (p. ej. CPI 2000-02-29). Detectado al revisar el calendario de eventos, no por resultados de rendimiento."}],
  "apertura": "la prueba sellada de cada nivel se abre UNA vez con --abrir-prueba; el registro resultados/nivel_v2_registro.json bloquea reaperturas. Depurar solo con --validacion o con datos <= 2014."
 }
