@@ -37,9 +37,9 @@ def git_read(*args):
 def targets(now,kind):
     day=pd.Timestamp(now.date())
     if kind=='cripto':
-        return [day.date().isoformat(),(day+pd.Timedelta(days=4)).date().isoformat()], day+pd.Timedelta(days=1)
+        return [day.date().isoformat(),(day+pd.Timedelta(days=4)).date().isoformat(),(day+pd.Timedelta(days=20)).date().isoformat()], day+pd.Timedelta(days=1)
     session=CAL.date_to_session(day,direction='next')
-    dates=[session.date().isoformat(),CAL.session_offset(session,4).date().isoformat()]
+    dates=[CAL.session_offset(session,n).date().isoformat() for n in (0,4,20)]
     return dates,CAL.session_open(session)
 
 
@@ -72,11 +72,19 @@ def features(d,crypto=False):
 
 def predict(d,sim,horizon,patterns=None):
     x=features(d,crypto=sim.endswith('-USD')); last=x.iloc[-1]
-    out={'sube_siempre':1.,'azar':float(int(hashlib.sha256((sim+str(d.index[-1])+str(horizon)).encode()).hexdigest()[:8],16)%2)}
-    if pd.notna(last['mom']):out['momentum_12_1']=float(last['mom']>=0)
-    if pd.notna(last['r5']):out['reversion_5d']=float(last['r5']<=0)
-    # Se entrena con etiquetas ya maduras; validación cronológica final sin selección de hiperparámetros.
     future=d.close.shift(-horizon)/d.close-1
+    valid=future.notna()
+    base=float((future[valid]>0).mean()) if valid.any() else .5
+    out={'tasa_base':base,'azar':float(int(hashlib.sha256((sim+str(d.index[-1])+str(horizon)).encode()).hexdigest()[:8],16)%2)}
+    month,quarter,year=(30,90,365) if sim.endswith('-USD') else (21,63,252)
+    for name,lag in (('momentum_1m',month),('momentum_3m',quarter),('momentum_12m',year)):
+        ret=d.close.iloc[-1]/d.close.iloc[-lag-1]-1 if len(d)>lag else None
+        if ret is not None:out[name]=float(ret>=0)
+    for threshold in (.02,.05,.10):
+        ret=float(d.close.iloc[-1]/d.close.iloc[-6]-1) if len(d)>=6 else 0
+        out[f'reversion_{int(threshold*100)}pct']=0. if ret<=-threshold else base
+    if pd.notna(last['dist']):out['tendencia_sma200']=float(last['dist']>=0)
+    # Se entrena con etiquetas ya maduras; validación cronológica final sin selección de hiperparámetros.
     valid=x.notna().all(axis=1)&future.notna()
     train=x[valid]; y=(future[valid]>0).astype(int)
     if len(train)>=120 and last.notna().all() and y.nunique()==2:
@@ -128,11 +136,19 @@ def generate(kind,now=None):
             if d.index[-1].date()!=anchor:raise ValueError('ancla no fresca')
             if kind=='cripto' and len(d)>5 and not (d.index[-6:].to_series().diff().dropna()==pd.Timedelta(days=1)).all():raise ValueError('huecos recientes')
             result=[];patterns=detect(d.tail(300),last_only=True)
-            for h,target in zip((1,5),dates):
+            for h,target in zip((1,5,21),dates):
                 preds,brier=predict(d,a['sim'],h,patterns)
+                reasons={name:(f"Tasa base: frecuencia histórica de subida {p:.1%} antes de la fecha ancla." if name=='tasa_base' else
+                    f"Momentum {name.split('_')[1]}: el retorno pasado correspondiente fue {'positivo' if p>=.5 else 'no positivo'}." if name.startswith('momentum_') else
+                    f"Reversión tras caída de {name.split('_')[1]}: señal según caída de cinco sesiones/días y umbral fijado." if name.startswith('reversion_') else
+                    f"Tendencia: precio {'sobre' if p>=.5 else 'bajo'} la SMA200." if name=='tendencia_sma200' else
+                    "Control aleatorio reproducible por hash; no es una señal de mercado." if name=='azar' else
+                    f"Estimación logística con datos anteriores al ancla; validación cronológica Brier {brier if brier is not None else 'no disponible'}." if name=='logistica' else
+                    f"Patrón técnico registrado antes del cierre objetivo: {name.removeprefix('patron:')}.") for name,p in preds.items()}
                 result.append({'sim':a['sim'],'coinbase':a.get('coinbase'),'tipo':a['tipo'],
                     'sector':a.get('sector','Desconocido'),'horizonte':h,'objetivo':target,
                     'ancla':d.index[-1].date().isoformat(),'predicciones':preds,
+                    'razones':reasons,
                     'validacion_brier':brier,'entrenamiento_hasta':d.index[-h-1].date().isoformat(),
                     'contexto_previo':{k:float(v) for k,v in features(d,crypto=a['tipo']=='cripto').iloc[-1].items() if pd.notna(v)},
                     'volumen_filtro_usd':liquidity})
@@ -194,6 +210,7 @@ def summary(rows):
         wins=sum(r['acierto'] for r in group);n=len(group)
         out.append(dict(zip(('predictor','tipo','sector','horizonte'),key),n=n,dias=len(daily),
             acierto_pct=100*wins/n,brier=float(np.mean([(r['p']-r['y'])**2 for r in group])),
+            brier_tasa_base=float(np.mean([(r.get('p_base',.5)-r['y'])**2 for r in group])),
             ic95_descriptivo=wilson(wins,n),diferencia_sube_siempre=mean,ic95_por_dia=ci,
             azar_pct=100*np.mean([r['azar_acierto'] for r in group])))
         for control,field in (('siempre','siempre_acierto'),('azar','azar_acierto')):
@@ -209,12 +226,15 @@ def summary(rows):
 
 def score(now=None):
     now=now or dt.datetime.now(UTC);directory=ROOT/'resultados/pronosticos';evaluations=ROOT/'resultados/calificaciones'
-    evaluations.mkdir(parents=True,exist_ok=True); failures=[];registrations=[]
+    evaluations.mkdir(parents=True,exist_ok=True); failures=[];registrations=[];forecast_views=[]
     for path in sorted(directory.glob('*.json')):
         payload=json.loads(path.read_text(encoding='utf8'));proof=receipt(path,payload)
         registrations.append({'archivo':path.name,'publicado':payload['publicado'],'sha256':payload['sha256'],
             'filas':len(payload['filas']),'tipo':payload['tipo'],'prueba':proof,
             'estado':'recibo verificado; etiquetas futuras pendientes' if proof else 'recibo aún no verificado'})
+        forecast_views.append({'publicado':payload['publicado'],'sha256':payload['sha256'],'tipo':payload['tipo'],
+            'filas':[{'sim':row['sim'],'tipo':row['tipo'],'horizonte':row['horizonte'],'objetivo':row['objetivo'],
+                'predicciones':row['predicciones'],'razones':row.get('razones',{}),'ancla':row['ancla']} for row in payload['filas']]})
         if not proof:continue
         # Cada símbolo maduro se descarga una vez, con concurrencia acotada.
         # Descargar miles en serie retrasaba el marcador y el siguiente registro.
@@ -250,7 +270,9 @@ def score(now=None):
                 preds=row['predicciones']; always=int(y==1);random=int((preds['azar']>=.5)==bool(y))
                 rows=[{**{k:row[k] for k in ('sim','tipo','sector','horizonte','objetivo')},
                     'predictor':name,'p':p,'y':y,'acierto':int((p>=.5)==bool(y)),
-                    'siempre_acierto':always,'azar_acierto':random,'retorno_pct':ret*100,
+                    'p_base':preds.get('tasa_base',.5),
+                    'razon':row.get('razones',{}).get(name,''),
+                    'siempre_acierto':int((preds.get('tasa_base',.5)>=.5)==bool(y)),'azar_acierto':random,'retorno_pct':ret*100,
                     'brecha_pct':float(b.open.iloc[0]/a.close.iloc[0]-1)*100,
                     'contexto_previo':row.get('contexto_previo',{}),
                     'prueba':proof} for name,p in preds.items()]
@@ -272,9 +294,15 @@ def score(now=None):
             'texto':explanation+f"Movimiento {row['retorno_pct']:.2f}%; promedio equiponderado observado {np.mean(market):.2f}%, sector {np.mean(sector):.2f}%; brecha {row['brecha_pct']:.2f}%. "+
             ('La logística acertó. ' if model and model['acierto'] else 'La logística falló. ' if model else 'Sin pronóstico logístico. ')+
             'Resultados empresariales: fecha no disponible. Este contexto no demuestra la causa.'})
-    r={'version':1,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
+    latest=max(forecast_views,key=lambda x:x['publicado'],default={'publicado':None,'sha256':None,'filas':[]})
+    curve=[]
+    for (day,predictor,horizon),group in pd.DataFrame(allrows).groupby(['objetivo','predictor','horizonte']) if allrows else []:
+        curve.append({'fecha':day,'predictor':predictor,'horizonte':int(horizon),
+            'brier':float(np.mean([(r['p']-r['y'])**2 for r in group.to_dict('records')])),'n':len(group)})
+    r={'version':2,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
+        'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
     from lab.enciclopedia import bh
     tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}

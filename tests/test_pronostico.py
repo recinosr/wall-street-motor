@@ -31,7 +31,10 @@ class ForecastTests(unittest.TestCase):
         self.assertEqual(dates[1],'2026-07-10')
     def test_crypto_horizon(self):
         dates,_=targets(dt.datetime(2026,10,9,tzinfo=dt.timezone.utc),'cripto')
-        self.assertEqual(dates,['2026-10-09','2026-10-13'])
+        self.assertEqual(dates,['2026-10-09','2026-10-13','2026-10-29'])
+    def test_stock_horizons_are_one_five_twenty_one_sessions(self):
+        dates,_=targets(dt.datetime(2026,7,3,tzinfo=dt.timezone.utc),'acción')
+        self.assertEqual(dates,['2026-07-06','2026-07-10','2026-08-03'])
     def test_write_once_and_hash(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)/'f.json';save_once(p,{'filas':[1]})
@@ -50,6 +53,7 @@ class ForecastTests(unittest.TestCase):
         rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
         d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))
         p,b=predict(d,'A',5);self.assertIn('logistica',p)
+        self.assertTrue({'tasa_base','momentum_1m','momentum_3m','momentum_12m','reversion_2pct','reversion_5pct','reversion_10pct','tendencia_sma200'}<=set(p))
         self.assertTrue(all(0<=x<=1 for x in p.values()));self.assertGreaterEqual(b,0)
     def test_no_fake_score(self):
         self.assertEqual(summary([]),[]);self.assertIsNone(wilson(0,0))
