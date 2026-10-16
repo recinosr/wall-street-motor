@@ -155,8 +155,8 @@ def walk_forward_report(d, sim, horizon, cutoff=None):
     names=('tasa_base','momentum_1m','momentum_3m','momentum_12m','tendencia_sma200')
     losses={name:[] for name in names}; rows=[]
     for i in range(start,len(c)-horizon):
-        y=int(c[i+horizon]>c[i]); past=c[1:i+1]/c[:i]-1
-        p={'tasa_base':float(np.mean(past>0)),
+        y=int(c[i+horizon]>c[i]); past_h=c[horizon:i+1]/c[:i+1-horizon]-1
+        p={'tasa_base':float(np.mean(past_h>0)),
            'momentum_1m':float(c[i]/c[i-21]>=1) if i>=21 else .5,
            'momentum_3m':float(c[i]/c[i-63]>=1) if i>=63 else .5,
            'momentum_12m':float(c[i]/c[i-252]>=1) if i>=252 else .5,
