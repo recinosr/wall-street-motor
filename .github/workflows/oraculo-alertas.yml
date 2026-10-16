@@ -1,0 +1,37 @@
+name: Alertas horarias del Oráculo
+on:
+  schedule:
+    - cron: '0 13-22 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: oraculo-alertas
+  queue: max
+  cancel-in-progress: false
+jobs:
+  alertas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Calcular alertas, solo datos públicos y sin órdenes
+        env:
+          API_1: ${{ secrets.API_1 }}
+        run: python -m lab.pronostico alertas
+      - name: Publicar el resumen horario
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/alertas.json
+          git diff --cached --quiet && exit 0
+          git commit -m "alertas del oraculo $GITHUB_RUN_ID"
+          bash scripts/push_results.sh
