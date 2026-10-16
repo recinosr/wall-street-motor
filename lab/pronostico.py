@@ -28,7 +28,8 @@ from lab.enciclopedia import catalog, detect
 ROOT=Path(__file__).resolve().parents[1]
 CAL=xc.get_calendar('XNYS')
 UTC=dt.timezone.utc
-WALK_FORWARD_WATCH={'TSLA','NVDA','AAPL','MSFT','GOOGL','AMZN','META','QQQ','SPY','VT','ACWI','SCHD','GLD','IBIT','BTC-USD'}
+WALK_FORWARD_WATCH={'TSLA','NVDA','AAPL','MSFT','GOOGL','AMZN','META','QQQ','SPY','VT','ACWI','SCHD','GLD','IBIT','BTC-USD','INTC','PARA','WBA','BA','VFC'}
+WALK_FORWARD_SURVIVOR_BIAS={'INTC','PARA','WBA','BA','VFC'}
 
 
 def digest(obj):
@@ -67,28 +68,37 @@ def fetch(asset):
     return coin_history(asset['coinbase']) if asset['tipo']=='cripto' and asset.get('coinbase') and not asset.get('coinbase_inactivo') else history(asset['sim'],'5y')
 
 
+def signal_features(d,sim):
+    """Signals shared by live and walk-forward paths; all features use prices through t."""
+    c=d.close; crypto=sim.endswith('-USD'); month,year=(30,365) if crypto else (21,252)
+    quarter=90 if crypto else 63
+    return pd.DataFrame({'momentum_1m':(c/c.shift(month)>=1).astype(float),
+        'momentum_3m':(c/c.shift(quarter)>=1).astype(float),
+        'momentum_12m':(c/c.shift(year)>=1).astype(float),
+        'tendencia_sma200':(c>=c.shift(1).rolling(200).mean()).astype(float)},index=d.index)
+
+
 def features(d,crypto=False):
     c=d.close
     month,year=(30,365) if crypto else (21,252)
     return pd.DataFrame({'r1':c.pct_change(),'r5':c.pct_change(5),
         'mom':c.shift(month)/c.shift(year)-1,'vol':c.pct_change().rolling(20).std(),
-        'dist':c/c.rolling(200).mean()-1},index=d.index)
+        'dist':c/c.shift(1).rolling(200).mean()-1},index=d.index)
 
 
 def predict(d,sim,horizon,patterns=None):
     x=features(d,crypto=sim.endswith('-USD')); last=x.iloc[-1]
+    live_signals=signal_features(d,sim).iloc[-1]
     future=d.close.shift(-horizon)/d.close-1
     valid=future.notna()
     base=float((future[valid]>0).mean()) if valid.any() else .5
     out={'tasa_base':base,'azar':float(int(hashlib.sha256((sim+str(d.index[-1])+str(horizon)).encode()).hexdigest()[:8],16)%2)}
-    month,quarter,year=(30,90,365) if sim.endswith('-USD') else (21,63,252)
-    for name,lag in (('momentum_1m',month),('momentum_3m',quarter),('momentum_12m',year)):
-        ret=d.close.iloc[-1]/d.close.iloc[-lag-1]-1 if len(d)>lag else None
-        if ret is not None:out[name]=float(ret>=0)
+    for name in ('momentum_1m','momentum_3m','momentum_12m'):
+        if pd.notna(live_signals[name]):out[name]=float(live_signals[name])
     for threshold in (.02,.05,.10):
         ret=float(d.close.iloc[-1]/d.close.iloc[-6]-1) if len(d)>=6 else 0
         out[f'reversion_{int(threshold*100)}pct']=0. if ret<=-threshold else base
-    if pd.notna(last['dist']):out['tendencia_sma200']=float(last['dist']>=0)
+    if pd.notna(live_signals['tendencia_sma200']):out['tendencia_sma200']=float(live_signals['tendencia_sma200'])
     # Se entrena con etiquetas ya maduras; validación cronológica final sin selección de hiperparámetros.
     valid=x.notna().all(axis=1)&future.notna()
     train=x[valid]; y=(future[valid]>0).astype(int)
@@ -129,12 +139,20 @@ def hedge_weights(sim, horizon):
     names=sorted({r['predictor'] for r in rows if r.get('predictor') not in ('ensamble_hedge', 'azar')})
     if not names:
         return {}, 'Pesos iguales hasta que maduren etiquetas prospectivas.'
-    eta=2.0
-    losses={name:sum((float(r['p'])-int(r['y']))**2 for r in rows if r['predictor']==name) for name in names}
-    floor=min(eta*loss for loss in losses.values())
-    raw={name:math.exp(-eta*loss+floor) for name,loss in losses.items()}
-    total=sum(raw.values())
-    return {name:value/total for name,value in raw.items()}, f'Hedge eta={eta:g}; Brier de {len(rows)} etiquetas maduras previas para {sim}, horizonte {horizon}.'
+    counts={name:sum(1 for r in rows if r['predictor']==name) for name in names}
+    names=[n for n in names if counts[n]]; k=len(names)
+    losses={name:sum((float(r['p'])-int(r['y']))**2 for r in rows if r['predictor']==name)/counts[name] for name in names}
+    weights,eta=hedge_distribution(losses,counts)
+    return weights, f'Hedge Brier promedio, eta=sqrt(8 ln K/T)={eta:.4g}; {len(rows)} etiquetas maduras.'
+
+
+def hedge_distribution(losses,counts):
+    names=[n for n in losses if counts.get(n,0)>0];k=len(names)
+    if not k:return {},0.
+    eta=math.sqrt(8*math.log(max(k,2))/max(counts[n] for n in names))
+    raw={n:math.exp(-eta*losses[n]) for n in names};total=sum(raw.values());floor=1/(4*k)
+    weights={n:floor+(1-k*floor)*value/total for n,value in raw.items()}
+    return weights,eta
 
 
 def hedge_probability(preds, weights):
@@ -150,25 +168,20 @@ def walk_forward_report(d, sim, horizon, cutoff=None):
     """Expanding walk-forward: every forecast uses only prices preceding its anchor."""
     cutoff=pd.Timestamp(cutoff or d.index[-1]).tz_localize(None)
     d=d[d.index.tz_localize(None)<=cutoff].dropna(subset=['close'])
-    c=d.close.to_numpy(dtype=float)
+    c=d.close.to_numpy(dtype=float); signals=signal_features(d,sim)
     start=max(253,horizon+1)
     names=('tasa_base','momentum_1m','momentum_3m','momentum_12m','tendencia_sma200')
     losses={name:[] for name in names}; rows=[]
     for i in range(start,len(c)-horizon):
         y=int(c[i+horizon]>c[i]); past_h=c[horizon:i+1]/c[:i+1-horizon]-1
-        p={'tasa_base':float(np.mean(past_h>0)),
-           'momentum_1m':float(c[i]/c[i-21]>=1) if i>=21 else .5,
-           'momentum_3m':float(c[i]/c[i-63]>=1) if i>=63 else .5,
-           'momentum_12m':float(c[i]/c[i-252]>=1) if i>=252 else .5,
-           'tendencia_sma200':float(c[i]>=np.mean(c[i-200:i]))}
+        p=signals.iloc[i].to_dict();p['tasa_base']=float(np.mean(past_h>0))
         # Snapshot at anchor i is computed before its label can enter later weights.
         rows.append({'fecha':d.index[i].date().isoformat(),'y':y,'p':p})
         for name in names: losses[name].append((p[name]-y)**2)
     if not rows:return {'sim':sim,'horizonte':horizon,'n':0,'pesos':{},'brier':{}}
-    eta=2.0; scores={name:-eta*float(np.sum(v)) for name,v in losses.items()}
-    high=max(scores.values()); exps={name:math.exp(v-high) for name,v in scores.items()}; total=sum(exps.values())
+    means={n:float(np.mean(v)) for n,v in losses.items()};weights,eta=hedge_distribution(means,{n:len(rows) for n in names})
     return {'sim':sim,'horizonte':horizon,'desde':rows[0]['fecha'],'hasta':rows[-1]['fecha'],'n':len(rows),
-            'pesos':{name:value/total for name,value in exps.items()},
+            'pesos':weights,
             'brier':{name:float(np.mean(v)) for name,v in losses.items()},
             'aviso':'Walk-forward histórico con etiquetas maduras hasta el corte; separado del marcador en vivo.'}
 
@@ -303,8 +316,8 @@ def generate(kind,now=None):
     dates,deadline=targets(now,kind)
     path=ROOT/'resultados/pronosticos'/f'{dates[0]}-{kind}.json'
     if path.exists():print('Pronóstico existente preservado:',path.name);return
-    if kind=='cripto' and now.hour>0:
-        print('Fuera de la ventana 00:00–00:59 UTC; no crear pronóstico tardío.');return
+    if kind=='cripto' and not (now.hour==0 and now.minute<5):
+        print('Fuera de la ventana UTC 00:00–00:04; no crear pronóstico tardío.');return
     if pd.Timestamp(now)>=deadline:
         print('Apertura ya ocurrió; no crear pronóstico tardío.');return
     universe=json.loads((ROOT/'resultados/universo.json').read_text(encoding='utf8'))
@@ -326,7 +339,8 @@ def generate(kind,now=None):
             if d.index[-1].date()!=anchor:raise ValueError('ancla no fresca')
             if kind=='cripto' and len(d)>5 and not (d.index[-6:].to_series().diff().dropna()==pd.Timedelta(days=1)).all():raise ValueError('huecos recientes')
             result=[];patterns=detect(d.tail(300),last_only=True)
-            for h,target in zip((1,5,21),dates):
+            horizons=(1,7,30) if kind=='cripto' else (1,5,21)
+            for h,target in zip(horizons,dates):
                 preds,brier=predict(d,a['sim'],h,patterns)
                 calendar=calendar_context(calendar_events,a['sim'],d.index[-1].date().isoformat(),target)
                 preds['calendario_macro']=calendar['probabilidad']
@@ -367,7 +381,7 @@ def generate(kind,now=None):
     published=dt.datetime.now(UTC)
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')
     save_once(path,{'version':2,'publicado':published.isoformat(),'deadline':deadline.isoformat(),
-        'run_id':os.environ.get('GITHUB_RUN_ID'),'tipo':kind,'filas':rows,'fallas':failures,
+        'run_id':os.environ.get('GITHUB_RUN_ID'),'head_sha':os.environ.get('GITHUB_SHA'),'tipo':kind,'filas':rows,'fallas':failures,
         'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte, sin ajuste por resultado',
         'predictores_registrados':5+sum(bool(r['direccion']) for r in catalog()),
         'aviso':'Dirección entre cierre anterior y cierre objetivo. Patrones se abstienen sin señal. No es simulación de ejecución.'})
@@ -390,8 +404,9 @@ def receipt(path,payload):
     r=requests.get('https://api.github.com/repos/recinosr/wall-street-motor/actions/runs/'+payload['run_id'],
         headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'},timeout=30)
     r.raise_for_status();run=r.json()
-    if run.get('conclusion')!='success':return None
-    return {'commit':sha,'run_id':run['id'],'url':run['html_url'],'sha256':payload['sha256']}
+    expected_sha=payload.get('head_sha') or sha
+    if run.get('conclusion')!='success' or run.get('head_sha')!=expected_sha:return None
+    return {'commit':sha,'head_sha':expected_sha,'run_id':run['id'],'url':run['html_url'],'sha256':payload['sha256']}
 
 
 def wilson(w,n):
@@ -404,7 +419,8 @@ def summary(rows):
     out=[]
     keys={(r['predictor'],r['tipo'],r['sector'],r['horizonte']) for r in rows}|{(r['predictor'],r['tipo'],'Todos',r['horizonte']) for r in rows}
     for key in sorted(keys):
-        group=[r for r in rows if r['predictor']==key[0] and r['tipo']==key[1] and (key[2]=='Todos' or r['sector']==key[2]) and r['horizonte']==key[3]]
+        group=[r for r in rows if r['predictor']==key[0] and r['tipo']==key[1] and (key[2]=='Todos' or r['sector']==key[2]) and r['horizonte']==key[3] and r.get('p_apostado',True)]
+        if not group:continue
         daily={}
         for r in group:daily.setdefault(r['objetivo'],[]).append(r)
         differences=[np.mean([r['acierto']-r['siempre_acierto'] for r in g]) for g in daily.values()]
@@ -414,7 +430,7 @@ def summary(rows):
         wins=sum(r['acierto'] for r in group);n=len(group)
         net=[r for r in group if 'retorno_neto_pct' in r]
         out.append(dict(zip(('predictor','tipo','sector','horizonte'),key),n=n,dias=len(daily),
-            acierto_pct=100*wins/n,brier=float(np.mean([(r['p']-r['y'])**2 for r in group])),
+            acierto_pct=100*wins/n if n else None,brier=float(np.mean([(r['p']-r['y'])**2 for r in group])) if group else None,
             brier_tasa_base=float(np.mean([(r.get('p_base',.5)-r['y'])**2 for r in group])),
             ic95_descriptivo=wilson(wins,n),diferencia_sube_siempre=mean,ic95_por_dia=ci,
             azar_pct=100*np.mean([r['azar_acierto'] for r in group]),
@@ -423,6 +439,7 @@ def summary(rows):
             exceso_medio_vs_mantener_pct=float(np.mean([r['exceso_sobre_mantener_pct'] for r in net])) if net else None))
         for control,field in (('siempre','siempre_acierto'),('azar','azar_acierto')):
             diffs=np.array([np.mean([r['acierto']-r[field] for r in g]) for g in daily.values()])
+            if not len(diffs):out[-1]['p_'+control]=1.;continue
             mean=float(diffs.mean());z=diffs-mean;n_days=len(z)
             variance=float(z@z/n_days)
             for lag in range(1,min(6,n_days)):
@@ -472,7 +489,19 @@ def score(now=None):
                 if row['sim'] in errors:raise ValueError(errors[row['sim']])
                 d=cache[row['sim']];dates=d.index.strftime('%Y-%m-%d')
                 a=d[dates==row['ancla']];b=d[dates==row['objetivo']]
-                if len(a)!=1 or len(b)!=1:raise ValueError('Falta cierre exacto; pendiente')
+                if len(a)!=1:raise ValueError('Falta cierre ancla exacto; pendiente')
+                cierre_sustituto=False
+                if len(b)!=1:
+                    if row['tipo']=='cripto':
+                        limite=(pd.Timestamp(row['objetivo'])+pd.Timedelta(days=5)).date().isoformat()
+                        deadline=pd.Timestamp(row['objetivo'],tz='UTC')+pd.Timedelta(days=6)
+                    else:
+                        limite=CAL.session_offset(pd.Timestamp(row['objetivo']),5).date().isoformat()
+                        deadline=CAL.session_close(pd.Timestamp(limite))+pd.Timedelta(minutes=15)
+                    if pd.Timestamp(now)<deadline:continue
+                    b=d[(dates>row['objetivo'])&(dates<=limite)]
+                    if b.empty:raise ValueError('Sin cotización disponible hasta cinco sesiones; pendiente')
+                    b=b.tail(1);cierre_sustituto=True
                 ret=float(b.close.iloc[0]/a.close.iloc[0]-1); y=int(ret>0)
                 # Empates no son subida; convención fijada antes de observar resultados.
                 preds=row['predicciones']; always=int(y==1);random=int((preds['azar']>=.5)==bool(y))
@@ -480,11 +509,12 @@ def score(now=None):
                     'predictor':name,'p':p,'y':y,'acierto':int((p>=.5)==bool(y)),
                     'p_base':preds.get('tasa_base',.5),
                     'razon':row.get('razones',{}).get(name,''),
-                    'siempre_acierto':int((preds.get('tasa_base',.5)>=.5)==bool(y)),'azar_acierto':random,'retorno_pct':ret*100,
+                    'siempre_acierto':int(y==1),'azar_acierto':random,'retorno_pct':ret*100,
                     'brecha_pct':float(b.open.iloc[0]/a.close.iloc[0]-1)*100,
-                    'retorno_neto_pct':100*((1+ret)*.995**2-1 if p>=.5 else 0.0),
+                    'retorno_neto_pct':100*((1+ret)*.995**2-1 if p>.5 else 0.0),
                     'mantener_neto_pct':100*((1+ret)*.995**2-1),
-                    'exceso_sobre_mantener_pct':100*((1+ret)*.995**2-1 if p>=.5 else 0.0)-100*((1+ret)*.995**2-1),
+                    'exceso_sobre_mantener_pct':100*((1+ret)*.995**2-1 if p>.5 else 0.0)-100*((1+ret)*.995**2-1),
+                    'cotizacion_sustituta':cierre_sustituto,'p_apostado':p!=.5,
                     'costo_xtb':{'comision_pct':0.0,'conversion_entrada_pct':.5,'conversion_salida_pct':.5,
                                   'supuesto':'Conversión en entrada y salida; activos USD, sin spread/impuestos.'},
                     'contexto_previo':row.get('contexto_previo',{}),
@@ -522,7 +552,7 @@ def score(now=None):
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
         'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,'curva_pesos_hedge':hedge_curve,
         'walk_forward_inicializacion':[{'sim':row['sim'],'horizonte':row['horizonte'],**row['walk_forward']} for row in latest['filas'] if row.get('walk_forward')],
-        'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; dirección no es rentabilidad neta (costos 0.1% por lado).'}
+        'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; costos 0.5% por lado.'}
     from lab.enciclopedia import bh
     tests={f'{window}:{i}:{control}':s['p_'+control] for window in ('acumulado','diario','ventana_30d') for i,s in enumerate(r[window]) for control in ('siempre','azar')}
     adjusted=bh(tests)

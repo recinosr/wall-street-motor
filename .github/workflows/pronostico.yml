@@ -1,7 +1,7 @@
 name: Pronóstico prospectivo y marcador
 on:
   schedule:
-    - cron: '15 0 * * *'
+    - cron: '0 0 * * *'
     - cron: '15 12 * * 1-5'
   workflow_dispatch:
     inputs:
@@ -79,3 +79,10 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "pronósticos y marcador $GITHUB_RUN_ID"
           bash scripts/push_results.sh
+          day=$(date -u +%F)
+          tag="oraculo-$day"
+          if ! git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
+            hashes=$(find resultados/pronosticos -maxdepth 1 -name "$day-*.json" -print0 | sort -z | xargs -0 -r sha256sum)
+            git tag -a "$tag" -m "Ancla diaria de predicciones SHA-256: $hashes"
+            git push origin "refs/tags/$tag"
+          fi

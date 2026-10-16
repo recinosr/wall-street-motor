@@ -6,7 +6,7 @@ from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score
+from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score, signal_features, walk_forward_report, hedge_distribution
 from lab.enciclopedia import detect
 
 class ForecastTests(unittest.TestCase):
@@ -49,6 +49,23 @@ class ForecastTests(unittest.TestCase):
         d=pd.DataFrame({'close':np.arange(1,501,dtype=float)})
         self.assertAlmostEqual(features(d,crypto=True).mom.iloc[-1],470/135-1)
         self.assertAlmostEqual(features(d).mom.iloc[-1],479/248-1)
+    def test_live_and_walk_forward_share_exact_signals(self):
+        rng=np.random.default_rng(44);c=100*np.exp(np.cumsum(rng.normal(0,.02,800)))
+        for sim in ('SPY','BTC-USD'):
+            d=pd.DataFrame({'close':c},index=pd.date_range('2020-01-01',periods=len(c)))
+            signals=signal_features(d,sim)
+            wf=walk_forward_report(d,sim,1)
+            self.assertAlmostEqual(wf['brier']['momentum_1m'],float(np.mean((signals.momentum_1m.iloc[253:-1].to_numpy()-((c[254:]>c[253:-1]).astype(float)))**2)))
+            self.assertEqual(float(signals.iloc[400].tendencia_sma200),float(c[400]>=np.mean(c[200:400])))
+        crypto=signal_features(pd.DataFrame({'close':c}),'BTC-USD')
+        self.assertEqual(float(crypto.momentum_1m.iloc[100]),float(c[100]>=c[70]))
+    def test_random_hedge_weights_stay_below_40_percent(self):
+        rng=np.random.default_rng(31);y=rng.integers(0,2,100);losses={}
+        for i in range(10):losses[str(i)]=float(np.mean((rng.random(100)-y)**2))
+        weights,eta=hedge_distribution(losses,{name:100 for name in losses})
+        self.assertLess(max(weights.values()),.4)
+        self.assertAlmostEqual(sum(weights.values()),1.)
+        self.assertAlmostEqual(eta,np.sqrt(8*np.log(10)/100))
     def test_predict_probability(self):
         rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
         d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))
