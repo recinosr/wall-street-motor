@@ -1,0 +1,74 @@
+{
+ "version": "oraculo-v2",
+ "escrito_utc": "2026-10-16",
+ "nota": "Pre-registro escrito ANTES de calcular cualquier métrica sobre validación o prueba sellada. El código lee estos parámetros de este archivo; cualquier cambio posterior cambia el hash y queda a la vista en git. Solo se permitió depurar con datos de entrenamiento (<= 2014).",
+ "datos": {
+  "corte_datos": "2026-10-15",
+  "precio": "close diario de datos/pit/precios (splits ajustados, sin dividendos); nunca adj_close",
+  "evento_macro_filtro": "se descartan fechas de CPI/EMPLEO a menos de 10 dias de la fecha previa conservada (revisiones estacionales de ALFRED)",
+  "particion": {"entrenamiento": ["inicio", "2014-12-31"], "validacion": ["2015-01-01", "2019-12-31"], "prueba_sellada": ["2020-01-01", "2026-10-15"]},
+  "purga": "una muestra pertenece a un tramo por su fecha t; si t+h cruza el fin del tramo se descarta",
+  "ajuste_final": "la prueba usa el modelo reajustado con entrenamiento+validacion (<=2019) y los mismos hiperparametros; la validacion usa el modelo ajustado solo con entrenamiento"
+ },
+ "estadistica": {
+  "semilla": 3202602, "bootstrap_rondas": 2000, "alfa": 0.05,
+  "bootstrap": "circular por bloques, bloque = max(10, 2*horizonte) en niveles 1-2; iid en nivel 3 (eventos espaciados)",
+  "p_valor": "unilateral: (1 + #{media bootstrap <= 0}) / (rondas + 1) para la mejora (referencia menos modelo)",
+  "multiples_comparaciones": "Benjamini-Hochberg dentro de cada nivel sobre TODAS las pruebas del nivel (Brier y exactitud); ademas se reporta BH global sobre niveles 1-3",
+  "celda_aprobada": "q_BH < 0.05 en todas sus pruebas, mejora media > 0 en la prueba y mejora media > 0 en validacion"
+ },
+ "modelo_direccion": {
+  "etiqueta": "y = 1 si close[t+h] > close[t]",
+  "rasgos": ["ln(c_t/c_{t-1})", "ln(c_t/c_{t-5})", "ln(c_t/c_{t-21})", "ln(desv_est_21d de retornos log diarios)"],
+  "modelo": "regresion logistica, rasgos estandarizados con media y sd del tramo de ajuste, penalizacion L2 = 10 sobre pesos (no intercepto)",
+  "referencia_tasa_base": "probabilidad constante = frecuencia de alzas en el tramo de ajuste; prueba de Brier",
+  "referencia_siempre_sube": "predice alza siempre; prueba de exactitud del modelo (umbral 0.5) contra la exactitud de siempre-sube, mejora pareada por bootstrap",
+  "min_n_ajuste": 750
+ },
+ "nivel1": {"activo": "^GSPC", "horizonte": 1},
+ "nivel2": {
+  "activos": ["^GSPC", "SPY", "QQQ", "GLD", "TLT", "VT", "TSLA", "NVDA", "AAPL", "MSFT", "GOOGL", "AMZN", "META"],
+  "horizontes": [1, 5, 21],
+  "regla_aprobacion": "el nivel se aprueba si al menos 2 celdas activo-horizonte se aprueban",
+  "celdas_con_datos_insuficientes": "se excluyen de la familia y se listan"
+ },
+ "nivel3": {
+  "eventos": {
+   "FOMC": {"activo": "^GSPC", "desde": "1994-01-01"},
+   "CPI": {"activo": "^GSPC", "desde": "2000-01-01"},
+   "EMPLEO": {"activo": "^GSPC", "desde": "2000-01-01"},
+   "RESULTADOS": {"activos": ["TSLA", "NVDA", "AAPL", "MSFT", "GOOGL", "AMZN", "META"], "fuente": "8-K con item 2.02 (una por ticker y fecha), ademas del conjunto agrupado de las 7 acciones"}
+  },
+  "dia_reaccion": "macro: el dia del evento si es sesion; resultados: el dia del evento si aceptado antes de 16:00 ET, si no la siguiente sesion; si cae fuera de sesion, la siguiente sesion",
+  "retorno_reaccion": "R = ln(close[dia_reaccion] / close[sesion anterior])",
+  "rasgos": ["ln(c_{t-1}/c_{t-2})", "ln(c_{t-1}/c_{t-6})", "ln(c_{t-1}/c_{t-22})", "ln(desv_est_21d hasta t-1)"],
+  "direccion": "misma logistica que nivel 1 sobre y = 1 si R > 0; referencias tasa base y siempre-sube",
+  "tamano": "objetivo s = ln|R|; modelo OLS sobre ln(desv_est_21d hasta t-1) ajustado en el tramo de ajuste; referencia = media de s en el tramo de ajuste; mejora = error cuadratico de la referencia menos el del modelo",
+  "minimos": {"n_ajuste": 40, "n_validacion": 15, "n_prueba": 20},
+  "regla_aprobacion": "el nivel se aprueba si al menos 2 celdas (evento, direccion o tamano) se aprueban"
+ },
+ "nivel5": {
+  "indice": "^GSPC (precio, sin dividendos, desde 1950)",
+  "reglas": {
+   "tendencia": "posicion en t+1 = 1 si close_t > media simple de 200 cierres hasta t; si no 0 (efectivo)",
+   "volatilidad": "posicion en t+1 = 0 si desv_est_21d de retornos log diarios * sqrt(252) > 0.25; si no 1"
+  },
+  "efectivo": "retorno 0 (conservador: no se acredita interes)",
+  "costo_por_cambio_de_posicion": 0.0005,
+  "crisis_apartadas": {
+   "2000": ["2000-03-24", "2003-10-08"],
+   "2008": ["2007-10-09", "2010-03-08"],
+   "2020": ["2020-02-19", "2021-03-22"],
+   "2022": ["2022-01-03", "2023-10-11"]
+  },
+  "nota_crisis": "cada ventana va del maximo previo hasta ~252 sesiones despues del minimo, para medir tambien el costo de perder el rebote. Las fechas de maximos y minimos son conocimiento publico previo: el contraste es contra reglas SIN parametros ajustados, fijadas en este archivo.",
+  "aprobada_si": "(a) en >= 3 de 4 ventanas la caida maxima de la regla <= 0.70 * la de mantener; (b) en 1950-2026 el retorno anual compuesto de la regla >= el de mantener menos 1.5 puntos porcentuales; (c) q_BH < 0.05 (2 reglas) en la prueba de temporizacion aleatoria",
+  "prueba_temporizacion_aleatoria": "2000 calendarios aleatorios con la misma fraccion de tiempo invertido y misma duracion media de racha (rachas geometricas) sobre las 4 ventanas; estadistico = media sobre ventanas de (DD_mantener - DD_regla)/DD_mantener; p = (1+#{aleatorio >= observado})/(2001)"
+ },
+ "niveles_sin_ensayo_v2": {
+  "4": "noticias GDELT: sin corpus historico clasificado y congelado",
+  "6": "sin panel PIT sincronizado de tasas, dolar, oro y tecnologia",
+  "7": "sin simulacion completa de costos XTB, dividendos y aportes"
+ },
+ "apertura": "la prueba sellada de cada nivel se abre UNA vez con --abrir-prueba; el registro resultados/nivel_v2_registro.json bloquea reaperturas. Depurar solo con --validacion o con datos <= 2014."
+}
