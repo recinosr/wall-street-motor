@@ -11,7 +11,7 @@
   "EMPLEO": 449,
   "FOMC": 272
  },
- "eventos_sha256": "64b7d2102d63d1034738ca6e7105002aa3908836741b952971e83d291aacc630",
+ "eventos_sha256": "ff2d786e5717a0ce6f50dd315096a2330af0ebf09a91d3d63d98b988b69fc4a9",
  "fuentes": {
   "8-K": "SEC EDGAR submissions",
   "CPI/EMPLEO": "ALFRED (St. Louis Fed) release dates rid=10 y rid=50",
@@ -23,14 +23,14 @@
    "archivo": "datos/pit/precios/AAPL.csv.gz",
    "filas": 11553,
    "primera": "1980-12-12",
-   "sha256": "308b8e5d2f151291244f226378a3e9800b4e4bf75aac6d1dcf8483c65f5f9064",
+   "sha256": "ffe99cf17fc764333ce44d62e53359f7d50d0ce9bafdcb1548fc4ade1456405d",
    "ultima": "2026-10-15"
   },
   "AMZN": {
    "archivo": "datos/pit/precios/AMZN.csv.gz",
    "filas": 7401,
    "primera": "1997-05-15",
-   "sha256": "7797c6bfa180d26fb9fa4307eb3f52604bf75c0423c0c687293aea58fc62af6c",
+   "sha256": "30cdf42933fdb0ac1254bd58206e03cc5329e2f6785879b95c440cd5edede5e6",
    "ultima": "2026-10-15"
   },
   "BTC-USD": {
@@ -44,77 +44,77 @@
    "archivo": "datos/pit/precios/GLD.csv.gz",
    "filas": 5511,
    "primera": "2004-11-18",
-   "sha256": "73c6633232f7066d308bf2021d0dfd003252c9fc64769a2f2b02b043ce1854d1",
+   "sha256": "81f73afe7b7024e1a30e6e069c3b89875288a72b6d21fd3805bebd59990d552f",
    "ultima": "2026-10-15"
   },
   "GOOGL": {
    "archivo": "datos/pit/precios/GOOGL.csv.gz",
    "filas": 5575,
    "primera": "2004-08-19",
-   "sha256": "3b64b4c09f9e55a16b6d7092303e4ed6bd46da71b85306004c04351b36fdd4a4",
+   "sha256": "c68da0501fd6530fbaca5e248ec2e9c94db93993eea274387c60215608f90543",
    "ultima": "2026-10-15"
   },
   "IBIT": {
    "archivo": "datos/pit/precios/IBIT.csv.gz",
    "filas": 693,
    "primera": "2024-01-11",
-   "sha256": "6d75525cc90d4aa180237bf346e67e106ff883143bbd84b0b8e26529f07b5e54",
+   "sha256": "8de9e6968f20541c5aa67be9be340249846101d97a902000676d1fb02fba92ba",
    "ultima": "2026-10-15"
   },
   "META": {
    "archivo": "datos/pit/precios/META.csv.gz",
    "filas": 3623,
    "primera": "2012-05-18",
-   "sha256": "9fd0ab9219c0cd3d26e35ac4c586a0cb848cd275319f1c34f8f68c8914f9490f",
+   "sha256": "0381b48d50d33f3ee8ff0ac88eee54e83df3d81d8062970c401c7b21206fe3d3",
    "ultima": "2026-10-15"
   },
   "MSFT": {
    "archivo": "datos/pit/precios/MSFT.csv.gz",
    "filas": 10227,
    "primera": "1986-03-13",
-   "sha256": "ee41d4349b8c2fb21792c562b027799441aafc8bf46a3bcd3236cbf07844cc98",
+   "sha256": "64308217728cdf104cd9e75d9e6c00f9afdfd6d5ebe2eed9fbaea354c61f646f",
    "ultima": "2026-10-15"
   },
   "NVDA": {
    "archivo": "datos/pit/precios/NVDA.csv.gz",
    "filas": 6976,
    "primera": "1999-01-22",
-   "sha256": "0fb4cacc282899a296eca25d351168858ba7f8c89eb54dfbe3c254f576b6d070",
+   "sha256": "8ac3df4b9f3ae8f2827f55ee8e1d69bcf13622414e339af46bf6159d78b0c32d",
    "ultima": "2026-10-15"
   },
   "QQQ": {
    "archivo": "datos/pit/precios/QQQ.csv.gz",
    "filas": 6944,
    "primera": "1999-03-10",
-   "sha256": "5786fe6de000b31b0e918edb01fbc08b4831d8bf9cd359e54aa866751039c5c3",
+   "sha256": "9f8c993e78e3ad4a29bbd04b636af7617665434b06141a1fae38bb1900a459ef",
    "ultima": "2026-10-15"
   },
   "SCHD": {
    "archivo": "datos/pit/precios/SCHD.csv.gz",
    "filas": 3768,
    "primera": "2011-10-20",
-   "sha256": "74d2ae023ad2d45055ef64b5eed1a54cbb44269fd18270c8efd34a1e372bd617",
+   "sha256": "4b0374dd91e3afeb8ae4432076c1d8b572e6cddcf61087c1a329ec29c8116983",
    "ultima": "2026-10-15"
   },
   "SPY": {
    "archivo": "datos/pit/precios/SPY.csv.gz",
    "filas": 8486,
    "primera": "1993-01-29",
-   "sha256": "7c225a5df4a9fdab7c0151e0e68ac0bb1d0cc302a43c8ebc8ac928a28f335d44",
+   "sha256": "38cd35a6308410aa0b8aad656742f98f2ca5ff81418a4b2bc28d19bccfa2862d",
    "ultima": "2026-10-15"
   },
   "TLT": {
    "archivo": "datos/pit/precios/TLT.csv.gz",
    "filas": 6093,
    "primera": "2002-07-30",
-   "sha256": "9985eb4a785607136b6a0a45889e2dfb775ae81e0bf7336b553cd8cdeb35ef5e",
+   "sha256": "d74e3cd5348620662b777c9faf05f48be37b017588542abff1dbc01c96e50c5b",
    "ultima": "2026-10-15"
   },
   "TSLA": {
    "archivo": "datos/pit/precios/TSLA.csv.gz",
    "filas": 4100,
    "primera": "2010-06-29",
-   "sha256": "8db05dcd751daaa8933f65624d8084a2616064e3faa13008da06badc5812f99a",
+   "sha256": "17395519bead2007da498f0aed78b87cf65bd024f9348edb1d51ea49a16013e9",
    "ultima": "2026-10-15"
   },
   "VT": {
@@ -128,15 +128,15 @@
    "archivo": "datos/pit/precios/VWRA.L.csv.gz",
    "filas": 1827,
    "primera": "2019-07-23",
-   "sha256": "ff24e490d614285030683607dde803c1ca073ed6623c69c24b937d9095700b71",
-   "ultima": "2026-10-16"
+   "sha256": "e375a6c9a77ee3624314965250e15915d518619b054958cd4d145591a9ca64b3",
+   "ultima": "2026-10-15"
   },
   "^GSPC": {
    "archivo": "datos/pit/precios/_GSPC.csv.gz",
-   "filas": 19319,
+   "filas": 19320,
    "primera": "1950-01-03",
-   "sha256": "87348ba9d3c61535650804d62a494b2c999bdcb7ac79416340be23fb660f3771",
-   "ultima": "2026-10-15"
+   "sha256": "72d41918e14af0e5836d3cc0b96757a6a0fa81865acc3798be2e25b8c2981373",
+   "ultima": "2026-10-16"
   }
  },
  "reglas_disponibilidad": {
