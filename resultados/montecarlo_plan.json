@@ -1,0 +1,176 @@
+{
+ "parametros": {
+  "semilla": 20261017,
+  "rondas": 20000,
+  "bloque_meses": 12,
+  "aporte_mensual_usd": 100.0,
+  "pesos": {
+   "VT": 0.8,
+   "SPY": 0.2
+  },
+  "dividendo_anual": {
+   "VT": 0.019,
+   "SPY": 0.013
+  },
+  "horizontes_anios": [
+   5,
+   10,
+   20
+  ],
+  "plan_esperado_anual": 0.07,
+  "ajuste_conservador_anual": -0.04
+ },
+ "ajuste_anual_aplicado": 0.0,
+ "datos": {
+  "meses": 220,
+  "desde": "2008-07-31",
+  "hasta": "2026-10-31",
+  "nota": "precio sin dividendos + dividendo anual supuesto; historia desde jun-2008 (incluye 2008, 2020, 2022)"
+ },
+ "horizontes": {
+  "5": {
+   "aportado_usd": 6000.0,
+   "referencia_7pct_usd": 7119.59,
+   "final_usd": {
+    "p5": 5224.23,
+    "p25": 6740.03,
+    "p50": 7750.31,
+    "p75": 8746.49,
+    "p95": 10300.46
+   },
+   "prob_final_menor_aportado": 0.1232,
+   "prob_final_menor_referencia_7pct": 0.3366,
+   "peor_caida_maxima": {
+    "p5": -0.3179,
+    "p50": -0.1062,
+    "p95": -0.0353
+   },
+   "prob_caida_peor_que_30pct": 0.067,
+   "prob_caida_peor_que_50pct": 0.0001,
+   "caminos_historicos": {
+    "n_ventanas_solapadas": 161,
+    "min_usd": 6041.32,
+    "max_usd": 9334.19
+   }
+  },
+  "10": {
+   "aportado_usd": 12000.0,
+   "referencia_7pct_usd": 17105.17,
+   "final_usd": {
+    "p5": 11595.61,
+    "p25": 16128.84,
+    "p50": 19940.4,
+    "p75": 24288.32,
+    "p95": 31648.84
+   },
+   "prob_final_menor_aportado": 0.0617,
+   "prob_final_menor_referencia_7pct": 0.3095,
+   "peor_caida_maxima": {
+    "p5": -0.4142,
+    "p50": -0.1975,
+    "p95": -0.0992
+   },
+   "prob_caida_peor_que_30pct": 0.2786,
+   "prob_caida_peor_que_50pct": 0.0069,
+   "caminos_historicos": {
+    "n_ventanas_solapadas": 101,
+    "min_usd": 15252.42,
+    "max_usd": 24940.72
+   }
+  },
+  "20": {
+   "aportado_usd": 24000.0,
+   "referencia_7pct_usd": 50753.64,
+   "final_usd": {
+    "p5": 30684.31,
+    "p25": 50106.95,
+    "p50": 69274.63,
+    "p75": 95224.3,
+    "p95": 147969.15
+   },
+   "prob_final_menor_aportado": 0.0162,
+   "prob_final_menor_referencia_7pct": 0.2585,
+   "peor_caida_maxima": {
+    "p5": -0.515,
+    "p50": -0.3545,
+    "p95": -0.1885
+   },
+   "prob_caida_peor_que_30pct": 0.612,
+   "prob_caida_peor_que_50pct": 0.0618,
+   "caminos_historicos": null
+  }
+ },
+ "conservador": {
+  "5": {
+   "aportado_usd": 6000.0,
+   "referencia_7pct_usd": 7119.59,
+   "final_usd": {
+    "p5": 4741.86,
+    "p25": 6083.28,
+    "p50": 6974.66,
+    "p75": 7847.49,
+    "p95": 9209.69
+   },
+   "prob_final_menor_aportado": 0.2294,
+   "prob_final_menor_referencia_7pct": 0.5448,
+   "peor_caida_maxima": {
+    "p5": -0.3243,
+    "p50": -0.1111,
+    "p95": -0.0382
+   },
+   "prob_caida_peor_que_30pct": 0.0745,
+   "prob_caida_peor_que_50pct": 0.0001,
+   "caminos_historicos": {
+    "n_ventanas_solapadas": 161,
+    "min_usd": 5432.41,
+    "max_usd": 8390.21
+   }
+  },
+  "10": {
+   "aportado_usd": 12000.0,
+   "referencia_7pct_usd": 17105.17,
+   "final_usd": {
+    "p5": 9472.13,
+    "p25": 13011.5,
+    "p50": 15924.2,
+    "p75": 19246.17,
+    "p95": 24713.33
+   },
+   "prob_final_menor_aportado": 0.1762,
+   "prob_final_menor_referencia_7pct": 0.5961,
+   "peor_caida_maxima": {
+    "p5": -0.4257,
+    "p50": -0.2046,
+    "p95": -0.1056
+   },
+   "prob_caida_peor_que_30pct": 0.2896,
+   "prob_caida_peor_que_50pct": 0.0084,
+   "caminos_historicos": {
+    "n_ventanas_solapadas": 101,
+    "min_usd": 12182.61,
+    "max_usd": 19858.94
+   }
+  },
+  "20": {
+   "aportado_usd": 24000.0,
+   "referencia_7pct_usd": 50753.64,
+   "final_usd": {
+    "p5": 20045.67,
+    "p25": 31376.05,
+    "p50": 42262.29,
+    "p75": 56773.12,
+    "p95": 85847.71
+   },
+   "prob_final_menor_aportado": 0.1043,
+   "prob_final_menor_referencia_7pct": 0.6576,
+   "peor_caida_maxima": {
+    "p5": -0.5377,
+    "p50": -0.3683,
+    "p95": -0.199
+   },
+   "prob_caida_peor_que_30pct": 0.6458,
+   "prob_caida_peor_que_50pct": 0.0906,
+   "caminos_historicos": null
+  }
+ }
+}
