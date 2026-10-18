@@ -1,0 +1,44 @@
+{
+ "version": "oraculo-nivel7",
+ "escrito_utc": "2026-10-18",
+ "nota": "Pre-registro escrito y subido a origin/main ANTES de escribir el código que calcula. Nivel 7 = reglas de APORTE del inversionista con costos XTB, dividendos y aportes reales, contra el plan 80/20 de compra fija mensual. Ninguna regla tiene parámetros ajustables: no hay tramo de entrenamiento. Un resultado positivo NO cambia el plan; solo puede entrar a la bóveda y esperar 90 días según Plan-vigente.",
+ "datos": {
+  "precios": "close diario de datos/pit/precios (sin dividendos); toda decisión del día t usa solo filas con available_at <= momento de la orden",
+  "orden": "la compra del mes se decide con el cierre de la sesión anterior y se ejecuta al close del primer día hábil del mes (proxy de orden límite en la mañana)",
+  "tramo_validacion": {"cartera": {"_GSPC": 1.0}, "dividendo_anual": {"_GSPC": 0.030}, "inicios": ["1951-01-01", "2014-12-01"]},
+  "tramo_prueba": {"cartera": {"VT": 0.8, "SPY": 0.2}, "dividendo_anual": {"VT": 0.019, "SPY": 0.013}, "inicios": ["2009-07-01", "2021-09-01"]},
+  "ventana_meses": 60,
+  "nota_ventanas": "una ventana por mes de inicio; dura 60 aportes y se valora al close del último día hábil del mes 60; ventanas que no completan 60 meses antes del 2026-10-15 se descartan"
+ },
+ "costos_xtb": {
+  "comision": 0.0,
+  "spread_por_compra": 0.001,
+  "spread_por_venta": 0.001,
+  "conversion": 0.0,
+  "efectivo_en_espera_anual": 0.0,
+  "dividendos": "se reinvierten al mismo precio, sin retención (ETF irlandés de acumulación); se acumulan diario como dividendo_anual/252 sobre lo invertido, nunca sobre el efectivo"
+ },
+ "aporte_mensual_usd": 100.0,
+ "reglas": {
+  "R0_plan": "compra fija: el aporte completo se compra cada mes con los pesos objetivo. Referencia.",
+  "R1_caida": "guarda el aporte en efectivo; compra todo lo acumulado el mes en que el índice (o SPY en prueba) cerró la sesión anterior al menos 5 % por debajo de su máximo de 252 sesiones; si se acumulan 12 meses sin caída, compra todo.",
+  "R2_sma200": "compra el aporte (y lo acumulado) solo si el cierre previo está sobre su media de 200 sesiones; si no, guarda en efectivo.",
+  "R3_doble_en_caida": "presupuesto igual: cada mes aparta el aporte; compra 50 % si el cierre previo está sobre la media de 200 sesiones y guarda 50 %; compra todo lo guardado cuando está debajo.",
+  "R4_sin_banda": "como R0 pero sin la corrección de octubre; en prueba, R0 aplica la regla del plan: cada octubre, si SPY pesa fuera de 15-25 %, el aporte de ese mes y los siguientes va solo al activo bajo hasta volver a 20 %, sin vender. En validación R4 == R0 y se omite."
+ },
+ "metrica": {
+  "valor": "valor final de la ventana / total aportado (múltiplo); el efectivo que quede sin invertir cuenta a su valor nominal",
+  "mejora": "múltiplo(regla) - múltiplo(R0) por ventana",
+  "secundaria": "peor caída de la cuenta (mark-to-market) dentro de la ventana; se reporta, no aprueba"
+ },
+ "estadistica": {
+  "semilla": 7202610,
+  "bootstrap_rondas": 2000,
+  "bootstrap": "circular por bloques de 24 ventanas consecutivas (las ventanas se solapan)",
+  "p_valor": "unilateral: (1 + #{media bootstrap de la mejora <= 0}) / (rondas + 1)",
+  "multiples_comparaciones": "Benjamini-Hochberg sobre las 4 pruebas del tramo de prueba (R1-R4)",
+  "aprobada": "una regla se aprueba si q_BH < 0.05 en prueba, la mejora media > 0 en prueba Y la mejora media > 0 en validación (cuando aplica)",
+  "nivel_aprobado": "el nivel 7 se aprueba si al menos una regla se aprueba"
+ },
+ "prohibido": "cambiar reglas, umbrales, costos, dividendos, tramos o la métrica después de ver cualquier número. Una corrida fallida o interrumpida cuenta como intento y se anota. El resultado se publica gane o pierda."
+}
