@@ -1,0 +1,46 @@
+{
+ "prereg_sha256": "f3302e559105608e22a24713dadda2754dadeb03d2aafde957e1a8ff36e03182",
+ "ejecutado_utc": "2026-10-18T23:26:39+00:00",
+ "senales": {
+  "S1": {
+   "dif_validacion": 0.013257747130420843,
+   "dif_prueba": -0.007108304028746558,
+   "n_validacion": 120,
+   "n_prueba": 140,
+   "acierto_prueba_vs_base": [
+    0.5428571428571428,
+    0.6642857142857143
+   ],
+   "p": 0.8534293141371726,
+   "q_BH": 0.9792041591681664,
+   "aprobada": false
+  },
+  "S2": {
+   "dif_validacion": 0.006450243658601217,
+   "dif_prueba": -0.015089492813813336,
+   "n_validacion": 115,
+   "n_prueba": 140,
+   "acierto_prueba_vs_base": [
+    0.4714285714285714,
+    0.6642857142857143
+   ],
+   "p": 0.9792041591681664,
+   "q_BH": 0.9792041591681664,
+   "aprobada": false
+  },
+  "S3": {
+   "dif_validacion": 0.00020723022851976223,
+   "dif_prueba": -0.0007844610840535664,
+   "n_validacion": 120,
+   "n_prueba": 140,
+   "acierto_prueba_vs_base": [
+    0.5714285714285714,
+    0.6642857142857143
+   ],
+   "p": 0.5380923815236952,
+   "q_BH": 0.9792041591681664,
+   "aprobada": false
+  }
+ },
+ "nivel6_aprobado": false
+}
