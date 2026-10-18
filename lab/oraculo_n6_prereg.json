@@ -1,0 +1,32 @@
+{
+ "version": "oraculo-nivel6",
+ "escrito_utc": "2026-10-18",
+ "nota": "Pre-registro escrito y subido a origin/main ANTES de escribir el código que calcula. Nivel 6 = señales intermercado (bonos, oro, tecnología) que anticipan el rendimiento del mes siguiente del S&P 500, separando señal de correlación contemporánea (la señal usa solo el cierre previo a la decisión). Ninguna señal tiene parámetros ajustables. Un resultado positivo NO cambia el plan.",
+ "datos": {
+  "precios": "close diario de datos/pit/precios; toda decisión usa solo filas con available_at <= momento de la decisión",
+  "objetivo": "SPY (tramo validación y prueba); _GSPC no se usa",
+  "decision": "primer día hábil de cada mes con el cierre de la sesión anterior; el resultado es el retorno de SPY desde ese cierre previo hasta el cierre previo del mes siguiente",
+  "tramo_validacion": {"inicio": "2005-01", "fin": "2014-12"},
+  "tramo_prueba": {"inicio": "2015-01", "fin": "2026-08", "nota": "sellado: se abre una sola vez"},
+  "ventanas_retorno_sesiones": {"S1": 63, "S2": 126, "S3": 63}
+ },
+ "senales": {
+  "S1_huida_a_bonos": "si el retorno de TLT en 63 sesiones supera el de SPY en 63 sesiones -> señal 'baja' (SPY mes siguiente < 0 esperado); si no, 'sube'.",
+  "S2_oro": "si el retorno de GLD en 126 sesiones supera el de SPY en 126 sesiones -> 'baja'; si no, 'sube'.",
+  "S3_apetito_riesgo": "si el retorno de QQQ en 63 sesiones supera el de SPY en 63 sesiones -> 'sube'; si no, 'baja'."
+ },
+ "metrica": {
+  "principal": "diferencia de medias del retorno mensual de SPY siguiente: media(meses señal 'sube') - media(meses señal 'baja'), orientada a la dirección declarada (positiva = la señal funciona)",
+  "secundaria": "acierto de dirección frente a la tasa base de meses positivos; se reporta, no aprueba"
+ },
+ "estadistica": {
+  "semilla": 7202611,
+  "bootstrap_rondas": 5000,
+  "bootstrap": "remuestreo de meses con reemplazo, bloques de 3 meses",
+  "p_valor": "unilateral: (1 + #{diferencia bootstrap <= 0}) / (rondas + 1)",
+  "multiples_comparaciones": "Benjamini-Hochberg sobre las 3 señales en prueba",
+  "aprobada": "una señal se aprueba si q_BH < 0.05 en prueba, la diferencia > 0 en prueba Y la diferencia > 0 en validación",
+  "nivel_aprobado": "el nivel 6 se aprueba si al menos una señal se aprueba"
+ },
+ "prohibido": "cambiar señales, ventanas, tramos o métrica después de ver cualquier número. Una corrida fallida cuenta como intento y se anota. El resultado se publica gane o pierda."
+}
