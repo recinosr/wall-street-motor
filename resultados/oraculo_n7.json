@@ -1,0 +1,144 @@
+{
+ "prereg_sha256": "39b79b7dcea62caf9f788a945f8ecf74b322a22c5f82f6c05fc30cd9a7ca85be",
+ "prereg_version": "oraculo-nivel7",
+ "ejecutado_utc": "2026-10-18T15:24:45+00:00",
+ "parametros": {
+  "aporte_mensual_usd": 100.0,
+  "ventana_meses": 60,
+  "spread_por_compra": 0.001,
+  "semilla": 7202610,
+  "bootstrap_rondas": 2000,
+  "bloque_ventanas": 24,
+  "dividendos_validacion": {
+   "_GSPC": 0.03
+  },
+  "dividendos_prueba": {
+   "VT": 0.019,
+   "SPY": 0.013
+  },
+  "pesos_prueba": {
+   "VT": 0.8,
+   "SPY": 0.2
+  },
+  "inicios_validacion": [
+   "1951-01-01",
+   "2014-12-01"
+  ],
+  "inicios_prueba": [
+   "2009-07-01",
+   "2021-09-01"
+  ],
+  "corte_datos": "2026-10-15"
+ },
+ "tramos": {
+  "validacion": {
+   "n_windows": 768,
+   "primer_inicio": "1951-01-02",
+   "ultima_valoracion": "2019-11-29",
+   "rules": {
+    "R0": {
+     "n_windows": 768,
+     "mean_multiple": 1.3337784465459326,
+     "mean_mejora": 0.0,
+     "p": null,
+     "q_BH": null,
+     "median_max_drawdown": -0.16409996541467997,
+     "decisiones_sin_historial": 0,
+     "approved": null
+    },
+    "R1": {
+     "n_windows": 768,
+     "mean_multiple": 1.2983226285191674,
+     "mean_mejora": -0.0354558180267652,
+     "p": 1.0,
+     "q_BH": null,
+     "median_max_drawdown": -0.1618877754957564,
+     "decisiones_sin_historial": 1,
+     "approved": null
+    },
+    "R2": {
+     "n_windows": 768,
+     "mean_multiple": 1.3280726442225994,
+     "mean_mejora": -0.005705802323333176,
+     "p": 0.9240379810094953,
+     "q_BH": null,
+     "median_max_drawdown": -0.1396297520835904,
+     "decisiones_sin_historial": 0,
+     "approved": null
+    },
+    "R3": {
+     "n_windows": 768,
+     "mean_multiple": 1.2943295556746905,
+     "mean_mejora": -0.03944889087124189,
+     "p": 1.0,
+     "q_BH": null,
+     "median_max_drawdown": -0.15159956067723573,
+     "decisiones_sin_historial": 0,
+     "approved": null
+    }
+   }
+  },
+  "prueba": {
+   "n_windows": 147,
+   "primer_inicio": "2009-07-01",
+   "ultima_valoracion": "2026-08-31",
+   "rules": {
+    "R0": {
+     "n_windows": 147,
+     "mean_multiple": 1.2981109605916394,
+     "mean_mejora": 0.0,
+     "p": null,
+     "q_BH": null,
+     "median_max_drawdown": -0.14961751364893772,
+     "decisiones_sin_historial": 0,
+     "approved": null
+    },
+    "R1": {
+     "n_windows": 147,
+     "mean_multiple": 1.2715711732571218,
+     "mean_mejora": -0.026539787334517926,
+     "p": 1.0,
+     "q_BH": 1.0,
+     "median_max_drawdown": -0.14605461703059386,
+     "decisiones_sin_historial": 0,
+     "approved": false,
+     "pasa_validacion": false
+    },
+    "R2": {
+     "n_windows": 147,
+     "mean_multiple": 1.283784789655546,
+     "mean_mejora": -0.014326170936093592,
+     "p": 1.0,
+     "q_BH": 1.0,
+     "median_max_drawdown": -0.14605101414320054,
+     "decisiones_sin_historial": 0,
+     "approved": false,
+     "pasa_validacion": false
+    },
+    "R3": {
+     "n_windows": 147,
+     "mean_multiple": 1.273100585190085,
+     "mean_mejora": -0.02501037540155458,
+     "p": 1.0,
+     "q_BH": 1.0,
+     "median_max_drawdown": -0.13981151201145958,
+     "decisiones_sin_historial": 0,
+     "approved": false,
+     "pasa_validacion": false
+    },
+    "R4": {
+     "n_windows": 147,
+     "mean_multiple": 1.2981109605916394,
+     "mean_mejora": 0.0,
+     "p": 1.0,
+     "q_BH": 1.0,
+     "median_max_drawdown": -0.14961751364893772,
+     "decisiones_sin_historial": 0,
+     "approved": false,
+     "pasa_validacion": null
+    }
+   }
+  }
+ },
+ "level_approved": false
+}
