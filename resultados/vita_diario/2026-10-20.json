@@ -1,0 +1,6609 @@
+{
+  "version": 2,
+  "fecha": "2026-10-20",
+  "fuentes": {
+    "marcador": {
+      "sha256": "1f38f92bc51e6d2455fb97394ad515d698a1ae84b7a26da9f50252a3fba0ac76",
+      "fecha": "2026-10-20T22:10:57.980369+00:00",
+      "actualizado_hoy": true
+    },
+    "enciclopedia": {
+      "sha256": "1ed4bdab5bc83bacd2f30486a38d0485b0911b5cb6d5e9d4412664a426f9c374",
+      "fecha": "2026-10-18T03:40:34.631005+00:00",
+      "actualizado_hoy": false
+    },
+    "demo_cripto": {
+      "sha256": "2ee671a9fbb1a24c32c73ab505c3a0d31dc705bb2114a5052d849a41a1d3733b",
+      "fecha": "2026-10-20T22:24:02.865634+00:00",
+      "actualizado_hoy": true
+    },
+    "robots": {
+      "sha256": "1fbe0a4d2c6ae7025b38f1848c82dffa77270ec04488a6be7b1246c88d7d0ead",
+      "fecha": "2026-10-09T13:55:06.607799+00:00",
+      "actualizado_hoy": false
+    },
+    "carteras_robots": {
+      "sha256": "5535688b5f4b68dae7dde9f124dd494d3e6106c1fb5802740d28f7c518340689",
+      "fecha": "2026-10-09T16:25:25.725024+00:00",
+      "actualizado_hoy": false
+    }
+  },
+  "fuentes_no_disponibles": [],
+  "frases": [
+    "En el estudio histórico desde 2000-01-01 hasta antes de 2025-04-01 medí 85 patrones: 0 pasan todos los criterios después de costos. No es una medición de esta semana.",
+    "Probé 3 robots en 24 casos históricos: 0 superan a mantener y al azar con corrección por pruebas múltiples.",
+    "En la demo BTC llevo US$971.89 frente a US$1,005.86 si hubiera mantenido, al corte 2026-10-20T22:24:00.161850823Z; son cuentas ficticias con reglas, no decisiones del chat.",
+    "Tengo 177464 etiquetas maduras de pronósticos y 6 archivos registrados; sin etiquetas no puedo medir aciertos.",
+    "Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada."
+  ],
+  "que_probo_hoy": [
+    {
+      "fuente": "marcador",
+      "descripcion": "Registro y calificación de pronósticos publicados con recibo",
+      "fecha_resultado": "2026-10-20T22:10:57.980369+00:00"
+    },
+    {
+      "fuente": "demo_cripto",
+      "descripcion": "Observación de reglas cripto en cuentas ficticias",
+      "fecha_resultado": "2026-10-20T22:24:02.865634+00:00"
+    }
+  ],
+  "que_aprendio": {
+    "etiquetas_pronostico": 177464,
+    "aciertos": [
+      {
+        "predictor": "azar",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 50.20253848231164,
+        "brier": 0.49797461517688363,
+        "ic95_descriptivo": [
+          0.4906397275333122,
+          0.5134089420090975
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 51.0053619302949,
+        "brier": 0.48994638069705093,
+        "ic95_descriptivo": [
+          0.48469427101168516,
+          0.5353613284582052
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 50.408098702942105,
+        "brier": 0.49591901297057894,
+        "ic95_descriptivo": [
+          0.49628597402664065,
+          0.5118740166459207
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 47.91997459510956,
+        "brier": 0.5208002540489044,
+        "ic95_descriptivo": [
+          0.4617869831909775,
+          0.49666319711620954
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6489,
+        "acierto_pct": 48.3587609801202,
+        "brier": 0.2562585527328258,
+        "ic95_descriptivo": [
+          0.47144176763536383,
+          0.4957528733058227
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1309,
+        "acierto_pct": 48.05194805194805,
+        "brier": 0.26711256558637925,
+        "ic95_descriptivo": [
+          0.4535499093193165,
+          0.5076030584111395
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 14897,
+        "acierto_pct": 51.527153118077464,
+        "brier": 0.2500156720209083,
+        "ic95_descriptivo": [
+          0.5072430925168508,
+          0.5232920955090389
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2969,
+        "acierto_pct": 48.13068373189626,
+        "brier": 0.2588259370883475,
+        "ic95_descriptivo": [
+          0.4633697308598282,
+          0.49929225557093226
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6812,
+        "acierto_pct": 46.41808573106283,
+        "brier": 0.5358191426893717,
+        "ic95_descriptivo": [
+          0.45236110101303867,
+          0.47604099096046015
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1371,
+        "acierto_pct": 39.24142961342086,
+        "brier": 0.6075857038657914,
+        "ic95_descriptivo": [
+          0.366902098023193,
+          0.4185277289474194
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15214,
+        "acierto_pct": 50.236624161956094,
+        "brier": 0.49763375838043905,
+        "ic95_descriptivo": [
+          0.49442154462261934,
+          0.510309743945925
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3032,
+        "acierto_pct": 47.32849604221636,
+        "brier": 0.5267150395778364,
+        "ic95_descriptivo": [
+          0.45555780278291913,
+          0.4910797292938533
+        ]
+      },
+      {
+        "predictor": "patron:bandera_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:bandera_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:bandera_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:banderin_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_mismo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 110,
+        "acierto_pct": 52.72727272727273,
+        "brier": 0.4727272727272727,
+        "ic95_descriptivo": [
+          0.4346352821640567,
+          0.6180695287310817
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_mismo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 500,
+        "acierto_pct": 44.8,
+        "brier": 0.552,
+        "ic95_descriptivo": [
+          0.40497189195901473,
+          0.4918210683681993
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_siguiente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 38,
+        "acierto_pct": 60.526315789473685,
+        "brier": 0.39473684210526316,
+        "ic95_descriptivo": [
+          0.44717586998695963,
+          0.7440214073638108
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_siguiente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 149,
+        "acierto_pct": 48.993288590604024,
+        "brier": 0.5100671140939598,
+        "ic95_descriptivo": [
+          0.41093223470967327,
+          0.5694396012302804
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_mismo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 180,
+        "acierto_pct": 42.77777777777778,
+        "brier": 0.5722222222222222,
+        "ic95_descriptivo": [
+          0.35775133655491426,
+          0.5008225661961497
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_mismo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 754,
+        "acierto_pct": 53.315649867374006,
+        "brier": 0.46684350132625996,
+        "ic95_descriptivo": [
+          0.497467461488035,
+          0.5685093864443034
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_siguiente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 50,
+        "acierto_pct": 14.0,
+        "brier": 0.86,
+        "ic95_descriptivo": [
+          0.06950745262022862,
+          0.2618645719852809
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_siguiente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 151,
+        "acierto_pct": 39.0728476821192,
+        "brier": 0.609271523178808,
+        "ic95_descriptivo": [
+          0.31653967965392227,
+          0.47033929860515017
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 26,
+        "acierto_pct": 38.46153846153846,
+        "brier": 0.6153846153846154,
+        "ic95_descriptivo": [
+          0.22428359511834425,
+          0.5746547996057992
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 45,
+        "acierto_pct": 53.333333333333336,
+        "brier": 0.4666666666666667,
+        "ic95_descriptivo": [
+          0.39077208862410456,
+          0.6706509605798527
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 86,
+        "acierto_pct": 26.74418604651163,
+        "brier": 0.7325581395348837,
+        "ic95_descriptivo": [
+          0.1853195577468752,
+          0.3694523964480633
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 16,
+        "acierto_pct": 68.75,
+        "brier": 0.3125,
+        "ic95_descriptivo": [
+          0.4440393186673406,
+          0.8583556494803894
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 417,
+        "acierto_pct": 40.52757793764988,
+        "brier": 0.5947242206235012,
+        "ic95_descriptivo": [
+          0.3592263287738172,
+          0.4530545864208783
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 141,
+        "acierto_pct": 61.702127659574465,
+        "brier": 0.3829787234042553,
+        "ic95_descriptivo": [
+          0.5346892540798192,
+          0.6931458430193568
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 65,
+        "acierto_pct": 55.38461538461539,
+        "brier": 0.4461538461538462,
+        "ic95_descriptivo": [
+          0.43337604317300876,
+          0.6683066603086071
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 12,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.3906175873976139,
+          0.8618821601026386
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 374,
+        "acierto_pct": 43.850267379679146,
+        "brier": 0.5614973262032086,
+        "ic95_descriptivo": [
+          0.38909049299980164,
+          0.4891653687157955
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 37,
+        "acierto_pct": 48.648648648648646,
+        "brier": 0.5135135135135135,
+        "ic95_descriptivo": [
+          0.33446153327211037,
+          0.6410536277401908
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1240,
+        "acierto_pct": 57.25806451612903,
+        "brier": 0.4274193548387097,
+        "ic95_descriptivo": [
+          0.5448627672831998,
+          0.5998501929522515
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1627,
+        "acierto_pct": 49.354640442532265,
+        "brier": 0.5064535955746773,
+        "ic95_descriptivo": [
+          0.4692963943835172,
+          0.5178268185637119
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1180,
+        "acierto_pct": 56.86440677966102,
+        "brier": 0.43135593220338986,
+        "ic95_descriptivo": [
+          0.5402075567932767,
+          0.5966350748560926
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1963,
+        "acierto_pct": 54.915944982170146,
+        "brier": 0.45084055017829855,
+        "ic95_descriptivo": [
+          0.5270728752084918,
+          0.571053989710371
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 14.814814814814815,
+        "brier": 0.8518518518518519,
+        "ic95_descriptivo": [
+          0.0591583185964489,
+          0.3247906334682948
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 38,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.3484967553286069,
+          0.6515032446713931
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 10,
+        "acierto_pct": 90.0,
+        "brier": 0.1,
+        "ic95_descriptivo": [
+          0.5958436145024278,
+          0.9821242504842789
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 138,
+        "acierto_pct": 30.434782608695652,
+        "brier": 0.6956521739130435,
+        "ic95_descriptivo": [
+          0.23373730953412233,
+          0.38555632505544807
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 9.090909090909092,
+        "brier": 0.9090909090909091,
+        "ic95_descriptivo": [
+          0.016231752262825964,
+          0.3773646254862038
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 117,
+        "acierto_pct": 35.042735042735046,
+        "brier": 0.6495726495726496,
+        "ic95_descriptivo": [
+          0.26998261263996287,
+          0.44038202999965786
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 57.142857142857146,
+        "brier": 0.42857142857142855,
+        "ic95_descriptivo": [
+          0.3259026690286935,
+          0.7861949006959947
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 8,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.40926987910258916,
+          0.9285223111419724
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 20.0,
+        "brier": 0.8,
+        "ic95_descriptivo": [
+          0.036223160969787456,
+          0.6244717358814612
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 20,
+        "acierto_pct": 55.0,
+        "brier": 0.45,
+        "ic95_descriptivo": [
+          0.34208200830759966,
+          0.741804979142907
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 80.0,
+        "brier": 0.2,
+        "ic95_descriptivo": [
+          0.37552826411853885,
+          0.9637768390302125
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 19,
+        "acierto_pct": 21.05263157894737,
+        "brier": 0.7894736842105263,
+        "ic95_descriptivo": [
+          0.08507538491591575,
+          0.43334714240266087
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.35433884297520657
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 83,
+        "acierto_pct": 53.01204819277108,
+        "brier": 0.46987951807228917,
+        "ic95_descriptivo": [
+          0.42380777365590233,
+          0.6337683189080303
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 28.571428571428573,
+        "brier": 0.7142857142857143,
+        "ic95_descriptivo": [
+          0.11721187910109102,
+          0.546495411724844
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 45,
+        "acierto_pct": 51.111111111111114,
+        "brier": 0.4888888888888889,
+        "ic95_descriptivo": [
+          0.37004224326489743,
+          0.6504321064697549
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 9,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.7008472464490406,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 52,
+        "acierto_pct": 36.53846153846154,
+        "brier": 0.6346153846153846,
+        "ic95_descriptivo": [
+          0.2480051371130184,
+          0.5012857141519882
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 10,
+        "acierto_pct": 90.0,
+        "brier": 0.1,
+        "ic95_descriptivo": [
+          0.5958436145024278,
+          0.9821242504842789
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 65,
+        "acierto_pct": 49.23076923076923,
+        "brier": 0.5076923076923077,
+        "ic95_descriptivo": [
+          0.3746363604246928,
+          0.6108375390779336
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 28,
+        "acierto_pct": 89.28571428571429,
+        "brier": 0.10714285714285714,
+        "ic95_descriptivo": [
+          0.7280377463234292,
+          0.9628823079452006
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 126,
+        "acierto_pct": 43.65079365079365,
+        "brier": 0.5634920634920635,
+        "ic95_descriptivo": [
+          0.3530579106505297,
+          0.523715018826618
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 42,
+        "acierto_pct": 73.80952380952381,
+        "brier": 0.2619047619047619,
+        "ic95_descriptivo": [
+          0.5893098001502446,
+          0.8469751462739642
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 89,
+        "acierto_pct": 28.089887640449437,
+        "brier": 0.7191011235955056,
+        "ic95_descriptivo": [
+          0.19809358040575942,
+          0.38183610628641307
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 71.42857142857143,
+        "brier": 0.2857142857142857,
+        "ic95_descriptivo": [
+          0.4535045882751561,
+          0.882788120898909
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 206,
+        "acierto_pct": 63.10679611650485,
+        "brier": 0.36893203883495146,
+        "ic95_descriptivo": [
+          0.5633381812330819,
+          0.693998781504526
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 51,
+        "acierto_pct": 82.3529411764706,
+        "brier": 0.17647058823529413,
+        "ic95_descriptivo": [
+          0.6974559482722196,
+          0.904277042741901
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 175,
+        "acierto_pct": 36.57142857142857,
+        "brier": 0.6342857142857142,
+        "ic95_descriptivo": [
+          0.2979511863838482,
+          0.43924642312087553
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 48,
+        "acierto_pct": 62.5,
+        "brier": 0.375,
+        "ic95_descriptivo": [
+          0.4836250612524957,
+          0.7478492759593187
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 174,
+        "acierto_pct": 53.44827586206897,
+        "brier": 0.46551724137931033,
+        "ic95_descriptivo": [
+          0.4604222626837277,
+          0.6070535135126177
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 65.21739130434783,
+        "brier": 0.34782608695652173,
+        "ic95_descriptivo": [
+          0.4488997690689163,
+          0.8118894536301776
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 37.03703703703704,
+        "brier": 0.6296296296296297,
+        "ic95_descriptivo": [
+          0.21532287067936856,
+          0.557710953765537
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 43,
+        "acierto_pct": 48.83720930232558,
+        "brier": 0.5116279069767442,
+        "ic95_descriptivo": [
+          0.34617209277756006,
+          0.6324793623392592
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 31,
+        "acierto_pct": 48.38709677419355,
+        "brier": 0.5161290322580645,
+        "ic95_descriptivo": [
+          0.3196998603127883,
+          0.6515988171302682
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 84.61538461538461,
+        "brier": 0.15384615384615385,
+        "ic95_descriptivo": [
+          0.5776482949136899,
+          0.9567427368172621
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 51,
+        "acierto_pct": 56.86274509803921,
+        "brier": 0.43137254901960786,
+        "ic95_descriptivo": [
+          0.4326506123505807,
+          0.694989719076657
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 17,
+        "acierto_pct": 41.1764705882353,
+        "brier": 0.5882352941176471,
+        "ic95_descriptivo": [
+          0.21610786039131383,
+          0.6399492561448445
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 60,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.37734812427246284,
+          0.6226518757275372
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 69.56521739130434,
+        "brier": 0.30434782608695654,
+        "ic95_descriptivo": [
+          0.4913387093942739,
+          0.8439617197902755
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 378,
+        "acierto_pct": 44.17989417989418,
+        "brier": 0.5582010582010583,
+        "ic95_descriptivo": [
+          0.392570405479017,
+          0.49219856678592216
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 166,
+        "acierto_pct": 66.26506024096386,
+        "brier": 0.3373493975903614,
+        "ic95_descriptivo": [
+          0.5877689006997525,
+          0.7301744064758747
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 113,
+        "acierto_pct": 50.442477876106196,
+        "brier": 0.49557522123893805,
+        "ic95_descriptivo": [
+          0.4136203069022564,
+          0.5949382886664452
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.2800877556899882,
+          0.7872904245601196
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 280,
+        "acierto_pct": 58.57142857142857,
+        "brier": 0.4142857142857143,
+        "ic95_descriptivo": [
+          0.5272350309964935,
+          0.6418733731274968
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 27.272727272727273,
+        "brier": 0.7272727272727273,
+        "ic95_descriptivo": [
+          0.09745880573921469,
+          0.5656502930102462
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 8,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.3244156195108769
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15,
+        "acierto_pct": 46.666666666666664,
+        "brier": 0.5333333333333333,
+        "ic95_descriptivo": [
+          0.24809225259746442,
+          0.6988336984894922
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer_doji",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.7934567085261071
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer_doji",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.2999883213415286,
+          0.903230667440783
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 67,
+        "acierto_pct": 37.3134328358209,
+        "brier": 0.6268656716417911,
+        "ic95_descriptivo": [
+          0.26717987071840976,
+          0.4928481354248733
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.2999883213415286,
+          0.903230667440783
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 163,
+        "acierto_pct": 46.625766871165645,
+        "brier": 0.5337423312883436,
+        "ic95_descriptivo": [
+          0.3913329078981605,
+          0.5427362930685049
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 20,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.38657794231520604,
+          0.7811960325858073
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.5615060804490177
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 16,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.10181901984237347,
+          0.4949876892939865
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.565508505247919,
+          1.0000000000000002
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.6576280471103807
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 5,
+        "acierto_pct": 40.0,
+        "brier": 0.6,
+        "ic95_descriptivo": [
+          0.11761823115925325,
+          0.769280067791163
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:estructura_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 58,
+        "acierto_pct": 51.724137931034484,
+        "brier": 0.4827586206896552,
+        "ic95_descriptivo": [
+          0.3916204342921343,
+          0.640720255470097
+        ]
+      },
+      {
+        "predictor": "patron:estructura_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 312,
+        "acierto_pct": 55.76923076923077,
+        "brier": 0.4423076923076923,
+        "ic95_descriptivo": [
+          0.5022112756028024,
+          0.6117699099028435
+        ]
+      },
+      {
+        "predictor": "patron:estructura_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 211,
+        "acierto_pct": 52.60663507109005,
+        "brier": 0.47393364928909953,
+        "ic95_descriptivo": [
+          0.45882946878449915,
+          0.592371043592992
+        ]
+      },
+      {
+        "predictor": "patron:estructura_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 707,
+        "acierto_pct": 54.03111739745403,
+        "brier": 0.4596888260254597,
+        "ic95_descriptivo": [
+          0.5034553607795781,
+          0.5767312799572613
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 395,
+        "acierto_pct": 39.74683544303797,
+        "brier": 0.6025316455696202,
+        "ic95_descriptivo": [
+          0.3504174936260374,
+          0.44649436311107327
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 36,
+        "acierto_pct": 77.77777777777777,
+        "brier": 0.2222222222222222,
+        "ic95_descriptivo": [
+          0.6191498017214091,
+          0.882838070251604
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 787,
+        "acierto_pct": 39.135959339263025,
+        "brier": 0.6086404066073697,
+        "ic95_descriptivo": [
+          0.35786751005324724,
+          0.4259071421653512
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 71,
+        "acierto_pct": 54.929577464788736,
+        "brier": 0.4507042253521127,
+        "ic95_descriptivo": [
+          0.4340086039234116,
+          0.6595222666084852
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 757,
+        "acierto_pct": 53.36856010568032,
+        "brier": 0.4663143989431968,
+        "ic95_descriptivo": [
+          0.49806716134611323,
+          0.5689638737602742
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 157,
+        "acierto_pct": 79.61783439490446,
+        "brier": 0.20382165605095542,
+        "ic95_descriptivo": [
+          0.7264468399004285,
+          0.8517617827444596
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1575,
+        "acierto_pct": 45.46031746031746,
+        "brier": 0.5453968253968254,
+        "ic95_descriptivo": [
+          0.43015163362052367,
+          0.4792756325472794
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 280,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.5416372189471983,
+          0.655655919197457
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 15,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          -2.2096511667503485e-17,
+          0.20388926630434784
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 53,
+        "acierto_pct": 37.735849056603776,
+        "brier": 0.6226415094339622,
+        "ic95_descriptivo": [
+          0.25936076571733824,
+          0.5119334976390768
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 46.15384615384615,
+        "brier": 0.5384615384615384,
+        "ic95_descriptivo": [
+          0.23205754301488138,
+          0.7085656756816795
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 44.44444444444444,
+        "brier": 0.5555555555555556,
+        "ic95_descriptivo": [
+          0.27585597670072826,
+          0.6268728052042312
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 77,
+        "acierto_pct": 35.064935064935064,
+        "brier": 0.6493506493506493,
+        "ic95_descriptivo": [
+          0.253485167224312,
+          0.46200784627368907
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 18,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4374906934425036,
+          0.8372144563633714
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.7934567085261071
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 11,
+        "acierto_pct": 81.81818181818181,
+        "brier": 0.18181818181818182,
+        "ic95_descriptivo": [
+          0.5230138624217553,
+          0.9486333993289994
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 138,
+        "acierto_pct": 47.82608695652174,
+        "brier": 0.5217391304347826,
+        "ic95_descriptivo": [
+          0.3966396690369733,
+          0.5610596236952011
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 16,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.2799923761135083,
+          0.7200076238864918
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 205,
+        "acierto_pct": 43.41463414634146,
+        "brier": 0.5658536585365853,
+        "ic95_descriptivo": [
+          0.3681238219945419,
+          0.5025915910266185
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 41,
+        "acierto_pct": 31.70731707317073,
+        "brier": 0.6829268292682927,
+        "ic95_descriptivo": [
+          0.19564433205311735,
+          0.4698448565574586
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 19,
+        "acierto_pct": 57.89473684210526,
+        "brier": 0.42105263157894735,
+        "ic95_descriptivo": [
+          0.3627555146516011,
+          0.7685837960796963
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 94,
+        "acierto_pct": 31.914893617021278,
+        "brier": 0.6808510638297872,
+        "ic95_descriptivo": [
+          0.23361018709048179,
+          0.4188893632030539
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 25,
+        "acierto_pct": 96.0,
+        "brier": 0.04,
+        "ic95_descriptivo": [
+          0.8045552759497747,
+          0.9929039496133009
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 129,
+        "acierto_pct": 44.18604651162791,
+        "brier": 0.5581395348837209,
+        "ic95_descriptivo": [
+          0.3590743988197216,
+          0.5280091653649917
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 38,
+        "acierto_pct": 65.78947368421052,
+        "brier": 0.34210526315789475,
+        "ic95_descriptivo": [
+          0.4989181162907454,
+          0.7878777997354104
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 250,
+        "acierto_pct": 46.8,
+        "brier": 0.532,
+        "ic95_descriptivo": [
+          0.4070986228731766,
+          0.5298699433507993
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 26,
+        "acierto_pct": 96.15384615384616,
+        "brier": 0.038461538461538464,
+        "ic95_descriptivo": [
+          0.8110682300804161,
+          0.9931781910230102
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 228,
+        "acierto_pct": 48.24561403508772,
+        "brier": 0.5175438596491229,
+        "ic95_descriptivo": [
+          0.41842368815450526,
+          0.5470699937386493
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 30,
+        "acierto_pct": 93.33333333333333,
+        "brier": 0.06666666666666667,
+        "ic95_descriptivo": [
+          0.7867618227892791,
+          0.9815233646723066
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 16,
+        "acierto_pct": 56.25,
+        "brier": 0.4375,
+        "ic95_descriptivo": [
+          0.3317819560677652,
+          0.7690163666481449
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 66,
+        "acierto_pct": 56.06060606060606,
+        "brier": 0.4393939393939394,
+        "ic95_descriptivo": [
+          0.44082421430053925,
+          0.6737206987598717
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 25,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.4073912778512734,
+          0.7659694233580908
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 479,
+        "acierto_pct": 57.20250521920668,
+        "brier": 0.4279749478079332,
+        "ic95_descriptivo": [
+          0.5273145746994967,
+          0.6155894335715387
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 126,
+        "acierto_pct": 92.85714285714286,
+        "brier": 0.07142857142857142,
+        "ic95_descriptivo": [
+          0.8698134381416338,
+          0.9619692878876204
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 736,
+        "acierto_pct": 48.77717391304348,
+        "brier": 0.5122282608695652,
+        "ic95_descriptivo": [
+          0.4518165817315026,
+          0.5238538861091813
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 223,
+        "acierto_pct": 74.88789237668162,
+        "brier": 0.25112107623318386,
+        "ic95_descriptivo": [
+          0.6880727794127123,
+          0.8012554566780226
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 333,
+        "acierto_pct": 51.351351351351354,
+        "brier": 0.4864864864864865,
+        "ic95_descriptivo": [
+          0.45998212602685234,
+          0.5667366640513326
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 56,
+        "acierto_pct": 94.64285714285714,
+        "brier": 0.05357142857142857,
+        "ic95_descriptivo": [
+          0.8539246046357079,
+          0.9816145520713321
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 582,
+        "acierto_pct": 54.123711340206185,
+        "brier": 0.4587628865979381,
+        "ic95_descriptivo": [
+          0.5006148371723539,
+          0.5813185728142363
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 104,
+        "acierto_pct": 63.46153846153846,
+        "brier": 0.36538461538461536,
+        "ic95_descriptivo": [
+          0.5388083768716195,
+          0.7208316878158479
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 92,
+        "acierto_pct": 43.47826086956522,
+        "brier": 0.5652173913043478,
+        "ic95_descriptivo": [
+          0.3381140282933585,
+          0.5366793808316977
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 35,
+        "acierto_pct": 80.0,
+        "brier": 0.2,
+        "ic95_descriptivo": [
+          0.6410806339053748,
+          0.899576805540992
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 197,
+        "acierto_pct": 47.71573604060914,
+        "brier": 0.5228426395939086,
+        "ic95_descriptivo": [
+          0.40851398006941686,
+          0.5466745864427001
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 67,
+        "acierto_pct": 49.25373134328358,
+        "brier": 0.5074626865671642,
+        "ic95_descriptivo": [
+          0.37651970947161373,
+          0.6093642908897557
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 32,
+        "acierto_pct": 56.25,
+        "brier": 0.4375,
+        "ic95_descriptivo": [
+          0.3932530203122613,
+          0.7183491403055682
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 137,
+        "acierto_pct": 45.25547445255474,
+        "brier": 0.5474452554744526,
+        "ic95_descriptivo": [
+          0.3716340041503001,
+          0.5360637215216606
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 12,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.08894003962896137,
+          0.53231033912066
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 298,
+        "acierto_pct": 52.348993288590606,
+        "brier": 0.47651006711409394,
+        "ic95_descriptivo": [
+          0.46684500364290354,
+          0.5795369397340201
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 73,
+        "acierto_pct": 89.04109589041096,
+        "brier": 0.1095890410958904,
+        "ic95_descriptivo": [
+          0.7983717410229372,
+          0.9434139583898808
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 246,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.4379997130575665,
+          0.5620002869424335
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 93,
+        "acierto_pct": 67.74193548387096,
+        "brier": 0.3225806451612903,
+        "ic95_descriptivo": [
+          0.5770106827427646,
+          0.7637519647145264
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 171,
+        "acierto_pct": 55.55555555555556,
+        "brier": 0.4444444444444444,
+        "ic95_descriptivo": [
+          0.4806691129222163,
+          0.6280006773336496
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 15,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4171312515121298,
+          0.8482389930530875
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 332,
+        "acierto_pct": 62.04819277108434,
+        "brier": 0.3795180722891566,
+        "ic95_descriptivo": [
+          0.5671852024000659,
+          0.671022333533541
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 15,
+        "acierto_pct": 53.333333333333336,
+        "brier": 0.4666666666666667,
+        "ic95_descriptivo": [
+          0.3011663015105079,
+          0.7519077474025356
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 36,
+        "acierto_pct": 44.44444444444444,
+        "brier": 0.5555555555555556,
+        "ic95_descriptivo": [
+          0.29541029876543135,
+          0.6041921268399659
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 73,
+        "acierto_pct": 56.16438356164384,
+        "brier": 0.4383561643835616,
+        "ic95_descriptivo": [
+          0.4475757167181133,
+          0.6695483410839106
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.5615060804490177
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 53,
+        "acierto_pct": 54.716981132075475,
+        "brier": 0.4528301886792453,
+        "ic95_descriptivo": [
+          0.41453742646439184,
+          0.6734263183985252
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 84.61538461538461,
+        "brier": 0.15384615384615385,
+        "ic95_descriptivo": [
+          0.5776482949136899,
+          0.9567427368172621
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 149,
+        "acierto_pct": 40.939597315436245,
+        "brier": 0.5906040268456376,
+        "ic95_descriptivo": [
+          0.3336829795416323,
+          0.4896635439179495
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 49,
+        "acierto_pct": 73.46938775510205,
+        "brier": 0.2653061224489796,
+        "ic95_descriptivo": [
+          0.5973744384734165,
+          0.8378886875485057
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 271,
+        "acierto_pct": 43.91143911439114,
+        "brier": 0.5608856088560885,
+        "ic95_descriptivo": [
+          0.38128590719736555,
+          0.4986449329665689
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 33,
+        "acierto_pct": 75.75757575757575,
+        "brier": 0.24242424242424243,
+        "ic95_descriptivo": [
+          0.5897505131450972,
+          0.871684386533527
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 176,
+        "acierto_pct": 44.88636363636363,
+        "brier": 0.5511363636363636,
+        "ic95_descriptivo": [
+          0.3772538936604555,
+          0.5226580288313372
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 27,
+        "acierto_pct": 59.25925925925926,
+        "brier": 0.4074074074074074,
+        "ic95_descriptivo": [
+          0.4072638305536409,
+          0.7548548662714264
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1488,
+        "acierto_pct": 34.07258064516129,
+        "brier": 0.6592741935483871,
+        "ic95_descriptivo": [
+          0.31708161118001316,
+          0.36519028685527416
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 257,
+        "acierto_pct": 76.65369649805447,
+        "brier": 0.23346303501945526,
+        "ic95_descriptivo": [
+          0.7111231178351913,
+          0.8140998527339204
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1403,
+        "acierto_pct": 44.689950106913756,
+        "brier": 0.5531004989308624,
+        "ic95_descriptivo": [
+          0.4210640188248544,
+          0.4730249816710081
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 168,
+        "acierto_pct": 53.57142857142857,
+        "brier": 0.4642857142857143,
+        "ic95_descriptivo": [
+          0.4603438255306153,
+          0.6094879265014886
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.47824419872105484,
+          0.8135694555640666
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 132,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.4604241101750001,
+          0.627914071942996
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 19,
+        "acierto_pct": 68.42105263157895,
+        "brier": 0.3157894736842105,
+        "ic95_descriptivo": [
+          0.4601001017506463,
+          0.846358289955714
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 98,
+        "acierto_pct": 75.51020408163265,
+        "brier": 0.24489795918367346,
+        "ic95_descriptivo": [
+          0.6614070439739143,
+          0.829551464140648
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.1876128068994087,
+          0.8123871931005913
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 422,
+        "acierto_pct": 51.18483412322275,
+        "brier": 0.4881516587677725,
+        "ic95_descriptivo": [
+          0.4642646850938535,
+          0.5592182249835085
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 54,
+        "acierto_pct": 24.074074074074073,
+        "brier": 0.7592592592592593,
+        "ic95_descriptivo": [
+          0.14644154703850742,
+          0.36947779129238245
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 112,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.4089470959009493,
+          0.5910529040990508
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 22,
+        "acierto_pct": 77.27272727272727,
+        "brier": 0.22727272727272727,
+        "ic95_descriptivo": [
+          0.5655964393704065,
+          0.8987710920517965
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 492,
+        "acierto_pct": 56.300813008130085,
+        "brier": 0.4369918699186992,
+        "ic95_descriptivo": [
+          0.5188577525805924,
+          0.6061821795267579
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 114,
+        "acierto_pct": 76.3157894736842,
+        "brier": 0.23684210526315788,
+        "ic95_descriptivo": [
+          0.6773396355726482,
+          0.8318184206655564
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 21,
+        "acierto_pct": 47.61904761904762,
+        "brier": 0.5238095238095238,
+        "ic95_descriptivo": [
+          0.28343712296762946,
+          0.6763078209973326
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.30063605244263664,
+          0.9544139373553638
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 74,
+        "acierto_pct": 51.351351351351354,
+        "brier": 0.4864864864864865,
+        "ic95_descriptivo": [
+          0.40180918267194504,
+          0.6238840199343734
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 24,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.5510017468789357,
+          0.8800079652065768
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 368,
+        "acierto_pct": 45.92391304347826,
+        "brier": 0.5407608695652174,
+        "ic95_descriptivo": [
+          0.4090061936637637,
+          0.5103142911878505
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 79,
+        "acierto_pct": 73.41772151898734,
+        "brier": 0.26582278481012656,
+        "ic95_descriptivo": [
+          0.6275675648945112,
+          0.8190679419040056
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 813,
+        "acierto_pct": 50.30750307503075,
+        "brier": 0.4969249692496925,
+        "ic95_descriptivo": [
+          0.4687720301700936,
+          0.5373491076367957
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 140,
+        "acierto_pct": 74.28571428571429,
+        "brier": 0.2571428571428571,
+        "ic95_descriptivo": [
+          0.6646516640043542,
+          0.8080905746804214
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 77,
+        "acierto_pct": 38.96103896103896,
+        "brier": 0.6103896103896104,
+        "ic95_descriptivo": [
+          0.28842084532265894,
+          0.5012913820454289
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 22,
+        "acierto_pct": 90.9090909090909,
+        "brier": 0.09090909090909091,
+        "ic95_descriptivo": [
+          0.7218461934161421,
+          0.9747051037171623
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 130,
+        "acierto_pct": 50.76923076923077,
+        "brier": 0.49230769230769234,
+        "ic95_descriptivo": [
+          0.42277206871603834,
+          0.5921709684263747
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 30,
+        "acierto_pct": 73.33333333333333,
+        "brier": 0.26666666666666666,
+        "ic95_descriptivo": [
+          0.5555169795568831,
+          0.8581750444608938
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 118,
+        "acierto_pct": 37.28813559322034,
+        "brier": 0.6271186440677966,
+        "ic95_descriptivo": [
+          0.29093039494611966,
+          0.4628482816306816
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 20,
+        "acierto_pct": 85.0,
+        "brier": 0.15,
+        "ic95_descriptivo": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 106,
+        "acierto_pct": 47.16981132075472,
+        "brier": 0.5283018867924528,
+        "ic95_descriptivo": [
+          0.37932593057045705,
+          0.5660499561609817
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 27,
+        "acierto_pct": 74.07407407407408,
+        "brier": 0.25925925925925924,
+        "ic95_descriptivo": [
+          0.5532106959738432,
+          0.8682979157713321
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 74,
+        "acierto_pct": 45.945945945945944,
+        "brier": 0.5405405405405406,
+        "ic95_descriptivo": [
+          0.35073184428251214,
+          0.5721885478985324
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.35433884297520657
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 69,
+        "acierto_pct": 53.6231884057971,
+        "brier": 0.463768115942029,
+        "ic95_descriptivo": [
+          0.4197820076036184,
+          0.6488600870236276
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 61.53846153846154,
+        "brier": 0.38461538461538464,
+        "ic95_descriptivo": [
+          0.3552248097226855,
+          0.8229055341876319
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 2051,
+        "acierto_pct": 50.36567528035105,
+        "brier": 0.49634324719648953,
+        "ic95_descriptivo": [
+          0.4820314287857248,
+          0.5252684039605074
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 525,
+        "acierto_pct": 88.76190476190476,
+        "brier": 0.11238095238095239,
+        "ic95_descriptivo": [
+          0.8577378204905853,
+          0.9118688065221157
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1806,
+        "acierto_pct": 43.90919158361019,
+        "brier": 0.5609080841638981,
+        "ic95_descriptivo": [
+          0.4163564585728481,
+          0.46208594213227455
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 589,
+        "acierto_pct": 65.70458404074702,
+        "brier": 0.34295415959252973,
+        "ic95_descriptivo": [
+          0.6178023886594397,
+          0.6942539852522426
+        ]
+      },
+      {
+        "predictor": "patron:tasuki_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.045586062644636216,
+          0.6993639475573634
+        ]
+      },
+      {
+        "predictor": "patron:tasuki_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.6576280471103807
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 373,
+        "acierto_pct": 44.50402144772118,
+        "brier": 0.5549597855227882,
+        "ic95_descriptivo": [
+          0.3954200869630304,
+          0.495780884479613
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 69,
+        "acierto_pct": 84.05797101449275,
+        "brier": 0.15942028985507245,
+        "ic95_descriptivo": [
+          0.7366529959201307,
+          0.9085826935759813
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1589,
+        "acierto_pct": 56.32473253618628,
+        "brier": 0.4367526746381372,
+        "ic95_descriptivo": [
+          0.5387365604868369,
+          0.5874530116589434
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 309,
+        "acierto_pct": 69.57928802588997,
+        "brier": 0.3042071197411003,
+        "ic95_descriptivo": [
+          0.64234975124375,
+          0.7444274548567174
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 11,
+        "acierto_pct": 63.63636363636363,
+        "brier": 0.36363636363636365,
+        "ic95_descriptivo": [
+          0.35379677689163724,
+          0.8483377638586862
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.20765495512648788,
+          0.9385096847238393
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_arriba",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 5,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.23071993220883702,
+          0.8823817688407467
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 25,
+        "acierto_pct": 48.0,
+        "brier": 0.52,
+        "ic95_descriptivo": [
+          0.30031003928960015,
+          0.665017820468527
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 118,
+        "acierto_pct": 38.983050847457626,
+        "brier": 0.6101694915254238,
+        "ic95_descriptivo": [
+          0.30663375206175597,
+          0.47997443430480513
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 34,
+        "acierto_pct": 23.529411764705884,
+        "brier": 0.7647058823529411,
+        "ic95_descriptivo": [
+          0.12436838109244344,
+          0.3999646280826443
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 92.85714285714286,
+        "brier": 0.07142857142857142,
+        "ic95_descriptivo": [
+          0.6853073044604219,
+          0.9872781138877085
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 130,
+        "acierto_pct": 33.07692307692308,
+        "brier": 0.6692307692307692,
+        "ic95_descriptivo": [
+          0.2557690588722058,
+          0.4154841239947055
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 52.17391304347826,
+        "brier": 0.4782608695652174,
+        "ic95_descriptivo": [
+          0.32962429864218495,
+          0.7076313046005428
+        ]
+      },
+      {
+        "predictor": "patron:tres_metodos_ascendentes",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 582,
+        "acierto_pct": 48.281786941580755,
+        "brier": 0.5171821305841925,
+        "ic95_descriptivo": [
+          0.44246539706646865,
+          0.5233956821057855
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 68,
+        "acierto_pct": 91.17647058823529,
+        "brier": 0.08823529411764706,
+        "ic95_descriptivo": [
+          0.8205602176535451,
+          0.9589324439798259
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1296,
+        "acierto_pct": 52.9320987654321,
+        "brier": 0.470679012345679,
+        "ic95_descriptivo": [
+          0.5020990053057561,
+          0.556369657337446
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 157,
+        "acierto_pct": 70.70063694267516,
+        "brier": 0.2929936305732484,
+        "ic95_descriptivo": [
+          0.6315493666141511,
+          0.7725749395355017
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 13,
+        "acierto_pct": 53.84615384615385,
+        "brier": 0.46153846153846156,
+        "ic95_descriptivo": [
+          0.29143432431832045,
+          0.7679424569851186
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.20765495512648788,
+          0.9385096847238393
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 17,
+        "acierto_pct": 41.1764705882353,
+        "brier": 0.5882352941176471,
+        "ic95_descriptivo": [
+          0.21610786039131383,
+          0.6399492561448445
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 18,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.2903070395897999,
+          0.7096929604102001
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.045586062644636216,
+          0.6993639475573634
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 24,
+        "acierto_pct": 62.5,
+        "brier": 0.375,
+        "ic95_descriptivo": [
+          0.42709619037907065,
+          0.7884086656636855
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 71.42857142857143,
+        "brier": 0.2857142857142857,
+        "ic95_descriptivo": [
+          0.35892909014821267,
+          0.9177828342909845
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 17,
+        "acierto_pct": 35.294117647058826,
+        "brier": 0.6470588235294118,
+        "ic95_descriptivo": [
+          0.17309486143904904,
+          0.5870003327878818
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.565508505247919,
+          1.0000000000000002
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 44,
+        "acierto_pct": 45.45454545454545,
+        "brier": 0.5454545454545454,
+        "ic95_descriptivo": [
+          0.3170500778685361,
+          0.599340678293465
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 40.0,
+        "brier": 0.6,
+        "ic95_descriptivo": [
+          0.11761823115925325,
+          0.769280067791163
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 13,
+        "acierto_pct": 15.384615384615385,
+        "brier": 0.8461538461538461,
+        "ic95_descriptivo": [
+          0.04325726318273798,
+          0.4223517050863101
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 30,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4877972581383026,
+          0.807697044731538
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 55,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.41522461348360484,
+          0.669749282535538
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 85.71428571428571,
+        "brier": 0.14285714285714285,
+        "ic95_descriptivo": [
+          0.600580922361363,
+          0.9599069262620787
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 29,
+        "acierto_pct": 37.93103448275862,
+        "brier": 0.6206896551724138,
+        "ic95_descriptivo": [
+          0.2268779573086734,
+          0.5599777379071503
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 39.79206049149338,
+        "brier": 0.6020793950850661,
+        "ic95_descriptivo": [
+          0.3868284882869139,
+          0.4091185667756396
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 38.53887399463807,
+        "brier": 0.6146112600536193,
+        "ic95_descriptivo": [
+          0.36101735379799155,
+          0.4103488122452579
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 44.37203416640304,
+        "brier": 0.5562796583359696,
+        "ic95_descriptivo": [
+          0.4359892574585889,
+          0.4514787781500416
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 41.409971419498255,
+        "brier": 0.5859002858050175,
+        "ic95_descriptivo": [
+          0.3970103625329396,
+          0.43139839736162666
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 53.551174723197406,
+        "brier": 0.4644882527680259,
+        "ic95_descriptivo": [
+          0.5241373712377235,
+          0.546849301405859
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 55.160857908847184,
+        "brier": 0.44839142091152817,
+        "ic95_descriptivo": [
+          0.5262723894244211,
+          0.5766796878543495
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 49.07307813982917,
+        "brier": 0.5092692186017084,
+        "ic95_descriptivo": [
+          0.48294009211279343,
+          0.4985259755844122
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 52.270562083201014,
+        "brier": 0.47729437916798984,
+        "ic95_descriptivo": [
+          0.5052427408291021,
+          0.5401131692172508
+        ]
+      }
+    ],
+    "patrones_contrastes": 11550,
+    "patrones_pasan": 167,
+    "robots_contrastes": 48,
+    "robots_casos": 24,
+    "decisiones_demo_acumuladas": 3150,
+    "cuentas_demo": {
+      "BTC": {
+        "initial": 1000.0,
+        "net_liquidation": 971.8861031341443,
+        "hold_equity": 1005.8623659409317,
+        "vs_hold": -33.97626280678742,
+        "fees": 1.9718599610972396,
+        "quote_time": "2026-10-20T22:24:00.161850823Z"
+      },
+      "ETH": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 985.771424207017,
+        "vs_hold": 14.228575792982951,
+        "fees": 0.0,
+        "quote_time": "2026-10-20T22:23:59.623506879Z"
+      }
+    }
+  },
+  "que_piensa_probar_manana": [
+    "Seguir las reglas publicadas y esperar etiquetas maduras; no se cambia la política ni se crea un ensayo nuevo."
+  ],
+  "como_voy": {
+    "pronosticos": [
+      {
+        "predictor": "azar",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 50.20253848231164,
+        "brier": 0.49797461517688363,
+        "ic95_descriptivo": [
+          0.4906397275333122,
+          0.5134089420090975
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 51.0053619302949,
+        "brier": 0.48994638069705093,
+        "ic95_descriptivo": [
+          0.48469427101168516,
+          0.5353613284582052
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 50.408098702942105,
+        "brier": 0.49591901297057894,
+        "ic95_descriptivo": [
+          0.49628597402664065,
+          0.5118740166459207
+        ]
+      },
+      {
+        "predictor": "azar",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 47.91997459510956,
+        "brier": 0.5208002540489044,
+        "ic95_descriptivo": [
+          0.4617869831909775,
+          0.49666319711620954
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6489,
+        "acierto_pct": 48.3587609801202,
+        "brier": 0.2562585527328258,
+        "ic95_descriptivo": [
+          0.47144176763536383,
+          0.4957528733058227
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1309,
+        "acierto_pct": 48.05194805194805,
+        "brier": 0.26711256558637925,
+        "ic95_descriptivo": [
+          0.4535499093193165,
+          0.5076030584111395
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 14897,
+        "acierto_pct": 51.527153118077464,
+        "brier": 0.2500156720209083,
+        "ic95_descriptivo": [
+          0.5072430925168508,
+          0.5232920955090389
+        ]
+      },
+      {
+        "predictor": "logistica",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2969,
+        "acierto_pct": 48.13068373189626,
+        "brier": 0.2588259370883475,
+        "ic95_descriptivo": [
+          0.4633697308598282,
+          0.49929225557093226
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6812,
+        "acierto_pct": 46.41808573106283,
+        "brier": 0.5358191426893717,
+        "ic95_descriptivo": [
+          0.45236110101303867,
+          0.47604099096046015
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1371,
+        "acierto_pct": 39.24142961342086,
+        "brier": 0.6075857038657914,
+        "ic95_descriptivo": [
+          0.366902098023193,
+          0.4185277289474194
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15214,
+        "acierto_pct": 50.236624161956094,
+        "brier": 0.49763375838043905,
+        "ic95_descriptivo": [
+          0.49442154462261934,
+          0.510309743945925
+        ]
+      },
+      {
+        "predictor": "momentum_12_1",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3032,
+        "acierto_pct": 47.32849604221636,
+        "brier": 0.5267150395778364,
+        "ic95_descriptivo": [
+          0.45555780278291913,
+          0.4910797292938533
+        ]
+      },
+      {
+        "predictor": "patron:bandera_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:bandera_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:bandera_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:banderin_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_mismo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 110,
+        "acierto_pct": 52.72727272727273,
+        "brier": 0.4727272727272727,
+        "ic95_descriptivo": [
+          0.4346352821640567,
+          0.6180695287310817
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_mismo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 500,
+        "acierto_pct": 44.8,
+        "brier": 0.552,
+        "ic95_descriptivo": [
+          0.40497189195901473,
+          0.4918210683681993
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_siguiente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 38,
+        "acierto_pct": 60.526315789473685,
+        "brier": 0.39473684210526316,
+        "ic95_descriptivo": [
+          0.44717586998695963,
+          0.7440214073638108
+        ]
+      },
+      {
+        "predictor": "patron:barrido_maximo_siguiente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 149,
+        "acierto_pct": 48.993288590604024,
+        "brier": 0.5100671140939598,
+        "ic95_descriptivo": [
+          0.41093223470967327,
+          0.5694396012302804
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_mismo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 180,
+        "acierto_pct": 42.77777777777778,
+        "brier": 0.5722222222222222,
+        "ic95_descriptivo": [
+          0.35775133655491426,
+          0.5008225661961497
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_mismo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 754,
+        "acierto_pct": 53.315649867374006,
+        "brier": 0.46684350132625996,
+        "ic95_descriptivo": [
+          0.497467461488035,
+          0.5685093864443034
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_siguiente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 50,
+        "acierto_pct": 14.0,
+        "brier": 0.86,
+        "ic95_descriptivo": [
+          0.06950745262022862,
+          0.2618645719852809
+        ]
+      },
+      {
+        "predictor": "patron:barrido_minimo_siguiente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 151,
+        "acierto_pct": 39.0728476821192,
+        "brier": 0.609271523178808,
+        "ic95_descriptivo": [
+          0.31653967965392227,
+          0.47033929860515017
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 26,
+        "acierto_pct": 38.46153846153846,
+        "brier": 0.6153846153846154,
+        "ic95_descriptivo": [
+          0.22428359511834425,
+          0.5746547996057992
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:bloque_ordenes_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 45,
+        "acierto_pct": 53.333333333333336,
+        "brier": 0.4666666666666667,
+        "ic95_descriptivo": [
+          0.39077208862410456,
+          0.6706509605798527
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 86,
+        "acierto_pct": 26.74418604651163,
+        "brier": 0.7325581395348837,
+        "ic95_descriptivo": [
+          0.1853195577468752,
+          0.3694523964480633
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 16,
+        "acierto_pct": 68.75,
+        "brier": 0.3125,
+        "ic95_descriptivo": [
+          0.4440393186673406,
+          0.8583556494803894
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 417,
+        "acierto_pct": 40.52757793764988,
+        "brier": 0.5947242206235012,
+        "ic95_descriptivo": [
+          0.3592263287738172,
+          0.4530545864208783
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_inferior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 141,
+        "acierto_pct": 61.702127659574465,
+        "brier": 0.3829787234042553,
+        "ic95_descriptivo": [
+          0.5346892540798192,
+          0.6931458430193568
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 65,
+        "acierto_pct": 55.38461538461539,
+        "brier": 0.4461538461538462,
+        "ic95_descriptivo": [
+          0.43337604317300876,
+          0.6683066603086071
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 12,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.3906175873976139,
+          0.8618821601026386
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 374,
+        "acierto_pct": 43.850267379679146,
+        "brier": 0.5614973262032086,
+        "ic95_descriptivo": [
+          0.38909049299980164,
+          0.4891653687157955
+        ]
+      },
+      {
+        "predictor": "patron:bollinger_superior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 37,
+        "acierto_pct": 48.648648648648646,
+        "brier": 0.5135135135135135,
+        "ic95_descriptivo": [
+          0.33446153327211037,
+          0.6410536277401908
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1240,
+        "acierto_pct": 57.25806451612903,
+        "brier": 0.4274193548387097,
+        "ic95_descriptivo": [
+          0.5448627672831998,
+          0.5998501929522515
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1627,
+        "acierto_pct": 49.354640442532265,
+        "brier": 0.5064535955746773,
+        "ic95_descriptivo": [
+          0.4692963943835172,
+          0.5178268185637119
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1180,
+        "acierto_pct": 56.86440677966102,
+        "brier": 0.43135593220338986,
+        "ic95_descriptivo": [
+          0.5402075567932767,
+          0.5966350748560926
+        ]
+      },
+      {
+        "predictor": "patron:brecha_valor_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1963,
+        "acierto_pct": 54.915944982170146,
+        "brier": 0.45084055017829855,
+        "ic95_descriptivo": [
+          0.5270728752084918,
+          0.571053989710371
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 14.814814814814815,
+        "brier": 0.8518518518518519,
+        "ic95_descriptivo": [
+          0.0591583185964489,
+          0.3247906334682948
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 38,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.3484967553286069,
+          0.6515032446713931
+        ]
+      },
+      {
+        "predictor": "patron:canal_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 10,
+        "acierto_pct": 90.0,
+        "brier": 0.1,
+        "ic95_descriptivo": [
+          0.5958436145024278,
+          0.9821242504842789
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 138,
+        "acierto_pct": 30.434782608695652,
+        "brier": 0.6956521739130435,
+        "ic95_descriptivo": [
+          0.23373730953412233,
+          0.38555632505544807
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 9.090909090909092,
+        "brier": 0.9090909090909091,
+        "ic95_descriptivo": [
+          0.016231752262825964,
+          0.3773646254862038
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 117,
+        "acierto_pct": 35.042735042735046,
+        "brier": 0.6495726495726496,
+        "ic95_descriptivo": [
+          0.26998261263996287,
+          0.44038202999965786
+        ]
+      },
+      {
+        "predictor": "patron:canal_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 57.142857142857146,
+        "brier": 0.42857142857142855,
+        "ic95_descriptivo": [
+          0.3259026690286935,
+          0.7861949006959947
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 8,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.40926987910258916,
+          0.9285223111419724
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 20.0,
+        "brier": 0.8,
+        "ic95_descriptivo": [
+          0.036223160969787456,
+          0.6244717358814612
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 20,
+        "acierto_pct": 55.0,
+        "brier": 0.45,
+        "ic95_descriptivo": [
+          0.34208200830759966,
+          0.741804979142907
+        ]
+      },
+      {
+        "predictor": "patron:cruce_dorado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 80.0,
+        "brier": 0.2,
+        "ic95_descriptivo": [
+          0.37552826411853885,
+          0.9637768390302125
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 19,
+        "acierto_pct": 21.05263157894737,
+        "brier": 0.7894736842105263,
+        "ic95_descriptivo": [
+          0.08507538491591575,
+          0.43334714240266087
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.35433884297520657
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 83,
+        "acierto_pct": 53.01204819277108,
+        "brier": 0.46987951807228917,
+        "ic95_descriptivo": [
+          0.42380777365590233,
+          0.6337683189080303
+        ]
+      },
+      {
+        "predictor": "patron:cruce_muerte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 28.571428571428573,
+        "brier": 0.7142857142857143,
+        "ic95_descriptivo": [
+          0.11721187910109102,
+          0.546495411724844
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 45,
+        "acierto_pct": 51.111111111111114,
+        "brier": 0.4888888888888889,
+        "ic95_descriptivo": [
+          0.37004224326489743,
+          0.6504321064697549
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 9,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.7008472464490406,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 52,
+        "acierto_pct": 36.53846153846154,
+        "brier": 0.6346153846153846,
+        "ic95_descriptivo": [
+          0.2480051371130184,
+          0.5012857141519882
+        ]
+      },
+      {
+        "predictor": "patron:cuna_ascendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 10,
+        "acierto_pct": 90.0,
+        "brier": 0.1,
+        "ic95_descriptivo": [
+          0.5958436145024278,
+          0.9821242504842789
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 65,
+        "acierto_pct": 49.23076923076923,
+        "brier": 0.5076923076923077,
+        "ic95_descriptivo": [
+          0.3746363604246928,
+          0.6108375390779336
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 28,
+        "acierto_pct": 89.28571428571429,
+        "brier": 0.10714285714285714,
+        "ic95_descriptivo": [
+          0.7280377463234292,
+          0.9628823079452006
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 126,
+        "acierto_pct": 43.65079365079365,
+        "brier": 0.5634920634920635,
+        "ic95_descriptivo": [
+          0.3530579106505297,
+          0.523715018826618
+        ]
+      },
+      {
+        "predictor": "patron:cuna_descendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 42,
+        "acierto_pct": 73.80952380952381,
+        "brier": 0.2619047619047619,
+        "ic95_descriptivo": [
+          0.5893098001502446,
+          0.8469751462739642
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 89,
+        "acierto_pct": 28.089887640449437,
+        "brier": 0.7191011235955056,
+        "ic95_descriptivo": [
+          0.19809358040575942,
+          0.38183610628641307
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 71.42857142857143,
+        "brier": 0.2857142857142857,
+        "ic95_descriptivo": [
+          0.4535045882751561,
+          0.882788120898909
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 206,
+        "acierto_pct": 63.10679611650485,
+        "brier": 0.36893203883495146,
+        "ic95_descriptivo": [
+          0.5633381812330819,
+          0.693998781504526
+        ]
+      },
+      {
+        "predictor": "patron:doble_piso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 51,
+        "acierto_pct": 82.3529411764706,
+        "brier": 0.17647058823529413,
+        "ic95_descriptivo": [
+          0.6974559482722196,
+          0.904277042741901
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 175,
+        "acierto_pct": 36.57142857142857,
+        "brier": 0.6342857142857142,
+        "ic95_descriptivo": [
+          0.2979511863838482,
+          0.43924642312087553
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 48,
+        "acierto_pct": 62.5,
+        "brier": 0.375,
+        "ic95_descriptivo": [
+          0.4836250612524957,
+          0.7478492759593187
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 174,
+        "acierto_pct": 53.44827586206897,
+        "brier": 0.46551724137931033,
+        "ic95_descriptivo": [
+          0.4604222626837277,
+          0.6070535135126177
+        ]
+      },
+      {
+        "predictor": "patron:doble_techo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 65.21739130434783,
+        "brier": 0.34782608695652173,
+        "ic95_descriptivo": [
+          0.4488997690689163,
+          0.8118894536301776
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 37.03703703703704,
+        "brier": 0.6296296296296297,
+        "ic95_descriptivo": [
+          0.21532287067936856,
+          0.557710953765537
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 43,
+        "acierto_pct": 48.83720930232558,
+        "brier": 0.5116279069767442,
+        "ic95_descriptivo": [
+          0.34617209277756006,
+          0.6324793623392592
+        ]
+      },
+      {
+        "predictor": "patron:doji_lapida",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.09452865480086611,
+          0.905471345199134
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 31,
+        "acierto_pct": 48.38709677419355,
+        "brier": 0.5161290322580645,
+        "ic95_descriptivo": [
+          0.3196998603127883,
+          0.6515988171302682
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 84.61538461538461,
+        "brier": 0.15384615384615385,
+        "ic95_descriptivo": [
+          0.5776482949136899,
+          0.9567427368172621
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 51,
+        "acierto_pct": 56.86274509803921,
+        "brier": 0.43137254901960786,
+        "ic95_descriptivo": [
+          0.4326506123505807,
+          0.694989719076657
+        ]
+      },
+      {
+        "predictor": "patron:doji_libelula",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 17,
+        "acierto_pct": 41.1764705882353,
+        "brier": 0.5882352941176471,
+        "ic95_descriptivo": [
+          0.21610786039131383,
+          0.6399492561448445
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 60,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.37734812427246284,
+          0.6226518757275372
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 69.56521739130434,
+        "brier": 0.30434782608695654,
+        "ic95_descriptivo": [
+          0.4913387093942739,
+          0.8439617197902755
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 378,
+        "acierto_pct": 44.17989417989418,
+        "brier": 0.5582010582010583,
+        "ic95_descriptivo": [
+          0.392570405479017,
+          0.49219856678592216
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 166,
+        "acierto_pct": 66.26506024096386,
+        "brier": 0.3373493975903614,
+        "ic95_descriptivo": [
+          0.5877689006997525,
+          0.7301744064758747
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 113,
+        "acierto_pct": 50.442477876106196,
+        "brier": 0.49557522123893805,
+        "ic95_descriptivo": [
+          0.4136203069022564,
+          0.5949382886664452
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.2800877556899882,
+          0.7872904245601196
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 280,
+        "acierto_pct": 58.57142857142857,
+        "brier": 0.4142857142857143,
+        "ic95_descriptivo": [
+          0.5272350309964935,
+          0.6418733731274968
+        ]
+      },
+      {
+        "predictor": "patron:envolvente_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 11,
+        "acierto_pct": 27.272727272727273,
+        "brier": 0.7272727272727273,
+        "ic95_descriptivo": [
+          0.09745880573921469,
+          0.5656502930102462
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 8,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.3244156195108769
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15,
+        "acierto_pct": 46.666666666666664,
+        "brier": 0.5333333333333333,
+        "ic95_descriptivo": [
+          0.24809225259746442,
+          0.6988336984894922
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer_doji",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.7934567085261071
+        ]
+      },
+      {
+        "predictor": "patron:estrella_atardecer_doji",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 6,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.2999883213415286,
+          0.903230667440783
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 67,
+        "acierto_pct": 37.3134328358209,
+        "brier": 0.6268656716417911,
+        "ic95_descriptivo": [
+          0.26717987071840976,
+          0.4928481354248733
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.2999883213415286,
+          0.903230667440783
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 163,
+        "acierto_pct": 46.625766871165645,
+        "brier": 0.5337423312883436,
+        "ic95_descriptivo": [
+          0.3913329078981605,
+          0.5427362930685049
+        ]
+      },
+      {
+        "predictor": "patron:estrella_fugaz",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 20,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.38657794231520604,
+          0.7811960325858073
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.5615060804490177
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 16,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.10181901984237347,
+          0.4949876892939865
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.565508505247919,
+          1.0000000000000002
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.6576280471103807
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 5,
+        "acierto_pct": 40.0,
+        "brier": 0.6,
+        "ic95_descriptivo": [
+          0.11761823115925325,
+          0.769280067791163
+        ]
+      },
+      {
+        "predictor": "patron:estrella_manana_doji",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:estructura_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 58,
+        "acierto_pct": 51.724137931034484,
+        "brier": 0.4827586206896552,
+        "ic95_descriptivo": [
+          0.3916204342921343,
+          0.640720255470097
+        ]
+      },
+      {
+        "predictor": "patron:estructura_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 312,
+        "acierto_pct": 55.76923076923077,
+        "brier": 0.4423076923076923,
+        "ic95_descriptivo": [
+          0.5022112756028024,
+          0.6117699099028435
+        ]
+      },
+      {
+        "predictor": "patron:estructura_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 211,
+        "acierto_pct": 52.60663507109005,
+        "brier": 0.47393364928909953,
+        "ic95_descriptivo": [
+          0.45882946878449915,
+          0.592371043592992
+        ]
+      },
+      {
+        "predictor": "patron:estructura_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 707,
+        "acierto_pct": 54.03111739745403,
+        "brier": 0.4596888260254597,
+        "ic95_descriptivo": [
+          0.5034553607795781,
+          0.5767312799572613
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 395,
+        "acierto_pct": 39.74683544303797,
+        "brier": 0.6025316455696202,
+        "ic95_descriptivo": [
+          0.3504174936260374,
+          0.44649436311107327
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 36,
+        "acierto_pct": 77.77777777777777,
+        "brier": 0.2222222222222222,
+        "ic95_descriptivo": [
+          0.6191498017214091,
+          0.882838070251604
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 787,
+        "acierto_pct": 39.135959339263025,
+        "brier": 0.6086404066073697,
+        "ic95_descriptivo": [
+          0.35786751005324724,
+          0.4259071421653512
+        ]
+      },
+      {
+        "predictor": "patron:gap_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 71,
+        "acierto_pct": 54.929577464788736,
+        "brier": 0.4507042253521127,
+        "ic95_descriptivo": [
+          0.4340086039234116,
+          0.6595222666084852
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 757,
+        "acierto_pct": 53.36856010568032,
+        "brier": 0.4663143989431968,
+        "ic95_descriptivo": [
+          0.49806716134611323,
+          0.5689638737602742
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 157,
+        "acierto_pct": 79.61783439490446,
+        "brier": 0.20382165605095542,
+        "ic95_descriptivo": [
+          0.7264468399004285,
+          0.8517617827444596
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1575,
+        "acierto_pct": 45.46031746031746,
+        "brier": 0.5453968253968254,
+        "ic95_descriptivo": [
+          0.43015163362052367,
+          0.4792756325472794
+        ]
+      },
+      {
+        "predictor": "patron:gap_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 280,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.5416372189471983,
+          0.655655919197457
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 15,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          -2.2096511667503485e-17,
+          0.20388926630434784
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 53,
+        "acierto_pct": 37.735849056603776,
+        "brier": 0.6226415094339622,
+        "ic95_descriptivo": [
+          0.25936076571733824,
+          0.5119334976390768
+        ]
+      },
+      {
+        "predictor": "patron:harami_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 46.15384615384615,
+        "brier": 0.5384615384615384,
+        "ic95_descriptivo": [
+          0.23205754301488138,
+          0.7085656756816795
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 44.44444444444444,
+        "brier": 0.5555555555555556,
+        "ic95_descriptivo": [
+          0.27585597670072826,
+          0.6268728052042312
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 77,
+        "acierto_pct": 35.064935064935064,
+        "brier": 0.6493506493506493,
+        "ic95_descriptivo": [
+          0.253485167224312,
+          0.46200784627368907
+        ]
+      },
+      {
+        "predictor": "patron:harami_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 18,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4374906934425036,
+          0.8372144563633714
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.7934567085261071
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 11,
+        "acierto_pct": 81.81818181818181,
+        "brier": 0.18181818181818182,
+        "ic95_descriptivo": [
+          0.5230138624217553,
+          0.9486333993289994
+        ]
+      },
+      {
+        "predictor": "patron:hch_inverso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 138,
+        "acierto_pct": 47.82608695652174,
+        "brier": 0.5217391304347826,
+        "ic95_descriptivo": [
+          0.3966396690369733,
+          0.5610596236952011
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 16,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.2799923761135083,
+          0.7200076238864918
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 205,
+        "acierto_pct": 43.41463414634146,
+        "brier": 0.5658536585365853,
+        "ic95_descriptivo": [
+          0.3681238219945419,
+          0.5025915910266185
+        ]
+      },
+      {
+        "predictor": "patron:hombre_colgado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 41,
+        "acierto_pct": 31.70731707317073,
+        "brier": 0.6829268292682927,
+        "ic95_descriptivo": [
+          0.19564433205311735,
+          0.4698448565574586
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 19,
+        "acierto_pct": 57.89473684210526,
+        "brier": 0.42105263157894735,
+        "ic95_descriptivo": [
+          0.3627555146516011,
+          0.7685837960796963
+        ]
+      },
+      {
+        "predictor": "patron:hombro_cabeza_hombro",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 94,
+        "acierto_pct": 31.914893617021278,
+        "brier": 0.6808510638297872,
+        "ic95_descriptivo": [
+          0.23361018709048179,
+          0.4188893632030539
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 25,
+        "acierto_pct": 96.0,
+        "brier": 0.04,
+        "ic95_descriptivo": [
+          0.8045552759497747,
+          0.9929039496133009
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 129,
+        "acierto_pct": 44.18604651162791,
+        "brier": 0.5581395348837209,
+        "ic95_descriptivo": [
+          0.3590743988197216,
+          0.5280091653649917
+        ]
+      },
+      {
+        "predictor": "patron:kicker_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 38,
+        "acierto_pct": 65.78947368421052,
+        "brier": 0.34210526315789475,
+        "ic95_descriptivo": [
+          0.4989181162907454,
+          0.7878777997354104
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 250,
+        "acierto_pct": 46.8,
+        "brier": 0.532,
+        "ic95_descriptivo": [
+          0.4070986228731766,
+          0.5298699433507993
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 26,
+        "acierto_pct": 96.15384615384616,
+        "brier": 0.038461538461538464,
+        "ic95_descriptivo": [
+          0.8110682300804161,
+          0.9931781910230102
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 228,
+        "acierto_pct": 48.24561403508772,
+        "brier": 0.5175438596491229,
+        "ic95_descriptivo": [
+          0.41842368815450526,
+          0.5470699937386493
+        ]
+      },
+      {
+        "predictor": "patron:kicker_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 30,
+        "acierto_pct": 93.33333333333333,
+        "brier": 0.06666666666666667,
+        "ic95_descriptivo": [
+          0.7867618227892791,
+          0.9815233646723066
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 16,
+        "acierto_pct": 56.25,
+        "brier": 0.4375,
+        "ic95_descriptivo": [
+          0.3317819560677652,
+          0.7690163666481449
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 66,
+        "acierto_pct": 56.06060606060606,
+        "brier": 0.4393939393939394,
+        "ic95_descriptivo": [
+          0.44082421430053925,
+          0.6737206987598717
+        ]
+      },
+      {
+        "predictor": "patron:linea_penetrante",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 25,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.4073912778512734,
+          0.7659694233580908
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 479,
+        "acierto_pct": 57.20250521920668,
+        "brier": 0.4279749478079332,
+        "ic95_descriptivo": [
+          0.5273145746994967,
+          0.6155894335715387
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 126,
+        "acierto_pct": 92.85714285714286,
+        "brier": 0.07142857142857142,
+        "ic95_descriptivo": [
+          0.8698134381416338,
+          0.9619692878876204
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 736,
+        "acierto_pct": 48.77717391304348,
+        "brier": 0.5122282608695652,
+        "ic95_descriptivo": [
+          0.4518165817315026,
+          0.5238538861091813
+        ]
+      },
+      {
+        "predictor": "patron:macd_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 223,
+        "acierto_pct": 74.88789237668162,
+        "brier": 0.25112107623318386,
+        "ic95_descriptivo": [
+          0.6880727794127123,
+          0.8012554566780226
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 333,
+        "acierto_pct": 51.351351351351354,
+        "brier": 0.4864864864864865,
+        "ic95_descriptivo": [
+          0.45998212602685234,
+          0.5667366640513326
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 56,
+        "acierto_pct": 94.64285714285714,
+        "brier": 0.05357142857142857,
+        "ic95_descriptivo": [
+          0.8539246046357079,
+          0.9816145520713321
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 582,
+        "acierto_pct": 54.123711340206185,
+        "brier": 0.4587628865979381,
+        "ic95_descriptivo": [
+          0.5006148371723539,
+          0.5813185728142363
+        ]
+      },
+      {
+        "predictor": "patron:macd_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 104,
+        "acierto_pct": 63.46153846153846,
+        "brier": 0.36538461538461536,
+        "ic95_descriptivo": [
+          0.5388083768716195,
+          0.7208316878158479
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 92,
+        "acierto_pct": 43.47826086956522,
+        "brier": 0.5652173913043478,
+        "ic95_descriptivo": [
+          0.3381140282933585,
+          0.5366793808316977
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 35,
+        "acierto_pct": 80.0,
+        "brier": 0.2,
+        "ic95_descriptivo": [
+          0.6410806339053748,
+          0.899576805540992
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 197,
+        "acierto_pct": 47.71573604060914,
+        "brier": 0.5228426395939086,
+        "ic95_descriptivo": [
+          0.40851398006941686,
+          0.5466745864427001
+        ]
+      },
+      {
+        "predictor": "patron:martillo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 67,
+        "acierto_pct": 49.25373134328358,
+        "brier": 0.5074626865671642,
+        "ic95_descriptivo": [
+          0.37651970947161373,
+          0.6093642908897557
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 32,
+        "acierto_pct": 56.25,
+        "brier": 0.4375,
+        "ic95_descriptivo": [
+          0.3932530203122613,
+          0.7183491403055682
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 137,
+        "acierto_pct": 45.25547445255474,
+        "brier": 0.5474452554744526,
+        "ic95_descriptivo": [
+          0.3716340041503001,
+          0.5360637215216606
+        ]
+      },
+      {
+        "predictor": "patron:martillo_invertido",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 12,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.08894003962896137,
+          0.53231033912066
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 298,
+        "acierto_pct": 52.348993288590606,
+        "brier": 0.47651006711409394,
+        "ic95_descriptivo": [
+          0.46684500364290354,
+          0.5795369397340201
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 73,
+        "acierto_pct": 89.04109589041096,
+        "brier": 0.1095890410958904,
+        "ic95_descriptivo": [
+          0.7983717410229372,
+          0.9434139583898808
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 246,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.4379997130575665,
+          0.5620002869424335
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 93,
+        "acierto_pct": 67.74193548387096,
+        "brier": 0.3225806451612903,
+        "ic95_descriptivo": [
+          0.5770106827427646,
+          0.7637519647145264
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 171,
+        "acierto_pct": 55.55555555555556,
+        "brier": 0.4444444444444444,
+        "ic95_descriptivo": [
+          0.4806691129222163,
+          0.6280006773336496
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 15,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4171312515121298,
+          0.8482389930530875
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 332,
+        "acierto_pct": 62.04819277108434,
+        "brier": 0.3795180722891566,
+        "ic95_descriptivo": [
+          0.5671852024000659,
+          0.671022333533541
+        ]
+      },
+      {
+        "predictor": "patron:marubozu_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 15,
+        "acierto_pct": 53.333333333333336,
+        "brier": 0.4666666666666667,
+        "ic95_descriptivo": [
+          0.3011663015105079,
+          0.7519077474025356
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 36,
+        "acierto_pct": 44.44444444444444,
+        "brier": 0.5555555555555556,
+        "ic95_descriptivo": [
+          0.29541029876543135,
+          0.6041921268399659
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 73,
+        "acierto_pct": 56.16438356164384,
+        "brier": 0.4383561643835616,
+        "ic95_descriptivo": [
+          0.4475757167181133,
+          0.6695483410839106
+        ]
+      },
+      {
+        "predictor": "patron:nube_oscura",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.5615060804490177
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 53,
+        "acierto_pct": 54.716981132075475,
+        "brier": 0.4528301886792453,
+        "ic95_descriptivo": [
+          0.41453742646439184,
+          0.6734263183985252
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 84.61538461538461,
+        "brier": 0.15384615384615385,
+        "ic95_descriptivo": [
+          0.5776482949136899,
+          0.9567427368172621
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 149,
+        "acierto_pct": 40.939597315436245,
+        "brier": 0.5906040268456376,
+        "ic95_descriptivo": [
+          0.3336829795416323,
+          0.4896635439179495
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_inferior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 49,
+        "acierto_pct": 73.46938775510205,
+        "brier": 0.2653061224489796,
+        "ic95_descriptivo": [
+          0.5973744384734165,
+          0.8378886875485057
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 271,
+        "acierto_pct": 43.91143911439114,
+        "brier": 0.5608856088560885,
+        "ic95_descriptivo": [
+          0.38128590719736555,
+          0.4986449329665689
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 33,
+        "acierto_pct": 75.75757575757575,
+        "brier": 0.24242424242424243,
+        "ic95_descriptivo": [
+          0.5897505131450972,
+          0.871684386533527
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 176,
+        "acierto_pct": 44.88636363636363,
+        "brier": 0.5511363636363636,
+        "ic95_descriptivo": [
+          0.3772538936604555,
+          0.5226580288313372
+        ]
+      },
+      {
+        "predictor": "patron:pinzas_superior",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 27,
+        "acierto_pct": 59.25925925925926,
+        "brier": 0.4074074074074074,
+        "ic95_descriptivo": [
+          0.4072638305536409,
+          0.7548548662714264
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1488,
+        "acierto_pct": 34.07258064516129,
+        "brier": 0.6592741935483871,
+        "ic95_descriptivo": [
+          0.31708161118001316,
+          0.36519028685527416
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 257,
+        "acierto_pct": 76.65369649805447,
+        "brier": 0.23346303501945526,
+        "ic95_descriptivo": [
+          0.7111231178351913,
+          0.8140998527339204
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1403,
+        "acierto_pct": 44.689950106913756,
+        "brier": 0.5531004989308624,
+        "ic95_descriptivo": [
+          0.4210640188248544,
+          0.4730249816710081
+        ]
+      },
+      {
+        "predictor": "patron:resistencia",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 168,
+        "acierto_pct": 53.57142857142857,
+        "brier": 0.4642857142857143,
+        "ic95_descriptivo": [
+          0.4603438255306153,
+          0.6094879265014886
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 27,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.47824419872105484,
+          0.8135694555640666
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 132,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.4604241101750001,
+          0.627914071942996
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrecomprado",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 19,
+        "acierto_pct": 68.42105263157895,
+        "brier": 0.3157894736842105,
+        "ic95_descriptivo": [
+          0.4601001017506463,
+          0.846358289955714
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 98,
+        "acierto_pct": 75.51020408163265,
+        "brier": 0.24489795918367346,
+        "ic95_descriptivo": [
+          0.6614070439739143,
+          0.829551464140648
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.1876128068994087,
+          0.8123871931005913
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 422,
+        "acierto_pct": 51.18483412322275,
+        "brier": 0.4881516587677725,
+        "ic95_descriptivo": [
+          0.4642646850938535,
+          0.5592182249835085
+        ]
+      },
+      {
+        "predictor": "patron:rsi_sobrevendido",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 54,
+        "acierto_pct": 24.074074074074073,
+        "brier": 0.7592592592592593,
+        "ic95_descriptivo": [
+          0.14644154703850742,
+          0.36947779129238245
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 112,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.4089470959009493,
+          0.5910529040990508
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 22,
+        "acierto_pct": 77.27272727272727,
+        "brier": 0.22727272727272727,
+        "ic95_descriptivo": [
+          0.5655964393704065,
+          0.8987710920517965
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 492,
+        "acierto_pct": 56.300813008130085,
+        "brier": 0.4369918699186992,
+        "ic95_descriptivo": [
+          0.5188577525805924,
+          0.6061821795267579
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 114,
+        "acierto_pct": 76.3157894736842,
+        "brier": 0.23684210526315788,
+        "ic95_descriptivo": [
+          0.6773396355726482,
+          0.8318184206655564
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 21,
+        "acierto_pct": 47.61904761904762,
+        "brier": 0.5238095238095238,
+        "ic95_descriptivo": [
+          0.28343712296762946,
+          0.6763078209973326
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.30063605244263664,
+          0.9544139373553638
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 74,
+        "acierto_pct": 51.351351351351354,
+        "brier": 0.4864864864864865,
+        "ic95_descriptivo": [
+          0.40180918267194504,
+          0.6238840199343734
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_resistencia_volumen",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 24,
+        "acierto_pct": 75.0,
+        "brier": 0.25,
+        "ic95_descriptivo": [
+          0.5510017468789357,
+          0.8800079652065768
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 368,
+        "acierto_pct": 45.92391304347826,
+        "brier": 0.5407608695652174,
+        "ic95_descriptivo": [
+          0.4090061936637637,
+          0.5103142911878505
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 79,
+        "acierto_pct": 73.41772151898734,
+        "brier": 0.26582278481012656,
+        "ic95_descriptivo": [
+          0.6275675648945112,
+          0.8190679419040056
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 813,
+        "acierto_pct": 50.30750307503075,
+        "brier": 0.4969249692496925,
+        "ic95_descriptivo": [
+          0.4687720301700936,
+          0.5373491076367957
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 140,
+        "acierto_pct": 74.28571428571429,
+        "brier": 0.2571428571428571,
+        "ic95_descriptivo": [
+          0.6646516640043542,
+          0.8080905746804214
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 77,
+        "acierto_pct": 38.96103896103896,
+        "brier": 0.6103896103896104,
+        "ic95_descriptivo": [
+          0.28842084532265894,
+          0.5012913820454289
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 22,
+        "acierto_pct": 90.9090909090909,
+        "brier": 0.09090909090909091,
+        "ic95_descriptivo": [
+          0.7218461934161421,
+          0.9747051037171623
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 130,
+        "acierto_pct": 50.76923076923077,
+        "brier": 0.49230769230769234,
+        "ic95_descriptivo": [
+          0.42277206871603834,
+          0.5921709684263747
+        ]
+      },
+      {
+        "predictor": "patron:ruptura_soporte_volumen",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 30,
+        "acierto_pct": 73.33333333333333,
+        "brier": 0.26666666666666666,
+        "ic95_descriptivo": [
+          0.5555169795568831,
+          0.8581750444608938
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 118,
+        "acierto_pct": 37.28813559322034,
+        "brier": 0.6271186440677966,
+        "ic95_descriptivo": [
+          0.29093039494611966,
+          0.4628482816306816
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 20,
+        "acierto_pct": 85.0,
+        "brier": 0.15,
+        "ic95_descriptivo": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 106,
+        "acierto_pct": 47.16981132075472,
+        "brier": 0.5283018867924528,
+        "ic95_descriptivo": [
+          0.37932593057045705,
+          0.5660499561609817
+        ]
+      },
+      {
+        "predictor": "patron:separacion_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 27,
+        "acierto_pct": 74.07407407407408,
+        "brier": 0.25925925925925924,
+        "ic95_descriptivo": [
+          0.5532106959738432,
+          0.8682979157713321
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 74,
+        "acierto_pct": 45.945945945945944,
+        "brier": 0.5405405405405406,
+        "ic95_descriptivo": [
+          0.35073184428251214,
+          0.5721885478985324
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.35433884297520657
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 69,
+        "acierto_pct": 53.6231884057971,
+        "brier": 0.463768115942029,
+        "ic95_descriptivo": [
+          0.4197820076036184,
+          0.6488600870236276
+        ]
+      },
+      {
+        "predictor": "patron:separacion_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 13,
+        "acierto_pct": 61.53846153846154,
+        "brier": 0.38461538461538464,
+        "ic95_descriptivo": [
+          0.3552248097226855,
+          0.8229055341876319
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 2051,
+        "acierto_pct": 50.36567528035105,
+        "brier": 0.49634324719648953,
+        "ic95_descriptivo": [
+          0.4820314287857248,
+          0.5252684039605074
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 525,
+        "acierto_pct": 88.76190476190476,
+        "brier": 0.11238095238095239,
+        "ic95_descriptivo": [
+          0.8577378204905853,
+          0.9118688065221157
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1806,
+        "acierto_pct": 43.90919158361019,
+        "brier": 0.5609080841638981,
+        "ic95_descriptivo": [
+          0.4163564585728481,
+          0.46208594213227455
+        ]
+      },
+      {
+        "predictor": "patron:soporte",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 589,
+        "acierto_pct": 65.70458404074702,
+        "brier": 0.34295415959252973,
+        "ic95_descriptivo": [
+          0.6178023886594397,
+          0.6942539852522426
+        ]
+      },
+      {
+        "predictor": "patron:tasuki_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.045586062644636216,
+          0.6993639475573634
+        ]
+      },
+      {
+        "predictor": "patron:tasuki_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 2,
+        "acierto_pct": 0.0,
+        "brier": 1.0,
+        "ic95_descriptivo": [
+          0.0,
+          0.6576280471103807
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 373,
+        "acierto_pct": 44.50402144772118,
+        "brier": 0.5549597855227882,
+        "ic95_descriptivo": [
+          0.3954200869630304,
+          0.495780884479613
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 69,
+        "acierto_pct": 84.05797101449275,
+        "brier": 0.15942028985507245,
+        "ic95_descriptivo": [
+          0.7366529959201307,
+          0.9085826935759813
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1589,
+        "acierto_pct": 56.32473253618628,
+        "brier": 0.4367526746381372,
+        "ic95_descriptivo": [
+          0.5387365604868369,
+          0.5874530116589434
+        ]
+      },
+      {
+        "predictor": "patron:tres_cuervos_negros",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 309,
+        "acierto_pct": 69.57928802588997,
+        "brier": 0.3042071197411003,
+        "ic95_descriptivo": [
+          0.64234975124375,
+          0.7444274548567174
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 11,
+        "acierto_pct": 63.63636363636363,
+        "brier": 0.36363636363636365,
+        "ic95_descriptivo": [
+          0.35379677689163724,
+          0.8483377638586862
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_abajo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.20765495512648788,
+          0.9385096847238393
+        ]
+      },
+      {
+        "predictor": "patron:tres_dentro_arriba",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 5,
+        "acierto_pct": 60.0,
+        "brier": 0.4,
+        "ic95_descriptivo": [
+          0.23071993220883702,
+          0.8823817688407467
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 25,
+        "acierto_pct": 48.0,
+        "brier": 0.52,
+        "ic95_descriptivo": [
+          0.30031003928960015,
+          0.665017820468527
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 118,
+        "acierto_pct": 38.983050847457626,
+        "brier": 0.6101694915254238,
+        "ic95_descriptivo": [
+          0.30663375206175597,
+          0.47997443430480513
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_abajo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 6,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.09676933255921684,
+          0.7000116786584712
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 34,
+        "acierto_pct": 23.529411764705884,
+        "brier": 0.7647058823529411,
+        "ic95_descriptivo": [
+          0.12436838109244344,
+          0.3999646280826443
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 92.85714285714286,
+        "brier": 0.07142857142857142,
+        "ic95_descriptivo": [
+          0.6853073044604219,
+          0.9872781138877085
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 130,
+        "acierto_pct": 33.07692307692308,
+        "brier": 0.6692307692307692,
+        "ic95_descriptivo": [
+          0.2557690588722058,
+          0.4154841239947055
+        ]
+      },
+      {
+        "predictor": "patron:tres_fuera_arriba",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 23,
+        "acierto_pct": 52.17391304347826,
+        "brier": 0.4782608695652174,
+        "ic95_descriptivo": [
+          0.32962429864218495,
+          0.7076313046005428
+        ]
+      },
+      {
+        "predictor": "patron:tres_metodos_ascendentes",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 582,
+        "acierto_pct": 48.281786941580755,
+        "brier": 0.5171821305841925,
+        "ic95_descriptivo": [
+          0.44246539706646865,
+          0.5233956821057855
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 68,
+        "acierto_pct": 91.17647058823529,
+        "brier": 0.08823529411764706,
+        "ic95_descriptivo": [
+          0.8205602176535451,
+          0.9589324439798259
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 1296,
+        "acierto_pct": 52.9320987654321,
+        "brier": 0.470679012345679,
+        "ic95_descriptivo": [
+          0.5020990053057561,
+          0.556369657337446
+        ]
+      },
+      {
+        "predictor": "patron:tres_soldados_blancos",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 157,
+        "acierto_pct": 70.70063694267516,
+        "brier": 0.2929936305732484,
+        "ic95_descriptivo": [
+          0.6315493666141511,
+          0.7725749395355017
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 3,
+        "acierto_pct": 33.333333333333336,
+        "brier": 0.6666666666666666,
+        "ic95_descriptivo": [
+          0.061490315276160515,
+          0.7923450448735121
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 13,
+        "acierto_pct": 53.84615384615385,
+        "brier": 0.46153846153846156,
+        "ic95_descriptivo": [
+          0.29143432431832045,
+          0.7679424569851186
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_ascendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.20765495512648788,
+          0.9385096847238393
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 17,
+        "acierto_pct": 41.1764705882353,
+        "brier": 0.5882352941176471,
+        "ic95_descriptivo": [
+          0.21610786039131383,
+          0.6399492561448445
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.5100999795960008,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 18,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.2903070395897999,
+          0.7096929604102001
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_descendente",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 4,
+        "acierto_pct": 50.0,
+        "brier": 0.5,
+        "ic95_descriptivo": [
+          0.15003570882017145,
+          0.8499642911798285
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 4,
+        "acierto_pct": 25.0,
+        "brier": 0.75,
+        "ic95_descriptivo": [
+          0.045586062644636216,
+          0.6993639475573634
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 24,
+        "acierto_pct": 62.5,
+        "brier": 0.375,
+        "ic95_descriptivo": [
+          0.42709619037907065,
+          0.7884086656636855
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_alcista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 7,
+        "acierto_pct": 71.42857142857143,
+        "brier": 0.2857142857142857,
+        "ic95_descriptivo": [
+          0.35892909014821267,
+          0.9177828342909845
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 17,
+        "acierto_pct": 35.294117647058826,
+        "brier": 0.6470588235294118,
+        "ic95_descriptivo": [
+          0.17309486143904904,
+          0.5870003327878818
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.565508505247919,
+          1.0000000000000002
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 44,
+        "acierto_pct": 45.45454545454545,
+        "brier": 0.5454545454545454,
+        "ic95_descriptivo": [
+          0.3170500778685361,
+          0.599340678293465
+        ]
+      },
+      {
+        "predictor": "patron:triangulo_simetrico_bajista",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 5,
+        "acierto_pct": 40.0,
+        "brier": 0.6,
+        "ic95_descriptivo": [
+          0.11761823115925325,
+          0.769280067791163
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 13,
+        "acierto_pct": 15.384615384615385,
+        "brier": 0.8461538461538461,
+        "ic95_descriptivo": [
+          0.04325726318273798,
+          0.4223517050863101
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 30,
+        "acierto_pct": 66.66666666666667,
+        "brier": 0.3333333333333333,
+        "ic95_descriptivo": [
+          0.4877972581383026,
+          0.807697044731538
+        ]
+      },
+      {
+        "predictor": "patron:triple_piso",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 2,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.3423719528896193,
+          1.0
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 55,
+        "acierto_pct": 54.54545454545455,
+        "brier": 0.45454545454545453,
+        "ic95_descriptivo": [
+          0.41522461348360484,
+          0.669749282535538
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 14,
+        "acierto_pct": 85.71428571428571,
+        "brier": 0.14285714285714285,
+        "ic95_descriptivo": [
+          0.600580922361363,
+          0.9599069262620787
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 29,
+        "acierto_pct": 37.93103448275862,
+        "brier": 0.6206896551724138,
+        "ic95_descriptivo": [
+          0.2268779573086734,
+          0.5599777379071503
+        ]
+      },
+      {
+        "predictor": "patron:triple_techo",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 1,
+        "acierto_pct": 100.0,
+        "brier": 0.0,
+        "ic95_descriptivo": [
+          0.20654329147389294,
+          1.0
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 39.79206049149338,
+        "brier": 0.6020793950850661,
+        "ic95_descriptivo": [
+          0.3868284882869139,
+          0.4091185667756396
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 38.53887399463807,
+        "brier": 0.6146112600536193,
+        "ic95_descriptivo": [
+          0.36101735379799155,
+          0.4103488122452579
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 44.37203416640304,
+        "brier": 0.5562796583359696,
+        "ic95_descriptivo": [
+          0.4359892574585889,
+          0.4514787781500416
+        ]
+      },
+      {
+        "predictor": "reversion_5d",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 41.409971419498255,
+        "brier": 0.5859002858050175,
+        "ic95_descriptivo": [
+          0.3970103625329396,
+          0.43139839736162666
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "ETF",
+        "horizonte": 1,
+        "n": 7406,
+        "acierto_pct": 53.551174723197406,
+        "brier": 0.4644882527680259,
+        "ic95_descriptivo": [
+          0.5241373712377235,
+          0.546849301405859
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "ETF",
+        "horizonte": 5,
+        "n": 1492,
+        "acierto_pct": 55.160857908847184,
+        "brier": 0.44839142091152817,
+        "ic95_descriptivo": [
+          0.5262723894244211,
+          0.5766796878543495
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "acción",
+        "horizonte": 1,
+        "n": 15805,
+        "acierto_pct": 49.07307813982917,
+        "brier": 0.5092692186017084,
+        "ic95_descriptivo": [
+          0.48294009211279343,
+          0.4985259755844122
+        ]
+      },
+      {
+        "predictor": "sube_siempre",
+        "tipo": "acción",
+        "horizonte": 5,
+        "n": 3149,
+        "acierto_pct": 52.270562083201014,
+        "brier": 0.47729437916798984,
+        "ic95_descriptivo": [
+          0.5052427408291021,
+          0.5401131692172508
+        ]
+      }
+    ],
+    "demo_contra_mantener": {
+      "BTC": {
+        "initial": 1000.0,
+        "net_liquidation": 971.8861031341443,
+        "hold_equity": 1005.8623659409317,
+        "vs_hold": -33.97626280678742,
+        "fees": 1.9718599610972396,
+        "quote_time": "2026-10-20T22:24:00.161850823Z"
+      },
+      "ETH": {
+        "initial": 1000.0,
+        "net_liquidation": 1000.0,
+        "hold_equity": 985.771424207017,
+        "vs_hold": 14.228575792982951,
+        "fees": 0.0,
+        "quote_time": "2026-10-20T22:23:59.623506879Z"
+      }
+    }
+  },
+  "aviso": "Resumen determinista de resultados disponibles, no reflexión de un LLM. Una fuente con fecha anterior no es una prueba hecha hoy. Acumulados no son aciertos del día. Sin etiquetas maduras, aún no se puede medir precisión. No hay ventaja futura demostrada."
+}
