@@ -1,4 +1,7 @@
 {
+ "version": "montecarlo-v2",
+ "generado_utc": "2026-10-21T15:12:48+00:00",
+ "corte_datos": "2026-10-19",
  "parametros": {
   "semilla": 20261017,
   "rondas": 20000,
@@ -8,169 +11,348 @@
    "VT": 0.8,
    "SPY": 0.2
   },
-  "dividendo_anual": {
-   "VT": 0.019,
-   "SPY": 0.013
-  },
   "horizontes_anios": [
    5,
    10,
    20
   ],
   "plan_esperado_anual": 0.07,
-  "ajuste_conservador_anual": -0.04
- },
- "ajuste_anual_aplicado": 0.0,
- "datos": {
-  "meses": 220,
-  "desde": "2008-07-31",
-  "hasta": "2026-10-31",
-  "nota": "precio sin dividendos + dividendo anual supuesto; historia desde jun-2008 (incluye 2008, 2020, 2022)"
- },
- "horizontes": {
-  "5": {
-   "aportado_usd": 6000.0,
-   "referencia_7pct_usd": 7119.59,
-   "final_usd": {
-    "p5": 5224.23,
-    "p25": 6740.03,
-    "p50": 7750.31,
-    "p75": 8746.49,
-    "p95": 10300.46
+  "ajuste_conservador_anual": -0.04,
+  "costos": {
+   "fondo": {
+    "VT": "VWRA",
+    "SPY": "VUAA"
    },
-   "prob_final_menor_aportado": 0.1232,
-   "prob_final_menor_referencia_7pct": 0.3366,
-   "peor_caida_maxima": {
-    "p5": -0.3179,
-    "p50": -0.1062,
-    "p95": -0.0353
+   "ter": {
+    "VWRA": 0.0019,
+    "VUAA": 0.0007,
+    "VT": 0.0006,
+    "SPY": 0.000945
    },
-   "prob_caida_peor_que_30pct": 0.067,
-   "prob_caida_peor_que_50pct": 0.0001,
-   "caminos_historicos": {
-    "n_ventanas_solapadas": 161,
-    "min_usd": 6041.32,
-    "max_usd": 9334.19
-   }
+   "dividendo_bruto": {
+    "VT": 0.019,
+    "SPY": 0.013
+   },
+   "fraccion_eeuu": {
+    "VT": 0.6,
+    "SPY": 1.0
+   },
+   "retencion_eeuu": 0.15,
+   "comision_xtb": 0.0,
+   "cambio_divisa": 0.0,
+   "diferencial_y_orden": 0.001,
+   "retiro_final": 0.0
   },
-  "10": {
-   "aportado_usd": 12000.0,
-   "referencia_7pct_usd": 17105.17,
-   "final_usd": {
-    "p5": 11595.61,
-    "p25": 16128.84,
-    "p50": 19940.4,
-    "p75": 24288.32,
-    "p95": 31648.84
-   },
-   "prob_final_menor_aportado": 0.0617,
-   "prob_final_menor_referencia_7pct": 0.3095,
-   "peor_caida_maxima": {
-    "p5": -0.4142,
-    "p50": -0.1975,
-    "p95": -0.0992
-   },
-   "prob_caida_peor_que_30pct": 0.2786,
-   "prob_caida_peor_que_50pct": 0.0069,
-   "caminos_historicos": {
-    "n_ventanas_solapadas": 101,
-    "min_usd": 15252.42,
-    "max_usd": 24940.72
-   }
-  },
-  "20": {
-   "aportado_usd": 24000.0,
-   "referencia_7pct_usd": 50753.64,
-   "final_usd": {
-    "p5": 30684.31,
-    "p25": 50106.95,
-    "p50": 69274.63,
-    "p75": 95224.3,
-    "p95": 147969.15
-   },
-   "prob_final_menor_aportado": 0.0162,
-   "prob_final_menor_referencia_7pct": 0.2585,
-   "peor_caida_maxima": {
-    "p5": -0.515,
-    "p50": -0.3545,
-    "p95": -0.1885
-   },
-   "prob_caida_peor_que_30pct": 0.612,
-   "prob_caida_peor_que_50pct": 0.0618,
-   "caminos_historicos": null
+  "historia_larga": {
+   "dividendo_neto_anual": 0.02
   }
  },
- "conservador": {
-  "5": {
-   "aportado_usd": 6000.0,
-   "referencia_7pct_usd": 7119.59,
-   "final_usd": {
-    "p5": 4741.86,
-    "p25": 6083.28,
-    "p50": 6974.66,
-    "p75": 7847.49,
-    "p95": 9209.69
+ "fuente": [
+  "datos/pit/precios/VT.csv.gz: cierre mensual 2008-06 a 2026-10 (base, proxy de VWRA)",
+  "datos/pit/precios/SPY.csv.gz: cierre mensual 1993-01 a 2026-10 (base, proxy de VUAA)",
+  "datos/pit/precios/_GSPC.csv.gz: cierre mensual 1950-01 a 2026-10 (historia_larga, S&P 500)",
+  "datos/pit/precios/VWRA.L.csv.gz: cierre mensual 2019-07 a 2026-10 (calibración, USD, acumulación)",
+  "Yahoo Finance vía datos/pit del motor",
+  "lab/montecarlo_plan.py"
+ ],
+ "metodo": [
+  "Bootstrap circular por bloques de 12 meses sobre retornos mensuales reales: 20,000 rondas con semilla fija 20261017; cada ronda encadena bloques de meses históricos, lo que conserva correlaciones y rachas. Base usa pares VT/SPY del mismo mes.",
+  "Aportes: US$100 al mes durante 5, 10 y 20 años, sin vender; cada aporte se reparte 80/20 y compone desde su mes de entrada (historia_larga: 100 % en el S&P 500).",
+  "Costos: cada aporte entra multiplicado por (1 - 0.001) (comisión 0 %, cambio 0 %, diferencial y orden límite 0.10 %). La pata VT resta 0.13 pp/año de TER frente a VT y la SPY suma 0.0245 pp/año frente a SPY; ambos se mensualizan como (1+x)^(1/12)-1.",
+  "Dividendos netos: VT 1.9 % bruto con retención de 15 % sobre 60 % EE. UU.; SPY 1.3 % bruto con retención total; ambos supuestos, no medidos.",
+  "Se reportan percentiles del saldo final y de la peor caída desde el máximo; costo_mediana_usd es la mediana sin costos (dividendos brutos, sin TER diferencial ni costo de compra) menos la mediana con costos, con la misma semilla.",
+  "Caminos históricos: todas las ventanas reales de cada horizonte, con los mismos aportes y costos (null si no hay historia suficiente). Calibración: VWRA.L real frente a la pata VT modelada en su período común; conservador: base con -4 %/año."
+ ],
+ "calibracion_vwra": {
+  "desde": "2019-08",
+  "hasta": "2026-10",
+  "meses": 87,
+  "cagr_vwra_real": 0.1286,
+  "cagr_modelo": 0.1246,
+  "diferencia_pp": -0.4
+ },
+ "escenarios": {
+  "base": {
+   "nombre": "Pares VT/SPY desde 2008, con costos y dividendos netos",
+   "datos": {
+    "desde": "2008-07",
+    "hasta": "2026-10",
+    "meses": 220
    },
-   "prob_final_menor_aportado": 0.2294,
-   "prob_final_menor_referencia_7pct": 0.5448,
-   "peor_caida_maxima": {
-    "p5": -0.3243,
-    "p50": -0.1111,
-    "p95": -0.0382
-   },
-   "prob_caida_peor_que_30pct": 0.0745,
-   "prob_caida_peor_que_50pct": 0.0001,
-   "caminos_historicos": {
-    "n_ventanas_solapadas": 161,
-    "min_usd": 5432.41,
-    "max_usd": 8390.21
+   "horizontes": {
+    "5": {
+     "aportado_usd": 6000.0,
+     "referencia_7pct_usd": 7119.59,
+     "final_usd": {
+      "p1": 4214.43,
+      "p5": 5167.81,
+      "p25": 6680.42,
+      "p50": 7683.18,
+      "p75": 8671.9,
+      "p95": 10208.76
+     },
+     "prob_final_menor_aportado": 0.1298,
+     "prob_final_menor_referencia_7pct": 0.3503,
+     "peor_caida_maxima": {
+      "p5": -0.3181,
+      "p50": -0.1064
+     },
+     "prob_caida_peor_que_30pct": 0.0672,
+     "prob_caida_peor_que_50pct": 0.0001,
+     "costo_mediana_usd": 62.28,
+     "caminos_historicos": {
+      "n_ventanas": 161,
+      "min_usd": 5992.42,
+      "p50_usd": 7639.96,
+      "max_usd": 9258.09,
+      "prob_perdida": 0.0062
+     }
+    },
+    "10": {
+     "aportado_usd": 12000.0,
+     "referencia_7pct_usd": 17105.17,
+     "final_usd": {
+      "p1": 8852.45,
+      "p5": 11360.62,
+      "p25": 15844.16,
+      "p50": 19591.66,
+      "p75": 23854.51,
+      "p95": 31065.76
+     },
+     "prob_final_menor_aportado": 0.0685,
+     "prob_final_menor_referencia_7pct": 0.3306,
+     "peor_caida_maxima": {
+      "p5": -0.4162,
+      "p50": -0.1979
+     },
+     "prob_caida_peor_que_30pct": 0.2791,
+     "prob_caida_peor_que_50pct": 0.0071,
+     "costo_mediana_usd": 317.91,
+     "caminos_historicos": {
+      "n_ventanas": 101,
+      "min_usd": 15009.51,
+      "p50_usd": 19910.19,
+      "max_usd": 24535.31,
+      "prob_perdida": 0.0
+     }
+    },
+    "20": {
+     "aportado_usd": 24000.0,
+     "referencia_7pct_usd": 50753.64,
+     "final_usd": {
+      "p1": 21014.49,
+      "p5": 29514.27,
+      "p25": 48298.32,
+      "p50": 66663.41,
+      "p75": 91595.37,
+      "p95": 142299.36
+     },
+     "prob_final_menor_aportado": 0.0195,
+     "prob_final_menor_referencia_7pct": 0.2853,
+     "peor_caida_maxima": {
+      "p5": -0.5191,
+      "p50": -0.3561
+     },
+     "prob_caida_peor_que_30pct": 0.6153,
+     "prob_caida_peor_que_50pct": 0.0659,
+     "costo_mediana_usd": 2300.22,
+     "caminos_historicos": null
+    }
    }
   },
-  "10": {
-   "aportado_usd": 12000.0,
-   "referencia_7pct_usd": 17105.17,
-   "final_usd": {
-    "p5": 9472.13,
-    "p25": 13011.5,
-    "p50": 15924.2,
-    "p75": 19246.17,
-    "p95": 24713.33
+  "historia_larga": {
+   "nombre": "S&P 500 desde 1950 como proxy de toda la cartera (solo EE. UU.)",
+   "datos": {
+    "desde": "1950-02",
+    "hasta": "2026-10",
+    "meses": 921
    },
-   "prob_final_menor_aportado": 0.1762,
-   "prob_final_menor_referencia_7pct": 0.5961,
-   "peor_caida_maxima": {
-    "p5": -0.4257,
-    "p50": -0.2046,
-    "p95": -0.1056
-   },
-   "prob_caida_peor_que_30pct": 0.2896,
-   "prob_caida_peor_que_50pct": 0.0084,
-   "caminos_historicos": {
-    "n_ventanas_solapadas": 101,
-    "min_usd": 12182.61,
-    "max_usd": 19858.94
+   "horizontes": {
+    "5": {
+     "aportado_usd": 6000.0,
+     "referencia_7pct_usd": 7119.59,
+     "final_usd": {
+      "p1": 4582.75,
+      "p5": 5483.36,
+      "p25": 6854.77,
+      "p50": 7862.93,
+      "p75": 8915.95,
+      "p95": 10534.36
+     },
+     "prob_final_menor_aportado": 0.1008,
+     "prob_final_menor_referencia_7pct": 0.3078,
+     "peor_caida_maxima": {
+      "p5": -0.2479,
+      "p50": -0.0832
+     },
+     "prob_caida_peor_que_30pct": 0.0167,
+     "prob_caida_peor_que_50pct": 0.0001,
+     "costo_mediana_usd": 116.33,
+     "caminos_historicos": {
+      "n_ventanas": 862,
+      "min_usd": 3744.83,
+      "p50_usd": 7853.18,
+      "max_usd": 12062.84,
+      "prob_perdida": 0.0824
+     }
+    },
+    "10": {
+     "aportado_usd": 12000.0,
+     "referencia_7pct_usd": 17105.17,
+     "final_usd": {
+      "p1": 9629.98,
+      "p5": 12201.42,
+      "p25": 16829.14,
+      "p50": 20739.9,
+      "p75": 25311.41,
+      "p95": 33448.41
+     },
+     "prob_final_menor_aportado": 0.0459,
+     "prob_final_menor_referencia_7pct": 0.2667,
+     "peor_caida_maxima": {
+      "p5": -0.3705,
+      "p50": -0.1705
+     },
+     "prob_caida_peor_que_30pct": 0.1129,
+     "prob_caida_peor_que_50pct": 0.0019,
+     "costo_mediana_usd": 634.53,
+     "caminos_historicos": {
+      "n_ventanas": 802,
+      "min_usd": 8158.25,
+      "p50_usd": 20335.53,
+      "max_usd": 36503.99,
+      "prob_perdida": 0.0299
+     }
+    },
+    "20": {
+     "aportado_usd": 24000.0,
+     "referencia_7pct_usd": 50753.64,
+     "final_usd": {
+      "p1": 25264.67,
+      "p5": 34833.66,
+      "p25": 55613.09,
+      "p50": 76577.79,
+      "p75": 105083.36,
+      "p95": 164098.01
+     },
+     "prob_final_menor_aportado": 0.0076,
+     "prob_final_menor_referencia_7pct": 0.1927,
+     "peor_caida_maxima": {
+      "p5": -0.4586,
+      "p50": -0.2764
+     },
+     "prob_caida_peor_que_30pct": 0.3676,
+     "prob_caida_peor_que_50pct": 0.0212,
+     "costo_mediana_usd": 5319.47,
+     "caminos_historicos": {
+      "n_ventanas": 682,
+      "min_usd": 27983.34,
+      "p50_usd": 64732.19,
+      "max_usd": 170225.06,
+      "prob_perdida": 0.0
+     }
+    }
    }
   },
-  "20": {
-   "aportado_usd": 24000.0,
-   "referencia_7pct_usd": 50753.64,
-   "final_usd": {
-    "p5": 20045.67,
-    "p25": 31376.05,
-    "p50": 42262.29,
-    "p75": 56773.12,
-    "p95": 85847.71
+  "conservador": {
+   "nombre": "Base con -4 %/año",
+   "datos": {
+    "desde": "2008-07",
+    "hasta": "2026-10",
+    "meses": 220
    },
-   "prob_final_menor_aportado": 0.1043,
-   "prob_final_menor_referencia_7pct": 0.6576,
-   "peor_caida_maxima": {
-    "p5": -0.5377,
-    "p50": -0.3683,
-    "p95": -0.199
-   },
-   "prob_caida_peor_que_30pct": 0.6458,
-   "prob_caida_peor_que_50pct": 0.0906,
-   "caminos_historicos": null
+   "horizontes": {
+    "5": {
+     "aportado_usd": 6000.0,
+     "referencia_7pct_usd": 7119.59,
+     "final_usd": {
+      "p1": 3832.05,
+      "p5": 4686.01,
+      "p25": 6032.06,
+      "p50": 6915.38,
+      "p75": 7782.42,
+      "p95": 9128.91
+     },
+     "prob_final_menor_aportado": 0.2422,
+     "prob_final_menor_referencia_7pct": 0.5619,
+     "peor_caida_maxima": {
+      "p5": -0.3243,
+      "p50": -0.1114
+     },
+     "prob_caida_peor_que_30pct": 0.0743,
+     "prob_caida_peor_que_50pct": 0.0001,
+     "costo_mediana_usd": 55.04,
+     "caminos_historicos": {
+      "n_ventanas": 161,
+      "min_usd": 5389.53,
+      "p50_usd": 6868.36,
+      "max_usd": 8323.34,
+      "prob_perdida": 0.0497
+     }
+    },
+    "10": {
+     "aportado_usd": 12000.0,
+     "referencia_7pct_usd": 17105.17,
+     "final_usd": {
+      "p1": 7337.44,
+      "p5": 9292.27,
+      "p25": 12795.31,
+      "p50": 15659.01,
+      "p75": 18910.78,
+      "p95": 24287.03
+     },
+     "prob_final_menor_aportado": 0.1907,
+     "prob_final_menor_referencia_7pct": 0.619,
+     "peor_caida_maxima": {
+      "p5": -0.4278,
+      "p50": -0.2051
+     },
+     "prob_caida_peor_que_30pct": 0.2905,
+     "prob_caida_peor_que_50pct": 0.0087,
+     "costo_mediana_usd": 240.59,
+     "caminos_historicos": {
+      "n_ventanas": 101,
+      "min_usd": 11998.49,
+      "p50_usd": 15883.22,
+      "max_usd": 19551.77,
+      "prob_perdida": 0.0099
+     }
+    },
+    "20": {
+     "aportado_usd": 24000.0,
+     "referencia_7pct_usd": 50753.64,
+     "final_usd": {
+      "p1": 14160.79,
+      "p5": 19370.24,
+      "p25": 30309.95,
+      "p50": 40808.14,
+      "p75": 54778.03,
+      "p95": 82776.72
+     },
+     "prob_final_menor_aportado": 0.119,
+     "prob_final_menor_referencia_7pct": 0.688,
+     "peor_caida_maxima": {
+      "p5": -0.5422,
+      "p50": -0.3696
+     },
+     "prob_caida_peor_que_30pct": 0.6493,
+     "prob_caida_peor_que_50pct": 0.0966,
+     "costo_mediana_usd": 1286.04,
+     "caminos_historicos": null
+    }
+   }
   }
- }
+ },
+ "limites": [
+  "base: solo 220 meses comunes (2008-07 a 2026-10) y casi todos alcistas; no incluye 2000-2002 ni décadas perdidas. Por eso se publica el conservador.",
+  "historia_larga es solo EE. UU. (S&P 500 vía ^GSPC): no representa la cartera global ni el tipo de cambio. Usa dividendo neto fijo de 2.0 %/año y TER combinado de 0.166 %/año.",
+  "Dividendos supuestos (1.9 % VT y 1.3 % SPY brutos; 2.0 % neto en historia_larga), no medidos.",
+  "Cargo de la tarjeta o del banco al depositar: no modelado. Cambio de divisa 0 % asumido (cuenta y ETF en USD).",
+  "Sin impuestos sobre ganancias ni costos de retiro (retiro final 0; XTB cobra US$30 solo en retiros menores de US$50).",
+  "Último mes parcial: los datos de VT llegan hasta 2026-10-19.",
+  "El bootstrap supone que el futuro se parece al pasado en bloques de 12 meses; no modela cambios de régimen de décadas ni cambios de correlación.",
+  "Calibración de VWRA.L: 87 meses, diferencia de -0.40 pp/año; el ajuste de TER del modelo es declarado, no medido.",
+  "No predice: acota rangos bajo los supuestos declarados."
+ ],
+ "veredicto": "A 20 años, en historia_larga (S&P 500 desde 1950, solo EE. UU.) el P5 del saldo final es US$34,834 y 0.8 % de las rondas termina por debajo de lo aportado (US$24,000). En base (muestra 2008-hoy, casi toda alcista) el P5 es US$29,514 y la probabilidad de pérdida es 1.9 %. El riesgo está en plazos cortos: a 5 años, en el conservador 24 % de las rondas pierde y el peor caso razonable (P5) es US$4,686 de US$6,000 aportados; desde 1950 la peor ventana real de 5 años terminó en US$3,745. Son rangos bajo supuestos declarados, no una predicción."
 }
