@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "fecha": "2026-10-22",
+  "fecha": "2026-10-23",
   "fuentes": {
     "marcador": {
-      "sha256": "8965659ec2042b5f2c9152857a3447f867608f35257e73458ab3b5f44f948ad9",
-      "fecha": "2026-10-22T22:11:19.505060+00:00",
+      "sha256": "0a1e5c0c86edfacaabfafbc592d068844c1378229635f644e7e8a05339c293c6",
+      "fecha": "2026-10-23T22:11:19.195053+00:00",
       "actualizado_hoy": true
     },
     "enciclopedia": {
@@ -13,8 +13,8 @@
       "actualizado_hoy": false
     },
     "demo_cripto": {
-      "sha256": "607c4f46d0c78463aa9178953f48889b06e262f0608f7bdc74330c2129a9a9e5",
-      "fecha": "2026-10-22T22:24:02.890250+00:00",
+      "sha256": "e7eee18691a910255553b549a213edf74e50fd11830f48fe27dd265d126ca87c",
+      "fecha": "2026-10-23T22:23:46.770264+00:00",
       "actualizado_hoy": true
     },
     "robots": {
@@ -32,7 +32,7 @@
   "frases": [
     "En el estudio histórico desde 2000-01-01 hasta antes de 2025-04-01 medí 85 patrones: 0 pasan todos los criterios después de costos. No es una medición de esta semana.",
     "Probé 3 robots en 24 casos históricos: 0 superan a mantener y al azar con corrección por pruebas múltiples.",
-    "En la demo BTC llevo US$971.89 frente a US$984.45 si hubiera mantenido, al corte 2026-10-22T22:24:01.188777419Z; son cuentas ficticias con reglas, no decisiones del chat.",
+    "En la demo BTC llevo US$971.89 frente a US$984.13 si hubiera mantenido, al corte 2026-10-23T22:23:43.859504396Z; son cuentas ficticias con reglas, no decisiones del chat.",
     "Tengo 177464 etiquetas maduras de pronósticos y 6 archivos registrados; sin etiquetas no puedo medir aciertos.",
     "Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada."
   ],
@@ -40,12 +40,12 @@
     {
       "fuente": "marcador",
       "descripcion": "Registro y calificación de pronósticos publicados con recibo",
-      "fecha_resultado": "2026-10-22T22:11:19.505060+00:00"
+      "fecha_resultado": "2026-10-23T22:11:19.195053+00:00"
     },
     {
       "fuente": "demo_cripto",
       "descripcion": "Observación de reglas cripto en cuentas ficticias",
-      "fecha_resultado": "2026-10-22T22:24:02.890250+00:00"
+      "fecha_resultado": "2026-10-23T22:23:46.770264+00:00"
     }
   ],
   "que_aprendio": {
@@ -3308,23 +3308,23 @@
     "patrones_pasan": 167,
     "robots_contrastes": 48,
     "robots_casos": 24,
-    "decisiones_demo_acumuladas": 3726,
+    "decisiones_demo_acumuladas": 4014,
     "cuentas_demo": {
       "BTC": {
         "initial": 1000.0,
         "net_liquidation": 971.8861031341443,
-        "hold_equity": 984.4549579052615,
-        "vs_hold": -12.56885477111723,
+        "hold_equity": 984.1341315060399,
+        "vs_hold": -12.248028371895657,
         "fees": 1.9718599610972396,
-        "quote_time": "2026-10-22T22:24:01.188777419Z"
+        "quote_time": "2026-10-23T22:23:43.859504396Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 954.4776657650092,
-        "vs_hold": 45.52233423499081,
+        "hold_equity": 959.0380828615652,
+        "vs_hold": 40.96191713843484,
         "fees": 0.0,
-        "quote_time": "2026-10-22T22:23:58.330221960Z"
+        "quote_time": "2026-10-23T22:23:44.104008603Z"
       }
     }
   },
@@ -6590,18 +6590,18 @@
       "BTC": {
         "initial": 1000.0,
         "net_liquidation": 971.8861031341443,
-        "hold_equity": 984.4549579052615,
-        "vs_hold": -12.56885477111723,
+        "hold_equity": 984.1341315060399,
+        "vs_hold": -12.248028371895657,
         "fees": 1.9718599610972396,
-        "quote_time": "2026-10-22T22:24:01.188777419Z"
+        "quote_time": "2026-10-23T22:23:43.859504396Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 954.4776657650092,
-        "vs_hold": 45.52233423499081,
+        "hold_equity": 959.0380828615652,
+        "vs_hold": 40.96191713843484,
         "fees": 0.0,
-        "quote_time": "2026-10-22T22:23:58.330221960Z"
+        "quote_time": "2026-10-23T22:23:44.104008603Z"
       }
     }
   },
