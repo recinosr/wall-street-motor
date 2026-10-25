@@ -103,16 +103,20 @@ def predict(d,sim,horizon,patterns=None):
     valid=x.notna().all(axis=1)&future.notna()
     train=x[valid]; y=(future[valid]>0).astype(int)
     if len(train)>=120 and last.notna().all() and y.nunique()==2:
-        model=make_pipeline(StandardScaler(),LogisticRegression(C=.1,max_iter=300));errors=[]
+        model=make_pipeline(StandardScaler(),LogisticRegression(C=.1,max_iter=300));errors=[];base_errors=[]
         boundaries=[int(len(train)*f) for f in (.5,.65,.8,1.)]
         for split,end in zip(boundaries[:-1],boundaries[1:]):
             if y.iloc[:split-horizon].nunique()<2:continue
             model.fit(train.iloc[:split-horizon],y.iloc[:split-horizon])
             p=model.predict_proba(train.iloc[split:end])[:,1]
             errors.extend((p-y.iloc[split:end].to_numpy())**2)
+            base_errors.extend((y.iloc[:split-horizon].mean()-y.iloc[split:end].to_numpy())**2)
         brier=float(np.mean(errors)) if errors else None
         model.fit(train,y)
         out['logistica']=float(model.predict_proba(x.tail(1))[0,1])
+        # Sin ventaja demostrada en validación cronológica previa al ancla, la salida se encoge a la tasa
+        # base: un modelo sin señal solo añade ruido (Brier por encima de la constante).
+        if errors and brier>=float(np.mean(base_errors)):out['logistica']=float(y.mean())
     else:brier=None
     # Incluye cada patrón activo; patrones neutros y ausencias se abstienen.
     signals=patterns if patterns is not None else detect(d.tail(300),last_only=True)
@@ -421,7 +425,7 @@ def generate(kind,now=None):
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')
     save_once(path,{'version':2,'publicado':published.isoformat(),'deadline':deadline.isoformat(),
         'run_id':os.environ.get('GITHUB_RUN_ID'),'head_sha':os.environ.get('GITHUB_SHA'),'tipo':kind,'filas':rows,'fallas':failures,
-        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte, sin ajuste por resultado',
+        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte; sin ventaja en validación previa se encoge a la tasa base; sin ajuste por resultado',
         'predictores_registrados':5+sum(bool(r['direccion']) for r in catalog()),
         'aviso':'Dirección entre cierre anterior y cierre objetivo. Patrones se abstienen sin señal. No es simulación de ejecución.'})
 

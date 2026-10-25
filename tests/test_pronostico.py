@@ -89,6 +89,13 @@ class ForecastTests(unittest.TestCase):
         p,b=predict(d,'A',5);self.assertIn('logistica',p)
         self.assertTrue({'tasa_base','momentum_1m','momentum_3m','momentum_12m','reversion_2pct','reversion_5pct','reversion_10pct','tendencia_sma200'}<=set(p))
         self.assertTrue(all(0<=x<=1 for x in p.values()));self.assertGreaterEqual(b,0)
+    def test_logistic_shrinks_to_base_rate_without_validated_edge(self):
+        rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
+        d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))
+        p,b=predict(d,'A',1)
+        future=d.close.shift(-1)/d.close-1;x=features(d);ok=x.notna().all(axis=1)&future.notna()
+        base=float((future[ok]>0).mean())
+        self.assertTrue(abs(p['logistica']-base)<1e-12 or b<.25)
     def test_no_fake_score(self):
         self.assertEqual(summary([]),[]);self.assertIsNone(wilson(0,0))
         self.assertLess(wilson(5,10)[0],.5)
