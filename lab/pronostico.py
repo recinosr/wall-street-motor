@@ -127,23 +127,45 @@ def save_once(path,payload):
     with path.open('x',encoding='utf8') as f:json.dump(payload,f,ensure_ascii=False,allow_nan=False)
 
 
-def hedge_weights(sim, horizon):
-    """Hedge weights from mature labels only, partitioned by asset and horizon."""
-    rows=[]
-    for path in (ROOT/'resultados/calificaciones').glob('*.json'):
-        try:
-            rows.extend(r for r in json.loads(path.read_text(encoding='utf8')).get('filas', [])
-                        if r.get('sim')==sim and r.get('horizonte')==horizon)
-        except (OSError, ValueError):
-            continue
-    names=sorted({r['predictor'] for r in rows if r.get('predictor') not in ('ensamble_hedge', 'azar')})
-    if not names:
+_LABELS={}
+
+
+def matured_labels():
+    """Índice (sim, horizonte) -> predictor -> [(objetivo, pérdida Brier)] de las etiquetas ya calificadas.
+
+    Se lee una sola vez por proceso (se invalida si cambia la carpeta): releer ~28 mil archivos por
+    activo y horizonte dejaba el registro colgado hasta el tiempo límite del workflow."""
+    directory=ROOT/'resultados/calificaciones'
+    try:stamp=(str(directory),directory.stat().st_mtime_ns)
+    except OSError:return {}
+    if _LABELS.get('stamp')!=stamp:
+        index={}
+        for path in directory.glob('*.json'):
+            try:filas=json.loads(path.read_text(encoding='utf8')).get('filas',[])
+            except (OSError,ValueError):continue
+            for r in filas:
+                if r.get('predictor') in ('ensamble_hedge','azar','tasa_base'):continue
+                index.setdefault((r.get('sim'),r.get('horizonte')),{}).setdefault(r['predictor'],[]).append(
+                    (r['objetivo'],(float(r['p'])-int(r['y']))**2))
+        _LABELS.clear();_LABELS.update(stamp=stamp,index=index)
+    return _LABELS['index']
+
+
+def hedge_weights(sim, horizon, names=None, asof=None):
+    """Hedge weights from mature labels only, partitioned by asset and horizon.
+
+    Pérdida Brier promedio por etiqueta; `names` limita a los predictores vigentes y `asof` (fecha ISO
+    del ancla) descarta etiquetas cuyo objetivo no había ocurrido todavía."""
+    by_name=matured_labels().get((sim,horizon),{})
+    losses={};counts={}
+    for name,items in by_name.items():
+        if names is not None and name not in names:continue
+        vals=[l for day,l in items if asof is None or day<=asof]
+        if vals:losses[name]=sum(vals)/len(vals);counts[name]=len(vals)
+    if not losses:
         return {}, 'Pesos iguales hasta que maduren etiquetas prospectivas.'
-    counts={name:sum(1 for r in rows if r['predictor']==name) for name in names}
-    names=[n for n in names if counts[n]]; k=len(names)
-    losses={name:sum((float(r['p'])-int(r['y']))**2 for r in rows if r['predictor']==name)/counts[name] for name in names}
     weights,eta=hedge_distribution(losses,counts)
-    return weights, f'Hedge Brier promedio, eta=sqrt(8 ln K/T)={eta:.4g}; {len(rows)} etiquetas maduras.'
+    return weights, f'Hedge Brier promedio, eta=sqrt(8 ln K/T)={eta:.4g}; {sum(counts.values())} etiquetas maduras.'
 
 
 def hedge_distribution(losses,counts):
@@ -346,7 +368,7 @@ def generate(kind,now=None):
                 preds['calendario_macro']=calendar['probabilidad']
                 news=news_by_symbol.get(a['sim'])
                 if news:preds['noticias_gemini']={'positivo':.65,'neutro':.5,'negativo':.35}[news['sentimiento']]
-                weights,hedge_reason=hedge_weights(a['sim'],h)
+                weights,hedge_reason=hedge_weights(a['sim'],h,names=set(preds),asof=d.index[-1].date().isoformat())
                 preds['ensamble_hedge']=hedge_probability(preds,weights)
                 wf=walk_forward_report(wf_data,a['sim'],h,cutoff=d.index[-1])
                 if not weights and wf['pesos']:

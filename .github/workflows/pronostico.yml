@@ -2,6 +2,7 @@ name: Pronóstico prospectivo y marcador
 on:
   schedule:
     - cron: '0 0 * * *'
+    - cron: '15 8 * * 1-5'
     - cron: '15 12 * * 1-5'
   workflow_dispatch:
     inputs:
