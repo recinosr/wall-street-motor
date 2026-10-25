@@ -168,6 +168,23 @@ def hedge_weights(sim, horizon, names=None, asof=None):
     return weights, f'Hedge Brier promedio, eta=sqrt(8 ln K/T)={eta:.4g}; {sum(counts.values())} etiquetas maduras.'
 
 
+def hedge_today(asof):
+    """Pesos Hedge con todas las etiquetas maduras (todos los activos) por horizonte, para el marcador."""
+    pooled={}
+    for (sim,horizon),by_name in matured_labels().items():
+        for name,items in by_name.items():
+            acc=pooled.setdefault(horizon,{}).setdefault(name,[0.,0])
+            for day,loss in items:
+                if day<=asof:acc[0]+=loss;acc[1]+=1
+    out={}
+    for horizon,by_name in sorted(pooled.items()):
+        losses={n:v[0]/v[1] for n,v in by_name.items() if v[1]};counts={n:v[1] for n,v in by_name.items() if v[1]}
+        weights,eta=hedge_distribution(losses,counts)
+        if weights:out[str(horizon)]={'pesos':weights,'perdida_brier':losses,'etiquetas':counts,'eta':eta,'k':len(weights),
+            'regla':'pérdida Brier promedio por etiqueta; eta=sqrt(8 ln K/T), T=máx. etiquetas; piso 1/(4K); solo etiquetas maduras'}
+    return out
+
+
 def hedge_distribution(losses,counts):
     names=[n for n in losses if counts.get(n,0)>0];k=len(names)
     if not k:return {},0.
@@ -572,7 +589,7 @@ def score(now=None):
     r={'version':2,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
-        'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,'curva_pesos_hedge':hedge_curve,
+        'pronostico_publicado':latest['publicado'],'pronostico_sha256':latest['sha256'],'pronosticos_hoy':latest['filas'],'curva_brier':curve,'curva_pesos_hedge':hedge_curve,'hedge_hoy':hedge_today(pd.Timestamp(now.date()).date().isoformat()),
         'walk_forward_inicializacion':[{'sim':row['sim'],'horizonte':row['horizonte'],**row['walk_forward']} for row in latest['filas'] if row.get('walk_forward')],
         'aviso':'Sin etiquetas maduras no hay aciertos. IC Wilson descriptivo supone independencia; IC de diferencias agrupa por día. No afirmar ventaja tras selección de miles de contrastes; costos 0.5% por lado.'}
     from lab.enciclopedia import bh

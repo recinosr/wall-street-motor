@@ -6,7 +6,7 @@ from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score, signal_features, walk_forward_report, hedge_distribution
+from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score, signal_features, walk_forward_report, hedge_distribution, hedge_weights, hedge_today
 from lab.enciclopedia import detect
 
 class ForecastTests(unittest.TestCase):
@@ -66,6 +66,23 @@ class ForecastTests(unittest.TestCase):
         self.assertLess(max(weights.values()),.4)
         self.assertAlmostEqual(sum(weights.values()),1.)
         self.assertAlmostEqual(eta,np.sqrt(8*np.log(10)/100))
+    def test_hedge_uses_only_mature_labels_and_floor(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);cal=root/'resultados/calificaciones';cal.mkdir(parents=True)
+            def row(name,p,y,day):return dict(sim='A',horizonte=1,predictor=name,p=p,y=y,objetivo=day)
+            filas=[row('bueno',.9,1,'2026-10-01'),row('malo',.1,1,'2026-10-01'),row('azar',1.,1,'2026-10-01'),
+                   row('bueno',.1,1,'2026-10-20')]
+            (cal/'x.json').write_text(json.dumps({'filas':filas}))
+            with patch('lab.pronostico.ROOT',root):
+                weights,reason=hedge_weights('A',1,asof='2026-10-10')
+                self.assertEqual(set(weights),{'bueno','malo'})
+                self.assertGreater(weights['bueno'],weights['malo'])
+                self.assertGreaterEqual(min(weights.values()),1/8-1e-12);self.assertAlmostEqual(sum(weights.values()),1.)
+                self.assertIn('2 etiquetas',reason)
+                self.assertEqual(hedge_weights('B',1)[0],{})
+                self.assertEqual(set(hedge_weights('A',1,names={'bueno'})[0]),{'bueno'})
+                today=hedge_today('2026-10-10');self.assertEqual(today['1']['k'],2)
+                self.assertAlmostEqual(today['1']['eta'],np.sqrt(8*np.log(2)/1))
     def test_predict_probability(self):
         rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
         d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))
