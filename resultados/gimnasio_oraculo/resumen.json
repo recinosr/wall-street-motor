@@ -1,98 +1,98 @@
 {
- "actualizado": "2026-10-26T05:22Z",
- "repeticiones_entrenamiento": 500,
- "repeticiones_validacion": 200,
- "sesiones": 1,
+ "actualizado": "2026-10-26T12:49Z",
+ "repeticiones_entrenamiento": 1000,
+ "repeticiones_validacion": 400,
+ "sesiones": 2,
  "top5_skill_validacion": [
   {
-   "metodo": "rsi",
-   "skill": 0.010479031790285975,
-   "brier": 0.23981863971510284,
-   "t": 2.0278482864913276,
-   "n": 600
+   "metodo": "soporte_resist_20",
+   "skill": 0.006681323081439761,
+   "brier": 0.23976902885378668,
+   "t": 1.5073634179265063,
+   "n": 1200
   },
   {
    "metodo": "reversion_caida",
-   "skill": 0.009952257434405087,
-   "brier": 0.23994630786314897,
-   "t": 2.0402544806102805,
-   "n": 600
+   "skill": 0.00630071504414309,
+   "brier": 0.23986090069874147,
+   "t": 1.7636039010628337,
+   "n": 1200
   },
   {
-   "metodo": "soporte_resist_20",
-   "skill": 0.007913887804517516,
-   "brier": 0.24044032370271287,
-   "t": 1.2636264399947326,
-   "n": 600
+   "metodo": "rsi",
+   "skill": 0.0055463829994194525,
+   "brier": 0.24004298270927785,
+   "t": 1.5175786660285624,
+   "n": 1200
   },
   {
    "metodo": "momentum_1m",
-   "skill": 0.007251355374546797,
-   "brier": 0.24060089394955686,
-   "t": 1.4871955841686042,
-   "n": 600
+   "skill": 0.0037426890294945947,
+   "brier": 0.24047836156761154,
+   "t": 0.991878962050741,
+   "n": 1200
   },
   {
    "metodo": "calendario",
-   "skill": 0.005280011759472347,
-   "brier": 0.24107866547675708,
-   "t": 0.7956964686983241,
-   "n": 600
+   "skill": 0.0023412658404524667,
+   "brier": 0.24081663958941638,
+   "t": 0.5423355689747361,
+   "n": 1200
   }
  ],
  "ensamble_validacion": {
-  "skill": 0.006721079212025027,
-  "brier": 0.24072941078957835,
-  "t": 1.8293071404984529,
-  "n": 600
+  "skill": 0.00392526452233577,
+  "brier": 0.24043429117043866,
+  "t": 1.3699565613670193,
+  "n": 1200
  },
- "tasa_base_brier_validacion": 0.24235832025772383,
+ "tasa_base_brier_validacion": 0.2413817785019306,
  "pesos_hedge": {
   "1": {
-   "tendencia_sma200": 0.07387808963699641,
-   "momentum_1m": 0.07614720949103802,
-   "momentum_3m": 0.07418614380381709,
-   "momentum_12m": 0.07472892534938459,
-   "reversion_caida": 0.07998308513099626,
-   "volumen_anomalo": 0.07659921249145896,
-   "soporte_resist_20": 0.07178445850929936,
-   "soporte_resist_60": 0.07163430466938202,
-   "rsi": 0.07476220963943059,
-   "calendario": 0.08847262566984193,
-   "eventos": 0.07885399829749884,
-   "regimen_volatilidad": 0.07459940040458521,
-   "logistica": 0.08437033690627078
+   "calendario": 0.07464889991973567,
+   "eventos": 0.0773485947394098,
+   "logistica": 0.0831715515893017,
+   "momentum_12m": 0.07661485742819313,
+   "momentum_1m": 0.081006271227141,
+   "momentum_3m": 0.07565613694741939,
+   "regimen_volatilidad": 0.07454994098244032,
+   "reversion_caida": 0.0761799703568593,
+   "rsi": 0.07760585428996206,
+   "soporte_resist_20": 0.07662614574889118,
+   "soporte_resist_60": 0.07474594548272934,
+   "tendencia_sma200": 0.07529374846956216,
+   "volumen_anomalo": 0.07655208281835496
   },
   "5": {
-   "tendencia_sma200": 0.07558424070796367,
-   "momentum_1m": 0.07828665304215429,
-   "momentum_3m": 0.07774454279069666,
-   "momentum_12m": 0.07564343792247186,
-   "reversion_caida": 0.07472158250630155,
-   "volumen_anomalo": 0.07699229900512697,
-   "soporte_resist_20": 0.07698313074796145,
-   "soporte_resist_60": 0.07607757622905778,
-   "rsi": 0.07975922637861106,
-   "calendario": 0.07616228090575604,
-   "eventos": 0.07489620640050859,
-   "regimen_volatilidad": 0.07757350886072947,
-   "logistica": 0.07957531450266059
+   "calendario": 0.07834110998725088,
+   "eventos": 0.07820014129174307,
+   "logistica": 0.06570904153732726,
+   "momentum_12m": 0.07840742983653863,
+   "momentum_1m": 0.08104075622950188,
+   "momentum_3m": 0.0775954833943304,
+   "regimen_volatilidad": 0.08190338194338259,
+   "reversion_caida": 0.07585219490427601,
+   "rsi": 0.07844689005738537,
+   "soporte_resist_20": 0.07517047561960946,
+   "soporte_resist_60": 0.07365742079064444,
+   "tendencia_sma200": 0.07620134839823568,
+   "volumen_anomalo": 0.07947432600977428
   },
   "21": {
-   "tendencia_sma200": 0.07587871897190865,
-   "momentum_1m": 0.07476019342535954,
-   "momentum_3m": 0.07624558923161685,
-   "momentum_12m": 0.07193977946380328,
-   "reversion_caida": 0.07459451968564922,
-   "volumen_anomalo": 0.07830899636052377,
-   "soporte_resist_20": 0.08396869238795175,
-   "soporte_resist_60": 0.08396968173709357,
-   "rsi": 0.08144961920323632,
-   "calendario": 0.08185012320594504,
-   "eventos": 0.07129294857126334,
-   "regimen_volatilidad": 0.07679245021170697,
-   "logistica": 0.06894868754394169
+   "calendario": 0.0756707826729241,
+   "eventos": 0.07527152448744684,
+   "logistica": 0.06471924065041737,
+   "momentum_12m": 0.07373217151708818,
+   "momentum_1m": 0.0750288127045608,
+   "momentum_3m": 0.07866451025764548,
+   "regimen_volatilidad": 0.07521586932979374,
+   "reversion_caida": 0.07869776443190601,
+   "rsi": 0.07888757652372255,
+   "soporte_resist_20": 0.08629565665301503,
+   "soporte_resist_60": 0.08363161732932849,
+   "tendencia_sma200": 0.07571284937447992,
+   "volumen_anomalo": 0.07847162406767152
   }
  },
- "frase": "rsi supera la tasa base en validación (skill 0.0105, t=2.0); falta confirmarlo en la prueba sellada y fuera de muestra, la t es optimista por solapamiento."
+ "frase": "El mejor método (soporte_resist_20) supera la tasa base por 0.0067 de skill, pero t=1.5<2: indistinguible de ruido (las repeticiones se solapan, la t es optimista)."
 }
