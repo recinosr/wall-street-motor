@@ -1,0 +1,98 @@
+{
+ "actualizado": "2026-10-26T05:22Z",
+ "repeticiones_entrenamiento": 500,
+ "repeticiones_validacion": 200,
+ "sesiones": 1,
+ "top5_skill_validacion": [
+  {
+   "metodo": "rsi",
+   "skill": 0.010479031790285975,
+   "brier": 0.23981863971510284,
+   "t": 2.0278482864913276,
+   "n": 600
+  },
+  {
+   "metodo": "reversion_caida",
+   "skill": 0.009952257434405087,
+   "brier": 0.23994630786314897,
+   "t": 2.0402544806102805,
+   "n": 600
+  },
+  {
+   "metodo": "soporte_resist_20",
+   "skill": 0.007913887804517516,
+   "brier": 0.24044032370271287,
+   "t": 1.2636264399947326,
+   "n": 600
+  },
+  {
+   "metodo": "momentum_1m",
+   "skill": 0.007251355374546797,
+   "brier": 0.24060089394955686,
+   "t": 1.4871955841686042,
+   "n": 600
+  },
+  {
+   "metodo": "calendario",
+   "skill": 0.005280011759472347,
+   "brier": 0.24107866547675708,
+   "t": 0.7956964686983241,
+   "n": 600
+  }
+ ],
+ "ensamble_validacion": {
+  "skill": 0.006721079212025027,
+  "brier": 0.24072941078957835,
+  "t": 1.8293071404984529,
+  "n": 600
+ },
+ "tasa_base_brier_validacion": 0.24235832025772383,
+ "pesos_hedge": {
+  "1": {
+   "tendencia_sma200": 0.07387808963699641,
+   "momentum_1m": 0.07614720949103802,
+   "momentum_3m": 0.07418614380381709,
+   "momentum_12m": 0.07472892534938459,
+   "reversion_caida": 0.07998308513099626,
+   "volumen_anomalo": 0.07659921249145896,
+   "soporte_resist_20": 0.07178445850929936,
+   "soporte_resist_60": 0.07163430466938202,
+   "rsi": 0.07476220963943059,
+   "calendario": 0.08847262566984193,
+   "eventos": 0.07885399829749884,
+   "regimen_volatilidad": 0.07459940040458521,
+   "logistica": 0.08437033690627078
+  },
+  "5": {
+   "tendencia_sma200": 0.07558424070796367,
+   "momentum_1m": 0.07828665304215429,
+   "momentum_3m": 0.07774454279069666,
+   "momentum_12m": 0.07564343792247186,
+   "reversion_caida": 0.07472158250630155,
+   "volumen_anomalo": 0.07699229900512697,
+   "soporte_resist_20": 0.07698313074796145,
+   "soporte_resist_60": 0.07607757622905778,
+   "rsi": 0.07975922637861106,
+   "calendario": 0.07616228090575604,
+   "eventos": 0.07489620640050859,
+   "regimen_volatilidad": 0.07757350886072947,
+   "logistica": 0.07957531450266059
+  },
+  "21": {
+   "tendencia_sma200": 0.07587871897190865,
+   "momentum_1m": 0.07476019342535954,
+   "momentum_3m": 0.07624558923161685,
+   "momentum_12m": 0.07193977946380328,
+   "reversion_caida": 0.07459451968564922,
+   "volumen_anomalo": 0.07830899636052377,
+   "soporte_resist_20": 0.08396869238795175,
+   "soporte_resist_60": 0.08396968173709357,
+   "rsi": 0.08144961920323632,
+   "calendario": 0.08185012320594504,
+   "eventos": 0.07129294857126334,
+   "regimen_volatilidad": 0.07679245021170697,
+   "logistica": 0.06894868754394169
+  }
+ },
+ "frase": "rsi supera la tasa base en validación (skill 0.0105, t=2.0); falta confirmarlo en la prueba sellada y fuera de muestra, la t es optimista por solapamiento."
+}
