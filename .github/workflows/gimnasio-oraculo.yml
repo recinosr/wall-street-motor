@@ -1,0 +1,43 @@
+name: gimnasio-oraculo
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gimnasio-oraculo
+  cancel-in-progress: false
+jobs:
+  sesion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install pandas numpy scikit-learn
+      - run: python -m unittest tests.test_gimnasio_oraculo
+        env:
+          PYTHONPATH: .
+      - name: Sesión de 500 repeticiones de entrenamiento y 200 de validación
+        run: python -m lab.gimnasio_oraculo --train 500 --val 200
+        env:
+          PYTHONPATH: .
+      - name: Publicar solo resultados/gimnasio_oraculo
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add -A resultados/gimnasio_oraculo
+          git diff --cached --quiet && exit 0
+          git commit -m "gimnasio-oraculo $(date -u +%FT%H:%MZ)"
+          for intento in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep $((intento * 3))
+          done
+          echo 'Publicación agotó reintentos' >&2
+          exit 1
