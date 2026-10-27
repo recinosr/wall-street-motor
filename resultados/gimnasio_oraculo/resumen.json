@@ -1,98 +1,98 @@
 {
- "actualizado": "2026-10-27T10:27Z",
- "repeticiones_entrenamiento": 3000,
- "repeticiones_validacion": 1200,
- "sesiones": 6,
+ "actualizado": "2026-10-27T16:29Z",
+ "repeticiones_entrenamiento": 3500,
+ "repeticiones_validacion": 1400,
+ "sesiones": 7,
  "top5_skill_validacion": [
   {
    "metodo": "eventos",
-   "skill": 0.0022825590595768608,
-   "brier": 0.24230871225865333,
-   "t": 1.1637452842970295,
-   "n": 3600
+   "skill": 0.0027129155713859765,
+   "brier": 0.2426623075373309,
+   "t": 1.493865795323941,
+   "n": 4200
   },
   {
    "metodo": "reversion_caida",
-   "skill": 0.0016322743506823612,
-   "brier": 0.24246664239392812,
-   "t": 0.8420688477803889,
-   "n": 3600
+   "skill": 0.0025464271877316813,
+   "brier": 0.24270281789386366,
+   "t": 1.412345628569277,
+   "n": 4200
   },
   {
    "metodo": "rsi",
-   "skill": 0.0011770797075254524,
-   "brier": 0.24257719235856182,
-   "t": 0.5922994128556636,
-   "n": 3600
-  },
-  {
-   "metodo": "soporte_resist_20",
-   "skill": 0.0011537991124573876,
-   "brier": 0.2425828463551545,
-   "t": 0.48554142327644967,
-   "n": 3600
+   "skill": 0.00131880112594851,
+   "brier": 0.2430015268389574,
+   "t": 0.7143914120480866,
+   "n": 4200
   },
   {
    "metodo": "momentum_1m",
-   "skill": 0.0006242396285719432,
-   "brier": 0.24271145679267847,
-   "t": 0.31109109182623296,
-   "n": 3600
+   "skill": 0.0010777690622848501,
+   "brier": 0.2430601753441595,
+   "t": 0.5841741330020349,
+   "n": 4200
+  },
+  {
+   "metodo": "soporte_resist_20",
+   "skill": 0.0009885938687876905,
+   "brier": 0.24308187366810952,
+   "t": 0.45520093545923224,
+   "n": 4200
   }
  ],
  "ensamble_validacion": {
-  "skill": 0.0009313172026510497,
-  "brier": 0.24263687899290734,
-  "t": 0.5480126359663906,
-  "n": 3600
+  "skill": 0.0013250529649058151,
+  "brier": 0.24300000562636834,
+  "t": 0.834932393423391,
+  "n": 4200
  },
- "tasa_base_brier_validacion": 0.24286306154000806,
+ "tasa_base_brier_validacion": 0.24332242072137325,
  "pesos_hedge": {
   "1": {
-   "calendario": 0.0740266685416668,
-   "eventos": 0.07773430375989013,
-   "logistica": 0.07319307900633001,
-   "momentum_12m": 0.08011289968389668,
-   "momentum_1m": 0.07820325091913283,
-   "momentum_3m": 0.07720261669389027,
-   "regimen_volatilidad": 0.07507424568035795,
-   "reversion_caida": 0.07696732423535976,
-   "rsi": 0.07901272653099897,
-   "soporte_resist_20": 0.07605257337312585,
-   "soporte_resist_60": 0.07686440840983194,
-   "tendencia_sma200": 0.07701555970892104,
-   "volumen_anomalo": 0.07854034345659774
+   "calendario": 0.07368622894542737,
+   "eventos": 0.0798198139954178,
+   "logistica": 0.07381632891019,
+   "momentum_12m": 0.07873305851348872,
+   "momentum_1m": 0.07711010585251873,
+   "momentum_3m": 0.07714128257033509,
+   "regimen_volatilidad": 0.07532355866409204,
+   "reversion_caida": 0.07644736178496536,
+   "rsi": 0.07950369651856362,
+   "soporte_resist_20": 0.07574289280780178,
+   "soporte_resist_60": 0.07777008460294316,
+   "tendencia_sma200": 0.07704458827053015,
+   "volumen_anomalo": 0.07786099856372623
   },
   "5": {
-   "calendario": 0.08013831112793182,
-   "eventos": 0.07598979799706664,
-   "logistica": 0.060548016450722955,
-   "momentum_12m": 0.08399400645642359,
-   "momentum_1m": 0.07780058187338938,
-   "momentum_3m": 0.0779592687119809,
-   "regimen_volatilidad": 0.08841558652656029,
-   "reversion_caida": 0.0749102853176337,
-   "rsi": 0.07581555510231096,
-   "soporte_resist_20": 0.07300680757114822,
-   "soporte_resist_60": 0.07514105067566891,
-   "tendencia_sma200": 0.0766850032304226,
-   "volumen_anomalo": 0.0795957289587401
+   "calendario": 0.07960088185574185,
+   "eventos": 0.07600623855451222,
+   "logistica": 0.05620401942637366,
+   "momentum_12m": 0.08392407833103216,
+   "momentum_1m": 0.07810568996816954,
+   "momentum_3m": 0.0782075814731319,
+   "regimen_volatilidad": 0.09237095978815,
+   "reversion_caida": 0.07696468446731322,
+   "rsi": 0.07629734003050771,
+   "soporte_resist_20": 0.07248714573232681,
+   "soporte_resist_60": 0.07400451917011097,
+   "tendencia_sma200": 0.07699140210395344,
+   "volumen_anomalo": 0.07883545909867647
   },
   "21": {
-   "calendario": 0.06609739760747721,
-   "eventos": 0.06979779952829887,
-   "logistica": 0.07485043404510461,
-   "momentum_12m": 0.07915285921222046,
-   "momentum_1m": 0.07730184247513407,
-   "momentum_3m": 0.07789628995470765,
-   "regimen_volatilidad": 0.08585745145882104,
-   "reversion_caida": 0.07692880485033832,
-   "rsi": 0.077462711311483,
-   "soporte_resist_20": 0.07672815461040206,
-   "soporte_resist_60": 0.07901979030887005,
-   "tendencia_sma200": 0.07874140266761087,
-   "volumen_anomalo": 0.08016506196953184
+   "calendario": 0.06541340099392276,
+   "eventos": 0.06940029538452593,
+   "logistica": 0.07444400510827834,
+   "momentum_12m": 0.07954287728092399,
+   "momentum_1m": 0.07757596443985995,
+   "momentum_3m": 0.07799502917763854,
+   "regimen_volatilidad": 0.0839700989514937,
+   "reversion_caida": 0.07571271651363787,
+   "rsi": 0.07805144600627464,
+   "soporte_resist_20": 0.07734371656612124,
+   "soporte_resist_60": 0.08032874908396746,
+   "tendencia_sma200": 0.0799770503399051,
+   "volumen_anomalo": 0.0802446501534505
   }
  },
- "frase": "El mejor método (eventos) supera la tasa base por 0.0023 de skill, pero t=1.2<2: indistinguible de ruido (las repeticiones se solapan, la t es optimista)."
+ "frase": "El mejor método (eventos) supera la tasa base por 0.0027 de skill, pero t=1.5<2: indistinguible de ruido (las repeticiones se solapan, la t es optimista)."
 }
