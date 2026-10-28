@@ -20,7 +20,8 @@ jobs:
       - run: pip install numpy pandas requests
       - name: Descargar corpus GDELT (crudo, con manifiesto sha256)
         run: python lab/oraculo_n4_datos.py
-      - name: Publicar corpus congelado
+      - name: Publicar corpus congelado (también parcial, para reanudar)
+        if: always()
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com

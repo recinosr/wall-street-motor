@@ -58,10 +58,12 @@ def _pedir(params: dict) -> bytes:
         time.sleep(PAUSA_S if intento == 0 else 15 * 2 ** (intento - 1))
         try:
             r = requests.get(API, params=params, headers={"User-Agent": UA}, timeout=60)
-        except requests.RequestException:
+        except requests.RequestException as e:
+            print(f"  intento {intento}: {type(e).__name__}", flush=True)
             continue
         if r.status_code == 200 and _respuesta_valida(r.content):
             return r.content
+        print(f"  intento {intento}: HTTP {r.status_code} {r.content[:160]!r}", flush=True)
     raise RuntimeError(f"GDELT sin respuesta válida tras {REINTENTOS} reintentos: "
                        f"{params['query']} {params['mode']} {params['startdatetime'][:4]}")
 
@@ -78,6 +80,7 @@ def descargar(prereg: dict) -> int:
                 params = {"query": q, "mode": modo, "format": "json",
                           "startdatetime": f"{anio}0101000000",
                           "enddatetime": min(f"{anio}1231235959", FIN_CORPUS)}
+                print(f"{tema} {modo} {anio}", flush=True)
                 cuerpo = _pedir(params)
                 tmp = destino.with_suffix(".tmp")
                 tmp.write_bytes(cuerpo)
