@@ -24,8 +24,9 @@ API = "https://api.gdeltproject.org/api/v2/doc/doc"
 UA = "ProyectoWallStreet-investigacion/oraculo-n4"
 ANIOS = list(range(2017, 2027))
 MODOS = ["timelinevol", "timelinetone"]
-PAUSA_S = 6          # pausa entre peticiones
-REINTENTOS = 6       # reintentos con espera creciente (15 s, 30 s, ... 480 s)
+PAUSA_S = 8          # pausa entre peticiones
+REINTENTOS = 8       # reintentos con espera creciente (15 s, 30 s, ... tope 300 s)
+PRESUPUESTO_S = 5 * 3600  # tiempo máximo de descarga por corrida; lo que falte se reanuda en otra
 CORTE = pd.Timestamp("2026-10-27").date()
 FIN_CORPUS = "20261027235959"
 
@@ -55,7 +56,7 @@ def _respuesta_valida(cuerpo: bytes) -> bool:
 def _pedir(params: dict) -> bytes:
     """GET con pausa entre peticiones; GDELT da texto plano al limitar, eso cuenta como fallo."""
     for intento in range(REINTENTOS + 1):
-        time.sleep(PAUSA_S if intento == 0 else 15 * 2 ** (intento - 1))
+        time.sleep(PAUSA_S if intento == 0 else min(300, 15 * 2 ** (intento - 1)))
         try:
             r = requests.get(API, params=params, headers={"User-Agent": UA}, timeout=60)
         except requests.RequestException as e:
@@ -70,7 +71,7 @@ def _pedir(params: dict) -> bytes:
 
 def descargar(prereg: dict) -> int:
     CARPETA.mkdir(parents=True, exist_ok=True)
-    nuevos = 0
+    nuevos, faltan, inicio = 0, 0, time.monotonic()
     for tema, q in consultas(prereg).items():
         for modo in MODOS:
             for anio in ANIOS:
@@ -80,12 +81,22 @@ def descargar(prereg: dict) -> int:
                 params = {"query": q, "mode": modo, "format": "json",
                           "startdatetime": f"{anio}0101000000",
                           "enddatetime": min(f"{anio}1231235959", FIN_CORPUS)}
+                if time.monotonic() - inicio > PRESUPUESTO_S:
+                    faltan += 1
+                    continue
                 print(f"{tema} {modo} {anio}", flush=True)
-                cuerpo = _pedir(params)
+                try:
+                    cuerpo = _pedir(params)
+                except RuntimeError as e:
+                    print(f"  pendiente: {e}", flush=True)
+                    faltan += 1
+                    continue
                 tmp = destino.with_suffix(".tmp")
                 tmp.write_bytes(cuerpo)
                 os.replace(tmp, destino)
                 nuevos += 1
+    if faltan:
+        raise RuntimeError(f"GDELT: {nuevos} descargas nuevas, faltan {faltan}; volver a lanzar para reanudar")
     return nuevos
 
 
