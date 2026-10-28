@@ -1,0 +1,52 @@
+name: oraculo-n4
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: oraculo-n4
+  cancel-in-progress: false
+jobs:
+  n4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy pandas requests
+      - name: Descargar corpus GDELT (crudo, con manifiesto sha256)
+        run: python lab/oraculo_n4_datos.py
+      - name: Publicar corpus congelado
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add datos/gdelt_n4
+          git diff --cached --quiet && exit 0
+          git commit -m "Oráculo N4: corpus GDELT congelado"
+          for intento in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep $((intento * 3))
+          done
+          echo 'Publicación agotó reintentos' >&2
+          exit 1
+      - name: Evaluación (la prueba sellada se abre una sola vez)
+        run: python lab/oraculo_n4.py
+      - name: Publicar resultado, también si el estado es negativo o la corrida falló
+        if: always()
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          [ -f resultados/oraculo_n4.json ] || exit 0
+          git add resultados/oraculo_n4.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Oráculo N4: resultado"
+          for intento in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep $((intento * 3))
+          done
+          echo 'Publicación agotó reintentos' >&2
+          exit 1
