@@ -1,0 +1,63 @@
+{
+ "version": "oraculo-nivel4",
+ "escrito_utc": "2026-10-28",
+ "nota": "Pre-registro escrito y subido a origin/main en un push propio ANTES de escribir el código que descarga o calcula. Nivel 4 = ¿las noticias point-in-time de GDELT, clasificadas por tema y tono, agregan información sobre la dirección o el tamaño del movimiento de SPY, por encima de la tasa base (dirección) y de la volatilidad pasada (tamaño)? Un resultado positivo NO cambia el plan 80/20; solo puede entrar a la bóveda y esperar 90 días según Plan-vigente.",
+ "fuente_noticias": {
+  "api": "GDELT DOC 2.0 (https://api.gdeltproject.org/api/v2/doc/doc), modos timelinevol (porcentaje de toda la cobertura monitoreada; corrige el crecimiento de GDELT) y timelinetone (tono promedio, clasificador léxico fijo de GDELT)",
+  "clasificacion": "5 temas por consulta, cada uno con sourcelang:english",
+  "temas": {
+   "mercado": "(\"stock market\" OR \"wall street\" OR \"stock prices\")",
+   "fed": "(\"federal reserve\" OR \"interest rates\" OR \"rate hike\")",
+   "inflacion": "(inflation OR \"consumer prices\")",
+   "recesion": "(recession OR layoffs OR \"market crash\")",
+   "geopolitica": "(war OR sanctions OR missile)"
+  },
+  "descarga": "una consulta por tema, modo y año calendario (2017 a 2026), sin suavizado; respuestas crudas congeladas en datos/gdelt_n4/ con manifiesto sha256 antes de calcular nada",
+  "punto_en_el_tiempo": "GDELT fecha cada artículo por su hora de indexación (seendate, UTC), que es igual o posterior a la publicación: es una disponibilidad conservadora. Si la resolución devuelta es menor a un día, se agrega por día UTC con la media. Riesgo no verificable: que GDELT haya re-procesado el pasado; se declara como límite.",
+  "corte": "2026-10-27T23:59:59Z"
+ },
+ "precios": "SPY de datos/pit/precios/SPY.csv.gz (open y close sin ajustar), solo filas con available_at <= 2026-10-27T23:59:59Z",
+ "alineacion": {
+  "ventana_noticias": "para el día hábil T, días UTC desde la fecha del día hábil anterior T_prev (incluido) hasta T-1 (incluido); todo eso es conocido antes de la apertura de T (13:30 UTC o 14:30 UTC)",
+  "agregado": "media de los valores diarios dentro de la ventana; día sin dato = ausente",
+  "objetivo_entrada": "open de T (después de toda la ventana de noticias)",
+  "horizontes": [1, 5],
+  "direccion": "sube_h(T) = 1 si close(T+h-1) > open(T)",
+  "tamano": "abs_h(T) = |ln(close(T+h-1) / open(T))|"
+ },
+ "variables": {
+  "noticias": "10 = 5 temas x (volumen, tono). Cada una en z-score contra las 60 ventanas anteriores (solo pasado, mínimo 20 observaciones; si no hay, la fila se descarta), recortado a [-5, 5]; ausente = 0 tras el z-score",
+  "har": "rv1 = |ln(close(T_prev)/close(T_prev-1))|; rv5 y rv22 = medias de esa misma serie en las últimas 5 y 22 sesiones que terminan en T_prev"
+ },
+ "particion": {
+  "entrenamiento": ["2017-01-01", "2021-12-31"],
+  "validacion": ["2022-01-01", "2023-12-31"],
+  "prueba_sellada": ["2024-01-01", "2026-10-27"],
+  "embargo": "en cada tramo se descartan los T cuyo objetivo (T+h-1) cae fuera del tramo",
+  "respaldo": "si la primera fecha con datos GDELT de todos los temas es posterior a 2017-06-30, o algún tramo tiene menos de 90 % de días hábiles con noticias, se usa una partición cronológica 60/15/25 sobre las filas disponibles; si hay menos de 750 filas, el nivel queda sin_evaluacion"
+ },
+ "modelos": {
+  "direccion": {
+   "base": "tasa de alza constante del tramo de ajuste",
+   "modelo": "regresión logística L2 (C = 1.0) sobre las 10 variables de noticias estandarizadas con media y desviación del tramo de ajuste",
+   "perdida": "Brier por día"
+  },
+  "tamano": {
+   "base": "HAR: mínimos cuadrados de abs_h sobre [1, rv1, rv5, rv22]",
+   "modelo": "HAR + las 10 variables de noticias, mínimos cuadrados",
+   "perdida": "error cuadrático por día"
+  },
+  "ajuste": "validación: se ajusta en entrenamiento y se mide en validación. Prueba: se reajusta en entrenamiento + validación y se mide en la prueba sellada. No hay búsqueda de hiperparámetros."
+ },
+ "estadistica": {
+  "semilla": 4202610,
+  "bootstrap_rondas": 5000,
+  "bootstrap": "circular por bloques de 20 días sobre la diferencia diaria de pérdidas (base - modelo)",
+  "p_valor": "unilateral: (1 + #{media bootstrap de la mejora <= 0}) / (rondas + 1)",
+  "multiples_comparaciones": "Benjamini-Hochberg sobre las 4 pruebas del tramo de prueba (dirección y tamaño, h = 1 y 5)",
+  "aprobada": "una prueba se aprueba si q_BH < 0.05 en prueba, la mejora media > 0 en prueba Y la mejora media > 0 en validación",
+  "nivel_aprobado": "nivel 4 de dirección se aprueba si pasa dirección h=1 o h=5. Si solo pasa tamaño, se reporta como 'tamaño sí, dirección no': no da ventaja para comprar o vender"
+ },
+ "prueba_sellada": "se abre una sola vez; el script se niega a correr si resultados/oraculo_n4.json ya existe con la prueba abierta. Una corrida fallida o interrumpida que alcance a abrir la prueba cuenta como intento y se anota.",
+ "prohibido": "cambiar temas, consultas, ventanas, variables, modelos, tramos, métrica o reglas después de ver cualquier número. El resultado se publica gane o pierda."
+}
