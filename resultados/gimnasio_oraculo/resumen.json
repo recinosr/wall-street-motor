@@ -1,98 +1,98 @@
 {
- "actualizado": "2026-10-30T19:15Z",
- "repeticiones_entrenamiento": 10000,
- "repeticiones_validacion": 4000,
- "sesiones": 20,
+ "actualizado": "2026-10-30T23:40Z",
+ "repeticiones_entrenamiento": 10500,
+ "repeticiones_validacion": 4200,
+ "sesiones": 21,
  "top5_skill_validacion": [
   {
    "metodo": "soporte_resist_20",
-   "skill": 0.006243183519983875,
-   "brier": 0.2420531992780807,
-   "t": 5.187719875242218,
-   "n": 12000
-  },
-  {
-   "metodo": "eventos",
-   "skill": 0.006199847370541134,
-   "brier": 0.24206375483195772,
-   "t": 5.510230051616145,
-   "n": 12000
+   "skill": 0.006452348863793422,
+   "brier": 0.2419676999007608,
+   "t": 5.490786693476868,
+   "n": 12600
   },
   {
    "metodo": "reversion_caida",
-   "skill": 0.006169017353446216,
-   "brier": 0.24207126421870895,
-   "t": 5.637090287916706,
-   "n": 12000
+   "skill": 0.006412470567574435,
+   "brier": 0.24197741182509683,
+   "t": 6.017201393523705,
+   "n": 12600
+  },
+  {
+   "metodo": "eventos",
+   "skill": 0.006323425035354879,
+   "brier": 0.24199909789379517,
+   "t": 5.751277410588747,
+   "n": 12600
   },
   {
    "metodo": "momentum_1m",
-   "skill": 0.005922809101458371,
-   "brier": 0.24213123411687115,
-   "t": 5.540513767808028,
-   "n": 12000
+   "skill": 0.00611623083263968,
+   "brier": 0.24204955778326945,
+   "t": 5.875001657439718,
+   "n": 12600
   },
   {
    "metodo": "tendencia_sma200",
-   "skill": 0.005860791855372471,
-   "brier": 0.24214633989785958,
-   "t": 5.559635456515619,
-   "n": 12000
+   "skill": 0.0060125890345719135,
+   "brier": 0.2420747986134031,
+   "t": 5.833879197129999,
+   "n": 12600
   }
  ],
  "ensamble_validacion": {
-  "skill": 0.0062132459007652185,
-  "brier": 0.24206049130002255,
-  "t": 6.31431150704939,
-  "n": 12000
+  "skill": 0.006377300728911073,
+  "brier": 0.24198597705592145,
+  "t": 6.637450011805212,
+  "n": 12600
  },
- "tasa_base_brier_validacion": 0.24357387568465372,
+ "tasa_base_brier_validacion": 0.24353909913032362,
  "pesos_hedge": {
   "1": {
-   "calendario": 0.08548016109198127,
-   "eventos": 0.08698756987935047,
-   "logistica": 0.06464152446795161,
-   "momentum_12m": 0.07737643361484453,
-   "momentum_1m": 0.07603436640017552,
-   "momentum_3m": 0.07611504326251069,
-   "regimen_volatilidad": 0.07529374556863852,
-   "reversion_caida": 0.07771118039024741,
-   "rsi": 0.07722320057666096,
-   "soporte_resist_20": 0.07557104390736127,
-   "soporte_resist_60": 0.0742246542827337,
-   "tendencia_sma200": 0.07678672643213041,
-   "volumen_anomalo": 0.07655435012541367
+   "calendario": 0.08405822937547817,
+   "eventos": 0.08635761268653776,
+   "logistica": 0.06336660456627924,
+   "momentum_12m": 0.07681386760099793,
+   "momentum_1m": 0.07597051657317072,
+   "momentum_3m": 0.07615203305163164,
+   "regimen_volatilidad": 0.07485239838575344,
+   "reversion_caida": 0.07699042978662791,
+   "rsi": 0.07820871755214687,
+   "soporte_resist_20": 0.07818222603282043,
+   "soporte_resist_60": 0.07608340805963915,
+   "tendencia_sma200": 0.07671222271640989,
+   "volumen_anomalo": 0.07625173361250692
   },
   "5": {
-   "calendario": 0.07483249771236693,
-   "eventos": 0.07648322280092099,
-   "logistica": 0.03553036982531725,
-   "momentum_12m": 0.08729763639679533,
-   "momentum_1m": 0.07987027176432938,
-   "momentum_3m": 0.08017230136152914,
-   "regimen_volatilidad": 0.1000011521960619,
-   "reversion_caida": 0.07617500692404144,
-   "rsi": 0.07750940964233444,
-   "soporte_resist_20": 0.07775898920007077,
-   "soporte_resist_60": 0.07530826259658782,
-   "tendencia_sma200": 0.07986782137870768,
-   "volumen_anomalo": 0.079193058200937
+   "calendario": 0.07543369740817726,
+   "eventos": 0.07630568015471731,
+   "logistica": 0.03443420061484799,
+   "momentum_12m": 0.08750686828443356,
+   "momentum_1m": 0.07973600320988558,
+   "momentum_3m": 0.07996731943672047,
+   "regimen_volatilidad": 0.09978168118998448,
+   "reversion_caida": 0.07659852736742775,
+   "rsi": 0.07762024794978385,
+   "soporte_resist_20": 0.07823194264897929,
+   "soporte_resist_60": 0.07502317626911495,
+   "tendencia_sma200": 0.08013219835397173,
+   "volumen_anomalo": 0.07922845711195582
   },
   "21": {
-   "calendario": 0.06723944353787006,
-   "eventos": 0.07086250031632527,
-   "logistica": 0.059445129857547345,
-   "momentum_12m": 0.08307841772625658,
-   "momentum_1m": 0.077456499617294,
-   "momentum_3m": 0.07817591428924256,
-   "regimen_volatilidad": 0.08270733138318682,
-   "reversion_caida": 0.0795327445641898,
-   "rsi": 0.0768678127567709,
-   "soporte_resist_20": 0.08171110791930035,
-   "soporte_resist_60": 0.07742558834053065,
-   "tendencia_sma200": 0.08736201245358352,
-   "volumen_anomalo": 0.07813549723790214
+   "calendario": 0.0658609668538234,
+   "eventos": 0.07144042765133571,
+   "logistica": 0.05968067943045517,
+   "momentum_12m": 0.08404320371593452,
+   "momentum_1m": 0.07697023990087326,
+   "momentum_3m": 0.07773517887318261,
+   "regimen_volatilidad": 0.08165810585475583,
+   "reversion_caida": 0.07892984949197882,
+   "rsi": 0.07611250044197068,
+   "soporte_resist_20": 0.08251970809668595,
+   "soporte_resist_60": 0.07813260656510265,
+   "tendencia_sma200": 0.08900987993974889,
+   "volumen_anomalo": 0.07790665318415257
   }
  },
- "frase": "soporte_resist_20 supera la tasa base en validación (skill 0.0062, t=5.2); falta confirmarlo en la prueba sellada y fuera de muestra, la t es optimista por solapamiento."
+ "frase": "soporte_resist_20 supera la tasa base en validación (skill 0.0065, t=5.5); falta confirmarlo en la prueba sellada y fuera de muestra, la t es optimista por solapamiento."
 }
