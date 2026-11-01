@@ -420,6 +420,12 @@ def generate(kind,now=None):
             rows+=result
             if err:failures.append(err)
             if i%500==0:print('Pronósticos activos:',i,'/',len(assets),flush=True)
+    # Auditoría 1-nov: la corrida de 00:00 UTC encontraba el cierre del día aún sin publicar en Yahoo y
+    # sellaba solo ~3 % del universo ("ancla no fresca"), bloqueando las corridas de 08:15/12:15. Si más de la
+    # mitad tiene ancla vieja y queda una corrida antes de la apertura, no se sella y se reintenta después.
+    stale=sum(f['error']=='ancla no fresca' for f in failures)
+    if kind!='cripto' and assets and stale>len(assets)/2 and pd.Timestamp(dt.datetime.now(UTC))<deadline-pd.Timedelta(hours=3):
+        print(f'Ancla no fresca en {stale}/{len(assets)}; no se sella, reintenta la siguiente corrida.');return
     # Comprobar nuevamente después de descargar todo.
     published=dt.datetime.now(UTC)
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')
