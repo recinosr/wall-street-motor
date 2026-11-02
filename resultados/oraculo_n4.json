@@ -1,0 +1,173 @@
+{
+  "prereg_sha256": "3cd6f5b3b91cf61ae7377d08a4476eaa8b3b8d98f533f61111d1975ab3e272dd",
+  "prereg_version": "oraculo-nivel4",
+  "ejecutado_utc": "2026-11-02T06:48:53+00:00",
+  "sintetico": false,
+  "manifiesto_datos_sha256": "c069c88876e341d957fee51ffdaff1d926a509b628d827b2da55e3d047c43d74",
+  "n_filas_validas": 2448,
+  "limites": [
+    "GDELT fecha cada artículo por su hora de indexación (seendate), no por su publicación; la disponibilidad usada es conservadora pero no exacta.",
+    "GDELT puede haber reprocesado su histórico; no es verificable desde aquí y no se controla.",
+    "El tono usa el clasificador léxico fijo de GDELT; no mide sentimiento contextual.",
+    "El volumen es porcentaje de la cobertura monitoreada por GDELT, no número de noticias.",
+    "Solo SPY, con precios sin ajustar; no se modelan costos ni ejecución.",
+    "Una sola prueba sellada: un resultado positivo solo puede entrar a la bóveda y no cambia el plan 80/20."
+  ],
+  "particion": {
+    "usada": "fechas",
+    "respaldo_usado": false,
+    "motivo_respaldo": null,
+    "tramos": {
+      "entrenamiento": {
+        "inicio": "2017-01-03",
+        "fin": "2021-12-31",
+        "dias_habiles": 1259,
+        "filas_validas": 1239,
+        "pct_dias_con_noticias": 0.9992
+      },
+      "validacion": {
+        "inicio": "2022-01-03",
+        "fin": "2023-12-29",
+        "dias_habiles": 501,
+        "filas_validas": 501,
+        "pct_dias_con_noticias": 0.998
+      },
+      "prueba": {
+        "inicio": "2024-01-02",
+        "fin": "2026-10-27",
+        "dias_habiles": 708,
+        "filas_validas": 708,
+        "pct_dias_con_noticias": 0.9703
+      }
+    }
+  },
+  "cobertura": {
+    "primera_noticia_por_tema": {
+      "mercado": "2017-01-01",
+      "fed": "2017-01-01",
+      "inflacion": "2017-01-01",
+      "recesion": "2017-01-01",
+      "geopolitica": "2017-01-01"
+    },
+    "ultima_noticia_por_tema": {
+      "mercado": "2026-10-27",
+      "fed": "2026-10-27",
+      "inflacion": "2026-10-27",
+      "recesion": "2026-10-27",
+      "geopolitica": "2026-10-27"
+    },
+    "pct_dias_con_noticias": {
+      "entrenamiento": 0.9992,
+      "validacion": 0.998,
+      "prueba": 0.9703
+    }
+  },
+  "pruebas": {
+    "direccion_h1": {
+      "tipo": "direccion",
+      "horizonte": 1,
+      "metrica": "brier",
+      "n_validacion": 501,
+      "validacion": {
+        "perdida_base": 0.24782832952835138,
+        "perdida_modelo": 0.24776333810331092,
+        "mejora_media": 6.499142504045182e-05
+      },
+      "prueba": {
+        "n": 708,
+        "perdida_base": 0.24990972880012363,
+        "perdida_modelo": 0.250327447337168,
+        "mejora_media": -0.0004177185370443616,
+        "ic95": [
+          -0.0029917159181546615,
+          0.0020318018599913995
+        ],
+        "p": 0.6284743051389722,
+        "exactitud_modelo": 0.5409604519774012,
+        "exactitud_siempre_sube": 0.5225988700564972,
+        "q_BH": 0.7904419116176765,
+        "aprobada": false
+      }
+    },
+    "direccion_h5": {
+      "tipo": "direccion",
+      "horizonte": 5,
+      "metrica": "brier",
+      "n_validacion": 497,
+      "validacion": {
+        "perdida_base": 0.25660535950875474,
+        "perdida_modelo": 0.2593311198139482,
+        "mejora_media": -0.002725760305193496
+      },
+      "prueba": {
+        "n": 704,
+        "perdida_base": 0.23805279298243748,
+        "perdida_modelo": 0.2398593301532533,
+        "mejora_media": -0.0018065371708158098,
+        "ic95": [
+          -0.006318136333154792,
+          0.00265252359181529
+        ],
+        "p": 0.7904419116176765,
+        "exactitud_modelo": 0.6051136363636364,
+        "exactitud_siempre_sube": 0.609375,
+        "q_BH": 0.7904419116176765,
+        "aprobada": false
+      }
+    },
+    "tamano_h1": {
+      "tipo": "tamano",
+      "horizonte": 1,
+      "metrica": "error_cuadratico",
+      "n_validacion": 501,
+      "validacion": {
+        "perdida_base": 4.423581146928688e-05,
+        "perdida_modelo": 4.292072999509477e-05,
+        "mejora_media": 1.3150814741920946e-06
+      },
+      "prueba": {
+        "n": 708,
+        "perdida_base": 3.4070024480353316e-05,
+        "perdida_modelo": 3.359029684041288e-05,
+        "mejora_media": 4.797276399404308e-07,
+        "ic95": [
+          -1.43305969448393e-06,
+          3.4696746109716828e-06
+        ],
+        "p": 0.4117176564687063,
+        "q_BH": 0.7904419116176765,
+        "aprobada": false
+      }
+    },
+    "tamano_h5": {
+      "tipo": "tamano",
+      "horizonte": 5,
+      "metrica": "error_cuadratico",
+      "n_validacion": 497,
+      "validacion": {
+        "perdida_base": 0.0002550213958598462,
+        "perdida_modelo": 0.00026069494254362145,
+        "mejora_media": -5.6735466837753486e-06
+      },
+      "prueba": {
+        "n": 704,
+        "perdida_base": 0.0001473277109506341,
+        "perdida_modelo": 0.00014897089646488695,
+        "mejora_media": -1.6431855142528342e-06,
+        "ic95": [
+          -6.274165248189157e-06,
+          3.845353909563282e-06
+        ],
+        "p": 0.74125174965007,
+        "q_BH": 0.7904419116176765,
+        "aprobada": false
+      }
+    }
+  },
+  "nivel_direccion_aprobado": false,
+  "nivel_tamano_aprobado": false,
+  "estado": "no_aprobado",
+  "veredicto": "ninguna",
+  "resumen": "No aprobado: ninguna prueba del nivel 4 supera su base en la prueba sellada con los criterios del prereg.",
+  "prueba_abierta": true
+}
