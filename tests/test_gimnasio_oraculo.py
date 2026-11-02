@@ -78,26 +78,76 @@ class Aprendizaje(unittest.TestCase):
         self.assertGreater(w['a'], w['c'])
         self.assertGreater(w['c'], w['b'])
 
-    def test_sesion_valida_no_actualiza_estado_y_entrena_si(self):
+    def _activos(self):
         d = sintetico(3300, 2)
         d['date'] = pd.bdate_range('2005-01-03', periods=3300)
         d['disp'] = d['date'] + pd.Timedelta(hours=21)
-        activos = {'X': d, '__eventos__': EV}
+        return {'X': d, '__eventos__': EV}
+
+    def test_sesion_valida_no_actualiza_estado_y_entrena_si(self):
         est = g.estado_inicial()
-        brier, X, Y = g.sesion(est, activos, np.random.default_rng(0), 60, 30)
+        ev, X, Y = g.sesion(est, self._activos(), np.random.default_rng(0), 60)
         self.assertEqual(est['repeticiones_train'], 60)
         self.assertEqual(est['hedge']['1']['tendencia_sma200'][1], 60)  # solo entrenamiento
-        self.assertEqual(est['val']['tasa_base']['1'][0], 30)
-        self.assertIn('ensamble', brier)
+        self.assertIn('ensamble', ev['metodos']['tasa_base_ventana'])
+
+    def test_validacion_fija_no_depende_de_semilla_ni_sesion(self):
+        act = self._activos()
+        series = {'X': g.construir(act['X'], EV, 'X')}
+        a = g.validacion_fija(series)
+        e1, e2 = g.estado_inicial(), g.estado_inicial()
+        ev1, _, _ = g.sesion(e1, act, np.random.default_rng(1), 40)
+        ev2, _, _ = g.sesion(e2, act, np.random.default_rng(99), 90)
+        self.assertEqual((ev1['filas'], ev1['fechas']), (ev2['filas'], ev2['fechas']))
+        self.assertEqual(ev1['filas'], sum(len(v) for v in a.values()) * len(g.HORIZONTES))
+        ords = series['X']['fecha'][a['X']].astype('datetime64[D]').astype(np.int64)
+        self.assertTrue((ords % g.PASO_VAL == 0).all())
+        fechas = series['X']['fecha'][a['X']]
+        self.assertTrue(fechas.min() >= np.datetime64(g.VAL[0]) and fechas.max() <= np.datetime64(g.VAL[1]))  # no toca 2020+
+
+    def test_referencia_de_ventana_es_la_frecuencia_de_la_propia_ventana(self):
+        act = self._activos()
+        ev, _, _ = g.sesion(g.estado_inicial(), act, np.random.default_rng(0), 30)
+        S = g.construir(act['X'], EV, 'X')
+        idx = g.validacion_fija({'X': S})['X']
+        for h in g.HORIZONTES:
+            self.assertAlmostEqual(ev['frecuencia_subida_ventana'][str(h)], float(S['up'][h][idx].mean()))
+        # la tasa base de la ventana, como método, tiene skill 0 contra sí misma por horizonte constante (misma pérdida de referencia)
+        self.assertAlmostEqual(ev['metodos']['tasa_base_ventana']['tasa_base']['brier_ref'], ev['brier_ref']['tasa_base_ventana'])
+
+    def test_t_por_fechas_no_crece_con_repeticiones_duplicadas(self):
+        rng = np.random.default_rng(3)
+        ng, k = 120, 50
+        grupo = np.repeat(np.arange(ng), 1)
+        ref = rng.random(ng) * .1 + .25
+        perd = ref - rng.normal(.002, .02, ng)
+        t1 = g._estadisticos(perd, ref, grupo, ng, np.random.default_rng(0))['t']
+        # cada fecha repetida k veces idéntica: 50x más filas pero la misma información
+        t2 = g._estadisticos(np.tile(perd, k), np.tile(ref, k), np.tile(grupo, k), ng, np.random.default_rng(0))['t']
+        self.assertAlmostEqual(t1, t2, delta=.05 * max(1, abs(t1)))
+
+    def test_sesgo_alcista_no_da_skill_contra_la_tasa_base_de_la_ventana(self):
+        # un predictor que solo sabe "sube 60 %" gana a una base de 53 % pero no a la frecuencia real de la ventana
+        rng = np.random.default_rng(5)
+        y = (rng.random(4000) < .6).astype(float)
+        grupo = np.arange(4000) // 10
+        ng = int(grupo.max()) + 1
+        mod = (.6 - y) ** 2
+        ent = (.53 - y) ** 2
+        ven = (y.mean() - y) ** 2
+        self.assertGreater(g._estadisticos(mod, ent, grupo, ng, np.random.default_rng(0))['t'], 2)
+        self.assertLess(abs(g._estadisticos(mod, ven, grupo, ng, np.random.default_rng(0))['t']), 2)
 
     def test_dos_sesiones_en_disco(self):
         with tempfile.TemporaryDirectory() as t:
-            f1 = g.correr(Path(t), 60, 30, semilla=3)
-            f2 = g.correr(Path(t), 60, 30, semilla=3)
+            f1 = g.correr(Path(t), 60, semilla=3)
+            f2 = g.correr(Path(t), 60, semilla=3)
             self.assertEqual(f2['repeticiones_acumuladas'], 120)
             self.assertEqual(len(pd.read_csv(Path(t) / 'curva.csv')), 2)
             self.assertTrue((Path(t) / 'pesos.json').exists())
-            self.assertIn('frase', __import__('json').loads((Path(t) / 'resumen.json').read_text()))
+            res = __import__('json').loads((Path(t) / 'resumen.json').read_text())
+            self.assertIn('frase', res)
+            self.assertEqual(set(res['por_referencia']), set(g.REFS_SKILL))
 
 
 if __name__ == '__main__':

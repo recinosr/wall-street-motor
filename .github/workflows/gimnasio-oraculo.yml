@@ -24,8 +24,8 @@ jobs:
       - run: python -m unittest tests.test_gimnasio_oraculo
         env:
           PYTHONPATH: .
-      - name: Sesión de 500 repeticiones de entrenamiento y 200 de validación
-        run: python -m lab.gimnasio_oraculo --train 500 --val 200
+      - name: Sesión de 500 repeticiones de entrenamiento y validación fija
+        run: python -m lab.gimnasio_oraculo --train 500
         env:
           PYTHONPATH: .
       - name: Publicar solo resultados/gimnasio_oraculo

@@ -1,6 +1,7 @@
 """Gimnasio del Oráculo: miles de repeticiones diarias con datos point-in-time.
 
 Entrenamiento 1990-2014 (aprende), validación 2015-2019 (solo mide), 2020 en adelante sellado: no se toca.
+Validación: conjunto fijo (mismas fechas y activos en cada sesión), t por bootstrap de bloques de fechas, tres referencias.
 Cada método solo ve filas cuya hora de disponibilidad es <= la del cierre de la fecha de decisión.
 """
 import argparse
@@ -24,6 +25,11 @@ VAL = ('2015-01-01', '2019-11-30')    # idem: ninguna etiqueta toca 2020 (prueba
 PRIOR_N = 50
 RETRAIN_CADA = 24
 POOL_MAX = 10000
+PASO_VAL = 5          # conjunto fijo de validación: fechas con ordinal múltiplo de 5 (igual en todas las sesiones)
+BLOQUE = 10           # bootstrap por bloques de fechas (en pasos de 5 días: cubre el solapamiento de 21 sesiones)
+N_BOOT = 1000
+REF_PRINCIPAL = 'tasa_base_ventana'
+REFS_SKILL = ['tasa_base_entrenamiento', 'tasa_base_ventana', 'siempre_sube_calibrado']
 FEATURES = ['r1', 'r5', 'mom', 'vol', 'dist', 'rsi', 'volrel']
 METODOS = ['tendencia_sma200', 'momentum_1m', 'momentum_3m', 'momentum_12m', 'reversion_caida', 'volumen_anomalo',
            'soporte_resist_20', 'soporte_resist_60', 'rsi', 'calendario', 'eventos', 'regimen_volatilidad']
@@ -125,7 +131,7 @@ def construir(d, eventos, simbolo=''):
 def estado_inicial():
     return {'sesiones': 0, 'repeticiones_train': 0, 'repeticiones_val': 0,
             'hedge': {str(h): {m: [0., 0] for m in ENSAMBLE_MIEMBROS} for h in HORIZONTES},
-            'cal': {}, 'val': {}, 'logistica': {}}
+            'cal': {}, 'val_final': {}, 'logistica': {}}
 
 
 def pesos_hedge(hedge_h):
@@ -181,13 +187,81 @@ def elegibles(S, rango):
     return np.flatnonzero(ok)
 
 
-def sesion(estado, activos, rng, n_train=500, n_val=200, ahora=None):
-    """Una sesión: entrena n_train repeticiones (aprende) y mide n_val en validación (congelado)."""
+def validacion_fija(series):
+    """Conjunto fijo y determinista (no depende de la semilla ni de la sesión): fechas con ordinal múltiplo de PASO_VAL."""
+    out = {}
+    for s_, S in series.items():
+        idx = elegibles(S, VAL)
+        ords = S['fecha'][idx].astype('datetime64[D]').astype(np.int64)
+        idx = idx[ords % PASO_VAL == 0]
+        if len(idx):
+            out[s_] = idx
+    return out
+
+
+def _estadisticos(perd, ref, grupo, ng, rng):
+    """skill = 1 - Brier/Brier_ref; t = dif media / error estándar de bootstrap por bloques de FECHAS (no de repeticiones)."""
+    dif = ref - perd
+    sd = np.bincount(grupo, weights=dif, minlength=ng)
+    cn = np.bincount(grupo, minlength=ng).astype(float)
+    nb = int(math.ceil(ng / BLOQUE))
+    ini = rng.integers(0, max(ng - BLOQUE, 0) + 1, size=(N_BOOT, nb))
+    pos = (ini[:, :, None] + np.arange(BLOQUE)).reshape(N_BOOT, -1)[:, :ng]
+    medias = sd[pos].sum(1) / cn[pos].sum(1)
+    media = float(dif.mean())
+    se = float(medias.std(ddof=1))
+    return {'skill': float(1 - perd.mean() / ref.mean()), 'brier': float(perd.mean()), 'brier_ref': float(ref.mean()),
+            't': media / se if se > 0 else 0., 'n': int(len(perd))}
+
+
+def evaluar(estado, series, fijo, pesos):
+    """Mide todos los métodos con el estado congelado sobre el MISMO conjunto fijo; t agrupada por fecha."""
+    filas = []
+    for s_, idx in fijo.items():
+        S = series[s_]
+        for i in idx:
+            f = int(S['fecha'][i].astype('datetime64[D]').astype(np.int64))
+            for h in HORIZONTES:
+                preds = predecir(estado, S, int(i), h)
+                preds['ensamble'] = ensamble(preds, pesos[h])
+                filas.append((s_, f, h, float(S['up'][h][i]), preds))
+    ys = np.array([r[3] for r in filas])
+    hs = np.array([r[2] for r in filas])
+    sims = np.array([r[0] for r in filas])
+    fechas = np.array([r[1] for r in filas])
+    _, grupo = np.unique(fechas, return_inverse=True)
+    ng = int(grupo.max()) + 1
+    refs = {'tasa_base_entrenamiento': np.array([r[4]['tasa_base'] for r in filas])}
+    v = np.zeros(len(ys))
+    c = np.zeros(len(ys))
+    for h in HORIZONTES:
+        v[hs == h] = ys[hs == h].mean()
+        for s_ in np.unique(sims):
+            m = (hs == h) & (sims == s_)
+            if m.any():
+                c[m] = ys[m].mean()
+    refs['tasa_base_ventana'] = v          # constante por horizonte con la frecuencia de subida de la propia ventana (en muestra)
+    refs['siempre_sube_calibrado'] = c     # constante por activo y horizonte con su frecuencia de subida en la ventana (en muestra)
+    perdidas = {m: (np.array([r[4][m] for r in filas]) - ys) ** 2 for m in TODOS + ['ensamble']}
+    out = {'filas': len(filas), 'fechas': ng, 'activos': len(fijo), 'paso_dias': PASO_VAL, 'bloque_bootstrap': BLOQUE,
+           'frecuencia_subida_ventana': {str(h): float(ys[hs == h].mean()) for h in HORIZONTES},
+           'brier_ref': {}, 'metodos': {}}
+    for rn, r in refs.items():
+        rl = (r - ys) ** 2
+        out['brier_ref'][rn] = float(rl.mean())
+        rr = np.random.default_rng(12345)  # misma semilla de remuestreo en cada sesión y referencia
+        out['metodos'][rn] = {m: _estadisticos(perdidas[m], rl, grupo, ng, rr) for m in perdidas}
+    return out
+
+
+def sesion(estado, activos, rng, n_train=500, n_val=None, ahora=None, quemar_rng_val=0):
+    """Una sesión: entrena n_train repeticiones (aprende) y mide el conjunto fijo de validación (congelado).
+
+    n_val se conserva por compatibilidad y se ignora: la validación ya no se muestrea.
+    quemar_rng_val solo sirve a `rehacer_historia`: consume del rng lo que consumía el muestreo antiguo para reproducir el entrenamiento real."""
     series = {s: construir(d, activos['__eventos__'], s) for s, d in activos.items() if s != '__eventos__'}
     el_tr = {s: elegibles(S, TRAIN) for s, S in series.items()}
-    el_va = {s: elegibles(S, VAL) for s, S in series.items()}
     el_tr = {s: v for s, v in el_tr.items() if len(v)}
-    el_va = {s: v for s, v in el_va.items() if len(v)}
     filas, etiquetas = [], []
     for _ in range(n_train):
         s = list(el_tr)[rng.integers(len(el_tr))]
@@ -208,29 +282,15 @@ def sesion(estado, activos, rng, n_train=500, n_val=200, ahora=None):
             filas.append(x)
             etiquetas.append(ys)
     estado['repeticiones_train'] += n_train
-    # Validación honesta: pesos y calibraciones congelados; nada se actualiza.
+    if quemar_rng_val:
+        el_va = {k: v for k, v in ((k, elegibles(S, VAL)) for k, S in series.items()) if len(v)}
+        for _ in range(quemar_rng_val):
+            rng.choice(el_va[list(el_va)[rng.integers(len(el_va))]])
     pesos = {h: pesos_hedge(estado['hedge'][str(h)]) for h in HORIZONTES}
-    perd = {m: [] for m in TODOS + ['ensamble']}
-    for _ in range(n_val):
-        s = list(el_va)[rng.integers(len(el_va))]
-        S = series[s]
-        i = int(rng.choice(el_va[s]))
-        for h in HORIZONTES:
-            y = bool(S['up'][h][i])
-            preds = predecir(estado, S, i, h)
-            preds['ensamble'] = ensamble(preds, pesos[h])
-            for m, p in preds.items():
-                perd[m].append((p - y) ** 2)
-                v = estado['val'].setdefault(m, {}).setdefault(str(h), [0, 0., 0., 0.])
-                dif = (preds['tasa_base'] - y) ** 2 - (p - y) ** 2
-                v[0] += 1
-                v[1] += (p - y) ** 2
-                v[2] += dif
-                v[3] += dif * dif
-    estado['repeticiones_val'] += n_val
+    ev = evaluar(estado, series, validacion_fija(series), pesos)
+    estado['val_final'] = ev
     estado['sesiones'] += 1
-    brier = {m: float(np.mean(v)) if v else float('nan') for m, v in perd.items()}
-    return brier, np.array(filas, dtype=np.float32), np.array(etiquetas, dtype=np.int8)
+    return ev, np.array(filas, dtype=np.float32), np.array(etiquetas, dtype=np.int8)
 
 
 def reentrenar(estado, X, Y):
@@ -271,48 +331,67 @@ def juntar_pool(out, X, Y, rng, consolidar):
 
 
 def resumen(estado, pesos):
-    filas = {}
-    for m in TODOS + ['ensamble']:
-        vs = estado['val'].get(m, {})
-        n = sum(v[0] for v in vs.values())
-        if not n:
-            continue
-        mb = sum(v[1] for v in vs.values()) / n
-        vb = estado['val']['tasa_base']
-        bb = sum(v[1] for v in vb.values()) / sum(v[0] for v in vb.values())
-        dif = sum(v[2] for v in vs.values()) / n
-        var = max(sum(v[3] for v in vs.values()) / n - dif * dif, 1e-12)
-        filas[m] = {'skill': 1 - mb / bb, 'brier': mb, 't': dif / math.sqrt(var / n), 'n': n}
-    cand = {m: v for m, v in filas.items() if m not in REFERENCIAS + ['ensamble']}
-    top = sorted(cand.items(), key=lambda kv: -kv[1]['skill'])[:5]
-    mejor = top[0] if top else None
-    if mejor is None:
-        frase = 'Sin datos de validación todavía.'
-    elif mejor[1]['skill'] <= 0:
-        frase = 'Ningún método supera la tasa base en validación 2015-2019: por ahora no hay ventaja demostrada.'
-    elif mejor[1]['t'] < 2:
-        frase = (f"El mejor método ({mejor[0]}) supera la tasa base por {mejor[1]['skill']:.4f} de skill, pero t={mejor[1]['t']:.1f}<2: "
-                 'indistinguible de ruido (las repeticiones se solapan, la t es optimista).')
+    ev = estado.get('val_final') or {}
+    if not ev:
+        return {'actualizado': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%MZ'), 'sesiones': estado['sesiones'],
+                'pesos_hedge': pesos, 'frase': 'Sin datos de validación todavía.'}
+    por_ref, mejores = {}, {}
+    for rn in REFS_SKILL:
+        mets = ev['metodos'][rn]
+        cand = {m: v for m, v in mets.items() if m in METODOS + ['logistica']}
+        top = sorted(cand.items(), key=lambda kv: -kv[1]['skill'])[:5]
+        por_ref[rn] = {'brier_referencia': ev['brier_ref'][rn], 'top5': [{'metodo': m, **v} for m, v in top],
+                       'ensamble': mets['ensamble']}
+        mejores[rn] = top[0]
+    mb, e = mejores[REF_PRINCIPAL], por_ref[REF_PRINCIPAL]['ensamble']
+    umbral = 3.0  # el mejor de 13 métodos: t>2 aparece por azar; se exige t>3 y que valga en las tres referencias
+    robusto = all(mejores[r][1]['skill'] > 0 and mejores[r][1]['t'] > umbral for r in REFS_SKILL)
+    if mb[1]['skill'] <= 0:
+        et = por_ref['tasa_base_entrenamiento']['ensamble']
+        frase = (f"Sin ventaja demostrada: ningún método supera la tasa base de la propia ventana 2015-2019 (mejor {mb[0]}, skill {mb[1]['skill']:.4f}, t={mb[1]['t']:.1f}; "
+                 f"ensamble skill {e['skill']:.4f}, t={e['t']:.1f}). La ganancia contra la tasa base de entrenamiento 1990-2014 (ensamble skill {et['skill']:.4f}, t={et['t']:.1f}) "
+                 'es compatible con el sesgo alcista de 2015-2019 (frecuencia de subida mayor que la histórica) y no demuestra capacidad de predicción.')
+    elif not robusto:
+        frase = (f"Sin ventaja demostrada: contra la tasa base de la ventana 2015-2019 el mejor método ({mb[0]}) tiene skill {mb[1]['skill']:.4f} "
+                 f"y t={mb[1]['t']:.1f} (bootstrap por bloques de fechas, no por repetición), y el ensamble skill {e['skill']:.4f}, t={e['t']:.1f}; "
+                 f"el skill contra la tasa base de entrenamiento 1990-2014 ({mejores['tasa_base_entrenamiento'][1]['skill']:.4f}) refleja sobre todo que 2015-2019 fue más alcista.")
     else:
-        frase = (f"{mejor[0]} supera la tasa base en validación (skill {mejor[1]['skill']:.4f}, t={mejor[1]['t']:.1f}); "
-                 'falta confirmarlo en la prueba sellada y fuera de muestra, la t es optimista por solapamiento.')
+        frase = (f"{mb[0]} supera las tres referencias (skill {mb[1]['skill']:.4f}, t={mb[1]['t']:.1f} contra la tasa base de la ventana) con t por bloques de fechas; "
+                 'falta confirmarlo en la prueba sellada y fuera de muestra.')
     return {'actualizado': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%MZ'),
-            'repeticiones_entrenamiento': estado['repeticiones_train'], 'repeticiones_validacion': estado['repeticiones_val'],
-            'sesiones': estado['sesiones'],
-            'top5_skill_validacion': [{'metodo': m, **v} for m, v in top],
-            'ensamble_validacion': filas.get('ensamble'), 'tasa_base_brier_validacion': filas.get('tasa_base', {}).get('brier'),
+            'repeticiones_entrenamiento': estado['repeticiones_train'], 'sesiones': estado['sesiones'],
+            'validacion': {k: ev[k] for k in ('filas', 'fechas', 'activos', 'paso_dias', 'bloque_bootstrap', 'frecuencia_subida_ventana')},
+            'metodo': 'conjunto fijo de validación idéntico en cada sesión; t = diferencia media de Brier / error estándar de bootstrap por bloques de fechas',
+            'referencia_principal': REF_PRINCIPAL, 'umbral_t': umbral, 'por_referencia': por_ref,
             'pesos_hedge': pesos, 'frase': frase}
 
 
-def correr(out=OUT, n_train=500, n_val=200, semilla=0, carpeta_datos=PIT):
+def fila_curva(estado, ev, fecha_hora=None):
+    fila = {'fecha_hora': fecha_hora or dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'repeticiones_acumuladas': estado['repeticiones_train'], 'filas_validacion': ev['filas'], 'fechas_validacion': ev['fechas']}
+    for rn in REFS_SKILL:
+        fila['brier_ref_' + rn] = ev['brier_ref'][rn]
+    for m in ['ensamble'] + TODOS:
+        fila['brier_val_' + m] = ev['metodos'][REF_PRINCIPAL][m]['brier']
+    for rn in REFS_SKILL:
+        for m in ['ensamble'] + ENSAMBLE_MIEMBROS:
+            v = ev['metodos'][rn][m]
+            fila[f'skill_{rn}_{m}'] = v['skill']
+            fila[f't_{rn}_{m}'] = v['t']
+    return fila
+
+
+def correr(out=OUT, n_train=500, n_val=None, semilla=0, carpeta_datos=PIT):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     pj = out / 'pesos.json'
     estado = json.loads(pj.read_text())['estado'] if pj.exists() else estado_inicial()
+    estado.pop('val', None)  # acumulado antiguo (repeticiones muestreadas, t inflada): ya no se usa
+    estado.setdefault('val_final', {})
     activos = cargar_activos(Path(carpeta_datos) / 'precios')
     activos['__eventos__'] = cargar_eventos(Path(carpeta_datos) / 'eventos.csv')
     rng = np.random.default_rng([semilla, estado['sesiones']])
-    brier, X, Y = sesion(estado, activos, rng, n_train, n_val)
+    ev, X, Y = sesion(estado, activos, rng, n_train)
     consolidar = estado['sesiones'] % RETRAIN_CADA == 0 or not estado['logistica']
     pool = juntar_pool(out, X, Y, rng, consolidar)
     if pool is not None:
@@ -321,24 +400,39 @@ def correr(out=OUT, n_train=500, n_val=200, semilla=0, carpeta_datos=PIT):
     pj.write_text(json.dumps({'pesos': pesos, 'estado': estado}, sort_keys=True, separators=(',', ':')))
     res = resumen(estado, pesos)
     (out / 'resumen.json').write_text(json.dumps(res, indent=1, ensure_ascii=False, allow_nan=False))
-    bb = brier['tasa_base']
-    fila = {'fecha_hora': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-            'repeticiones_acumuladas': estado['repeticiones_train'], 'brier_val_tasa_base': bb}
-    for m in ['ensamble'] + TODOS:
-        fila['brier_val_' + m] = brier[m]
-    for m in ['ensamble'] + TODOS:
-        fila['skill_val_' + m] = 1 - brier[m] / bb
+    fila = fila_curva(estado, ev)
     curva = out / 'curva.csv'
     pd.DataFrame([fila]).to_csv(curva, mode='a', header=not curva.exists(), index=False)
     return fila
 
 
+def rehacer_historia(destino, n_sesiones, semilla=0, n_train=500, carpeta_datos=PIT, horas=None):
+    """Repite las sesiones 1..n con las mismas semillas y mide cada una con la validación corregida.
+
+    Devuelve (estado final, filas de curva). `horas` conserva las marcas de tiempo originales."""
+    destino = Path(destino)
+    destino.mkdir(parents=True, exist_ok=True)
+    activos = cargar_activos(Path(carpeta_datos) / 'precios')
+    activos['__eventos__'] = cargar_eventos(Path(carpeta_datos) / 'eventos.csv')
+    estado, filas = estado_inicial(), []
+    for k in range(n_sesiones):
+        rng = np.random.default_rng([semilla, estado['sesiones']])
+        ev, X, Y = sesion(estado, activos, rng, n_train, quemar_rng_val=200)
+        consolidar = estado['sesiones'] % RETRAIN_CADA == 0 or not estado['logistica']
+        pool = juntar_pool(destino, X, Y, rng, consolidar)
+        if pool is not None:
+            reentrenar(estado, *pool)
+        filas.append(fila_curva(estado, ev, horas[k] if horas else None))
+    return estado, filas
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--train', type=int, default=500)
-    ap.add_argument('--val', type=int, default=200)
+    ap.add_argument('--val', type=int, default=None, help='obsoleto: la validación es un conjunto fijo')
     ap.add_argument('--semilla', type=int, default=0)
     ap.add_argument('--out', default=str(OUT))
     a = ap.parse_args()
     f = correr(a.out, a.train, a.val, a.semilla)
-    print(json.dumps({k: (round(v, 5) if isinstance(v, float) else v) for k, v in f.items() if k.startswith(('fecha', 'repet', 'skill'))}, indent=1))
+    print(json.dumps({k: (round(v, 5) if isinstance(v, float) else v) for k, v in f.items()
+                      if k.startswith(('fecha', 'repet')) or (k.startswith(('skill_', 't_')) and k.endswith('_ensamble'))}, indent=1))

@@ -6,7 +6,7 @@ from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score, signal_features, walk_forward_report, hedge_distribution, hedge_weights, hedge_today
+from lab.pronostico import targets, save_once, digest, predict, wilson, features, summary, score, signal_features, walk_forward_report, hedge_distribution, hedge_weights, hedge_today, hedge_probability
 from lab.enciclopedia import detect
 
 class ForecastTests(unittest.TestCase):
@@ -83,6 +83,20 @@ class ForecastTests(unittest.TestCase):
                 self.assertEqual(set(hedge_weights('A',1,names={'bueno'})[0]),{'bueno'})
                 today=hedge_today('2026-10-10');self.assertEqual(today['1']['k'],2)
                 self.assertAlmostEqual(today['1']['eta'],np.sqrt(8*np.log(2)/1))
+    def test_ensemble_clips_hard_signals_and_keeps_base_rate(self):
+        preds={'tasa_base':.52,'azar':1.,'momentum_1m':1.,'momentum_3m':1.,'reversion_5pct':0.,'tendencia_sma200':1.,'patron:x':1.}
+        w={k:.2 for k in preds}
+        p=hedge_probability(preds,w)
+        self.assertLessEqual(p,.65);self.assertGreaterEqual(p,.35)
+        self.assertLess(abs(p-.52),.1)  # señales unánimes duras ya no arrastran el ensamble a ~0.9
+        self.assertAlmostEqual(hedge_probability({'tasa_base':.53,'azar':1.},{}),.53)  # azar nunca entra
+        self.assertEqual(hedge_probability({'momentum_1m':1.},{}),.65)  # sin tasa base: solo recorte
+    def test_ensemble_brier_close_to_base_rate_with_noise_signals(self):
+        rng=np.random.default_rng(7);n=4000;y=(rng.random(n)<.53).astype(float);eb=[];bb=[]
+        for t in range(n):
+            preds={'tasa_base':.53,**{f's{i}':float(rng.integers(0,2)) for i in range(10)}}
+            eb.append((hedge_probability(preds,{})-y[t])**2);bb.append((.53-y[t])**2)
+        self.assertLess(np.mean(eb)-np.mean(bb),.01)
     def test_predict_probability(self):
         rng=np.random.default_rng(5);c=100*np.exp(np.cumsum(rng.normal(0,.01,600)))
         d=pd.DataFrame({'close':c,'open':c*.999,'high':c*1.01,'low':c*.99,'volume':1e6},index=pd.date_range('2020-01-01',periods=600,tz='UTC'))

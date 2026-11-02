@@ -198,13 +198,27 @@ def hedge_distribution(losses,counts):
     return weights,eta
 
 
+ENSEMBLE_CLIP=(.35,.65)   # señales duras 0/1 no son probabilidades calibradas: se recortan antes de mezclar
+ENSEMBLE_BASE_WEIGHT=.5   # peso fijo del experto tasa_base; el resto se reparte por Hedge entre las señales
+NO_EXPERT=('azar','tasa_base','ensamble_hedge','sube_siempre')
+
+
 def hedge_probability(preds, weights):
-    active={name:weights[name] for name in preds if name in weights and name not in ('azar','tasa_base')}
+    """Mezcla señales recortadas a [.35,.65] (Hedge) con la tasa base como experto de peso fijo 1/2.
+
+    Antes se excluía la tasa base y se mezclaban probabilidades duras 0/1: con eta pequeño los pesos son casi
+    iguales y el promedio de ~10 señales binarias quedaba sobreconfiado (Brier .31 vs .25 de la tasa base)."""
+    lo,hi=ENSEMBLE_CLIP
+    active={name:weights[name] for name in preds if name in weights and name not in NO_EXPERT}
     denom=sum(active.values())
     if denom<=0:
-        active={name:1.0 for name in preds if name not in ('azar','ensamble_hedge')}
+        active={name:1.0 for name in preds if name not in NO_EXPERT}
         denom=sum(active.values())
-    return sum(active[name]*float(preds[name]) for name in active)/denom if denom else .5
+    signal=sum(active[name]*min(hi,max(lo,float(preds[name]))) for name in active)/denom if denom else None
+    base=preds.get('tasa_base')
+    if base is None:return .5 if signal is None else signal
+    base=min(hi,max(lo,float(base)))
+    return base if signal is None else ENSEMBLE_BASE_WEIGHT*base+(1-ENSEMBLE_BASE_WEIGHT)*signal
 
 
 def walk_forward_report(d, sim, horizon, cutoff=None):
@@ -431,7 +445,7 @@ def generate(kind,now=None):
     if pd.Timestamp(published)>=deadline:raise RuntimeError('Terminó después de apertura; no publicar')
     save_once(path,{'version':2,'publicado':published.isoformat(),'deadline':deadline.isoformat(),
         'run_id':os.environ.get('GITHUB_RUN_ID'),'head_sha':os.environ.get('GITHUB_SHA'),'tipo':kind,'filas':rows,'fallas':failures,
-        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte; sin ventaja en validación previa se encoge a la tasa base; sin ajuste por resultado',
+        'activos_elegibles':len(assets),'algoritmo':'logistica C=.1 fija, walk-forward3 bloques expansivos, purga horizonte; sin ventaja en validación previa se encoge a la tasa base; sin ajuste por resultado; ensamble_hedge (desde 2-nov-2026): señales recortadas a [.35,.65] y tasa base como experto con peso 1/2',
         'predictores_registrados':5+sum(bool(r['direccion']) for r in catalog()),
         'aviso':'Dirección entre cierre anterior y cierre objetivo. Patrones se abstienen sin señal. No es simulación de ejecución.'})
 
