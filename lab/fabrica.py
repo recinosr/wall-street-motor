@@ -26,6 +26,8 @@ def variantes(raiz=None):
     raiz = Path(raiz or ROOT / "ideas")
     for ruta in sorted(raiz.glob("*.json")):
         plantilla = json.loads(ruta.read_text(encoding="utf-8"))
+        if "symbols" in plantilla or "regla" in plantilla:  # universo y plantillas diarias (fabrica_diaria)
+            continue
         for campo in ("fuente", "hipotesis", "entrada", "salida", "activo", "horizonte_minutos", "lookback_minutos", "umbral", "costo_por_lado"):
             if campo not in plantilla:
                 raise ValueError(f"{ruta.name}: falta {campo}")

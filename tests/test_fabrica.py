@@ -14,6 +14,15 @@ class FabricaTests(unittest.TestCase):
         self.assertEqual(fabrica.benjamini_hochberg({"a": .001, "b": .02, "c": .06}), {"a", "b"})
         self.assertEqual(fabrica.benjamini_hochberg({"a": .02, "b": .04, "c": .06}), set())
 
+    def test_variantes_ignora_universo_y_plantillas_diarias(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "universo.json").write_text('{"symbols": ["AAA"]}', encoding="utf-8")
+            (Path(d) / "diaria.json").write_text('{"id": "x", "regla": "y"}', encoding="utf-8")
+            self.assertEqual(list(fabrica.variantes(d)), [])
+            (Path(d) / "rota.json").write_text('{"id": "z"}', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                list(fabrica.variantes(d))
+
     def test_senal_usa_pasado_y_entrada_futura_con_costos(self):
         idx = pd.date_range("2024-01-01", periods=90, freq="min", tz="UTC")
         px = [100 + i * .1 for i in range(90)]
