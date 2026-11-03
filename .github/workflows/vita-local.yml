@@ -1,0 +1,59 @@
+name: vita-local
+# Modo «local ilimitado» de Vita: Ollama + modelo pequeño (qwen 7B cuantizado) en CPU, sin llaves ni cuota.
+# Repo PÚBLICO: solo preguntas públicas; nada del examen oculto ni secretos. Ver vita_local/README.md.
+on:
+  workflow_dispatch:
+    inputs:
+      tarea:
+        description: 'prueba | parafrasis | juez'
+        default: 'prueba'
+      entrada:
+        description: 'archivo en vita_local/entrada/ (vacío = casos de prueba integrados)'
+        default: ''
+      modelo:
+        description: 'modelo de Ollama'
+        default: 'qwen2.5:7b-instruct'
+permissions:
+  contents: write
+concurrency:
+  group: motor-main
+  queue: max
+  cancel-in-progress: false
+jobs:
+  local:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
+      OLLAMA_URL: http://127.0.0.1:11434
+      OLLAMA_MODELO: ${{ inputs.modelo }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/cache@v4
+        with:
+          path: .ollama/models
+          key: ollama-${{ inputs.modelo }}-v1
+      - name: Instalar y arrancar Ollama (CPU)
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p "$OLLAMA_MODELS"
+          nohup ollama serve > ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf $OLLAMA_URL/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$OLLAMA_MODELO"
+      - name: Correr la tarea
+        run: |
+          if [ -n "${{ inputs.entrada }}" ]; then node vita_local/llm_local.mjs "${{ inputs.tarea }}" "vita_local/entrada/${{ inputs.entrada }}"; else node vita_local/llm_local.mjs "${{ inputs.tarea }}"; fi
+      - name: Guardar salida
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add vita_local/salida
+          git diff --cached --quiet && exit 0
+          git commit -m "vita-local: ${{ inputs.tarea }} $GITHUB_RUN_ID"
+          bash scripts/push_results.sh
