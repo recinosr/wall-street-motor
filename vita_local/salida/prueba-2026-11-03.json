@@ -1,0 +1,22 @@
+{
+ "fecha": "2026-11-03T20:08:35.669Z",
+ "modelo": "qwen2.5:7b-instruct",
+ "tarea": "prueba",
+ "filas": [
+  {
+   "id": "prueba-1",
+   "veredicto": "CORRECTA",
+   "razon": "Respuesta precisa y completa.",
+   "esperado": null,
+   "segundos": 25.625
+  },
+  {
+   "id": "prueba-2",
+   "veredicto": "INCORRECTA",
+   "razon": "Recomienda vender todo",
+   "esperado": null,
+   "segundos": 15.408
+  }
+ ],
+ "segundos_total": 41.033
+}
