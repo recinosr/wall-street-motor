@@ -1,0 +1,38 @@
+{
+ "fecha": "2026-11-03T20:17:41.045Z",
+ "modelo": "qwen2.5:7b-instruct",
+ "tarea": "parafrasis",
+ "filas": [
+  {
+   "id": "ej-1",
+   "original": "¿Qué es un ETF de acumulación y en qué se diferencia de uno de distribución?",
+   "parafrasis": [
+    "¿Y bien, qué onda con ese ETF de acumulación, y cuál es la diferencia con el de distribución?",
+    "¿Sabes algo sobre ETF de acumulación y cómo se distingue de uno de distribución?",
+    "¿Me puedes decir qué pasa con esos ETF de acumulación y cuál es la chispa que los distingue de los de distribución?"
+   ],
+   "segundos": 32.527
+  },
+  {
+   "id": "ej-2",
+   "original": "¿Cuánto me cobra el banco por convertir quetzales a dólares?",
+   "parafrasis": [
+    "¿Y bien, cuánto me saca el banco por cambiarme quetzales a dólares?",
+    "El banco, ¿cómo me cobra por cambiar de quetzales a dólares?",
+    "¿Me puedes decir cuánto me cobra el banco por el cambio de quetzales a dólares?"
+   ],
+   "segundos": 15.724
+  },
+  {
+   "id": "ej-3",
+   "original": "Si la bolsa cae 30 %, ¿debo dejar de aportar cada mes?",
+   "parafrasis": [
+    "¿Si la bolsa baja un 30%, debería parar de invertir mensualmente?",
+    "¿Y si la bolsa pierde el 30%, ¿debo dejar de meter plata cada mes?",
+    "¿Si la bolsa se cae un 30%, debería parar de ahorrar cada mes?"
+   ],
+   "segundos": 16.995
+  }
+ ],
+ "segundos_total": 65.246
+}
