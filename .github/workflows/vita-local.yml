@@ -1,12 +1,17 @@
 name: vita-local
 # Modo «local ilimitado» de Vita: Ollama + modelo pequeño (qwen 7B cuantizado) en CPU, sin llaves ni cuota.
 # Repo PÚBLICO: solo preguntas públicas; nada del examen oculto ni secretos. Ver vita_local/README.md.
+# Tarea L (5-nov-2026): cada hora (minuto 23) corre vita_local/ciclo.mjs: juez de lo pendiente, examinador del examen fresco y
+# paráfrasis de preguntas públicas. Los minutos de Actions en repos públicos son gratis y sin límite (docs.github.com, leído 3-nov-2026).
+# También diagnostica GitHub Models con el GITHUB_TOKEN de este repo (resultados/vita_local/github_models.json).
 on:
+  schedule:
+    - cron: '23 * * * *'
   workflow_dispatch:
     inputs:
       tarea:
-        description: 'prueba | parafrasis | juez'
-        default: 'prueba'
+        description: 'ciclo | prueba | parafrasis | juez | juez-examen'
+        default: 'ciclo'
       entrada:
         description: 'archivo en vita_local/entrada/ (vacío = casos de prueba integrados)'
         default: ''
@@ -15,18 +20,22 @@ on:
         default: 'qwen2.5:7b-instruct'
 permissions:
   contents: write
+  models: read
+# Grupo propio: el cálculo largo no bloquea a los demás workflows del motor; la publicación reintenta con pull --rebase.
 concurrency:
-  group: motor-main
+  group: vita-local
   queue: max
   cancel-in-progress: false
 jobs:
   local:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 58
     env:
       OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
       OLLAMA_URL: http://127.0.0.1:11434
-      OLLAMA_MODELO: ${{ inputs.modelo }}
+      OLLAMA_MODELO: ${{ inputs.modelo || 'qwen2.5:7b-instruct' }}
+      TAREA: ${{ inputs.tarea || 'ciclo' }}
+      ENTRADA: ${{ inputs.entrada || '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,11 +43,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Diagnóstico de GitHub Models (sin mostrar el token)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p resultados/vita_local
+          node vita_local/diagnostico_github_models.mjs --salida resultados/vita_local/github_models.json | head -c 6000
+      # Sin entradas (publicas.json / hechos_publicos.json / juzgar/) el ciclo no tiene nada que hacer: no instala Ollama.
+      - name: ¿Hay entradas?
+        id: entradas
+        run: |
+          if [ "$TAREA" != "ciclo" ] || ls vita_local/entrada/publicas.json vita_local/entrada/hechos_publicos.json vita_local/entrada/juzgar/*.json >/dev/null 2>&1; then echo "hay=1" >> "$GITHUB_OUTPUT"; else echo "hay=0" >> "$GITHUB_OUTPUT"; echo "Sin entradas públicas: solo diagnóstico."; fi
       - uses: actions/cache@v4
+        if: steps.entradas.outputs.hay == '1'
         with:
           path: .ollama/models
-          key: ollama-${{ inputs.modelo }}-v1
+          key: ollama-${{ inputs.modelo || 'qwen2.5:7b-instruct' }}-v1
       - name: Instalar y arrancar Ollama (CPU)
+        if: steps.entradas.outputs.hay == '1'
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
           sudo systemctl stop ollama 2>/dev/null || true
@@ -47,13 +70,17 @@ jobs:
           for i in $(seq 1 30); do curl -sf $OLLAMA_URL/api/tags >/dev/null && break; sleep 2; done
           ollama pull "$OLLAMA_MODELO"
       - name: Correr la tarea
+        if: steps.entradas.outputs.hay == '1'
         run: |
-          if [ -n "${{ inputs.entrada }}" ]; then node vita_local/llm_local.mjs "${{ inputs.tarea }}" "vita_local/entrada/${{ inputs.entrada }}"; else node vita_local/llm_local.mjs "${{ inputs.tarea }}"; fi
+          if [ "$TAREA" = "ciclo" ]; then node vita_local/ciclo.mjs
+          elif [ -n "$ENTRADA" ]; then node vita_local/llm_local.mjs "$TAREA" "vita_local/entrada/$ENTRADA"
+          else node vita_local/llm_local.mjs "$TAREA"; fi
       - name: Guardar salida
+        if: always()
         run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
-          git add vita_local/salida
+          git add vita_local/salida resultados/vita_local 2>/dev/null || true
           git diff --cached --quiet && exit 0
-          git commit -m "vita-local: ${{ inputs.tarea }} $GITHUB_RUN_ID"
+          git commit -m "vita-local: $TAREA $GITHUB_RUN_ID"
           bash scripts/push_results.sh
