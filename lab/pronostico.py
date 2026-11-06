@@ -605,11 +605,13 @@ def score(now=None):
     for (day,predictor,horizon),group in pd.DataFrame(allrows).groupby(['objetivo','predictor','horizonte']) if allrows else []:
         curve.append({'fecha':day,'predictor':predictor,'horizonte':int(horizon),
             'brier':float(np.mean([(r['p']-r['y'])**2 for r in group.to_dict('records')])),'n':len(group)})
-    hedge_curve=[]
+    # Peso medio por publicación/horizonte/predictor: la versión por activo pasaba de 100 MB y GitHub rechazaba el push.
+    hedge_acc={}
     for forecast in forecast_views:
         for row in forecast['filas']:
             for predictor,weight in row.get('pesos_hedge',{}).items():
-                hedge_curve.append({'fecha':forecast['publicado'],'sim':row['sim'],'horizonte':row['horizonte'],'predictor':predictor,'peso':weight})
+                a=hedge_acc.setdefault((forecast['publicado'],row['horizonte'],predictor),[0.0,0]);a[0]+=weight;a[1]+=1
+    hedge_curve=[{'fecha':f,'horizonte':h,'predictor':pr,'peso_medio':t/n,'n':n} for (f,h,pr),(t,n) in hedge_acc.items()]
     r={'version':2,'actualizado':now.isoformat(),'ultimo_dia':last,'acumulado':summary(allrows),
         'diario':summary(today),'ventana_30d':summary(window),'sorpresas':surprises,'fallas':failures,
         'pronosticos_registrados':len(list(directory.glob('*.json'))),'registros':registrations,'etiquetas':len(allrows),
@@ -624,7 +626,7 @@ def score(now=None):
             for control in ('siempre','azar'):s['q_'+control]=adjusted[f'{window}:{i}:{control}']
     r['contrastes_calculados']=len(tests)
     r['inferencia']='BH global sobre todos los contrastes calculados de3 ventanas, tipos/sectores/horizontes. Pruebas por diferencias de aciertos agrupadas por día, Newey-West5lags, mínimo30días; de lo contrario p=1. No demuestra rendimiento neto.'
-    (ROOT/'resultados/marcador.json').write_text(json.dumps(r,ensure_ascii=False,allow_nan=False),encoding='utf8')
+    (ROOT/'resultados/marcador.json').write_text(json.dumps(r,ensure_ascii=False,allow_nan=False,separators=(',',':')),encoding='utf8')
     print('Etiquetas:',len(allrows),'Pronósticos:',r['pronosticos_registrados'])
 
 
