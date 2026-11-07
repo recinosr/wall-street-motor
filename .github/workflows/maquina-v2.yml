@@ -1,14 +1,15 @@
 name: VITA v2 - máquina del tiempo
 on:
+  # Período limpio depende del modelo: qwen2.5 aprendió hasta 2024 (usar 2025-2026); llama3.1 hasta 2023 (puede usar 2024).
   workflow_dispatch:
     inputs:
       desde:
         description: Primera fecha de decisión
-        default: '2024-01-02'
+        default: '2025-01-02'
         type: string
       hasta:
         description: Última fecha de decisión
-        default: '2024-12-31'
+        default: '2026-10-16'
         type: string
       modelo:
         description: Modelo principal de Ollama
