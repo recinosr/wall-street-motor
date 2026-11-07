@@ -2,13 +2,13 @@
  "tramo": 13,
  "modelo": "qwen2.5:14b",
  "run_id": "42343659179",
- "fechas_hechas": 9,
+ "fechas_hechas": 12,
  "fechas_total": 23,
- "solicitudes": 9,
+ "solicitudes": 12,
  "lotes_con_json_valido": 0,
  "llamadas_crudas": 0,
  "llamadas_validas": 0,
  "segundos_modelo": 0,
- "ultima_fecha": "2026-03-16",
- "actualizado_utc": "2026-11-07T08:52:49.376Z"
+ "ultima_fecha": "2026-03-19",
+ "actualizado_utc": "2026-11-07T09:38:00.666Z"
 }
