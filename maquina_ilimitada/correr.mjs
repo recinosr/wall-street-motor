@@ -3,6 +3,7 @@
 // Uso: node correr.mjs --tramo=3 --total=20 --desde=2025-01-02 --hasta=2026-10-16 --series=series.json.gz --universo=universo.json --salida=salida --modelo=qwen2.5:7b-instruct --llamadas=20 --presupuesto_min=335
 import fs from 'node:fs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {leerJSON, leerJSONL, aFilas, insumosDeFecha, candidatos, lotes, armarPrompt, validarLlamada, calificarLlamada, precioReferencia, claseDe, diasHabiles, tramoDe} from './lib.mjs';
 import {pedirJSON} from './ollama.mjs';
 
@@ -46,6 +47,28 @@ export async function procesarFecha({dia, universo, series, modelo, llamadas = 2
   return {filas, stats};
 }
 
+
+// Las corridas largas no muestran su registro por la API hasta terminar: cada pocas fechas el trabajo publica un
+// resumen de avance (pocos bytes) en resultados/maquina_ilimitada/progreso/. No es un resultado: solo permite vigilar.
+function publicarProgreso(salida, tramo, total) {
+  if (process.env.GITHUB_ACTIONS !== 'true' || process.env.PROGRESO === '0') return;
+  try {
+    const est = leerJSONL(path.join(salida, 'estadisticas.jsonl')).filter(x => !x.error), sum = k => est.reduce((a, x) => a + (x[k] || 0), 0);
+    const slug = String(args.modelo).replace(/[:/]/g, '_'), dir = `resultados/maquina_ilimitada/progreso/${slug}`, f = `${dir}/tramo-${String(tramo).padStart(2, '0')}.json`;
+    const prog = {tramo, modelo: args.modelo, run_id: process.env.GITHUB_RUN_ID, fechas_hechas: est.length, fechas_total: total, solicitudes: sum('solicitudes'), lotes_con_json_valido: sum('json_validos'), llamadas_crudas: sum('llamadas_crudas'), llamadas_validas: sum('llamadas_validas'), segundos_modelo: Math.round(sum('segundos')), ultima_fecha: est.at(-1)?.dia, actualizado_utc: new Date().toISOString()};
+    for (let i = 0; i < 5; i++) {
+      try {
+        const g = (...a) => execFileSync('git', a, {stdio: 'pipe'});
+        g('fetch', '-q', '--depth=1', 'origin', 'main'); g('checkout', '-q', '--detach', 'FETCH_HEAD');
+        fs.mkdirSync(dir, {recursive: true}); fs.writeFileSync(f, JSON.stringify(prog, null, 1) + String.fromCharCode(10));
+        g('-c', 'user.name=motor-bot', '-c', 'user.email=motor-bot@users.noreply.github.com', 'add', f);
+        g('-c', 'user.name=motor-bot', '-c', 'user.email=motor-bot@users.noreply.github.com', 'commit', '-q', '-m', `maquina-ilimitada: avance tramo ${tramo} (${est.length}/${total})`);
+        g('push', '-q', 'origin', 'HEAD:main'); return;
+      } catch (e) { execFileSync('sleep', [String(2 + Math.floor(Math.random() * 8))]); }
+    }
+  } catch (e) { console.log('Avance no publicado:', e.message); }
+}
+
 async function main() {
   const inicio = Date.now(), presupuesto = num('presupuesto_min', 335) * 60000;
   const salida = args.salida || 'salida'; fs.mkdirSync(salida, {recursive: true});
@@ -62,6 +85,7 @@ async function main() {
       const {filas, stats} = await procesarFecha({dia, universo, series, modelo: args.modelo, llamadas: num('llamadas', 20), tramo: num('tramo', 0)});
       if (filas.length) fs.appendFileSync(pLl, filas.map(f => JSON.stringify(f)).join('\n') + '\n');
       fs.appendFileSync(pEst, JSON.stringify(stats) + '\n');
+      const hechas = leerJSONL(pEst).filter(x => !x.error).length; if (hechas === 1 || hechas % 3 === 0) publicarProgreso(salida, num('tramo', 0), dias.length);
       console.log(`${dia}: ${stats.llamadas_validas}/${stats.llamadas_crudas} válidas (${stats.json_validos}/${stats.solicitudes} lotes con JSON válido, ${stats.intentos} intentos), ${stats.segundos.toFixed(0)} s, descartes ${JSON.stringify(stats.descartes)}`);
     } catch (e) { console.log(`${dia}: error ${e.message}`); fs.appendFileSync(pEst, JSON.stringify({dia, error: e.message}) + '\n'); }
   }

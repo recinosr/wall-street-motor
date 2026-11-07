@@ -155,15 +155,18 @@ jobs:
           node maquina_ilimitada/resumir.mjs --artefactos=artefactos --series=series.json.gz --memoria=memoria.json \
             --salida="$SALIDA" --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --llamadas_por_dia="$LLAMADAS"
           echo "SALIDA=$SALIDA" >> "$GITHUB_ENV"
-      - name: Publicar en el repo
+      - name: Publicar en el repo (sin rebase: parte del último main y copia los resultados)
         run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
-          git add resultados/maquina_ilimitada
-          git diff --cached --quiet && exit 0
-          git commit -m "maquina-ilimitada: resumen $MODELO run $GITHUB_RUN_ID"
+          rm -rf /tmp/pub && mkdir -p /tmp/pub && cp -r "$SALIDA/." /tmp/pub/
           for i in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            git fetch -q --depth=1 origin main && git checkout -q -f --detach FETCH_HEAD
+            mkdir -p "$SALIDA" && cp -r /tmp/pub/. "$SALIDA/"
+            git add resultados/maquina_ilimitada
+            git diff --cached --quiet && exit 0
+            git commit -q -m "maquina-ilimitada: resumen $MODELO run $GITHUB_RUN_ID"
+            if git push -q origin HEAD:main; then exit 0; fi
             sleep $((i * 5))
           done
           exit 1
