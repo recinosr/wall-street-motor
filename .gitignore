@@ -13,3 +13,4 @@ partes/
 
 datos/cache/oraculo-pit/
 datos/cache/y_*_1d.csv
+series_pit.json.gz

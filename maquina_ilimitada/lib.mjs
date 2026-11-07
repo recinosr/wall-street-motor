@@ -52,11 +52,11 @@ export function cribarAcciones(acciones, sp500, max = 30) {
 }
 
 // ---- Insumos de una fecha, sin mirar el futuro ----
-export function insumosDeFecha(dia, universo, series) {
+export function insumosDeFecha(dia, universo, series, incluirTodasAcciones = false) {
   const prev = new Map(universo.map(f => [f.ticker, cortarSerie(aFilas(series[f.ticker]), dia)]));
   const acciones = universo.filter(f => f.clase === 'accion');
   const sp = acciones.map(f => [f, prev.get(f.ticker)]).filter(([, s]) => s.length >= 25).map(([f, s]) => fichaCribado(f.ticker_precio, s));
-  const seleccion = [...universo.filter(f => f.clase !== 'accion'), ...cribarAcciones(acciones, sp)];
+  const seleccion = incluirTodasAcciones ? universo : [...universo.filter(f => f.clase !== 'accion'), ...cribarAcciones(acciones, sp)];
   const instrumentos = seleccion.filter(f => prev.get(f.ticker)?.length >= 25).map(f => ({ ...f, ...rasgos(prev.get(f.ticker)), noticias: [] }));
   const vt = cortarSerie(aFilas(series.VT), dia);
   return { version: 1, simulada: true, fecha_decision: dia, instrumentos, referencia_vt: vt.length >= 25 ? rasgos(vt) : null };

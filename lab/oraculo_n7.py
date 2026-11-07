@@ -49,7 +49,8 @@ REGLAS_PRUEBA = ["R0", "R1", "R2", "R3", "R4"]
 
 def verificar_prereg(ruta: Path = PREREG, ruta_sha: Path = PREREG_SHA) -> tuple[dict, str]:
     """Devuelve (prereg, sha256). Aborta si el sha256 de los bytes no coincide con el sidecar."""
-    datos = Path(ruta).read_bytes()
+    # Git checkouts on Windows may expand LF to CRLF; hash canonical Git text bytes.
+    datos = Path(ruta).read_bytes().replace(b'\r\n', b'\n')
     esperado = Path(ruta_sha).read_text(encoding="utf-8").split()[0].lower()
     real = hashlib.sha256(datos).hexdigest()
     if real != esperado:

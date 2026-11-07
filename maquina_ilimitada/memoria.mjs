@@ -8,10 +8,10 @@ import {pedirJSON} from './ollama.mjs';
 const args = Object.fromEntries(process.argv.slice(2).map(s => s.replace(/^--/, '').split('=')));
 const hash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
 
-export function escogerPares(universo, series, n = 20, desde = '2025-01-02', hasta = '2026-10-16') {
+export function escogerPares(universo, series, n = 20, desde = '2025-01-02', hasta = '2026-10-16', miembrosPorFecha = null) {
   const cand = [];
   for (const f of universo.filter(x => x.clase !== 'cripto' || x.ticker === 'BTC')) {
-    const s = aFilas(series[f.ticker]).filter(x => x.fecha >= desde && x.fecha <= hasta);
+    const s = aFilas(series[f.ticker]).filter(x => x.fecha >= desde && x.fecha <= hasta && (!miembrosPorFecha || f.clase !== 'accion' || miembrosPorFecha[x.fecha]?.includes(f.ticker)));
     if (s.length < 50) continue;
     const x = s[hash(f.ticker + 'mem') % s.length];
     cand.push({activo: f.ticker, nombre: f.clase === 'cripto' ? 'Bitcoin (BTC-USD)' : f.que.replace(/\s*\(.*\)$/, ''), simbolo: f.ticker_precio, fecha: x.fecha, precio_real: x.precio, clase: f.clase});

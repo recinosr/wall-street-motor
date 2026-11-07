@@ -17,7 +17,8 @@ PRECIOS = RAIZ / "datos" / "pit" / "precios"
 
 
 def cargar_prereg():
-    datos = PREREG.read_bytes()
+    # Git checkouts on Windows may expand LF to CRLF; hash canonical Git text bytes.
+    datos = PREREG.read_bytes().replace(b'\r\n', b'\n')
     real = hashlib.sha256(datos).hexdigest()
     esperado = PREREG_SHA.read_text().split()[0]
     if real != esperado:

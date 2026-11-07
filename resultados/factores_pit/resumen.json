@@ -1,0 +1,4733 @@
+{
+  "generado_utc": "2026-11-07T21:37:24.441Z",
+  "fuente_membresia": "Wikipedia Historical components of the S&P 500, invertido desde la lista actual; datos/universo_pit/sp500_miembros.json",
+  "fuente_precios": "Yahoo Finance chart API (no ajustados; series faltantes explícitas)",
+  "periodo_corto": {
+    "periodo": {
+      "desde": "2025-01-02",
+      "hasta": "2026-09-30"
+    },
+    "miembros_unicos": 537,
+    "tickers_sin_serie": [
+      "ANSS",
+      "CTRA",
+      "DAY",
+      "DFS",
+      "HES",
+      "HOLX",
+      "IPG",
+      "JNPR",
+      "K",
+      "WBA"
+    ],
+    "fraccion_tickers_sin_serie": 0.0186219739292365,
+    "metodo": "Decisión a cierre previo; factores calculados solo con precios anteriores al día de decisión. Rebalanceo cada 21 sesiones; retorno desde cierre previo hasta cierre de la sesión 21; cestas equiponderadas. Precios Yahoo no ajustados por dividendos.",
+    "universo_total_fechas": 20,
+    "universo_miembro_dias": 10055,
+    "universo_sin_precio_o_corte": 182,
+    "fraccion_universo_sin_precio_o_corte": 0.01810044753853804,
+    "observaciones_factor": 9847,
+    "periodos": 20,
+    "media_top5": 0.05976121826455355,
+    "media_universo": 0.011151061004600985,
+    "media_peores5": 0.012625408503915086,
+    "exceso_top5": 0.04861015725995257,
+    "acumulado_top5": 1.6115323929277547,
+    "acumulado_universo": 0.23952896012469505,
+    "acumulado_peores5": 0.19053199823745381,
+    "bootstrap_mensual": {
+      "meses": 20,
+      "ic95": [
+        -0.010791541484832416,
+        0.11671470705488259
+      ]
+    },
+    "por_anio": {
+      "2025": {
+        "periodos": 12,
+        "media_top5": 0.028831696502905693,
+        "media_universo": 0.009590257756766087,
+        "media_peores5": 0.02946878645725633,
+        "exceso_top5": 0.019241438746139608,
+        "acumulado_top5": 0.3076068950344677,
+        "acumulado_universo": 0.11604324764158536,
+        "acumulado_peores5": 0.345016650609252,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.036326784017206584,
+            0.07368158842198773
+          ]
+        }
+      },
+      "2026": {
+        "periodos": 8,
+        "media_top5": 0.10615550090702533,
+        "media_universo": 0.01349226587635333,
+        "media_peores5": -0.012639658426096783,
+        "exceso_top5": 0.092663235030672,
+        "acumulado_top5": 0.9971846300633918,
+        "acumulado_universo": 0.1106459922086882,
+        "acumulado_peores5": -0.11485705571140814,
+        "bootstrap_mensual": {
+          "meses": 8,
+          "ic95": [
+            -0.02505538544620085,
+            0.23035414227394146
+          ]
+        }
+      }
+    },
+    "detalle": [
+      {
+        "date": "2025-01-02",
+        "target": "2025-02-03",
+        "n": 487,
+        "top5": 0.1021545352016702,
+        "universe": 0.028574440467358624,
+        "bottom5": -0.025260780463948397,
+        "topTickers": [
+          "VST",
+          "PLTR",
+          "TPL",
+          "NVDA",
+          "AXON"
+        ],
+        "bottomTickers": [
+          "ENPH",
+          "INTC",
+          "EL",
+          "CE",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-02-04",
+        "target": "2025-03-05",
+        "n": 487,
+        "top5": -0.09202186456526588,
+        "universe": -0.018533250251130663,
+        "bottom5": 0.06142831055911282,
+        "topTickers": [
+          "PLTR",
+          "VST",
+          "UAL",
+          "AXON",
+          "TPL"
+        ],
+        "bottomTickers": [
+          "DG",
+          "INTC",
+          "CE",
+          "SMCI",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-03-06",
+        "target": "2025-04-03",
+        "n": 487,
+        "top5": -0.182022861340913,
+        "universe": -0.057088439772111144,
+        "bottom5": -0.0979470419401691,
+        "topTickers": [
+          "PLTR",
+          "VST",
+          "TPL",
+          "UAL",
+          "ECHO"
+        ],
+        "bottomTickers": [
+          "ENPH",
+          "INTC",
+          "CE",
+          "MRNA",
+          "SMCI"
+        ]
+      },
+      {
+        "date": "2025-04-04",
+        "target": "2025-05-05",
+        "n": 489,
+        "top5": 0.23374502075443254,
+        "universe": 0.030874177274800595,
+        "bottom5": -0.05430562975470228,
+        "topTickers": [
+          "PLTR",
+          "TPL",
+          "ECHO",
+          "GEV",
+          "HWM"
+        ],
+        "bottomTickers": [
+          "ENPH",
+          "INTC",
+          "EL",
+          "SMCI",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-05-06",
+        "target": "2025-06-04",
+        "n": 489,
+        "top5": 0.054350217582603014,
+        "universe": 0.03492086394494918,
+        "bottom5": 0.24134489767950104,
+        "topTickers": [
+          "PLTR",
+          "TPL",
+          "GEV",
+          "HWM",
+          "PM"
+        ],
+        "bottomTickers": [
+          "ON",
+          "EL",
+          "MCHP",
+          "SMCI",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-06-05",
+        "target": "2025-07-07",
+        "n": 490,
+        "top5": 0.0487314909275685,
+        "universe": 0.03848580545031613,
+        "bottom5": 0.07056900986942245,
+        "topTickers": [
+          "PLTR",
+          "GEV",
+          "AXON",
+          "TPL",
+          "DASH"
+        ],
+        "bottomTickers": [
+          "FSLR",
+          "ALB",
+          "SMCI",
+          "ENPH",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-07-08",
+        "target": "2025-08-05",
+        "n": 490,
+        "top5": 0.11610312926516342,
+        "universe": -0.00502921718302297,
+        "bottom5": -0.04575267739895143,
+        "topTickers": [
+          "PLTR",
+          "GEV",
+          "AXON",
+          "HWM",
+          "DASH"
+        ],
+        "bottomTickers": [
+          "UNH",
+          "SMCI",
+          "REGN",
+          "ENPH",
+          "MRNA"
+        ]
+      },
+      {
+        "date": "2025-08-06",
+        "target": "2025-09-04",
+        "n": 493,
+        "top5": -0.09616485395947498,
+        "universe": 0.029840552396607715,
+        "bottom5": 0.08797708980806365,
+        "topTickers": [
+          "PLTR",
+          "GEV",
+          "AXON",
+          "VST",
+          "TPR"
+        ],
+        "bottomTickers": [
+          "DOW",
+          "UNH",
+          "MRNA",
+          "ENPH",
+          "CNC"
+        ]
+      },
+      {
+        "date": "2025-09-05",
+        "target": "2025-10-03",
+        "n": 494,
+        "top5": 0.046519654748673256,
+        "universe": 0.0163773971769084,
+        "bottom5": 0.14207368730741626,
+        "topTickers": [
+          "PLTR",
+          "GEV",
+          "TPR",
+          "VST",
+          "AXON"
+        ],
+        "bottomTickers": [
+          "DOW",
+          "MOH",
+          "MRNA",
+          "ENPH",
+          "CNC"
+        ]
+      },
+      {
+        "date": "2025-10-06",
+        "target": "2025-11-03",
+        "n": 494,
+        "top5": 0.013296969594776841,
+        "universe": -0.023002187601480588,
+        "bottom5": -0.06999001235153564,
+        "topTickers": [
+          "HOOD",
+          "PLTR",
+          "APP",
+          "ECHO",
+          "GEV"
+        ],
+        "bottomTickers": [
+          "DOW",
+          "IT",
+          "MRNA",
+          "CNC",
+          "TTD"
+        ]
+      },
+      {
+        "date": "2025-11-04",
+        "target": "2025-12-03",
+        "n": 492,
+        "top5": -0.045415620949212365,
+        "universe": 0.020751690751299675,
+        "bottom5": -0.041898965947964786,
+        "topTickers": [
+          "HOOD",
+          "PLTR",
+          "APP",
+          "ECHO",
+          "WDC"
+        ],
+        "bottomTickers": [
+          "MRNA",
+          "IT",
+          "DOW",
+          "TTD",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2025-12-04",
+        "target": "2026-01-05",
+        "n": 492,
+        "top5": 0.1467045407748468,
+        "universe": 0.01891126042669811,
+        "bottom5": 0.08538755012083135,
+        "topTickers": [
+          "HOOD",
+          "PLTR",
+          "ECHO",
+          "WDC",
+          "STX"
+        ],
+        "bottomTickers": [
+          "ARE",
+          "MOH",
+          "DECK",
+          "TTD",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-01-06",
+        "target": "2026-02-04",
+        "n": 494,
+        "top5": 0.14962770374637774,
+        "universe": 0.02456971106108455,
+        "bottom5": -0.1228851028325798,
+        "topTickers": [
+          "HOOD",
+          "WDC",
+          "ECHO",
+          "STX",
+          "MU"
+        ],
+        "bottomTickers": [
+          "DECK",
+          "IT",
+          "ARE",
+          "TTD",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-02-05",
+        "target": "2026-03-06",
+        "n": 494,
+        "top5": -0.033780914763399214,
+        "universe": -0.011916194085291609,
+        "bottom5": 0.01481152676268147,
+        "topTickers": [
+          "ECHO",
+          "WDC",
+          "MU",
+          "STX",
+          "FIX"
+        ],
+        "bottomTickers": [
+          "ARE",
+          "LULU",
+          "IT",
+          "TTD",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-03-09",
+        "target": "2026-04-07",
+        "n": 496,
+        "top5": 0.2285156449782368,
+        "universe": -0.024632814651192072,
+        "bottom5": -0.10986318509452582,
+        "topTickers": [
+          "SNDK",
+          "WDC",
+          "STX",
+          "MU",
+          "ECHO"
+        ],
+        "bottomTickers": [
+          "MOH",
+          "FDS",
+          "TTD",
+          "IT",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-04-08",
+        "target": "2026-05-06",
+        "n": 495,
+        "top5": 0.548643792447827,
+        "universe": 0.057030311670376026,
+        "bottom5": 0.02875665317635352,
+        "topTickers": [
+          "SNDK",
+          "LITE",
+          "WDC",
+          "CIEN",
+          "MU"
+        ],
+        "bottomTickers": [
+          "FDS",
+          "GDDY",
+          "TTD",
+          "IT",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-05-07",
+        "target": "2026-06-05",
+        "n": 497,
+        "top5": -0.029842069257951475,
+        "universe": 0.010440363638141393,
+        "bottom5": 0.02799549416206055,
+        "topTickers": [
+          "SNDK",
+          "LITE",
+          "WDC",
+          "CIEN",
+          "ECHO"
+        ],
+        "bottomTickers": [
+          "NOW",
+          "GDDY",
+          "IT",
+          "TTD",
+          "FISV"
+        ]
+      },
+      {
+        "date": "2026-06-08",
+        "target": "2026-07-08",
+        "n": 496,
+        "top5": -0.0533985922428011,
+        "universe": 0.0198104210127719,
+        "bottom5": -0.05758979505398989,
+        "topTickers": [
+          "SNDK",
+          "LITE",
+          "WDC",
+          "ECHO",
+          "CIEN"
+        ],
+        "bottomTickers": [
+          "LULU",
+          "IT",
+          "FISV",
+          "CHTR",
+          "TTD"
+        ]
+      },
+      {
+        "date": "2026-07-09",
+        "target": "2026-08-06",
+        "n": 495,
+        "top5": -0.0841899397365935,
+        "universe": 0.032099582696572225,
+        "bottom5": 0.07323284416116267,
+        "topTickers": [
+          "SNDK",
+          "LITE",
+          "WDC",
+          "MU",
+          "CIEN"
+        ],
+        "bottomTickers": [
+          "CSGP",
+          "FISV",
+          "INTU",
+          "CHTR",
+          "TTD"
+        ]
+      },
+      {
+        "date": "2026-08-07",
+        "target": "2026-09-04",
+        "n": 496,
+        "top5": 0.1236683820845064,
+        "universe": 0.0005367456683642304,
+        "bottom5": 0.044424297310063074,
+        "topTickers": [
+          "SNDK",
+          "MU",
+          "WDC",
+          "LITE",
+          "STX"
+        ],
+        "bottomTickers": [
+          "FISV",
+          "SMCI",
+          "INTU",
+          "CSGP",
+          "TTD"
+        ]
+      }
+    ]
+  },
+  "periodo_largo": {
+    "periodo": {
+      "desde": "2010-01-04",
+      "hasta": "2024-12-31"
+    },
+    "miembros_unicos": 782,
+    "tickers_sin_serie": [
+      "ABMD",
+      "ACE",
+      "ADS",
+      "AET",
+      "AGN",
+      "AKS",
+      "ALTR",
+      "ALXN",
+      "ANDV",
+      "ANR",
+      "ANSS",
+      "APOL",
+      "ARG",
+      "ARNC",
+      "ATVI",
+      "AVP",
+      "AYE",
+      "BCR",
+      "BHI",
+      "BIG",
+      "BJS",
+      "BMC",
+      "BMS",
+      "BRCM",
+      "BXLT",
+      "CA",
+      "CBE",
+      "CCE",
+      "CDAY",
+      "CELG",
+      "CEPH",
+      "CERN",
+      "CFN",
+      "CHK",
+      "CMA",
+      "CMCSK",
+      "COL",
+      "COV",
+      "CPGX",
+      "CSC",
+      "CTLT",
+      "CTRA",
+      "CTXS",
+      "CVC",
+      "CVH",
+      "DAY",
+      "DF",
+      "DFS",
+      "DISCA",
+      "DISCK",
+      "DISH",
+      "DNB",
+      "DNR",
+      "DO",
+      "DPS",
+      "DRE",
+      "DTV",
+      "DWDP",
+      "EK",
+      "ENDP",
+      "ESRX",
+      "ESV",
+      "ETFC",
+      "EVHC",
+      "FBHS",
+      "FDO",
+      "FII",
+      "FL",
+      "FLIR",
+      "FRC",
+      "FRX",
+      "FTR",
+      "GAS",
+      "GGP",
+      "GMCR",
+      "GPS",
+      "GR",
+      "HAR",
+      "HBI",
+      "HCBK",
+      "HES",
+      "HFC",
+      "HNZ",
+      "HOLX",
+      "HOT",
+      "HSP",
+      "IGT",
+      "IPG",
+      "JDSU",
+      "JNPR",
+      "JNS",
+      "JOY",
+      "JWN",
+      "K",
+      "KFT",
+      "KRFT",
+      "KSU",
+      "LLL",
+      "LLTC",
+      "LM",
+      "LO",
+      "LSI",
+      "LVLT",
+      "LXK",
+      "MDP",
+      "MEE",
+      "MFE",
+      "MHS",
+      "MIL",
+      "MJN",
+      "MNK",
+      "MOLX",
+      "MON",
+      "MRO",
+      "MWW",
+      "MXIM",
+      "NBL",
+      "NLSN",
+      "NOVL",
+      "NSM",
+      "NVLS",
+      "NYX",
+      "ODP",
+      "PBCT",
+      "PCP",
+      "PDCO",
+      "PETM",
+      "PGN",
+      "PLL",
+      "PTV",
+      "PXD",
+      "QEP",
+      "RAI",
+      "RDC",
+      "RHT",
+      "RRD",
+      "RSH",
+      "RTN",
+      "RX",
+      "SAI",
+      "SCG",
+      "SEE",
+      "SIAL",
+      "SIVB",
+      "SNI",
+      "SRCL",
+      "STJ",
+      "STR",
+      "SVU",
+      "SWN",
+      "SWY",
+      "TEG",
+      "TFCF",
+      "TFCFA",
+      "TGNA",
+      "TIE",
+      "TIF",
+      "TLAB",
+      "TSS",
+      "TWC",
+      "TWTR",
+      "TWX",
+      "TYC",
+      "VAR",
+      "VIAB",
+      "WBA",
+      "WCG",
+      "WFM",
+      "WFR",
+      "WIN",
+      "WLTW",
+      "WPX",
+      "WYN",
+      "X",
+      "XEC",
+      "XL",
+      "XLNX",
+      "XTO",
+      "YHOO"
+    ],
+    "fraccion_tickers_sin_serie": 0.2289002557544757,
+    "metodo": "Decisión a cierre previo; factores calculados solo con precios anteriores al día de decisión. Rebalanceo cada 21 sesiones; retorno desde cierre previo hasta cierre de la sesión 21; cestas equiponderadas. Precios Yahoo no ajustados por dividendos.",
+    "universo_total_fechas": 170,
+    "universo_miembro_dias": 90327,
+    "universo_sin_precio_o_corte": 15626,
+    "fraccion_universo_sin_precio_o_corte": 0.17299367852358652,
+    "observaciones_factor": 71258,
+    "periodos": 170,
+    "media_top5": 0.014816880254684563,
+    "media_universo": 0.010396557846070839,
+    "media_peores5": 0.02213956905588009,
+    "exceso_top5": 0.0044203224086137236,
+    "acumulado_top5": 6.782412765636987,
+    "acumulado_universo": 3.9158527951265256,
+    "acumulado_peores5": 9.371502530132844,
+    "bootstrap_mensual": {
+      "meses": 169,
+      "ic95": [
+        -0.005128960748665277,
+        0.013770137120320996
+      ]
+    },
+    "por_anio": {
+      "2010": {
+        "periodos": 3,
+        "media_top5": -0.02150182911143328,
+        "media_universo": 0.03483988678254093,
+        "media_peores5": 0.02015972422600568,
+        "exceso_top5": -0.05634171589397421,
+        "acumulado_top5": -0.06544308964303835,
+        "acumulado_universo": 0.10807564850645579,
+        "acumulado_peores5": 0.0604955857526166,
+        "bootstrap_mensual": {
+          "meses": 3,
+          "ic95": [
+            -0.10596231350508607,
+            -0.008557334323242391
+          ]
+        }
+      },
+      "2011": {
+        "periodos": 12,
+        "media_top5": -0.003073785902137218,
+        "media_universo": 0.0015148988016598947,
+        "media_peores5": 0.016578566503385853,
+        "exceso_top5": -0.004588684703797113,
+        "acumulado_top5": -0.0822442636707621,
+        "acumulado_universo": -0.0005808562413655016,
+        "acumulado_peores5": 0.0704802062633949,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.03950951245826331,
+            0.028350014072255653
+          ]
+        }
+      },
+      "2012": {
+        "periodos": 12,
+        "media_top5": 0.02171784033715099,
+        "media_universo": 0.016224902585188026,
+        "media_peores5": 0.03488993190204865,
+        "exceso_top5": 0.005492937751962964,
+        "acumulado_top5": 0.2789456381270099,
+        "acumulado_universo": 0.19939647803785698,
+        "acumulado_peores5": 0.35137965602530485,
+        "bootstrap_mensual": {
+          "meses": 11,
+          "ic95": [
+            -0.014551886970828364,
+            0.02345770400031438
+          ]
+        }
+      },
+      "2013": {
+        "periodos": 12,
+        "media_top5": 0.03825409159234925,
+        "media_universo": 0.023087770379866757,
+        "media_peores5": 0.030328356069996582,
+        "exceso_top5": 0.015166321212482493,
+        "acumulado_top5": 0.5453283006108256,
+        "acumulado_universo": 0.3105405426957517,
+        "acumulado_peores5": 0.39348569245164167,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.007977351605844698,
+            0.037849787418238905
+          ]
+        }
+      },
+      "2014": {
+        "periodos": 12,
+        "media_top5": 0.020672133299714023,
+        "media_universo": 0.009819625698271965,
+        "media_peores5": 0.000036831971693724805,
+        "exceso_top5": 0.010852507601442058,
+        "acumulado_top5": 0.2430007084203567,
+        "acumulado_universo": 0.11660488745433017,
+        "acumulado_peores5": -0.020321461379810724,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.02052233825260972,
+            0.03439943032296492
+          ]
+        }
+      },
+      "2015": {
+        "periodos": 12,
+        "media_top5": 0.004336829984977137,
+        "media_universo": -0.002056646749539282,
+        "media_peores5": -0.026546050920097684,
+        "exceso_top5": 0.0063934767345164185,
+        "acumulado_top5": 0.047424845754933775,
+        "acumulado_universo": -0.028536266048307724,
+        "acumulado_peores5": -0.30655564526516943,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.006720945812745696,
+            0.021483697303236862
+          ]
+        }
+      },
+      "2016": {
+        "periodos": 12,
+        "media_top5": 0.01920948047615657,
+        "media_universo": 0.01361406450490582,
+        "media_peores5": 0.0691940322150122,
+        "exceso_top5": 0.005595415971250749,
+        "acumulado_top5": 0.23419263632928944,
+        "acumulado_universo": 0.16797004381595038,
+        "acumulado_peores5": 1.118611571665979,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.014735143233276916,
+            0.02654064953216328
+          ]
+        }
+      },
+      "2017": {
+        "periodos": 12,
+        "media_top5": 0.02583366796105349,
+        "media_universo": 0.014045890445314528,
+        "media_peores5": 0.003379320598904683,
+        "exceso_top5": 0.011787777515738963,
+        "acumulado_top5": 0.3357908701231014,
+        "acumulado_universo": 0.18051419757207898,
+        "acumulado_peores5": -0.005762755693382693,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.021055571440164008,
+            0.0436460945068875
+          ]
+        }
+      },
+      "2018": {
+        "periodos": 12,
+        "media_top5": -0.02904187261462046,
+        "media_universo": -0.006922180628944415,
+        "media_peores5": -0.009897054303188548,
+        "exceso_top5": -0.022119691985676045,
+        "acumulado_top5": -0.3384119909117317,
+        "acumulado_universo": -0.08518611910603202,
+        "acumulado_peores5": -0.1327140327203412,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.062467390106707404,
+            0.017967217572815275
+          ]
+        }
+      },
+      "2019": {
+        "periodos": 12,
+        "media_top5": 0.030473982415792505,
+        "media_universo": 0.01921158884723471,
+        "media_peores5": 0.029388743525514415,
+        "exceso_top5": 0.011262393568557794,
+        "acumulado_top5": 0.40380425233724315,
+        "acumulado_universo": 0.2486212829795551,
+        "acumulado_peores5": 0.3750584962607746,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.019821551869881725,
+            0.03741750801444151
+          ]
+        }
+      },
+      "2020": {
+        "periodos": 12,
+        "media_top5": 0.017242498489573817,
+        "media_universo": 0.0159656494489623,
+        "media_peores5": 0.0917872510533344,
+        "exceso_top5": 0.0012768490406115177,
+        "acumulado_top5": 0.19580689370508497,
+        "acumulado_universo": 0.13720624282684812,
+        "acumulado_peores5": 0.5968857810204153,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.05029251808706886,
+            0.052953204078755166
+          ]
+        }
+      },
+      "2021": {
+        "periodos": 12,
+        "media_top5": 0.011228281438851247,
+        "media_universo": 0.019258787415476934,
+        "media_peores5": 0.021256319593310317,
+        "exceso_top5": -0.008030505976625687,
+        "acumulado_top5": 0.11232576518589577,
+        "acumulado_universo": 0.2522355332364945,
+        "acumulado_peores5": 0.23877650454783428,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.04806252528124574,
+            0.027067548544736655
+          ]
+        }
+      },
+      "2022": {
+        "periodos": 12,
+        "media_top5": 0.004255791211507345,
+        "media_universo": -0.0072404675671341725,
+        "media_peores5": 0.017089119581461285,
+        "exceso_top5": 0.011496258778641518,
+        "acumulado_top5": 0.00192185210310436,
+        "acumulado_universo": -0.09808521031070461,
+        "acumulado_peores5": 0.17081804961840863,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.04010356174060862,
+            0.06020429220076209
+          ]
+        }
+      },
+      "2023": {
+        "periodos": 12,
+        "media_top5": 0.024555047147200065,
+        "media_universo": 0.008138280728484316,
+        "media_peores5": 0.025599433907517826,
+        "exceso_top5": 0.01641676641871575,
+        "acumulado_top5": 0.3256108130521198,
+        "acumulado_universo": 0.09221885297153842,
+        "acumulado_peores5": 0.17836073160312904,
+        "bootstrap_mensual": {
+          "meses": 12,
+          "ic95": [
+            -0.0008627421957062131,
+            0.036462936008916445
+          ]
+        }
+      },
+      "2024": {
+        "periodos": 11,
+        "media_top5": 0.03230975459816827,
+        "media_universo": 0.01517720059704103,
+        "media_peores5": 0.006020904221352271,
+        "exceso_top5": 0.01713255400112724,
+        "acumulado_top5": 0.30363428105853196,
+        "acumulado_universo": 0.1783535502531104,
+        "acumulado_peores5": 0.04164497729844663,
+        "bootstrap_mensual": {
+          "meses": 11,
+          "ic95": [
+            -0.05367055621211359,
+            0.08430201343066977
+          ]
+        }
+      }
+    },
+    "detalle": [
+      {
+        "date": "2010-10-04",
+        "target": "2010-11-01",
+        "n": 343,
+        "top5": -0.07539579113875891,
+        "universe": 0.03056652236632717,
+        "bottom5": -0.0037375123694483037,
+        "topTickers": [
+          "EP",
+          "AKAM",
+          "CRM",
+          "CLF",
+          "BKNG"
+        ],
+        "bottomTickers": [
+          "HRB",
+          "NVDA",
+          "GT",
+          "BSX",
+          "WY"
+        ]
+      },
+      {
+        "date": "2010-11-02",
+        "target": "2010-12-01",
+        "n": 343,
+        "top5": 0.01792194414496242,
+        "universe": 0.02647927846820481,
+        "bottom5": 0.059921288215462144,
+        "topTickers": [
+          "AKAM",
+          "EP",
+          "BKNG",
+          "CMI",
+          "CRM"
+        ],
+        "bottomTickers": [
+          "RRC",
+          "ADBE",
+          "BSX",
+          "HRB",
+          "WY"
+        ]
+      },
+      {
+        "date": "2010-12-02",
+        "target": "2010-12-31",
+        "n": 343,
+        "top5": -0.007031640340503342,
+        "universe": 0.047473859513090806,
+        "bottom5": 0.0042953968320031954,
+        "topTickers": [
+          "AKAM",
+          "URI",
+          "CMI",
+          "UAA",
+          "CRM"
+        ],
+        "bottomTickers": [
+          "BAC",
+          "FHN",
+          "EP",
+          "HRB",
+          "WY"
+        ]
+      },
+      {
+        "date": "2011-01-03",
+        "target": "2011-02-01",
+        "n": 343,
+        "top5": 0.03464082515202975,
+        "universe": 0.04286053201077219,
+        "bottom5": 0.32350088122168785,
+        "topTickers": [
+          "NFLX",
+          "FFIV",
+          "CMI",
+          "UAA",
+          "AKAM"
+        ],
+        "bottomTickers": [
+          "MU",
+          "PHM",
+          "HRB",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-02-02",
+        "target": "2011-03-03",
+        "n": 343,
+        "top5": 0.008188704358423138,
+        "universe": 0.024503120673714,
+        "bottom5": 0.16543578298103007,
+        "topTickers": [
+          "NFLX",
+          "URI",
+          "FFIV",
+          "AIG",
+          "CMI"
+        ],
+        "bottomTickers": [
+          "GILD",
+          "PHM",
+          "HRB",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-03-04",
+        "target": "2011-04-01",
+        "n": 343,
+        "top5": 0.09618834660975226,
+        "universe": 0.010999445491226716,
+        "bottom5": 0.003206362364474935,
+        "topTickers": [
+          "URI",
+          "NFLX",
+          "UAA",
+          "BKNG",
+          "CRM"
+        ],
+        "bottomTickers": [
+          "V",
+          "HRB",
+          "PHM",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-04-04",
+        "target": "2011-05-03",
+        "n": 344,
+        "top5": -0.09372842111703886,
+        "universe": 0.016255001862200507,
+        "bottom5": -0.028726897878402723,
+        "topTickers": [
+          "URI",
+          "NFLX",
+          "UAA",
+          "NOV",
+          "AN"
+        ],
+        "bottomTickers": [
+          "GNW",
+          "CSCO",
+          "PHM",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-05-04",
+        "target": "2011-06-02",
+        "n": 345,
+        "top5": 0.028311735565497466,
+        "universe": -0.02669735369290299,
+        "bottom5": -0.06185591768738234,
+        "topTickers": [
+          "NFLX",
+          "URI",
+          "UAA",
+          "CMG",
+          "BKNG"
+        ],
+        "bottomTickers": [
+          "BBY",
+          "CSCO",
+          "PHM",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-06-03",
+        "target": "2011-07-01",
+        "n": 345,
+        "top5": 0.00220446641528238,
+        "universe": 0.022022371570817108,
+        "bottom5": -0.002837159376490694,
+        "topTickers": [
+          "BKNG",
+          "URI",
+          "NFLX",
+          "HAL",
+          "CF"
+        ],
+        "bottomTickers": [
+          "PHM",
+          "CSCO",
+          "AKAM",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-07-05",
+        "target": "2011-08-02",
+        "n": 346,
+        "top5": -0.032782872092731584,
+        "universe": -0.08648308033281572,
+        "bottom5": -0.20118458188890037,
+        "topTickers": [
+          "URI",
+          "BKNG",
+          "NFLX",
+          "ANF",
+          "CF"
+        ],
+        "bottomTickers": [
+          "AIG",
+          "AKAM",
+          "CSCO",
+          "WY",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-08-03",
+        "target": "2011-08-31",
+        "n": 346,
+        "top5": -0.04035267447853517,
+        "universe": -0.027591994645093928,
+        "bottom5": 0.08075840080865675,
+        "topTickers": [
+          "NFLX",
+          "BKNG",
+          "CMG",
+          "UAA",
+          "NOV"
+        ],
+        "bottomTickers": [
+          "AIG",
+          "GNW",
+          "AKAM",
+          "CSCO",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-09-01",
+        "target": "2011-09-30",
+        "n": 346,
+        "top5": -0.17432944675349188,
+        "universe": -0.08809309469579042,
+        "bottom5": -0.17872221957480908,
+        "topTickers": [
+          "CMG",
+          "NOV",
+          "NFLX",
+          "ANF",
+          "UAA"
+        ],
+        "bottomTickers": [
+          "PHM",
+          "BAC",
+          "GNW",
+          "AKAM",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-10-03",
+        "target": "2011-10-31",
+        "n": 347,
+        "top5": 0.20313115770446516,
+        "universe": 0.13418907366422148,
+        "bottom5": 0.22380692866728072,
+        "topTickers": [
+          "CF",
+          "CMG",
+          "WYNN",
+          "AN",
+          "BIIB"
+        ],
+        "bottomTickers": [
+          "BAC",
+          "PHM",
+          "GNW",
+          "AKAM",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-11-01",
+        "target": "2011-11-30",
+        "n": 348,
+        "top5": -0.005689939635298335,
+        "universe": -0.006534377442438964,
+        "bottom5": -0.10678127794209438,
+        "topTickers": [
+          "BIIB",
+          "RRC",
+          "VFC",
+          "IRM",
+          "CMG"
+        ],
+        "bottomTickers": [
+          "NFLX",
+          "AKAM",
+          "GNW",
+          "FSLR",
+          "EP"
+        ]
+      },
+      {
+        "date": "2011-12-01",
+        "target": "2011-12-30",
+        "n": 348,
+        "top5": -0.06266731255400093,
+        "universe": 0.0027491411560087602,
+        "bottom5": -0.01765750365442049,
+        "topTickers": [
+          "BIIB",
+          "VFC",
+          "ISRG",
+          "RRC",
+          "EQT"
+        ],
+        "bottomTickers": [
+          "AKAM",
+          "BAC",
+          "GNW",
+          "FSLR",
+          "NFLX"
+        ]
+      },
+      {
+        "date": "2012-01-03",
+        "target": "2012-02-01",
+        "n": 352,
+        "top5": 0.027096425874473185,
+        "universe": 0.07384447409178443,
+        "bottom5": 0.3458145948849801,
+        "topTickers": [
+          "BIIB",
+          "ISRG",
+          "MA",
+          "HUM",
+          "VFC"
+        ],
+        "bottomTickers": [
+          "GNW",
+          "AIG",
+          "BAC",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-02-02",
+        "target": "2012-03-02",
+        "n": 352,
+        "top5": 0.0769315524175439,
+        "universe": 0.02759490844691618,
+        "bottom5": -0.056412743994279355,
+        "topTickers": [
+          "BIIB",
+          "DLTR",
+          "MA",
+          "CMG",
+          "VFC"
+        ],
+        "bottomTickers": [
+          "BAC",
+          "EXPE",
+          "NFLX",
+          "EP",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-03-05",
+        "target": "2012-04-02",
+        "n": 352,
+        "top5": 0.07412147188531266,
+        "universe": 0.03151669867901974,
+        "bottom5": 0.0977482232506975,
+        "topTickers": [
+          "BIIB",
+          "DLTR",
+          "FAST",
+          "CMG",
+          "SBUX"
+        ],
+        "bottomTickers": [
+          "EXPE",
+          "BAC",
+          "NFLX",
+          "FSLR",
+          "EP"
+        ]
+      },
+      {
+        "date": "2012-04-03",
+        "target": "2012-05-02",
+        "n": 354,
+        "top5": 0.0027717244573911117,
+        "universe": -0.010437335515018235,
+        "bottom5": -0.1939522242170465,
+        "topTickers": [
+          "BIIB",
+          "MA",
+          "FAST",
+          "DLTR",
+          "AAPL"
+        ],
+        "bottomTickers": [
+          "BAC",
+          "AA",
+          "NFLX",
+          "EP",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-05-03",
+        "target": "2012-06-01",
+        "n": 354,
+        "top5": -0.06778591347579636,
+        "universe": -0.09816793550687829,
+        "bottom5": -0.13117397109140558,
+        "topTickers": [
+          "AAPL",
+          "DLTR",
+          "FAST",
+          "M",
+          "CMG"
+        ],
+        "bottomTickers": [
+          "NBR",
+          "AA",
+          "NFLX",
+          "EP",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-06-04",
+        "target": "2012-07-02",
+        "n": 354,
+        "top5": 0.04557523448928939,
+        "universe": 0.06640055725258044,
+        "bottom5": 0.12452975479795159,
+        "topTickers": [
+          "ORLY",
+          "ISRG",
+          "DLTR",
+          "URI",
+          "AAPL"
+        ],
+        "bottomTickers": [
+          "AA",
+          "NBR",
+          "GNW",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-07-03",
+        "target": "2012-08-01",
+        "n": 358,
+        "top5": -0.007742553287137355,
+        "universe": -0.0016372488001470014,
+        "bottom5": -0.10423483374047779,
+        "topTickers": [
+          "MNST",
+          "AAPL",
+          "TJX",
+          "ROST",
+          "SHW"
+        ],
+        "bottomTickers": [
+          "FOSL",
+          "GNW",
+          "ANF",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-08-02",
+        "target": "2012-08-30",
+        "n": 358,
+        "top5": 0.03809369478260975,
+        "universe": 0.026873452732228364,
+        "bottom5": 0.11775077020144534,
+        "topTickers": [
+          "MNST",
+          "STX",
+          "SHW",
+          "LEN",
+          "ROST"
+        ],
+        "bottomTickers": [
+          "CLF",
+          "FOSL",
+          "ANF",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-08-31",
+        "target": "2012-10-01",
+        "n": 358,
+        "top5": 0.031426468607610114,
+        "universe": 0.029123791398580595,
+        "bottom5": -0.010459685720430878,
+        "topTickers": [
+          "STX",
+          "PHM",
+          "LEN",
+          "SHW",
+          "ROST"
+        ],
+        "bottomTickers": [
+          "AMD",
+          "ANF",
+          "CLF",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-10-02",
+        "target": "2012-11-01",
+        "n": 361,
+        "top5": 0.039305449367285285,
+        "universe": 0.007169582485611658,
+        "bottom5": 0.02614034215100556,
+        "topTickers": [
+          "PHM",
+          "STX",
+          "LEN",
+          "RF",
+          "DHI"
+        ],
+        "bottomTickers": [
+          "CLF",
+          "AMD",
+          "ANF",
+          "NFLX",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2012-11-02",
+        "target": "2012-12-03",
+        "n": 362,
+        "top5": -0.05778953049977287,
+        "universe": -0.008628063529923893,
+        "bottom5": 0.05197510427641146,
+        "topTickers": [
+          "PHM",
+          "LEN",
+          "DHI",
+          "STX",
+          "RF"
+        ],
+        "bottomTickers": [
+          "HPQ",
+          "CLF",
+          "ANF",
+          "FSLR",
+          "AMD"
+        ]
+      },
+      {
+        "date": "2012-12-04",
+        "target": "2013-01-03",
+        "n": 364,
+        "top5": 0.058610059427003015,
+        "universe": 0.051045949287502314,
+        "bottom5": 0.15095385202573236,
+        "topTickers": [
+          "PHM",
+          "LEN",
+          "WHR",
+          "STZ",
+          "SW"
+        ],
+        "bottomTickers": [
+          "FSLR",
+          "BBY",
+          "HPQ",
+          "CLF",
+          "AMD"
+        ]
+      },
+      {
+        "date": "2013-01-04",
+        "target": "2013-02-04",
+        "n": 367,
+        "top5": 0.04238024744201572,
+        "universe": 0.04077837350757406,
+        "bottom5": 0.08316484890309628,
+        "topTickers": [
+          "PHM",
+          "WHR",
+          "EXPE",
+          "CPRI",
+          "LEN"
+        ],
+        "bottomTickers": [
+          "ATI",
+          "HPQ",
+          "BBY",
+          "CLF",
+          "AMD"
+        ]
+      },
+      {
+        "date": "2013-02-05",
+        "target": "2013-03-06",
+        "n": 367,
+        "top5": 0.0934054498052946,
+        "universe": 0.033006968773571614,
+        "bottom5": 0.02554093983084984,
+        "topTickers": [
+          "PHM",
+          "EXPE",
+          "LEN",
+          "WHR",
+          "STZ"
+        ],
+        "bottomTickers": [
+          "PBI",
+          "HPQ",
+          "CLF",
+          "BBY",
+          "AMD"
+        ]
+      },
+      {
+        "date": "2013-03-07",
+        "target": "2013-04-05",
+        "n": 368,
+        "top5": -0.02587587400696594,
+        "universe": 0.005065877404061167,
+        "bottom5": 0.020868371819632126,
+        "topTickers": [
+          "PHM",
+          "EXPE",
+          "MPC",
+          "LEN",
+          "THC"
+        ],
+        "bottomTickers": [
+          "HPQ",
+          "TPR",
+          "BBY",
+          "CLF",
+          "AMD"
+        ]
+      },
+      {
+        "date": "2013-04-08",
+        "target": "2013-05-06",
+        "n": 368,
+        "top5": 0.06528094909033781,
+        "universe": 0.0500865039514638,
+        "bottom5": 0.2013979909182614,
+        "topTickers": [
+          "PHM",
+          "MPC",
+          "EXPE",
+          "GILD",
+          "THC"
+        ],
+        "bottomTickers": [
+          "AAPL",
+          "TPR",
+          "FFIV",
+          "AMD",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-05-07",
+        "target": "2013-06-05",
+        "n": 370,
+        "top5": 0.005634080892302729,
+        "universe": -0.008801640837801092,
+        "bottom5": -0.020192350629055066,
+        "topTickers": [
+          "STZ",
+          "THC",
+          "MPC",
+          "NFLX",
+          "HRB"
+        ],
+        "bottomTickers": [
+          "GRMN",
+          "ATI",
+          "FFIV",
+          "AMD",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-06-06",
+        "target": "2013-07-05",
+        "n": 373,
+        "top5": -0.042402822519346774,
+        "universe": 0.016505246860421683,
+        "bottom5": -0.07901159287199785,
+        "topTickers": [
+          "FSLR",
+          "NFLX",
+          "PHM",
+          "STZ",
+          "THC"
+        ],
+        "bottomTickers": [
+          "FFIV",
+          "EW",
+          "NEM",
+          "AMD",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-07-08",
+        "target": "2013-08-05",
+        "n": 372,
+        "top5": 0.12516388178853716,
+        "universe": 0.05680465876560594,
+        "bottom5": 0.10418967724360188,
+        "topTickers": [
+          "FSLR",
+          "NFLX",
+          "SW",
+          "CPAY",
+          "WDC"
+        ],
+        "bottomTickers": [
+          "AAPL",
+          "AMD",
+          "NEM",
+          "EW",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-08-06",
+        "target": "2013-09-04",
+        "n": 372,
+        "top5": -0.022561881347960954,
+        "universe": -0.029889106338768633,
+        "bottom5": 0.034263686645206605,
+        "topTickers": [
+          "NFLX",
+          "FSLR",
+          "GNW",
+          "GME",
+          "CPAY"
+        ],
+        "bottomTickers": [
+          "FE",
+          "AAPL",
+          "EW",
+          "NEM",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-09-05",
+        "target": "2013-10-03",
+        "n": 372,
+        "top5": 0.08702160894393632,
+        "universe": 0.02592687708121944,
+        "bottom5": -0.023871769001022523,
+        "topTickers": [
+          "NFLX",
+          "GME",
+          "GNW",
+          "FSLR",
+          "SW"
+        ],
+        "bottomTickers": [
+          "AAPL",
+          "EW",
+          "MOS",
+          "NEM",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-10-04",
+        "target": "2013-11-01",
+        "n": 374,
+        "top5": 0.05269000447113263,
+        "universe": 0.0481899214455188,
+        "bottom5": 0.040564363900116085,
+        "topTickers": [
+          "NFLX",
+          "MU",
+          "GNW",
+          "CPAY",
+          "GME"
+        ],
+        "bottomTickers": [
+          "ISRG",
+          "EW",
+          "MOS",
+          "NEM",
+          "CLF"
+        ]
+      },
+      {
+        "date": "2013-11-04",
+        "target": "2013-12-03",
+        "n": 375,
+        "top5": 0.08067400080947063,
+        "universe": 0.014926477675180285,
+        "bottom5": -0.01674410880078827,
+        "topTickers": [
+          "NFLX",
+          "MU",
+          "TRIP",
+          "DAL",
+          "BBY"
+        ],
+        "bottomTickers": [
+          "TDC",
+          "IRM",
+          "ISRG",
+          "CLF",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2013-12-04",
+        "target": "2014-01-03",
+        "n": 375,
+        "top5": -0.0023605462605629677,
+        "universe": 0.024453086270353946,
+        "bottom5": -0.006229785117941611,
+        "topTickers": [
+          "NFLX",
+          "BBY",
+          "MU",
+          "DAL",
+          "GNW"
+        ],
+        "bottomTickers": [
+          "ANF",
+          "EW",
+          "ISRG",
+          "TDC",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-01-06",
+        "target": "2014-02-04",
+        "n": 375,
+        "top5": -0.05587946557733139,
+        "universe": -0.035713260380246754,
+        "bottom5": -0.07924762418741409,
+        "topTickers": [
+          "NFLX",
+          "BBY",
+          "MU",
+          "DAL",
+          "CPAY"
+        ],
+        "bottomTickers": [
+          "ISRG",
+          "EW",
+          "TDC",
+          "CLF",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-02-05",
+        "target": "2014-03-06",
+        "n": 377,
+        "top5": 0.116265966439882,
+        "universe": 0.07851491435754644,
+        "bottom5": 0.10723348629274895,
+        "topTickers": [
+          "MU",
+          "BBY",
+          "STZ",
+          "DAL",
+          "NFLX"
+        ],
+        "bottomTickers": [
+          "EW",
+          "ISRG",
+          "TDC",
+          "CLF",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-03-07",
+        "target": "2014-04-04",
+        "n": 377,
+        "top5": -0.1318240518307782,
+        "universe": -0.004507837480585928,
+        "bottom5": 0.03792528713039929,
+        "topTickers": [
+          "MU",
+          "META",
+          "NFLX",
+          "UAA",
+          "DAL"
+        ],
+        "bottomTickers": [
+          "FE",
+          "EW",
+          "CLF",
+          "TDC",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-04-07",
+        "target": "2014-05-06",
+        "n": 378,
+        "top5": 0.04745538848468085,
+        "universe": -0.00527897932483932,
+        "bottom5": 0.0058819695063963675,
+        "topTickers": [
+          "NFLX",
+          "MU",
+          "META",
+          "DAL",
+          "GT"
+        ],
+        "bottomTickers": [
+          "GEN",
+          "IRM",
+          "DOC",
+          "FE",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-05-07",
+        "target": "2014-06-05",
+        "n": 377,
+        "top5": 0.08315968521305069,
+        "universe": 0.04120946453584231,
+        "bottom5": 0.026171074155157868,
+        "topTickers": [
+          "MU",
+          "META",
+          "GT",
+          "DAL",
+          "PBI"
+        ],
+        "bottomTickers": [
+          "FE",
+          "RIG",
+          "DOC",
+          "IRM",
+          "NEM"
+        ]
+      },
+      {
+        "date": "2014-06-06",
+        "target": "2014-07-07",
+        "n": 378,
+        "top5": 0.018962717084816515,
+        "universe": 0.016691853509429314,
+        "bottom5": 0.027673719585467604,
+        "topTickers": [
+          "META",
+          "MU",
+          "DAL",
+          "AVGO",
+          "URI"
+        ],
+        "bottomTickers": [
+          "IRM",
+          "TDC",
+          "TPR",
+          "NEM",
+          "ISRG"
+        ]
+      },
+      {
+        "date": "2014-07-08",
+        "target": "2014-08-05",
+        "n": 381,
+        "top5": 0.014220838519051648,
+        "universe": -0.0318710399292174,
+        "bottom5": 0.027951649777204768,
+        "topTickers": [
+          "META",
+          "DAL",
+          "LUV",
+          "URI",
+          "MU"
+        ],
+        "bottomTickers": [
+          "NEM",
+          "VRTX",
+          "TDC",
+          "ISRG",
+          "TPR"
+        ]
+      },
+      {
+        "date": "2014-08-06",
+        "target": "2014-09-04",
+        "n": 381,
+        "top5": 0.08492701124446145,
+        "universe": 0.04557088295096716,
+        "bottom5": 0.0642371018204182,
+        "topTickers": [
+          "MU",
+          "AVGO",
+          "LUV",
+          "AA",
+          "NBR"
+        ],
+        "bottomTickers": [
+          "CAG",
+          "GME",
+          "URBN",
+          "TDC",
+          "TPR"
+        ]
+      },
+      {
+        "date": "2014-09-05",
+        "target": "2014-10-03",
+        "n": 381,
+        "top5": -0.028174326135685334,
+        "universe": -0.02489733468714576,
+        "bottom5": -0.07412377178068755,
+        "topTickers": [
+          "LUV",
+          "AA",
+          "MU",
+          "URI",
+          "UAA"
+        ],
+        "bottomTickers": [
+          "RIG",
+          "GME",
+          "BBY",
+          "TDC",
+          "TPR"
+        ]
+      },
+      {
+        "date": "2014-10-06",
+        "target": "2014-11-03",
+        "n": 381,
+        "top5": 0.0437806071045419,
+        "universe": 0.033074472508648874,
+        "bottom5": -0.013680432621571703,
+        "topTickers": [
+          "LUV",
+          "AA",
+          "AVGO",
+          "URI",
+          "HPQ"
+        ],
+        "bottomTickers": [
+          "BBY",
+          "TDC",
+          "MAT",
+          "RIG",
+          "TPR"
+        ]
+      },
+      {
+        "date": "2014-11-04",
+        "target": "2014-12-03",
+        "n": 381,
+        "top5": 0.08342885459528886,
+        "universe": 0.026819664640359352,
+        "bottom5": -0.09607702050528444,
+        "topTickers": [
+          "LUV",
+          "MU",
+          "AVGO",
+          "AA",
+          "UAA"
+        ],
+        "bottomTickers": [
+          "FMC",
+          "GME",
+          "MAT",
+          "TPR",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2014-12-04",
+        "target": "2015-01-05",
+        "n": 381,
+        "top5": -0.02825762554541078,
+        "universe": -0.021777292321494692,
+        "bottom5": -0.03350345551251057,
+        "topTickers": [
+          "LUV",
+          "AVGO",
+          "EW",
+          "AA",
+          "MAR"
+        ],
+        "bottomTickers": [
+          "OI",
+          "GNW",
+          "MAT",
+          "TPR",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-01-06",
+        "target": "2015-02-04",
+        "n": 382,
+        "top5": -0.00787396338398707,
+        "universe": 0.013939968051020313,
+        "bottom5": -0.027028257783748733,
+        "topTickers": [
+          "LUV",
+          "EW",
+          "AVGO",
+          "MU",
+          "RCL"
+        ],
+        "bottomTickers": [
+          "FCX",
+          "TPR",
+          "NBR",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-02-05",
+        "target": "2015-03-06",
+        "n": 383,
+        "top5": 0.05200328706180035,
+        "universe": 0.013379579523302411,
+        "bottom5": -0.002601112251700455,
+        "topTickers": [
+          "LUV",
+          "EW",
+          "AVGO",
+          "KR",
+          "BBWI"
+        ],
+        "bottomTickers": [
+          "FCX",
+          "NBR",
+          "RRC",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-03-09",
+        "target": "2015-04-07",
+        "n": 383,
+        "top5": 0.002814865681551493,
+        "universe": 0.011312851309710631,
+        "bottom5": 0.07354492144618867,
+        "topTickers": [
+          "LUV",
+          "EW",
+          "KR",
+          "AVGO",
+          "MNST"
+        ],
+        "bottomTickers": [
+          "RRC",
+          "FCX",
+          "NBR",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-04-08",
+        "target": "2015-05-06",
+        "n": 388,
+        "top5": -0.012522235194617282,
+        "universe": -0.0039309212733903455,
+        "bottom5": 0.126849743064555,
+        "topTickers": [
+          "SWKS",
+          "AVGO",
+          "MNST",
+          "VRTX",
+          "LUV"
+        ],
+        "bottomTickers": [
+          "HP",
+          "RRC",
+          "FCX",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-05-07",
+        "target": "2015-06-05",
+        "n": 389,
+        "top5": 0.05136138040028289,
+        "universe": 0.0037390582513413704,
+        "bottom5": -0.05957087045831151,
+        "topTickers": [
+          "SWKS",
+          "MNST",
+          "AVGO",
+          "VRTX",
+          "COR"
+        ],
+        "bottomTickers": [
+          "MAT",
+          "WYNN",
+          "FCX",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-06-08",
+        "target": "2015-07-07",
+        "n": 389,
+        "top5": -0.012941685223801569,
+        "universe": -0.0090085299593692,
+        "bottom5": -0.09002402191587085,
+        "topTickers": [
+          "MNST",
+          "SWKS",
+          "VRTX",
+          "AVGO",
+          "COR"
+        ],
+        "bottomTickers": [
+          "FCX",
+          "CPRI",
+          "WYNN",
+          "GNW",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-07-08",
+        "target": "2015-08-05",
+        "n": 390,
+        "top5": 0.01800884670821583,
+        "universe": 0.0024284226277065278,
+        "bottom5": -0.19941689979014884,
+        "topTickers": [
+          "SWKS",
+          "AVGO",
+          "MNST",
+          "REGN",
+          "HUM"
+        ],
+        "bottomTickers": [
+          "WYNN",
+          "FCX",
+          "GNW",
+          "CPRI",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-08-06",
+        "target": "2015-09-03",
+        "n": 391,
+        "top5": -0.04669475766272178,
+        "universe": -0.06387278866436204,
+        "bottom5": -0.01974556002743637,
+        "topTickers": [
+          "MNST",
+          "SWKS",
+          "AVGO",
+          "CI",
+          "ORLY"
+        ],
+        "bottomTickers": [
+          "WYNN",
+          "CPRI",
+          "CNX",
+          "FCX",
+          "RIG"
+        ]
+      },
+      {
+        "date": "2015-09-04",
+        "target": "2015-10-05",
+        "n": 392,
+        "top5": -0.0007761758611330993,
+        "universe": 0.011758934674192797,
+        "bottom5": -0.015339170345688569,
+        "topTickers": [
+          "NFLX",
+          "MNST",
+          "REGN",
+          "DRI",
+          "VMC"
+        ],
+        "bottomTickers": [
+          "APA",
+          "GNW",
+          "RIG",
+          "CNX",
+          "FCX"
+        ]
+      },
+      {
+        "date": "2015-10-06",
+        "target": "2015-11-03",
+        "n": 393,
+        "top5": 0.03451925618698026,
+        "universe": 0.04671585292704792,
+        "bottom5": 0.03135320749168959,
+        "topTickers": [
+          "VMC",
+          "ORLY",
+          "AMZN",
+          "CI",
+          "STZ"
+        ],
+        "bottomTickers": [
+          "RIG",
+          "WYNN",
+          "GNW",
+          "CNX",
+          "FCX"
+        ]
+      },
+      {
+        "date": "2015-11-04",
+        "target": "2015-12-03",
+        "n": 394,
+        "top5": 0.016498868664008716,
+        "universe": -0.03183250243276184,
+        "bottom5": -0.11303870510960276,
+        "topTickers": [
+          "NFLX",
+          "AMZN",
+          "SBUX",
+          "UAA",
+          "VMC"
+        ],
+        "bottomTickers": [
+          "RRC",
+          "FCX",
+          "GNW",
+          "WYNN",
+          "CNX"
+        ]
+      },
+      {
+        "date": "2015-12-04",
+        "target": "2016-01-05",
+        "n": 395,
+        "top5": -0.04235572755685311,
+        "universe": -0.019309686028909936,
+        "bottom5": -0.023535885361097363,
+        "topTickers": [
+          "NFLX",
+          "AMZN",
+          "SBUX",
+          "EXPE",
+          "STZ"
+        ],
+        "bottomTickers": [
+          "NRG",
+          "WYNN",
+          "FOSL",
+          "FCX",
+          "CNX"
+        ]
+      },
+      {
+        "date": "2016-01-06",
+        "target": "2016-02-04",
+        "n": 395,
+        "top5": -0.1068486682057646,
+        "universe": -0.05095280532160842,
+        "bottom5": -0.04471508601800909,
+        "topTickers": [
+          "NFLX",
+          "AMZN",
+          "VRSN",
+          "NVDA",
+          "HRL"
+        ],
+        "bottomTickers": [
+          "WYNN",
+          "KMI",
+          "NRG",
+          "FCX",
+          "CNX"
+        ]
+      },
+      {
+        "date": "2016-02-05",
+        "target": "2016-03-07",
+        "n": 398,
+        "top5": 0.07950527242624972,
+        "universe": 0.06703727677091864,
+        "bottom5": 0.2862972221911592,
+        "topTickers": [
+          "AMZN",
+          "NVDA",
+          "NFLX",
+          "HRL",
+          "FSLR"
+        ],
+        "bottomTickers": [
+          "NRG",
+          "WMB",
+          "KMI",
+          "FCX",
+          "CNX"
+        ]
+      },
+      {
+        "date": "2016-03-08",
+        "target": "2016-04-06",
+        "n": 399,
+        "top5": 0.06915028166776442,
+        "universe": 0.02582505863646205,
+        "bottom5": -0.04650619434629719,
+        "topTickers": [
+          "HRL",
+          "AMZN",
+          "META",
+          "EXR",
+          "PSA"
+        ],
+        "bottomTickers": [
+          "MU",
+          "DVN",
+          "KMI",
+          "FCX",
+          "WMB"
+        ]
+      },
+      {
+        "date": "2016-04-07",
+        "target": "2016-05-05",
+        "n": 400,
+        "top5": -0.042446155599005844,
+        "universe": 0.0013613718438524967,
+        "bottom5": 0.11391021369370768,
+        "topTickers": [
+          "TSN",
+          "NFLX",
+          "HRL",
+          "NVDA",
+          "AMZN"
+        ],
+        "bottomTickers": [
+          "FCX",
+          "KMI",
+          "MU",
+          "DVN",
+          "WMB"
+        ]
+      },
+      {
+        "date": "2016-05-06",
+        "target": "2016-06-06",
+        "n": 401,
+        "top5": 0.02703867940096205,
+        "universe": 0.03215746090375653,
+        "bottom5": 0.14503074624478343,
+        "topTickers": [
+          "EW",
+          "TSN",
+          "NVDA",
+          "HRL",
+          "AYI"
+        ],
+        "bottomTickers": [
+          "KMI",
+          "DVN",
+          "FCX",
+          "MU",
+          "WMB"
+        ]
+      },
+      {
+        "date": "2016-06-07",
+        "target": "2016-07-06",
+        "n": 406,
+        "top5": 0.05714041125180121,
+        "universe": -0.012645508807408123,
+        "bottom5": -0.05821321465054992,
+        "topTickers": [
+          "TSN",
+          "NVDA",
+          "AMZN",
+          "EW",
+          "AWK"
+        ],
+        "bottomTickers": [
+          "KMI",
+          "WDC",
+          "WMB",
+          "MU",
+          "STX"
+        ]
+      },
+      {
+        "date": "2016-07-07",
+        "target": "2016-08-04",
+        "n": 410,
+        "top5": 0.06443677767376862,
+        "universe": 0.036723946723259036,
+        "bottom5": 0.08988566739206712,
+        "topTickers": [
+          "NVDA",
+          "AMZN",
+          "NEM",
+          "AWK",
+          "ULTA"
+        ],
+        "bottomTickers": [
+          "M",
+          "PRGO",
+          "CF",
+          "STX",
+          "WMB"
+        ]
+      },
+      {
+        "date": "2016-08-05",
+        "target": "2016-09-02",
+        "n": 410,
+        "top5": -0.01231114870881005,
+        "universe": 0.013254402315352055,
+        "bottom5": 0.10077289853485369,
+        "topTickers": [
+          "NEM",
+          "NVDA",
+          "DLR",
+          "AWK",
+          "TSN"
+        ],
+        "bottomTickers": [
+          "M",
+          "PRGO",
+          "STX",
+          "WMB",
+          "CF"
+        ]
+      },
+      {
+        "date": "2016-09-06",
+        "target": "2016-10-04",
+        "n": 411,
+        "top5": -0.020861021301910764,
+        "universe": -0.01587472831222583,
+        "bottom5": 0.06732972681595235,
+        "topTickers": [
+          "NEM",
+          "NVDA",
+          "ALB",
+          "TSN",
+          "AMAT"
+        ],
+        "bottomTickers": [
+          "CMG",
+          "WMB",
+          "WDC",
+          "PRGO",
+          "CF"
+        ]
+      },
+      {
+        "date": "2016-10-05",
+        "target": "2016-11-02",
+        "n": 414,
+        "top5": 0.0015494876016563185,
+        "universe": -0.0292109126840076,
+        "bottom5": -0.05402490507732629,
+        "topTickers": [
+          "NVDA",
+          "NEM",
+          "AMAT",
+          "ALB",
+          "TSN"
+        ],
+        "bottomTickers": [
+          "CMG",
+          "WDC",
+          "SIG",
+          "PRGO",
+          "CF"
+        ]
+      },
+      {
+        "date": "2016-11-03",
+        "target": "2016-12-02",
+        "n": 414,
+        "top5": 0.036746052262393095,
+        "universe": 0.06126455418461305,
+        "bottom5": 0.14852415527866075,
+        "topTickers": [
+          "NVDA",
+          "AMAT",
+          "NEM",
+          "TSN",
+          "HPE"
+        ],
+        "bottomTickers": [
+          "HRB",
+          "PRGO",
+          "RIG",
+          "SIG",
+          "CF"
+        ]
+      },
+      {
+        "date": "2016-12-05",
+        "target": "2017-01-04",
+        "n": 414,
+        "top5": 0.07741379724477464,
+        "universe": 0.034428657805905975,
+        "bottom5": 0.08203715652114467,
+        "topTickers": [
+          "NVDA",
+          "NEM",
+          "OKE",
+          "ALB",
+          "AMAT"
+        ],
+        "bottomTickers": [
+          "HRB",
+          "VRTX",
+          "FSLR",
+          "PRGO",
+          "CF"
+        ]
+      },
+      {
+        "date": "2017-01-05",
+        "target": "2017-02-03",
+        "n": 415,
+        "top5": 0.04407313355386344,
+        "universe": 0.009813586585426965,
+        "bottom5": -0.009369682424709369,
+        "topTickers": [
+          "NVDA",
+          "FCX",
+          "OKE",
+          "NEM",
+          "PWR"
+        ],
+        "bottomTickers": [
+          "HRB",
+          "PRGO",
+          "VRTX",
+          "TRIP",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2017-02-06",
+        "target": "2017-03-07",
+        "n": 415,
+        "top5": -0.05823847611761823,
+        "universe": 0.020404868692134318,
+        "bottom5": -0.03818479204744931,
+        "topTickers": [
+          "NVDA",
+          "FCX",
+          "OKE",
+          "URI",
+          "ZION"
+        ],
+        "bottomTickers": [
+          "HRB",
+          "COTY",
+          "UAA",
+          "PRGO",
+          "FSLR"
+        ]
+      },
+      {
+        "date": "2017-03-08",
+        "target": "2017-04-05",
+        "n": 416,
+        "top5": 0.0003205759709201672,
+        "universe": -0.007394529781152871,
+        "bottom5": -0.06629367952783868,
+        "topTickers": [
+          "NVDA",
+          "URI",
+          "MU",
+          "OKE",
+          "DVN"
+        ],
+        "bottomTickers": [
+          "BBWI",
+          "SIG",
+          "PRGO",
+          "FSLR",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-04-06",
+        "target": "2017-05-05",
+        "n": 421,
+        "top5": -0.05054509299179062,
+        "universe": 0.018352597439001198,
+        "bottom5": 0.06865364773745393,
+        "topTickers": [
+          "AMD",
+          "NVDA",
+          "MU",
+          "URI",
+          "DXC"
+        ],
+        "bottomTickers": [
+          "BBWI",
+          "PRGO",
+          "SIG",
+          "UAA",
+          "UA"
+        ]
+      },
+      {
+        "date": "2017-05-08",
+        "target": "2017-06-06",
+        "n": 421,
+        "top5": 0.13224117987419032,
+        "universe": 0.009095747457181926,
+        "bottom5": -0.030712865996263237,
+        "topTickers": [
+          "AMD",
+          "NVDA",
+          "MU",
+          "STX",
+          "DXC"
+        ],
+        "bottomTickers": [
+          "COTY",
+          "SIG",
+          "BBWI",
+          "UA",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-06-07",
+        "target": "2017-07-06",
+        "n": 421,
+        "top5": -0.004215340019111858,
+        "universe": -0.0029549345641983684,
+        "bottom5": -0.02203565666051701,
+        "topTickers": [
+          "NVDA",
+          "MU",
+          "AMD",
+          "CSX",
+          "WDC"
+        ],
+        "bottomTickers": [
+          "TSCO",
+          "TRIP",
+          "RRC",
+          "UA",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-07-07",
+        "target": "2017-08-04",
+        "n": 423,
+        "top5": 0.01112162498288185,
+        "universe": 0.023130235099457632,
+        "bottom5": -0.041264421752317614,
+        "topTickers": [
+          "NVDA",
+          "MU",
+          "AMD",
+          "CSX",
+          "ADSK"
+        ],
+        "bottomTickers": [
+          "TRIP",
+          "KIM",
+          "UA",
+          "RRC",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-08-07",
+        "target": "2017-09-05",
+        "n": 425,
+        "top5": 0.04667473864420448,
+        "universe": -0.010928440030437116,
+        "bottom5": -0.02907941444659252,
+        "topTickers": [
+          "NVDA",
+          "MU",
+          "CSX",
+          "AMD",
+          "WDC"
+        ],
+        "bottomTickers": [
+          "AAP",
+          "TRIP",
+          "UA",
+          "UAA",
+          "RRC"
+        ]
+      },
+      {
+        "date": "2017-09-06",
+        "target": "2017-10-04",
+        "n": 424,
+        "top5": 0.06894813131801958,
+        "universe": 0.040542178158384574,
+        "bottom5": 0.033638352599706,
+        "topTickers": [
+          "NVDA",
+          "NRG",
+          "NFLX",
+          "BA",
+          "FMC"
+        ],
+        "bottomTickers": [
+          "MAT",
+          "BBWI",
+          "UA",
+          "UAA",
+          "RRC"
+        ]
+      },
+      {
+        "date": "2017-10-05",
+        "target": "2017-11-02",
+        "n": 425,
+        "top5": 0.0415980771075767,
+        "universe": 0.006576343559589633,
+        "bottom5": -0.14220445295899775,
+        "topTickers": [
+          "NVDA",
+          "NRG",
+          "ALGN",
+          "FMC",
+          "AMD"
+        ],
+        "bottomTickers": [
+          "BBWI",
+          "MAT",
+          "UA",
+          "RRC",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-11-03",
+        "target": "2017-12-04",
+        "n": 426,
+        "top5": -0.014764708148979655,
+        "universe": 0.035967186719129414,
+        "bottom5": 0.23555459151027747,
+        "topTickers": [
+          "NVDA",
+          "NRG",
+          "MU",
+          "ALGN",
+          "URI"
+        ],
+        "bottomTickers": [
+          "AAP",
+          "M",
+          "UA",
+          "MAT",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2017-12-05",
+        "target": "2018-01-04",
+        "n": 427,
+        "top5": 0.09279017135848573,
+        "universe": 0.025945846009257027,
+        "bottom5": 0.08185022115410431,
+        "topTickers": [
+          "ALGN",
+          "MU",
+          "NRG",
+          "NVDA",
+          "LRCX"
+        ],
+        "bottomTickers": [
+          "BKR",
+          "M",
+          "MAT",
+          "UA",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2018-01-05",
+        "target": "2018-02-05",
+        "n": 428,
+        "top5": -0.06788184151272258,
+        "universe": -0.03386487377645129,
+        "bottom5": -0.12784007013038465,
+        "topTickers": [
+          "ALGN",
+          "NRG",
+          "PHM",
+          "DHI",
+          "VRTX"
+        ],
+        "bottomTickers": [
+          "MAT",
+          "BKR",
+          "SIG",
+          "UA",
+          "UAA"
+        ]
+      },
+      {
+        "date": "2018-02-06",
+        "target": "2018-03-07",
+        "n": 428,
+        "top5": 0.1411437875832276,
+        "universe": 0.02627158597170172,
+        "bottom5": 0.02966901890714011,
+        "topTickers": [
+          "ALGN",
+          "PYPL",
+          "MU",
+          "NVDA",
+          "BA"
+        ],
+        "bottomTickers": [
+          "NWL",
+          "GE",
+          "MAT",
+          "BKR",
+          "RRC"
+        ]
+      },
+      {
+        "date": "2018-03-08",
+        "target": "2018-04-06",
+        "n": 429,
+        "top5": -0.08515228177207954,
+        "universe": -0.03380773608142381,
+        "bottom5": -0.028834617465060663,
+        "topTickers": [
+          "ALGN",
+          "NVDA",
+          "IPGP",
+          "BA",
+          "NFLX"
+        ],
+        "bottomTickers": [
+          "PCG",
+          "BKR",
+          "GE",
+          "NWL",
+          "RRC"
+        ]
+      },
+      {
+        "date": "2018-04-09",
+        "target": "2018-05-07",
+        "n": 431,
+        "top5": 0.0523448487922477,
+        "universe": 0.01659142377137844,
+        "bottom5": 0.06880927687296272,
+        "topTickers": [
+          "NKTR",
+          "NVDA",
+          "ALGN",
+          "NFLX",
+          "IPGP"
+        ],
+        "bottomTickers": [
+          "INCY",
+          "NWL",
+          "RRC",
+          "BKR",
+          "GE"
+        ]
+      },
+      {
+        "date": "2018-05-08",
+        "target": "2018-06-06",
+        "n": 431,
+        "top5": 0.007807122860249138,
+        "universe": 0.03283039412093646,
+        "bottom5": 0.004676682123046861,
+        "topTickers": [
+          "NKTR",
+          "NVDA",
+          "NRG",
+          "NFLX",
+          "BA"
+        ],
+        "bottomTickers": [
+          "NWL",
+          "BKR",
+          "RRC",
+          "GE",
+          "INCY"
+        ]
+      },
+      {
+        "date": "2018-06-07",
+        "target": "2018-07-06",
+        "n": 431,
+        "top5": -0.07743423111128458,
+        "universe": -0.0004470651528637508,
+        "bottom5": 0.10042732136437973,
+        "topTickers": [
+          "NKTR",
+          "NRG",
+          "NFLX",
+          "VLO",
+          "BA"
+        ],
+        "bottomTickers": [
+          "TAP",
+          "REGN",
+          "NWL",
+          "GE",
+          "INCY"
+        ]
+      },
+      {
+        "date": "2018-07-09",
+        "target": "2018-08-06",
+        "n": 431,
+        "top5": 0.039162718638389694,
+        "universe": 0.025070408826143434,
+        "bottom5": -0.06056062938377067,
+        "topTickers": [
+          "NKTR",
+          "NFLX",
+          "ALGN",
+          "NRG",
+          "NTAP"
+        ],
+        "bottomTickers": [
+          "CAH",
+          "PM",
+          "INCY",
+          "GE",
+          "NWL"
+        ]
+      },
+      {
+        "date": "2018-08-07",
+        "target": "2018-09-05",
+        "n": 432,
+        "top5": 0.04941538773854779,
+        "universe": 0.012377681730398162,
+        "bottom5": 0.014654439965748667,
+        "topTickers": [
+          "NFLX",
+          "NKTR",
+          "ALGN",
+          "CPRT",
+          "MU"
+        ],
+        "bottomTickers": [
+          "BHF",
+          "GEN",
+          "GE",
+          "INCY",
+          "NWL"
+        ]
+      },
+      {
+        "date": "2018-09-06",
+        "target": "2018-10-04",
+        "n": 433,
+        "top5": -0.04116726379476761,
+        "universe": -0.009373061185408952,
+        "bottom5": -0.03205539818517613,
+        "topTickers": [
+          "NKTR",
+          "NTAP",
+          "GWW",
+          "ALGN",
+          "NFLX"
+        ],
+        "bottomTickers": [
+          "PCG",
+          "GEN",
+          "GE",
+          "INCY",
+          "NWL"
+        ]
+      },
+      {
+        "date": "2018-10-05",
+        "target": "2018-11-02",
+        "n": 434,
+        "top5": -0.23735475480694132,
+        "universe": -0.05241074446572165,
+        "bottom5": -0.043893914638068354,
+        "topTickers": [
+          "NKTR",
+          "AMZN",
+          "AMD",
+          "ALGN",
+          "GWW"
+        ],
+        "bottomTickers": [
+          "XRAY",
+          "GEN",
+          "BBWI",
+          "GE",
+          "NWL"
+        ]
+      },
+      {
+        "date": "2018-11-05",
+        "target": "2018-12-04",
+        "n": 435,
+        "top5": -0.006058616169387387,
+        "universe": -0.005511825427560861,
+        "bottom5": -0.07360888046050604,
+        "topTickers": [
+          "AMD",
+          "FTNT",
+          "AAP",
+          "NKTR",
+          "NTAP"
+        ],
+        "bottomTickers": [
+          "BBWI",
+          "XRAY",
+          "GE",
+          "MHK",
+          "WDC"
+        ]
+      },
+      {
+        "date": "2018-12-06",
+        "target": "2019-01-07",
+        "n": 438,
+        "top5": -0.12332734782092439,
+        "universe": -0.06079235587846087,
+        "bottom5": 0.029792119391425852,
+        "topTickers": [
+          "AMD",
+          "UA",
+          "UAA",
+          "FTNT",
+          "HCA"
+        ],
+        "bottomTickers": [
+          "XRAY",
+          "WDC",
+          "COTY",
+          "GE",
+          "MHK"
+        ]
+      },
+      {
+        "date": "2019-01-08",
+        "target": "2019-02-06",
+        "n": 439,
+        "top5": 0.09251452407079439,
+        "universe": 0.08609323650763859,
+        "bottom5": 0.03571276499964806,
+        "topTickers": [
+          "TRIP",
+          "HCA",
+          "FTNT",
+          "AAP",
+          "AMD"
+        ],
+        "bottomTickers": [
+          "WDC",
+          "MHK",
+          "GE",
+          "PCG",
+          "COTY"
+        ]
+      },
+      {
+        "date": "2019-02-07",
+        "target": "2019-03-08",
+        "n": 439,
+        "top5": 0.03765468103957252,
+        "universe": 0.0018173190884581256,
+        "bottom5": 0.055490306452554615,
+        "topTickers": [
+          "AMD",
+          "CMG",
+          "FTNT",
+          "NRG",
+          "LLY"
+        ],
+        "bottomTickers": [
+          "MHK",
+          "WDC",
+          "PRGO",
+          "NKTR",
+          "COTY"
+        ]
+      },
+      {
+        "date": "2019-03-11",
+        "target": "2019-04-08",
+        "n": 440,
+        "top5": 0.10853474949946733,
+        "universe": 0.055736661171289316,
+        "bottom5": 0.10116532406863601,
+        "topTickers": [
+          "AMD",
+          "CMG",
+          "AES",
+          "LLY",
+          "FTNT"
+        ],
+        "bottomTickers": [
+          "CAG",
+          "PRGO",
+          "WDC",
+          "NKTR",
+          "COTY"
+        ]
+      },
+      {
+        "date": "2019-04-09",
+        "target": "2019-05-08",
+        "n": 439,
+        "top5": -0.02007967966161457,
+        "universe": -0.015026801915237326,
+        "bottom5": -0.03799426944349649,
+        "topTickers": [
+          "AMD",
+          "CMG",
+          "KEYS",
+          "CDNS",
+          "LLY"
+        ],
+        "bottomTickers": [
+          "COTY",
+          "NWL",
+          "WDC",
+          "KHC",
+          "NKTR"
+        ]
+      },
+      {
+        "date": "2019-05-09",
+        "target": "2019-06-07",
+        "n": 439,
+        "top5": 0.05092647315631429,
+        "universe": 0.00036932121469242864,
+        "bottom5": -0.0873263801834887,
+        "topTickers": [
+          "AMD",
+          "KEYS",
+          "CMG",
+          "AZO",
+          "LLY"
+        ],
+        "bottomTickers": [
+          "LUMN",
+          "HAL",
+          "NWL",
+          "KHC",
+          "NKTR"
+        ]
+      },
+      {
+        "date": "2019-06-10",
+        "target": "2019-07-09",
+        "n": 438,
+        "top5": 0.046042065359565856,
+        "universe": 0.03485552733579797,
+        "bottom5": 0.13975592438163412,
+        "topTickers": [
+          "BALL",
+          "AMD",
+          "CHD",
+          "CMG",
+          "CDNS"
+        ],
+        "bottomTickers": [
+          "NOV",
+          "HAL",
+          "NKTR",
+          "WDC",
+          "VTRS"
+        ]
+      },
+      {
+        "date": "2019-07-10",
+        "target": "2019-08-07",
+        "n": 440,
+        "top5": -0.0016905907445282863,
+        "universe": -0.03520685724109102,
+        "bottom5": -0.061144142440143365,
+        "topTickers": [
+          "AMD",
+          "BALL",
+          "SBUX",
+          "MKTX",
+          "AZO"
+        ],
+        "bottomTickers": [
+          "CPRI",
+          "HAL",
+          "KHC",
+          "NOV",
+          "VTRS"
+        ]
+      },
+      {
+        "date": "2019-08-08",
+        "target": "2019-09-06",
+        "n": 441,
+        "top5": 0.06197825513890791,
+        "universe": 0.02673480453571091,
+        "bottom5": -0.019233351816504096,
+        "topTickers": [
+          "MKTX",
+          "BALL",
+          "SBUX",
+          "AMD",
+          "CDNS"
+        ],
+        "bottomTickers": [
+          "HAL",
+          "CPRI",
+          "KHC",
+          "VTRS",
+          "NOV"
+        ]
+      },
+      {
+        "date": "2019-09-09",
+        "target": "2019-10-07",
+        "n": 443,
+        "top5": -0.0948923111515926,
+        "universe": -0.01242899254005465,
+        "bottom5": -0.01969653643791367,
+        "topTickers": [
+          "MKTX",
+          "BALL",
+          "SBUX",
+          "CMG",
+          "SBAC"
+        ],
+        "bottomTickers": [
+          "NOV",
+          "CPRI",
+          "ALGN",
+          "DXC",
+          "NKTR"
+        ]
+      },
+      {
+        "date": "2019-10-08",
+        "target": "2019-11-05",
+        "n": 444,
+        "top5": -0.05738012243239936,
+        "universe": 0.05078321786223877,
+        "bottom5": 0.13203597935900477,
+        "topTickers": [
+          "MKTX",
+          "CMG",
+          "SBAC",
+          "BALL",
+          "SBUX"
+        ],
+        "bottomTickers": [
+          "HAL",
+          "M",
+          "APA",
+          "CPRI",
+          "DXC"
+        ]
+      },
+      {
+        "date": "2019-11-06",
+        "target": "2019-12-05",
+        "n": 444,
+        "top5": 0.04463777010867753,
+        "universe": 0.006365496359240028,
+        "bottom5": 0.04910525699681707,
+        "topTickers": [
+          "KLAC",
+          "CMG",
+          "KEYS",
+          "NVR",
+          "CPRT"
+        ],
+        "bottomTickers": [
+          "HAL",
+          "CPRI",
+          "BBWI",
+          "M",
+          "DXC"
+        ]
+      },
+      {
+        "date": "2019-12-06",
+        "target": "2020-01-07",
+        "n": 446,
+        "top5": 0.09744197460634503,
+        "universe": 0.030446133788133375,
+        "bottom5": 0.06479404636942468,
+        "topTickers": [
+          "LRCX",
+          "KLAC",
+          "AMD",
+          "KEYS",
+          "CPRT"
+        ],
+        "bottomTickers": [
+          "VTRS",
+          "TRIP",
+          "BBWI",
+          "M",
+          "DXC"
+        ]
+      },
+      {
+        "date": "2020-01-08",
+        "target": "2020-02-06",
+        "n": 447,
+        "top5": 0.07097416498726021,
+        "universe": 0.021020680735998082,
+        "bottom5": 0.03679869458730711,
+        "topTickers": [
+          "AMD",
+          "LRCX",
+          "CPRT",
+          "AAPL",
+          "XRX"
+        ],
+        "bottomTickers": [
+          "OXY",
+          "MOS",
+          "BBWI",
+          "DXC",
+          "M"
+        ]
+      },
+      {
+        "date": "2020-02-07",
+        "target": "2020-03-09",
+        "n": 448,
+        "top5": -0.14919552539439765,
+        "universe": -0.1997511510525117,
+        "bottom5": -0.3356648642448712,
+        "topTickers": [
+          "AMD",
+          "CPRT",
+          "QCOM",
+          "AAPL",
+          "MKTX"
+        ],
+        "bottomTickers": [
+          "M",
+          "KHC",
+          "BBWI",
+          "MOS",
+          "DXC"
+        ]
+      },
+      {
+        "date": "2020-03-10",
+        "target": "2020-04-07",
+        "n": 449,
+        "top5": -0.019684954622036434,
+        "universe": -0.07845766188527933,
+        "bottom5": -0.02140454449043707,
+        "topTickers": [
+          "AMD",
+          "LRCX",
+          "AAPL",
+          "CPRT",
+          "LDOS"
+        ],
+        "bottomTickers": [
+          "HAL",
+          "APA",
+          "FANG",
+          "DXC",
+          "OXY"
+        ]
+      },
+      {
+        "date": "2020-04-08",
+        "target": "2020-05-07",
+        "n": 452,
+        "top5": 0.06358781927084427,
+        "universe": 0.07291286549711654,
+        "bottom5": 0.26704043476833167,
+        "topTickers": [
+          "RMD",
+          "LDOS",
+          "AMD",
+          "DVA",
+          "NEE"
+        ],
+        "bottomTickers": [
+          "FANG",
+          "CCL",
+          "NCLH",
+          "OXY",
+          "APA"
+        ]
+      },
+      {
+        "date": "2020-05-08",
+        "target": "2020-06-08",
+        "n": 452,
+        "top5": 0.010998668369916854,
+        "universe": 0.20820398668616283,
+        "bottom5": 0.861011860304427,
+        "topTickers": [
+          "AMD",
+          "NEM",
+          "REGN",
+          "VRTX",
+          "ODFL"
+        ],
+        "bottomTickers": [
+          "RCL",
+          "APA",
+          "OXY",
+          "CCL",
+          "NCLH"
+        ]
+      },
+      {
+        "date": "2020-06-09",
+        "target": "2020-07-08",
+        "n": 454,
+        "top5": 0.12141332529752047,
+        "universe": -0.0862457307984926,
+        "bottom5": -0.35316562908671695,
+        "topTickers": [
+          "DXCM",
+          "NVDA",
+          "REGN",
+          "FTNT",
+          "NEM"
+        ],
+        "bottomTickers": [
+          "RCL",
+          "COTY",
+          "UAL",
+          "CCL",
+          "NCLH"
+        ]
+      },
+      {
+        "date": "2020-07-09",
+        "target": "2020-08-06",
+        "n": 457,
+        "top5": 0.06833262486731309,
+        "universe": 0.05876786627740141,
+        "bottom5": 0.00418356304436962,
+        "topTickers": [
+          "DXCM",
+          "NVDA",
+          "REGN",
+          "ODFL",
+          "AAPL"
+        ],
+        "bottomTickers": [
+          "CCL",
+          "OXY",
+          "FTI",
+          "NCLH",
+          "DXC"
+        ]
+      },
+      {
+        "date": "2020-08-07",
+        "target": "2020-09-04",
+        "n": 457,
+        "top5": -0.007462352264022432,
+        "universe": 0.026044528940515458,
+        "bottom5": 0.06856997488370431,
+        "topTickers": [
+          "DXCM",
+          "NVDA",
+          "REGN",
+          "AAPL",
+          "AMD"
+        ],
+        "bottomTickers": [
+          "OXY",
+          "COTY",
+          "FTI",
+          "CCL",
+          "NCLH"
+        ]
+      },
+      {
+        "date": "2020-09-08",
+        "target": "2020-10-06",
+        "n": 457,
+        "top5": -0.0005076194956678881,
+        "universe": -0.00803689752025603,
+        "bottom5": -0.15925518069502156,
+        "topTickers": [
+          "AMD",
+          "DXCM",
+          "NVDA",
+          "AAPL",
+          "REGN"
+        ],
+        "bottomTickers": [
+          "COTY",
+          "FTI",
+          "OXY",
+          "CCL",
+          "NCLH"
+        ]
+      },
+      {
+        "date": "2020-10-07",
+        "target": "2020-11-04",
+        "n": 457,
+        "top5": -0.017727135945316476,
+        "universe": 0.020489095790139005,
+        "bottom5": -0.037898864197827196,
+        "topTickers": [
+          "AMD",
+          "NVDA",
+          "DXCM",
+          "AAPL",
+          "REGN"
+        ],
+        "bottomTickers": [
+          "FANG",
+          "OKE",
+          "NCLH",
+          "FTI",
+          "OXY"
+        ]
+      },
+      {
+        "date": "2020-11-05",
+        "target": "2020-12-04",
+        "n": 457,
+        "top5": 0.06219649412674873,
+        "universe": 0.13580630483946832,
+        "bottom5": 0.7466336711837647,
+        "topTickers": [
+          "ETSY",
+          "NVDA",
+          "DXCM",
+          "AMD",
+          "NOW"
+        ],
+        "bottomTickers": [
+          "NCLH",
+          "CCL",
+          "FANG",
+          "FTI",
+          "OXY"
+        ]
+      },
+      {
+        "date": "2020-12-07",
+        "target": "2021-01-06",
+        "n": 457,
+        "top5": 0.003984472676723016,
+        "universe": 0.02083390587728559,
+        "bottom5": 0.02459789658298257,
+        "topTickers": [
+          "ETSY",
+          "NVDA",
+          "AMD",
+          "WST",
+          "NOW"
+        ],
+        "bottomTickers": [
+          "FANG",
+          "FTI",
+          "NCLH",
+          "CCL",
+          "OXY"
+        ]
+      },
+      {
+        "date": "2021-01-07",
+        "target": "2021-02-05",
+        "n": 458,
+        "top5": 0.13360361609202617,
+        "universe": 0.020565596244974726,
+        "bottom5": 0.02815815942368678,
+        "topTickers": [
+          "TSLA",
+          "ENPH",
+          "ETSY",
+          "NVDA",
+          "BBWI"
+        ],
+        "bottomTickers": [
+          "FTI",
+          "APA",
+          "NCLH",
+          "CCL",
+          "OXY"
+        ]
+      },
+      {
+        "date": "2021-02-08",
+        "target": "2021-03-09",
+        "n": 459,
+        "top5": -0.12933078158830175,
+        "universe": 0.03888483426609247,
+        "bottom5": 0.2582611621107818,
+        "topTickers": [
+          "ENPH",
+          "TSLA",
+          "ETSY",
+          "FCX",
+          "ALGN"
+        ],
+        "bottomTickers": [
+          "UAL",
+          "AAL",
+          "CCL",
+          "OXY",
+          "NCLH"
+        ]
+      },
+      {
+        "date": "2021-03-10",
+        "target": "2021-04-08",
+        "n": 459,
+        "top5": 0.043538014109881874,
+        "universe": 0.047798598351709534,
+        "bottom5": -0.0049733307271701,
+        "topTickers": [
+          "TSLA",
+          "ENPH",
+          "ETSY",
+          "FCX",
+          "ALGN"
+        ],
+        "bottomTickers": [
+          "ED",
+          "VNO",
+          "FE",
+          "BXP",
+          "ECHO"
+        ]
+      },
+      {
+        "date": "2021-04-09",
+        "target": "2021-05-07",
+        "n": 462,
+        "top5": 0.02115054898340989,
+        "universe": 0.05093857518434447,
+        "bottom5": 0.05934197415548215,
+        "topTickers": [
+          "PENN",
+          "CZR",
+          "TSLA",
+          "SKYD",
+          "FCX"
+        ],
+        "bottomTickers": [
+          "GILD",
+          "FE",
+          "PRGO",
+          "VRTX",
+          "ECHO"
+        ]
+      },
+      {
+        "date": "2021-05-10",
+        "target": "2021-06-08",
+        "n": 463,
+        "top5": -0.03135598883564037,
+        "universe": 0.003983822148041484,
+        "bottom5": 0.040969805108890055,
+        "topTickers": [
+          "BBWI",
+          "PENN",
+          "CZR",
+          "TSLA",
+          "FCX"
+        ],
+        "bottomTickers": [
+          "INCY",
+          "ECHO",
+          "VRTX",
+          "PRGO",
+          "VTRS"
+        ]
+      },
+      {
+        "date": "2021-06-09",
+        "target": "2021-07-08",
+        "n": 464,
+        "top5": 0.027729063267061038,
+        "universe": -0.01325617874920303,
+        "bottom5": -0.037971939507463824,
+        "topTickers": [
+          "FCX",
+          "BBWI",
+          "TSLA",
+          "GNRC",
+          "TPR"
+        ],
+        "bottomTickers": [
+          "REGN",
+          "VRTX",
+          "PRGO",
+          "VTRS",
+          "ECHO"
+        ]
+      },
+      {
+        "date": "2021-07-09",
+        "target": "2021-08-06",
+        "n": 464,
+        "top5": 0.04364510078743651,
+        "universe": 0.028000634789072235,
+        "bottom5": -0.006731692811248436,
+        "topTickers": [
+          "BBWI",
+          "TPR",
+          "FCX",
+          "DVN",
+          "MOS"
+        ],
+        "bottomTickers": [
+          "REGN",
+          "MKTX",
+          "CLX",
+          "INCY",
+          "VRTX"
+        ]
+      },
+      {
+        "date": "2021-08-09",
+        "target": "2021-09-07",
+        "n": 465,
+        "top5": 0.031268721782146104,
+        "universe": 0.006525540565693161,
+        "bottom5": 0.01094127831002063,
+        "topTickers": [
+          "MRNA",
+          "TPR",
+          "BBWI",
+          "CZR",
+          "ENPH"
+        ],
+        "bottomTickers": [
+          "INCY",
+          "VTRS",
+          "CLX",
+          "ECHO",
+          "VRTX"
+        ]
+      },
+      {
+        "date": "2021-09-08",
+        "target": "2021-10-06",
+        "n": 466,
+        "top5": -0.036281575713187866,
+        "universe": -0.020177403614432706,
+        "bottom5": -0.08812776453876976,
+        "topTickers": [
+          "MRNA",
+          "TPR",
+          "ENPH",
+          "FTNT",
+          "DVN"
+        ],
+        "bottomTickers": [
+          "FMC",
+          "INCY",
+          "CLX",
+          "VRTX",
+          "LVS"
+        ]
+      },
+      {
+        "date": "2021-10-07",
+        "target": "2021-11-04",
+        "n": 465,
+        "top5": 0.0929618443786622,
+        "universe": 0.05424101709609381,
+        "bottom5": 0.015307237902547222,
+        "topTickers": [
+          "MRNA",
+          "DVN",
+          "FTNT",
+          "ALB",
+          "FANG"
+        ],
+        "bottomTickers": [
+          "LVS",
+          "LW",
+          "INCY",
+          "CLX",
+          "VRTX"
+        ]
+      },
+      {
+        "date": "2021-11-05",
+        "target": "2021-12-06",
+        "n": 465,
+        "top5": -0.07176570364403026,
+        "universe": -0.01968820827817572,
+        "bottom5": -0.07520601181432758,
+        "topTickers": [
+          "MRNA",
+          "DVN",
+          "FANG",
+          "OXY",
+          "FTNT"
+        ],
+        "bottomTickers": [
+          "BIIB",
+          "IPGP",
+          "MKTX",
+          "INCY",
+          "LVS"
+        ]
+      },
+      {
+        "date": "2021-12-07",
+        "target": "2022-01-05",
+        "n": 465,
+        "top5": 0.009576517646751381,
+        "universe": 0.03328862098151278,
+        "bottom5": 0.05510695750729484,
+        "topTickers": [
+          "FTNT",
+          "DVN",
+          "BBWI",
+          "FANG",
+          "NVDA"
+        ],
+        "bottomTickers": [
+          "MKTX",
+          "LW",
+          "PENN",
+          "GPN",
+          "LVS"
+        ]
+      },
+      {
+        "date": "2022-01-06",
+        "target": "2022-02-04",
+        "n": 467,
+        "top5": -0.06942018339770797,
+        "universe": -0.04139185225114586,
+        "bottom5": 0.03435693800780428,
+        "topTickers": [
+          "NVDA",
+          "DVN",
+          "F",
+          "BBWI",
+          "FTNT"
+        ],
+        "bottomTickers": [
+          "VTRS",
+          "MKTX",
+          "GPN",
+          "LVS",
+          "PENN"
+        ]
+      },
+      {
+        "date": "2022-02-07",
+        "target": "2022-03-08",
+        "n": 468,
+        "top5": -0.016991530535110756,
+        "universe": -0.053909294108063215,
+        "bottom5": -0.1084515311718492,
+        "topTickers": [
+          "DVN",
+          "NUE",
+          "F",
+          "NVDA",
+          "FTNT"
+        ],
+        "bottomTickers": [
+          "MKTX",
+          "LVS",
+          "SKYD",
+          "PYPL",
+          "PENN"
+        ]
+      },
+      {
+        "date": "2022-03-09",
+        "target": "2022-04-06",
+        "n": 470,
+        "top5": 0.117541522801237,
+        "universe": 0.06213469058811491,
+        "bottom5": 0.07686080486443161,
+        "topTickers": [
+          "DVN",
+          "NVDA",
+          "ANET",
+          "FTNT",
+          "AZO"
+        ],
+        "bottomTickers": [
+          "NCLH",
+          "ETSY",
+          "SKYD",
+          "PYPL",
+          "PENN"
+        ]
+      },
+      {
+        "date": "2022-04-07",
+        "target": "2022-05-06",
+        "n": 471,
+        "top5": 0.10238947217919234,
+        "universe": -0.058329040262708666,
+        "bottom5": -0.052481926159970584,
+        "topTickers": [
+          "DVN",
+          "APA",
+          "OXY",
+          "CF",
+          "COP"
+        ],
+        "bottomTickers": [
+          "NCLH",
+          "IPGP",
+          "PENN",
+          "PYPL",
+          "EPAM"
+        ]
+      },
+      {
+        "date": "2022-05-09",
+        "target": "2022-06-07",
+        "n": 471,
+        "top5": 0.03793037621190058,
+        "universe": 0.018108557493703995,
+        "bottom5": 0.03916778977154178,
+        "topTickers": [
+          "DVN",
+          "OXY",
+          "APA",
+          "CF",
+          "MOS"
+        ],
+        "bottomTickers": [
+          "IPGP",
+          "NFLX",
+          "PENN",
+          "EPAM",
+          "PYPL"
+        ]
+      },
+      {
+        "date": "2022-06-08",
+        "target": "2022-07-08",
+        "n": 473,
+        "top5": -0.20590256395030643,
+        "universe": -0.08257574746432417,
+        "bottom5": -0.058491775589487746,
+        "topTickers": [
+          "DVN",
+          "OXY",
+          "APA",
+          "COP",
+          "MCK"
+        ],
+        "bottomTickers": [
+          "ALGN",
+          "PENN",
+          "ETSY",
+          "PYPL",
+          "NFLX"
+        ]
+      },
+      {
+        "date": "2022-07-11",
+        "target": "2022-08-08",
+        "n": 472,
+        "top5": 0.00932239449519301,
+        "universe": 0.06856922207506154,
+        "bottom5": 0.23608896135804067,
+        "topTickers": [
+          "DVN",
+          "APA",
+          "OXY",
+          "COP",
+          "VLO"
+        ],
+        "bottomTickers": [
+          "CZR",
+          "ALGN",
+          "ETSY",
+          "PYPL",
+          "NFLX"
+        ]
+      },
+      {
+        "date": "2022-08-09",
+        "target": "2022-09-07",
+        "n": 472,
+        "top5": 0.10042468927701162,
+        "universe": -0.0271708885802408,
+        "bottom5": -0.022085893412089552,
+        "topTickers": [
+          "OXY",
+          "DVN",
+          "CF",
+          "APA",
+          "MCK"
+        ],
+        "bottomTickers": [
+          "ALGN",
+          "RCL",
+          "NFLX",
+          "CCL",
+          "PYPL"
+        ]
+      },
+      {
+        "date": "2022-09-08",
+        "target": "2022-10-06",
+        "n": 472,
+        "top5": 0.023352430984570183,
+        "universe": -0.06389252923691983,
+        "bottom5": -0.09572958750388309,
+        "topTickers": [
+          "OXY",
+          "CF",
+          "DVN",
+          "DLTR",
+          "MCK"
+        ],
+        "bottomTickers": [
+          "ALGN",
+          "NFLX",
+          "MTCH",
+          "PYPL",
+          "CCL"
+        ]
+      },
+      {
+        "date": "2022-10-07",
+        "target": "2022-11-04",
+        "n": 474,
+        "top5": 0.03823203181636279,
+        "universe": 0.03388142934785866,
+        "bottom5": 0.029032802947448234,
+        "topTickers": [
+          "EQT",
+          "OXY",
+          "ENPH",
+          "MCK",
+          "DVN"
+        ],
+        "bottomTickers": [
+          "NFLX",
+          "ALGN",
+          "CZR",
+          "MTCH",
+          "CCL"
+        ]
+      },
+      {
+        "date": "2022-11-07",
+        "target": "2022-12-06",
+        "n": 476,
+        "top5": -0.08736405144654606,
+        "universe": 0.05018938620437317,
+        "bottom5": 0.05140164413217101,
+        "topTickers": [
+          "EQT",
+          "OXY",
+          "CF",
+          "MPC",
+          "DVN"
+        ],
+        "bottomTickers": [
+          "META",
+          "MTCH",
+          "ALGN",
+          "CCL",
+          "GNRC"
+        ]
+      },
+      {
+        "date": "2022-12-07",
+        "target": "2023-01-06",
+        "n": 476,
+        "top5": 0.0015549061022918087,
+        "universe": 0.007500455388680206,
+        "bottom5": 0.07540120773337806,
+        "topTickers": [
+          "OXY",
+          "EQT",
+          "MPC",
+          "APA",
+          "XOM"
+        ],
+        "bottomTickers": [
+          "VFC",
+          "MTCH",
+          "META",
+          "ALGN",
+          "GNRC"
+        ]
+      },
+      {
+        "date": "2023-01-09",
+        "target": "2023-02-07",
+        "n": 477,
+        "top5": 0.05902608756621044,
+        "universe": 0.05504757028260997,
+        "bottom5": 0.42945386982166767,
+        "topTickers": [
+          "OXY",
+          "ENPH",
+          "FSLR",
+          "STLD",
+          "MPC"
+        ],
+        "bottomTickers": [
+          "TSLA",
+          "META",
+          "ALGN",
+          "MTCH",
+          "GNRC"
+        ]
+      },
+      {
+        "date": "2023-02-08",
+        "target": "2023-03-09",
+        "n": 478,
+        "top5": 0.035063723012216275,
+        "universe": -0.06367439729156099,
+        "bottom5": -0.20518910063321344,
+        "topTickers": [
+          "FSLR",
+          "STLD",
+          "CEG",
+          "LW",
+          "ENPH"
+        ],
+        "bottomTickers": [
+          "VFC",
+          "LUMN",
+          "MTCH",
+          "TSLA",
+          "GNRC"
+        ]
+      },
+      {
+        "date": "2023-03-10",
+        "target": "2023-04-10",
+        "n": 478,
+        "top5": -0.023915888126334005,
+        "universe": 0.01044069412290151,
+        "bottom5": -0.11895646315136588,
+        "topTickers": [
+          "FSLR",
+          "LW",
+          "EPAM",
+          "STLD",
+          "CEG"
+        ],
+        "bottomTickers": [
+          "LNC",
+          "MTCH",
+          "VFC",
+          "GNRC",
+          "LUMN"
+        ]
+      },
+      {
+        "date": "2023-04-11",
+        "target": "2023-05-09",
+        "n": 480,
+        "top5": -0.003799723629934082,
+        "universe": -0.010402310775904826,
+        "bottom5": -0.016886122856376872,
+        "topTickers": [
+          "FSLR",
+          "LW",
+          "FICO",
+          "LVS",
+          "STLD"
+        ],
+        "bottomTickers": [
+          "TSLA",
+          "VFC",
+          "GNRC",
+          "MTCH",
+          "LNC"
+        ]
+      },
+      {
+        "date": "2023-05-10",
+        "target": "2023-06-08",
+        "n": 481,
+        "top5": 0.044437789924868576,
+        "universe": 0.02163474335269907,
+        "bottom5": 0.08457534381872171,
+        "topTickers": [
+          "FSLR",
+          "AXON",
+          "FICO",
+          "NFLX",
+          "LW"
+        ],
+        "bottomTickers": [
+          "VFC",
+          "BXP",
+          "GNRC",
+          "ZION",
+          "LNC"
+        ]
+      },
+      {
+        "date": "2023-06-09",
+        "target": "2023-07-11",
+        "n": 481,
+        "top5": 0.02092126476649294,
+        "universe": 0.044857174123541135,
+        "bottom5": 0.09646108633931891,
+        "topTickers": [
+          "FSLR",
+          "AXON",
+          "FICO",
+          "LVS",
+          "GE"
+        ],
+        "bottomTickers": [
+          "VFC",
+          "MTCH",
+          "GNRC",
+          "ZION",
+          "LNC"
+        ]
+      },
+      {
+        "date": "2023-07-12",
+        "target": "2023-08-09",
+        "n": 482,
+        "top5": 0.01575013852876601,
+        "universe": 0.0007395758994979076,
+        "bottom5": -0.0365065073118682,
+        "topTickers": [
+          "RCL",
+          "FSLR",
+          "NVDA",
+          "NFLX",
+          "GE"
+        ],
+        "bottomTickers": [
+          "GNRC",
+          "LNC",
+          "NWL",
+          "VFC",
+          "AAP"
+        ]
+      },
+      {
+        "date": "2023-08-10",
+        "target": "2023-09-08",
+        "n": 482,
+        "top5": -0.014232820466713814,
+        "universe": -0.02757977023714658,
+        "bottom5": 0.00039083974510403243,
+        "topTickers": [
+          "RCL",
+          "NVDA",
+          "GE",
+          "NFLX",
+          "CCL"
+        ],
+        "bottomTickers": [
+          "GNRC",
+          "EPAM",
+          "NWL",
+          "VFC",
+          "AAP"
+        ]
+      },
+      {
+        "date": "2023-09-11",
+        "target": "2023-10-09",
+        "n": 481,
+        "top5": -0.04378916538600188,
+        "universe": -0.04256754783022029,
+        "bottom5": -0.10908527874312195,
+        "topTickers": [
+          "NVDA",
+          "RCL",
+          "PHM",
+          "GE",
+          "FICO"
+        ],
+        "bottomTickers": [
+          "IFF",
+          "SEDG",
+          "VFC",
+          "GNRC",
+          "ENPH"
+        ]
+      },
+      {
+        "date": "2023-10-10",
+        "target": "2023-11-07",
+        "n": 480,
+        "top5": 0.02783824295567645,
+        "universe": -0.004240370913386457,
+        "bottom5": -0.09944627274433168,
+        "topTickers": [
+          "NVDA",
+          "FICO",
+          "RCL",
+          "GE",
+          "META"
+        ],
+        "bottomTickers": [
+          "VFC",
+          "SEDG",
+          "ETSY",
+          "DG",
+          "ENPH"
+        ]
+      },
+      {
+        "date": "2023-11-08",
+        "target": "2023-12-07",
+        "n": 481,
+        "top5": 0.08431938678033521,
+        "universe": 0.06849955013728953,
+        "bottom5": 0.15768224522114868,
+        "topTickers": [
+          "META",
+          "NVDA",
+          "FICO",
+          "PHM",
+          "ADBE"
+        ],
+        "bottomTickers": [
+          "FMC",
+          "PODD",
+          "DG",
+          "ENPH",
+          "SEDG"
+        ]
+      },
+      {
+        "date": "2023-12-08",
+        "target": "2024-01-09",
+        "n": 481,
+        "top5": 0.09304152984081866,
+        "universe": 0.04490445787149182,
+        "bottom5": 0.12469956738453092,
+        "topTickers": [
+          "NVDA",
+          "META",
+          "PHM",
+          "ADBE",
+          "AVGO"
+        ],
+        "bottomTickers": [
+          "PAYC",
+          "MRNA",
+          "FMC",
+          "ENPH",
+          "SEDG"
+        ]
+      },
+      {
+        "date": "2024-01-10",
+        "target": "2024-02-08",
+        "n": 483,
+        "top5": 0.2027346506197941,
+        "universe": 0.013627730179580357,
+        "bottom5": -0.08530013888092047,
+        "topTickers": [
+          "NVDA",
+          "META",
+          "UBER",
+          "PANW",
+          "RCL"
+        ],
+        "bottomTickers": [
+          "ALB",
+          "EL",
+          "MRNA",
+          "FMC",
+          "ENPH"
+        ]
+      },
+      {
+        "date": "2024-02-09",
+        "target": "2024-03-11",
+        "n": 483,
+        "top5": 0.014196791730750525,
+        "universe": 0.04291426062842566,
+        "bottom5": 0.09948388613920649,
+        "topTickers": [
+          "NVDA",
+          "BLDR",
+          "PANW",
+          "LLY",
+          "META"
+        ],
+        "bottomTickers": [
+          "EL",
+          "ETSY",
+          "ENPH",
+          "FMC",
+          "ALB"
+        ]
+      },
+      {
+        "date": "2024-03-12",
+        "target": "2024-04-10",
+        "n": 483,
+        "top5": 0.011631525048937785,
+        "universe": -0.002751155246577015,
+        "bottom5": -0.046561531726651936,
+        "topTickers": [
+          "NVDA",
+          "META",
+          "LLY",
+          "BLDR",
+          "UBER"
+        ],
+        "bottomTickers": [
+          "EL",
+          "SKYD",
+          "ENPH",
+          "ALB",
+          "FMC"
+        ]
+      },
+      {
+        "date": "2024-04-11",
+        "target": "2024-05-09",
+        "n": 481,
+        "top5": -0.0734993475193122,
+        "universe": 0.005635326921762663,
+        "bottom5": 0.05978738458897901,
+        "topTickers": [
+          "SMCI",
+          "NVDA",
+          "UBER",
+          "META",
+          "BLDR"
+        ],
+        "bottomTickers": [
+          "ENPH",
+          "PODD",
+          "ALB",
+          "FMC",
+          "SKYD"
+        ]
+      },
+      {
+        "date": "2024-05-10",
+        "target": "2024-06-10",
+        "n": 482,
+        "top5": 0.055064316995962634,
+        "universe": -0.0060704346685798985,
+        "bottom5": -0.05679973731774348,
+        "topTickers": [
+          "SMCI",
+          "NVDA",
+          "VST",
+          "CEG",
+          "NRG"
+        ],
+        "bottomTickers": [
+          "SKYD",
+          "HUM",
+          "ALB",
+          "FMC",
+          "PODD"
+        ]
+      },
+      {
+        "date": "2024-06-11",
+        "target": "2024-07-11",
+        "n": 482,
+        "top5": 0.04412426764057065,
+        "universe": 0.017580809874660274,
+        "bottom5": 0.005243058976228299,
+        "topTickers": [
+          "VST",
+          "SMCI",
+          "NRG",
+          "CEG",
+          "NVDA"
+        ],
+        "bottomTickers": [
+          "FMC",
+          "ALB",
+          "ILMN",
+          "GL",
+          "PAYC"
+        ]
+      },
+      {
+        "date": "2024-07-12",
+        "target": "2024-08-09",
+        "n": 483,
+        "top5": -0.24425503935697992,
+        "universe": -0.005082418634560806,
+        "bottom5": -0.03955622375456105,
+        "topTickers": [
+          "VST",
+          "NVDA",
+          "SMCI",
+          "CRWD",
+          "CEG"
+        ],
+        "bottomTickers": [
+          "FMC",
+          "AAL",
+          "EL",
+          "ALB",
+          "PAYC"
+        ]
+      },
+      {
+        "date": "2024-08-12",
+        "target": "2024-09-10",
+        "n": 483,
+        "top5": -0.038044099727605495,
+        "universe": 0.030342471901447825,
+        "bottom5": 0.010763992497124208,
+        "topTickers": [
+          "SMCI",
+          "VST",
+          "NVDA",
+          "CRWD",
+          "NRG"
+        ],
+        "bottomTickers": [
+          "BF-B",
+          "NKE",
+          "EL",
+          "PAYC",
+          "ALB"
+        ]
+      },
+      {
+        "date": "2024-09-11",
+        "target": "2024-10-09",
+        "n": 483,
+        "top5": 0.23989284355261398,
+        "universe": 0.04469025918101056,
+        "bottom5": 0.15615986318494057,
+        "topTickers": [
+          "VST",
+          "NVDA",
+          "GDDY",
+          "NRG",
+          "FICO"
+        ],
+        "bottomTickers": [
+          "EL",
+          "LW",
+          "DXCM",
+          "ALB",
+          "INTC"
+        ]
+      },
+      {
+        "date": "2024-10-10",
+        "target": "2024-11-07",
+        "n": 483,
+        "top5": 0.09247429789028243,
+        "universe": 0.020230050741782614,
+        "bottom5": -0.029889375141223695,
+        "topTickers": [
+          "NVDA",
+          "VST",
+          "FICO",
+          "GDDY",
+          "HWM"
+        ],
+        "bottomTickers": [
+          "LW",
+          "EL",
+          "DLTR",
+          "ALB",
+          "INTC"
+        ]
+      },
+      {
+        "date": "2024-11-08",
+        "target": "2024-12-09",
+        "n": 483,
+        "top5": 0.05108709370483644,
+        "universe": 0.005832305688499101,
+        "bottom5": -0.007101232130502955,
+        "topTickers": [
+          "VST",
+          "NVDA",
+          "ECHO",
+          "PLTR",
+          "FICO"
+        ],
+        "bottomTickers": [
+          "APA",
+          "INTC",
+          "DG",
+          "DLTR",
+          "HUM"
+        ]
+      }
+    ]
+  }
+}

@@ -23,6 +23,10 @@ on:
         description: Llamadas Vita por día
         default: '20'
         type: string
+      universo_pit:
+        description: Usar miembros del S&P 500 vigentes en cada fecha; excluye temas
+        default: false
+        type: boolean
 permissions:
   contents: write
 concurrency:
@@ -34,6 +38,8 @@ env:
   HASTA: ${{ inputs.hasta || '2024-12-31' }}
   VARIANTES: ${{ inputs.variante || 'solo_compra,factores' }}
   LLAMADAS: ${{ inputs.llamadas_por_dia || '20' }}
+  UNIVERSO_PIT: ${{ inputs.universo_pit || false }}
+  INICIO_SERIES: ${{ inputs.universo_pit && '2009-10-01' || '2023-10-01' }}
   OLLAMA_URL: http://127.0.0.1:11434
   OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
 jobs:
@@ -45,14 +51,20 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22}
       - name: Pruebas sin fuga de futuro
-        run: node --test maquina_v2/maquina.test.mjs maquina_v2/fundamentales.test.mjs
+        run: node --test maquina_v2/maquina.test.mjs maquina_v2/fundamentales.test.mjs maquina_v2/resumir.test.mjs
       - name: Descargar las series diarias
         run: node maquina_ilimitada/preparar.mjs maquina_ilimitada/universo.json series.json.gz
+      - name: Descargar precios de los componentes hist?ricos S&P 500
+        if: inputs.universo_pit
+        run: node maquina_ilimitada/preparar_pit.mjs datos/universo_pit/sp500_miembros.json series_pit.json.gz
       - name: Descargar companyfacts SEC para la variante fundamentals
         if: contains(format(',{0},', inputs.variante), ',fundamentales,')
         run: node --input-type=module -e "import fs from 'node:fs'; import {descargarFundamentales} from './maquina_v2/fundamentales.mjs'; import {leerJSON} from './maquina_ilimitada/lib.mjs'; await descargarFundamentales(leerJSON('maquina_ilimitada/universo.json').instrumentos, 'fundamentales.json.gz');"
       - uses: actions/upload-artifact@v4
         with: {name: series, path: series.json.gz, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        if: inputs.universo_pit
+        with: {name: series-pit, path: series_pit.json.gz, retention-days: 30}
       - uses: actions/upload-artifact@v4
         if: contains(format(',{0},', inputs.variante), ',fundamentales,')
         with: {name: fundamentales, path: fundamentales.json.gz, retention-days: 30}
@@ -66,6 +78,9 @@ jobs:
         with: {node-version: 22}
       - uses: actions/download-artifact@v4
         with: {name: series}
+      - uses: actions/download-artifact@v4
+        if: inputs.universo_pit
+        with: {name: series-pit}
       - name: Arrancar Ollama y descargar modelo
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
@@ -75,7 +90,7 @@ jobs:
           for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/tags" >/dev/null && break; sleep 2; done
           ollama pull "$MODELO"
       - name: Prueba de memoria del modelo
-        run: node maquina_v2/memoria.mjs --series=series.json.gz --universo=maquina_ilimitada/universo.json --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --salida=memoria.json
+        run: node maquina_v2/memoria.mjs --series=series.json.gz --universo=maquina_ilimitada/universo.json --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --universo_pit="$UNIVERSO_PIT" --membresia=datos/universo_pit/sp500_miembros.json --series_pit=series_pit.json.gz --salida=memoria.json
       - uses: actions/upload-artifact@v4
         with: {name: memoria, path: memoria.json, retention-days: 30}
   maquina:
@@ -106,13 +121,17 @@ jobs:
           ollama pull "$MODELO"
           if [[ ",$VARIANTES," == *,conjunto,* ]]; then ollama pull llama3.1:8b; ollama pull qwen2.5:7b; fi
           if [[ ",$VARIANTES," == *,conjunto,* && "$MODELO" == *14b* ]]; then ollama pull qwen2.5:14b; fi
+      - uses: actions/download-artifact@v4
+        if: inputs.universo_pit
+        with: {name: series-pit}
       - name: Ejecutar variantes del tramo
+        timeout-minutes: 325
         run: |
           mkdir -p "salida/tramo-${{ matrix.tramo }}"
           IFS=',' read -ra VS <<< "$VARIANTES"
           for V in "${VS[@]}"; do
             node maquina_v2/experimento.mjs --tramo=${{ matrix.tramo }} --total=20 --desde="$DESDE" --hasta="$HASTA" \
-              --series=series.json.gz --universo=maquina_ilimitada/universo.json --salida="salida/tramo-${{ matrix.tramo }}/$V" \
+              --series=series.json.gz --universo=maquina_ilimitada/universo.json --universo_pit="$UNIVERSO_PIT" --membresia=datos/universo_pit/sp500_miembros.json --series_pit=series_pit.json.gz --salida="salida/tramo-${{ matrix.tramo }}/$V" \
               --modelo="$MODELO" --variante="$V" --llamadas="$LLAMADAS" --fundamentales=fundamentales.json.gz
           done
       - uses: actions/upload-artifact@v4
@@ -130,7 +149,7 @@ jobs:
           retention-days: 90
   resumir:
     needs: [preparar, memoria, maquina]
-    if: ${{ always() && needs.preparar.result == 'success' }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -138,17 +157,20 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22}
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with: {name: series}
       - uses: actions/download-artifact@v4
         continue-on-error: true
         with: {name: memoria}
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with: {pattern: tramo-*, path: artefactos, merge-multiple: false}
       - uses: actions/download-artifact@v4
         continue-on-error: true
         with: {pattern: noticias-*, path: cache_artifacts, merge-multiple: false}
       - name: Generar resumen y tabla
-        run: node maquina_v2/resumir.mjs --artefactos=artefactos --modelo="$MODELO" --variantes="${VARIANTES//,/;}" --desde="$DESDE" --hasta="$HASTA" --llamadas="$LLAMADAS"
+        if: always() && needs.preparar.result == 'success'
+        run: node maquina_v2/resumir.mjs --artefactos=artefactos --modelo="$MODELO" --variantes="${VARIANTES//,/;}" --desde="$DESDE" --hasta="$HASTA" --llamadas="$LLAMADAS" --universo_pit="$UNIVERSO_PIT"
       - name: Conservar caché de titulares del período
         run: |
           mkdir -p resultados/cache_gdelt

@@ -315,9 +315,9 @@ def juntar_pool(out, X, Y, rng, consolidar):
     xs, ys = [], []
     for f in [out / 'pool.npz'] + sorted(lotes.glob('*.npz')):
         if f.exists():
-            z = np.load(f)
-            xs.append(z['X'])
-            ys.append(z['Y'])
+            with np.load(f) as z:
+                xs.append(z['X'])
+                ys.append(z['Y'])
     if not xs:
         return None
     X, Y = np.concatenate(xs), np.concatenate(ys)
