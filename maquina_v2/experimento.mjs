@@ -53,7 +53,7 @@ export async function procesarDia({dia,universo,series,modelo,variante,llamadas=
     else consensus=await call(promptFor(dia,ctx,batch,active,base),model,k);
     for(const x of consensus.datos?.llamadas||[]) collect.push({...x,_model:model});
   }
-  if(active.includes('conjunto')){const by=new Map();for(const x of collect){if(!by.has(x.activo))by.set(x.activo,[]);by.get(x.activo).push(x);}raw.push(...[...by.values()].filter(v=>new Set(v.map(x=>x.direccion)).size===1&&v.length>=2).map(v=>({...v[0],probabilidad:v.reduce((s,x)=>s+x.probabilidad,0)/v.length})));}
+  if(active.includes('conjunto')){const by=new Map();for(const x of collect){if(!by.has(x.activo))by.set(x.activo,new Map());by.get(x.activo).set(x._model,x);}raw.push(...[...by.values()].map(v=>[...v.values()]).filter(v=>v.length>=2&&new Set(v.map(x=>x.direccion)).size===1).map(v=>({...v[0],probabilidad:v.reduce((s,x)=>s+x.probabilidad,0)/v.length})));}
   else raw.push(...collect);
  }
  const filas=[],used=new Set();for(const x of raw.slice(0,llamadas)){try{const c=cands.find(y=>y.ticker===x.activo);if(!c||used.has(x.activo))continue;if(active.includes('solo_compra')&&x.direccion!=='sube')continue;const l=validarLlamada(x,c,[]), pref=precioReferencia(c.referencia,series,dia);if(!pref)continue;used.add(x.activo);const pid=`${dia}-${c.ticker}-${l.horizonte_dias}`;let p=l.probabilidad;
