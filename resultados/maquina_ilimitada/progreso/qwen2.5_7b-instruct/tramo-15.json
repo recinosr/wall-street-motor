@@ -1,0 +1,14 @@
+{
+ "tramo": 15,
+ "modelo": "qwen2.5:7b-instruct",
+ "run_id": "42318399718",
+ "fechas_hechas": 1,
+ "fechas_total": 23,
+ "solicitudes": 4,
+ "lotes_con_json_valido": 4,
+ "llamadas_crudas": 20,
+ "llamadas_validas": 20,
+ "segundos_modelo": 744,
+ "ultima_fecha": "2026-05-07",
+ "actualizado_utc": "2026-11-07T00:46:17.973Z"
+}
