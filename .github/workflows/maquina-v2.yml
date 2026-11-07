@@ -45,11 +45,17 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22}
       - name: Pruebas sin fuga de futuro
-        run: node --test maquina_v2/maquina.test.mjs
+        run: node --test maquina_v2/maquina.test.mjs maquina_v2/fundamentales.test.mjs
       - name: Descargar las series diarias
         run: node maquina_ilimitada/preparar.mjs maquina_ilimitada/universo.json series.json.gz
+      - name: Descargar companyfacts SEC para la variante fundamentals
+        if: contains(format(',{0},', inputs.variante), ',fundamentales,')
+        run: node --input-type=module -e "import fs from 'node:fs'; import {descargarFundamentales} from './maquina_v2/fundamentales.mjs'; import {leerJSON} from './maquina_ilimitada/lib.mjs'; await descargarFundamentales(leerJSON('maquina_ilimitada/universo.json').instrumentos, 'fundamentales.json.gz');"
       - uses: actions/upload-artifact@v4
         with: {name: series, path: series.json.gz, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        if: contains(format(',{0},', inputs.variante), ',fundamentales,')
+        with: {name: fundamentales, path: fundamentales.json.gz, retention-days: 30}
   memoria:
     needs: preparar
     runs-on: ubuntu-latest
@@ -87,6 +93,9 @@ jobs:
         with: {node-version: 22}
       - uses: actions/download-artifact@v4
         with: {name: series}
+      - uses: actions/download-artifact@v4
+        if: contains(format(',{0},', inputs.variante), ',fundamentales,')
+        with: {name: fundamentales}
       - name: Instalar Ollama y modelos requeridos
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
@@ -104,7 +113,7 @@ jobs:
           for V in "${VS[@]}"; do
             node maquina_v2/experimento.mjs --tramo=${{ matrix.tramo }} --total=20 --desde="$DESDE" --hasta="$HASTA" \
               --series=series.json.gz --universo=maquina_ilimitada/universo.json --salida="salida/tramo-${{ matrix.tramo }}/$V" \
-              --modelo="$MODELO" --variante="$V" --llamadas="$LLAMADAS"
+              --modelo="$MODELO" --variante="$V" --llamadas="$LLAMADAS" --fundamentales=fundamentales.json.gz
           done
       - uses: actions/upload-artifact@v4
         if: always()
@@ -153,6 +162,7 @@ jobs:
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
           git add resultados/maquina_v2 resultados/cache_gdelt
+          if [[ ",$VARIANTES," == *,fundamentales,* && -f maquina_v2/REPORTE_fundamentales.md ]]; then git add maquina_v2/REPORTE_fundamentales.md; fi
           git diff --cached --quiet && exit 0
           git commit -m "maquina-v2: resultados $MODELO $GITHUB_RUN_ID"
           git pull --rebase origin main
