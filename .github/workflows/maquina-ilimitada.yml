@@ -155,7 +155,7 @@ jobs:
           node maquina_ilimitada/resumir.mjs --artefactos=artefactos --series=series.json.gz --memoria=memoria.json \
             --salida="$SALIDA" --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --llamadas_por_dia="$LLAMADAS"
           echo "SALIDA=$SALIDA" >> "$GITHUB_ENV"
-      - name: Publicar en el repo (sin rebase: parte del último main y copia los resultados)
+      - name: Publicar en el repo (sin rebase, desde el último main)
         run: |
           git config user.name motor-bot
           git config user.email motor-bot@users.noreply.github.com
