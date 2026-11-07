@@ -2,13 +2,13 @@
  "tramo": 4,
  "modelo": "qwen2.5:14b",
  "run_id": "42343659179",
- "fechas_hechas": 15,
+ "fechas_hechas": 18,
  "fechas_total": 23,
- "solicitudes": 15,
- "lotes_con_json_valido": 15,
- "llamadas_crudas": 75,
- "llamadas_validas": 75,
- "segundos_modelo": 3904,
- "ultima_fecha": "2025-06-03",
- "actualizado_utc": "2026-11-07T08:20:20.780Z"
+ "solicitudes": 18,
+ "lotes_con_json_valido": 18,
+ "llamadas_crudas": 90,
+ "llamadas_validas": 90,
+ "segundos_modelo": 4662,
+ "ultima_fecha": "2025-06-06",
+ "actualizado_utc": "2026-11-07T08:48:11.903Z"
 }
