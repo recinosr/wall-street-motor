@@ -1,0 +1,14 @@
+{
+ "tramo": 15,
+ "modelo": "qwen2.5:14b",
+ "run_id": "42343659179",
+ "fechas_hechas": 1,
+ "fechas_total": 23,
+ "solicitudes": 1,
+ "lotes_con_json_valido": 1,
+ "llamadas_crudas": 5,
+ "llamadas_validas": 5,
+ "segundos_modelo": 263,
+ "ultima_fecha": "2026-05-07",
+ "actualizado_utc": "2026-11-07T05:55:51.467Z"
+}
