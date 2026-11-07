@@ -1,0 +1,169 @@
+name: maquina-ilimitada
+# Máquina del tiempo ilimitada de Vita analista: Ollama local en CPU, sin llaves ni cuota.
+# Repo PÚBLICO: solo tickers públicos y precios de Yahoo; nada del examen oculto ni secretos. Ver maquina_ilimitada/README.md.
+# preparar (series una sola vez) -> memoria (prueba de memoria + caché del modelo) -> 20 tramos en paralelo -> resumir (commit).
+on:
+  workflow_dispatch:
+    inputs:
+      desde:
+        description: 'Primera fecha de decisión'
+        default: '2025-01-02'
+      hasta:
+        description: 'Última fecha de decisión'
+        default: '2026-10-16'
+      modelo:
+        description: 'Modelo de Ollama'
+        default: 'qwen2.5:7b-instruct'
+      llamadas_por_dia:
+        description: 'Llamadas de Vita por fecha (de a 5 por solicitud)'
+        default: '20'
+permissions:
+  contents: write
+concurrency:
+  group: maquina-ilimitada-${{ inputs.modelo || 'qwen2.5:7b-instruct' }}
+  cancel-in-progress: false
+env:
+  DESDE: ${{ inputs.desde || '2025-01-02' }}
+  HASTA: ${{ inputs.hasta || '2026-10-16' }}
+  MODELO: ${{ inputs.modelo || 'qwen2.5:7b-instruct' }}
+  LLAMADAS: ${{ inputs.llamadas_por_dia || '20' }}
+  OLLAMA_URL: http://127.0.0.1:11434
+  OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
+  OLLAMA_NUM_PARALLEL: '1'
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pruebas (incluye la de no mirar el futuro)
+        run: node --test maquina_ilimitada/maquina.test.mjs
+      - name: Bajar todas las series de Yahoo una sola vez
+        run: node maquina_ilimitada/preparar.mjs maquina_ilimitada/universo.json series.json.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: series
+          path: series.json.gz
+          retention-days: 14
+
+  memoria:
+    needs: preparar
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: series
+      - uses: actions/cache@v4
+        with:
+          path: .ollama/models
+          key: ollama-${{ env.MODELO }}-v1
+      - name: Instalar y arrancar Ollama (CPU)
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p "$OLLAMA_MODELS"
+          nohup ollama serve > ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf $OLLAMA_URL/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$MODELO"
+      - name: Prueba de memoria (20 cierres sin datos)
+        run: node maquina_ilimitada/memoria.mjs --series=series.json.gz --universo=maquina_ilimitada/universo.json --modelo="$MODELO" --salida=memoria.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: memoria
+          path: memoria.json
+          retention-days: 14
+
+  maquina:
+    needs: [preparar, memoria]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        tramo: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: series
+      - uses: actions/cache/restore@v4
+        with:
+          path: .ollama/models
+          key: ollama-${{ env.MODELO }}-v1
+      - name: Instalar y arrancar Ollama (CPU)
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p "$OLLAMA_MODELS"
+          nohup ollama serve > ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf $OLLAMA_URL/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$MODELO"
+      - name: Correr el tramo (guarda avance por fecha; para solo antes de agotar el tiempo)
+        run: |
+          mkdir -p salida
+          node maquina_ilimitada/correr.mjs --tramo=${{ matrix.tramo }} --total=20 --desde="$DESDE" --hasta="$HASTA" \
+            --series=series.json.gz --universo=maquina_ilimitada/universo.json --salida=salida \
+            --modelo="$MODELO" --llamadas="$LLAMADAS" --presupuesto_min=320
+      - name: Registro de Ollama si algo falló
+        if: failure()
+        run: tail -n 60 ollama.log || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tramo-${{ matrix.tramo }}
+          path: salida
+          retention-days: 14
+
+  resumir:
+    needs: [preparar, memoria, maquina]
+    if: ${{ always() && needs.preparar.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: series
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: memoria
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tramo-*
+          path: artefactos
+      - name: Resumir
+        run: |
+          if [ "$MODELO" = "qwen2.5:7b-instruct" ]; then SALIDA=resultados/maquina_ilimitada; else SALIDA="resultados/maquina_ilimitada/$(echo "$MODELO" | tr ':/' '__')"; fi
+          node maquina_ilimitada/resumir.mjs --artefactos=artefactos --series=series.json.gz --memoria=memoria.json \
+            --salida="$SALIDA" --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --llamadas_por_dia="$LLAMADAS"
+          echo "SALIDA=$SALIDA" >> "$GITHUB_ENV"
+      - name: Publicar en el repo
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/maquina_ilimitada
+          git diff --cached --quiet && exit 0
+          git commit -m "maquina-ilimitada: resumen $MODELO run $GITHUB_RUN_ID"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 5))
+          done
+          exit 1
