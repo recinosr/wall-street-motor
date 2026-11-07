@@ -1,0 +1,158 @@
+name: VITA v2 - máquina del tiempo
+on:
+  workflow_dispatch:
+    inputs:
+      desde:
+        description: Primera fecha de decisión
+        default: '2024-01-02'
+        type: string
+      hasta:
+        description: Última fecha de decisión
+        default: '2024-12-31'
+        type: string
+      modelo:
+        description: Modelo principal de Ollama
+        default: 'qwen2.5:7b'
+        type: string
+      variante:
+        description: Variantes separadas por coma
+        default: 'solo_compra,factores'
+        type: string
+      llamadas_por_dia:
+        description: Llamadas Vita por día
+        default: '20'
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: maquina-v2-${{ inputs.modelo || 'qwen2.5:7b' }}-${{ inputs.variante || 'solo_compra,factores' }}
+  cancel-in-progress: false
+env:
+  MODELO: ${{ inputs.modelo || 'qwen2.5:7b' }}
+  DESDE: ${{ inputs.desde || '2024-01-02' }}
+  HASTA: ${{ inputs.hasta || '2024-12-31' }}
+  VARIANTES: ${{ inputs.variante || 'solo_compra,factores' }}
+  LLAMADAS: ${{ inputs.llamadas_por_dia || '20' }}
+  OLLAMA_URL: http://127.0.0.1:11434
+  OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - name: Pruebas sin fuga de futuro
+        run: node --test maquina_v2/maquina.test.mjs
+      - name: Descargar las series diarias
+        run: node maquina_ilimitada/preparar.mjs maquina_ilimitada/universo.json series.json.gz
+      - uses: actions/upload-artifact@v4
+        with: {name: series, path: series.json.gz, retention-days: 30}
+  memoria:
+    needs: preparar
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - uses: actions/download-artifact@v4
+        with: {name: series}
+      - name: Arrancar Ollama y descargar modelo
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p "$OLLAMA_MODELS"
+          nohup ollama serve > ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/tags" >/dev/null && break; sleep 2; done
+          ollama pull "$MODELO"
+      - name: Prueba de memoria del modelo
+        run: node maquina_v2/memoria.mjs --series=series.json.gz --universo=maquina_ilimitada/universo.json --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --salida=memoria.json
+      - uses: actions/upload-artifact@v4
+        with: {name: memoria, path: memoria.json, retention-days: 30}
+  maquina:
+    needs: [preparar, memoria]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        tramo: ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - uses: actions/download-artifact@v4
+        with: {name: series}
+      - name: Instalar Ollama y modelos requeridos
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p "$OLLAMA_MODELS"
+          nohup ollama serve > ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/tags" >/dev/null && break; sleep 2; done
+          ollama pull "$MODELO"
+          if [[ ",$VARIANTES," == *,conjunto,* ]]; then ollama pull llama3.1:8b; ollama pull qwen2.5:7b; fi
+          if [[ ",$VARIANTES," == *,conjunto,* && "$MODELO" == *14b* ]]; then ollama pull qwen2.5:14b; fi
+      - name: Ejecutar variantes del tramo
+        run: |
+          mkdir -p "salida/tramo-${{ matrix.tramo }}"
+          IFS=',' read -ra VS <<< "$VARIANTES"
+          for V in "${VS[@]}"; do
+            node maquina_v2/experimento.mjs --tramo=${{ matrix.tramo }} --total=20 --desde="$DESDE" --hasta="$HASTA" \
+              --series=series.json.gz --universo=maquina_ilimitada/universo.json --salida="salida/tramo-${{ matrix.tramo }}/$V" \
+              --modelo="$MODELO" --variante="$V" --llamadas="$LLAMADAS"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tramo-${{ matrix.tramo }}
+          path: salida/tramo-${{ matrix.tramo }}
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: noticias-${{ matrix.tramo }}
+          path: resultados/cache_gdelt
+          if-no-files-found: ignore
+          retention-days: 90
+  resumir:
+    needs: [preparar, memoria, maquina]
+    if: ${{ always() && needs.preparar.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - uses: actions/download-artifact@v4
+        with: {name: series}
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with: {name: memoria}
+      - uses: actions/download-artifact@v4
+        with: {pattern: tramo-*, path: artefactos, merge-multiple: false}
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with: {pattern: noticias-*, path: cache_artifacts, merge-multiple: false}
+      - name: Generar resumen y tabla
+        run: node maquina_v2/resumir.mjs --artefactos=artefactos --modelo="$MODELO" --variantes="${VARIANTES//,/;}" --desde="$DESDE" --hasta="$HASTA" --llamadas="$LLAMADAS"
+      - name: Conservar caché de titulares del período
+        run: |
+          mkdir -p resultados/cache_gdelt
+          find cache_artifacts -name '*.jsonl.gz' -type f -print0 2>/dev/null | while IFS= read -r -d '' F; do
+            NAME=$(basename "$F")
+            gzip -cd "$F" >> "resultados/cache_gdelt/$NAME.jsonl"
+          done
+          for F in resultados/cache_gdelt/*.jsonl; do [ -f "$F" ] && sort -u "$F" | gzip -c > "$F.gz" && rm "$F"; done
+      - name: Publicar artefactos y resultados
+        run: |
+          git config user.name motor-bot
+          git config user.email motor-bot@users.noreply.github.com
+          git add resultados/maquina_v2 resultados/cache_gdelt
+          git diff --cached --quiet && exit 0
+          git commit -m "maquina-v2: resultados $MODELO $GITHUB_RUN_ID"
+          git pull --rebase origin main
+          git push origin HEAD:main
