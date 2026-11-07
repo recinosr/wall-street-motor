@@ -1,0 +1,259 @@
+{
+ "version": 1,
+ "actualizado_utc": "2026-11-07T00:27:19.715Z",
+ "modelo": "qwen2.5:7b-instruct",
+ "periodo": {
+  "desde": "2025-01-02",
+  "hasta": "2026-10-16"
+ },
+ "llamadas_por_dia": 20,
+ "run_id": "42317377484",
+ "estado": "parcial",
+ "cuenta": true,
+ "veredicto": "Muestra insuficiente para concluir (Vita n/d vs siempre sube n/d vs momentum n/d; n=0, n efectivo≈0 en 0 días).",
+ "memoria": {
+  "estado": "completa",
+  "n": 20,
+  "aciertos": 0,
+  "contaminado": false,
+  "regla": "si acierta ±3 % en más de 5 de 20, el período no cuenta",
+  "modelo": "qwen2.5:7b-instruct",
+  "respuestas": [
+   {
+    "activo": "MCO.US",
+    "fecha": "2025-11-25",
+    "precio_real": 485.6700134277344,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "NOC.US",
+    "fecha": "2025-08-06",
+    "precio_real": 589.2899780273438,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "T.US",
+    "fecha": "2025-01-17",
+    "precio_real": 22.290000915527344,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "DOV.US",
+    "fecha": "2025-11-10",
+    "precio_real": 182.08999633789062,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "F.US",
+    "fecha": "2025-02-19",
+    "precio_real": 9.34000015258789,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "CINF.US",
+    "fecha": "2025-08-25",
+    "precio_real": 153.30999755859375,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "APH.US",
+    "fecha": "2025-07-30",
+    "precio_real": 52.744998931884766,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "MSI.US",
+    "fecha": "2026-09-28",
+    "precio_real": 452.0799865722656,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "EXC.US",
+    "fecha": "2025-09-26",
+    "precio_real": 44.09000015258789,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "FRT.US",
+    "fecha": "2025-04-17",
+    "precio_real": 93.72000122070312,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "STE.US",
+    "fecha": "2025-01-06",
+    "precio_real": 204.00999450683594,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "FICO.US",
+    "fecha": "2026-06-03",
+    "precio_real": 1174.6600341796875,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "SBUX.US",
+    "fecha": "2025-03-10",
+    "precio_real": 101.12999725341797,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "LITE.US",
+    "fecha": "2026-08-04",
+    "precio_real": 849.469970703125,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "IWDA.UK",
+    "fecha": "2025-06-16",
+    "precio_real": 115.37000274658203,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "IGLN.UK",
+    "fecha": "2026-03-20",
+    "precio_real": 88.93499755859375,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "FTEK.UK",
+    "fecha": "2025-06-03",
+    "precio_real": 57.79999923706055,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "IUCM.UK",
+    "fecha": "2026-02-24",
+    "precio_real": 13.90999984741211,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "NUCL.UK",
+    "fecha": "2025-06-24",
+    "precio_real": 44.95500183105469,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   },
+   {
+    "activo": "BTC",
+    "fecha": "2025-03-23",
+    "precio_real": 86054.375,
+    "estimado": null,
+    "acierto": false,
+    "json_valido": true
+   }
+  ]
+ },
+ "global": {
+  "n": 0,
+  "aciertos": 0,
+  "pct": null,
+  "ic95_pct": null,
+  "brier": null,
+  "exceso_promedio": null,
+  "retorno_promedio": null,
+  "bases": {
+   "siempre_sube": {
+    "n": 0,
+    "pct": null,
+    "brier": null,
+    "exceso_promedio": null,
+    "vita_pct_pareado": null,
+    "dif_pct": null,
+    "ic95_dif_bootstrap_dias": null,
+    "p_valor_mcnemar": 1,
+    "discordantes": {
+     "vita_gana": 0,
+     "vita_pierde": 0
+    },
+    "estado": 0
+   },
+   "momentum": {
+    "n": 0,
+    "pct": null,
+    "brier": null,
+    "exceso_promedio": null,
+    "vita_pct_pareado": null,
+    "dif_pct": null,
+    "ic95_dif_bootstrap_dias": null,
+    "p_valor_mcnemar": 1,
+    "discordantes": {
+     "vita_gana": 0,
+     "vita_pierde": 0
+    },
+    "estado": 0
+   }
+  },
+  "veredicto": "muestra insuficiente",
+  "n_efectivo": {
+   "n": 0,
+   "dias": 0,
+   "icc": null,
+   "deff": null,
+   "n_efectivo": 0
+  }
+ },
+ "por_confianza": {},
+ "por_clase": {},
+ "por_horizonte": {},
+ "por_regimen": {},
+ "produccion": {
+  "llamadas_vita_emitidas": 0,
+  "calificadas": 0,
+  "sin_vencer": 0,
+  "solicitudes": 0,
+  "lotes_con_json_valido": 0,
+  "pct_json_valido": null,
+  "intentos_totales": 0,
+  "llamadas_crudas": 0,
+  "llamadas_validas": 0,
+  "pct_llamadas_validas": null,
+  "segundos_modelo": 0,
+  "segundos_por_solicitud": null,
+  "segundos_por_llamada_valida": null,
+  "fechas_procesadas": 0,
+  "fechas_con_error": 0
+ },
+ "tramos": [],
+ "ejemplos": [],
+ "noticias": false,
+ "metodo": "Solo precios (sin noticias): cada fecha usa únicamente cierres anteriores a ella; la calificación usa el primer cierre igual o posterior al vencimiento en días calendario. Acierto por signo; Brier probabilístico; IC Wilson 95 %; McNemar exacto pareado frente a siempre sube y momentum, más bootstrap por días completos para respetar la correlación dentro del día. Referencia: VT para acciones y ETF, BTC para cripto alt, efectivo para BTC. Precios de Yahoo sin ajuste de dividendos. Universo actual: posible sesgo de supervivencia. Un modelo entrenado después del período no reproduce un pronóstico emitido entonces; la prueba de memoria reduce, no elimina, esa duda. Subgrupos exploratorios, sin ajuste por comparaciones múltiples.",
+ "comparaciones_subgrupos": 0
+}
