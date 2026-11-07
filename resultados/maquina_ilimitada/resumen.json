@@ -1,16 +1,16 @@
 {
  "version": 1,
- "actualizado_utc": "2026-11-07T00:27:19.715Z",
+ "actualizado_utc": "2026-11-07T07:53:31.422Z",
  "modelo": "qwen2.5:7b-instruct",
  "periodo": {
   "desde": "2025-01-02",
   "hasta": "2026-10-16"
  },
  "llamadas_por_dia": 20,
- "run_id": "42317377484",
+ "run_id": "42318399718",
  "estado": "parcial",
  "cuenta": true,
- "veredicto": "Muestra insuficiente para concluir (Vita n/d vs siempre sube n/d vs momentum n/d; n=0, n efectivo≈0 en 0 días).",
+ "veredicto": "Vita pierde frente a al menos una línea base (Vita 53.3 % vs siempre sube 56.0 % vs momentum 53.1 %; n=7450, n efectivo≈5237 en 394 días).",
  "memoria": {
   "estado": "completa",
   "n": 20,
@@ -182,78 +182,1045 @@
   ]
  },
  "global": {
-  "n": 0,
-  "aciertos": 0,
-  "pct": null,
-  "ic95_pct": null,
-  "brier": null,
-  "exceso_promedio": null,
-  "retorno_promedio": null,
+  "n": 7450,
+  "aciertos": 3968,
+  "pct": 0.5326174496644295,
+  "ic95_pct": [
+   0.5212739648144492,
+   0.5439273146445992
+  ],
+  "brier": 0.2717326533912973,
+  "exceso_promedio": 0.012749288419735803,
+  "retorno_promedio": 0.025041001885695618,
   "bases": {
    "siempre_sube": {
-    "n": 0,
-    "pct": null,
-    "brier": null,
-    "exceso_promedio": null,
-    "vita_pct_pareado": null,
-    "dif_pct": null,
-    "ic95_dif_bootstrap_dias": null,
-    "p_valor_mcnemar": 1,
+    "n": 7450,
+    "pct": 0.5597315436241611,
+    "brier": 0.25,
+    "exceso_promedio": 0.015503844995876207,
+    "vita_pct_pareado": 0.5326174496644295,
+    "dif_pct": -0.027114093959731633,
+    "ic95_dif_bootstrap_dias": [
+     -0.043043710021321964,
+     -0.011234452320449378
+    ],
+    "p_valor_mcnemar": 0.000031418931968831206,
     "discordantes": {
-     "vita_gana": 0,
-     "vita_pierde": 0
+     "vita_gana": 1066,
+     "vita_pierde": 1268
     },
-    "estado": 0
+    "estado": -1
    },
    "momentum": {
-    "n": 0,
-    "pct": null,
-    "brier": null,
-    "exceso_promedio": null,
-    "vita_pct_pareado": null,
-    "dif_pct": null,
-    "ic95_dif_bootstrap_dias": null,
-    "p_valor_mcnemar": 1,
+    "n": 7450,
+    "pct": 0.5312751677852349,
+    "brier": 0.25,
+    "exceso_promedio": 0.013756629004027039,
+    "vita_pct_pareado": 0.5326174496644295,
+    "dif_pct": 0.0013422818791946067,
+    "ic95_dif_bootstrap_dias": [
+     -0.01521216973578863,
+     0.018098325229605618
+    ],
+    "p_valor_mcnemar": 0.8553721236923252,
     "discordantes": {
-     "vita_gana": 0,
-     "vita_pierde": 0
+     "vita_gana": 1224,
+     "vita_pierde": 1214
     },
     "estado": 0
    }
   },
-  "veredicto": "muestra insuficiente",
+  "veredicto": "pierde",
   "n_efectivo": {
-   "n": 0,
-   "dias": 0,
-   "icc": null,
-   "deff": null,
-   "n_efectivo": 0
+   "n": 7450,
+   "dias": 394,
+   "icc": 0.023590324646409245,
+   "deff": 1.4224703825001614,
+   "n_efectivo": 5237
   }
  },
- "por_confianza": {},
- "por_clase": {},
- "por_horizonte": {},
- "por_regimen": {},
+ "por_confianza": {
+  "0.50-0.55": {
+   "n": 225,
+   "aciertos": 112,
+   "pct": 0.49777777777777776,
+   "ic95_pct": [
+    0.4330342488260108,
+    0.5625959136229001
+   ],
+   "brier": 0.24957020226666665,
+   "exceso_promedio": 0.0000956720582764101,
+   "retorno_promedio": 0.00518507973024541,
+   "bases": {
+    "siempre_sube": {
+     "n": 225,
+     "pct": 0.5155555555555555,
+     "brier": 0.25,
+     "exceso_promedio": 0.004500324201350186,
+     "vita_pct_pareado": 0.49777777777777776,
+     "dif_pct": -0.01777777777777778,
+     "ic95_dif_bootstrap_dias": [
+      -0.13478260869565217,
+      0.1031390134529148
+     ],
+     "p_valor_mcnemar": 0.8277787949824109,
+     "discordantes": {
+      "vita_gana": 93,
+      "vita_pierde": 97
+     },
+     "estado": 0
+    },
+    "momentum": {
+     "n": 225,
+     "pct": 0.5244444444444445,
+     "brier": 0.25,
+     "exceso_promedio": 0.005976222079533002,
+     "vita_pct_pareado": 0.49777777777777776,
+     "dif_pct": -0.026666666666666727,
+     "ic95_dif_bootstrap_dias": [
+      -0.11688311688311688,
+      0.0684931506849315
+     ],
+     "p_valor_mcnemar": 0.6337556480191848,
+     "discordantes": {
+      "vita_gana": 52,
+      "vita_pierde": 58
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "no se distingue"
+  },
+  "0.55-0.70": {
+   "n": 3498,
+   "aciertos": 1747,
+   "pct": 0.49942824471126357,
+   "ic95_pct": [
+    0.48286851961418803,
+    0.5159892242194384
+   ],
+   "brier": 0.2616312500213496,
+   "exceso_promedio": -0.0000062835174239,
+   "retorno_promedio": 0.013542275754174271,
+   "bases": {
+    "siempre_sube": {
+     "n": 3498,
+     "pct": 0.5457404230989137,
+     "brier": 0.25,
+     "exceso_promedio": 0.00729467298903875,
+     "vita_pct_pareado": 0.49942824471126357,
+     "dif_pct": -0.046312178387650116,
+     "ic95_dif_bootstrap_dias": [
+      -0.07375643224699828,
+      -0.019459773453383677
+     ],
+     "p_valor_mcnemar": 0.00013310104337267882,
+     "discordantes": {
+      "vita_gana": 808,
+      "vita_pierde": 970
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 3498,
+     "pct": 0.5165809033733562,
+     "brier": 0.25,
+     "exceso_promedio": 0.0055148228259558,
+     "vita_pct_pareado": 0.49942824471126357,
+     "dif_pct": -0.01715265866209259,
+     "ic95_dif_bootstrap_dias": [
+      -0.04285311530871159,
+      0.006338231057332181
+     ],
+     "p_valor_mcnemar": 0.12279062125567984,
+     "discordantes": {
+      "vita_gana": 701,
+      "vita_pierde": 761
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  },
+  ">=0.70": {
+   "n": 3727,
+   "aciertos": 2109,
+   "pct": 0.565870673463912,
+   "ic95_pct": [
+    0.5498984677481201,
+    0.5817072317755535
+   ],
+   "brier": 0.2825513441589743,
+   "exceso_promedio": 0.02548501536299121,
+   "retorno_promedio": 0.03703191320660739,
+   "bases": {
+    "siempre_sube": {
+     "n": 3727,
+     "pct": 0.5755299168231822,
+     "brier": 0.25,
+     "exceso_promedio": 0.02387290210848298,
+     "vita_pct_pareado": 0.565870673463912,
+     "dif_pct": -0.009659243359270264,
+     "ic95_dif_bootstrap_dias": [
+      -0.020199299757608404,
+      0.0018726591760299626
+     ],
+     "p_valor_mcnemar": 0.06718133158068854,
+     "discordantes": {
+      "vita_gana": 165,
+      "vita_pierde": 201
+     },
+     "estado": 0
+    },
+    "momentum": {
+     "n": 3727,
+     "pct": 0.5454789374832305,
+     "brier": 0.25,
+     "exceso_promedio": 0.02196173487172335,
+     "vita_pct_pareado": 0.565870673463912,
+     "dif_pct": 0.020391735980681447,
+     "ic95_dif_bootstrap_dias": [
+      0.002672367717797969,
+      0.039142091152815014
+     ],
+     "p_valor_mcnemar": 0.0107736845247573,
+     "discordantes": {
+      "vita_gana": 471,
+      "vita_pierde": 395
+     },
+     "estado": 1
+    }
+   },
+   "veredicto": "no se distingue"
+  }
+ },
+ "por_clase": {
+  "ETF": {
+   "n": 2389,
+   "aciertos": 1305,
+   "pct": 0.5462536626203432,
+   "ic95_pct": [
+    0.5262314748997088,
+    0.5661273394234658
+   ],
+   "brier": 0.2568382485612623,
+   "exceso_promedio": 0.00236542923586571,
+   "retorno_promedio": 0.022544737596284756,
+   "bases": {
+    "siempre_sube": {
+     "n": 2389,
+     "pct": 0.632900795311846,
+     "brier": 0.25,
+     "exceso_promedio": 0.010611418941001776,
+     "vita_pct_pareado": 0.5462536626203432,
+     "dif_pct": -0.0866471326915027,
+     "ic95_dif_bootstrap_dias": [
+      -0.11139028475711893,
+      -0.06205747605164515
+     ],
+     "p_valor_mcnemar": 2.2049211083153407e-14,
+     "discordantes": {
+      "vita_gana": 265,
+      "vita_pierde": 472
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 2389,
+     "pct": 0.5533696107157806,
+     "brier": 0.25,
+     "exceso_promedio": 0.006744254033561641,
+     "vita_pct_pareado": 0.5462536626203432,
+     "dif_pct": -0.007115948095437363,
+     "ic95_dif_bootstrap_dias": [
+      -0.03605870020964361,
+      0.02267954640907182
+     ],
+     "p_valor_mcnemar": 0.5988587429557649,
+     "discordantes": {
+      "vita_gana": 454,
+      "vita_pierde": 471
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  },
+  "accion": {
+   "n": 3450,
+   "aciertos": 1876,
+   "pct": 0.543768115942029,
+   "ic95_pct": [
+    0.527108333909631,
+    0.5603305377353724
+   ],
+   "brier": 0.2753748667427039,
+   "exceso_promedio": 0.025994488347265518,
+   "retorno_promedio": 0.046142648376367494,
+   "bases": {
+    "siempre_sube": {
+     "n": 3450,
+     "pct": 0.5695652173913044,
+     "brier": 0.25,
+     "exceso_promedio": 0.032911920844482,
+     "vita_pct_pareado": 0.543768115942029,
+     "dif_pct": -0.025797101449275384,
+     "ic95_dif_bootstrap_dias": [
+      -0.041654444118509826,
+      -0.008926000575871005
+     ],
+     "p_valor_mcnemar": 0.0020602701364129633,
+     "discordantes": {
+      "vita_gana": 364,
+      "vita_pierde": 453
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 3450,
+     "pct": 0.5301449275362319,
+     "brier": 0.25,
+     "exceso_promedio": 0.022435521538177523,
+     "vita_pct_pareado": 0.543768115942029,
+     "dif_pct": 0.013623188405797126,
+     "ic95_dif_bootstrap_dias": [
+      -0.004455004455004455,
+      0.030536529680365295
+     ],
+     "p_valor_mcnemar": 0.1014353814783659,
+     "discordantes": {
+      "vita_gana": 418,
+      "vita_pierde": 371
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  },
+  "cripto": {
+   "n": 1611,
+   "aciertos": 787,
+   "pct": 0.48851644941030414,
+   "ic95_pct": [
+    0.46416347797957014,
+    0.5129240560331962
+   ],
+   "brier": 0.28602011278088274,
+   "exceso_promedio": -0.0002171300530834332,
+   "retorno_promedio": -0.016446959011520844,
+   "bases": {
+    "siempre_sube": {
+     "n": 1611,
+     "pct": 0.4301675977653631,
+     "brier": 0.25,
+     "exceso_promedio": -0.014520894813307702,
+     "vita_pct_pareado": 0.48851644941030414,
+     "dif_pct": 0.058348851644941024,
+     "ic95_dif_bootstrap_dias": [
+      0.01927860696517413,
+      0.09963768115942029
+     ],
+     "p_valor_mcnemar": 0.000857478315055098,
+     "discordantes": {
+      "vita_gana": 437,
+      "vita_pierde": 343
+     },
+     "estado": 1
+    },
+    "momentum": {
+     "n": 1611,
+     "pct": 0.5009310986964618,
+     "brier": 0.25,
+     "exceso_promedio": 0.005569406509689698,
+     "vita_pct_pareado": 0.48851644941030414,
+     "dif_pct": -0.012414649286157653,
+     "ic95_dif_bootstrap_dias": [
+      -0.046173308032890575,
+      0.02103960396039604
+     ],
+     "p_valor_mcnemar": 0.48013308704988666,
+     "discordantes": {
+      "vita_gana": 352,
+      "vita_pierde": 372
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "no se distingue"
+  }
+ },
+ "por_horizonte": {
+  "1": {
+   "n": 1113,
+   "aciertos": 554,
+   "pct": 0.4977538185085355,
+   "ic95_pct": [
+    0.46843789865567337,
+    0.5270851901762184
+   ],
+   "brier": 0.2540375594429458,
+   "exceso_promedio": -0.00008389648231511815,
+   "retorno_promedio": 0.001201539195825513,
+   "bases": {
+    "siempre_sube": {
+     "n": 1113,
+     "pct": 0.5004492362982929,
+     "brier": 0.25,
+     "exceso_promedio": 0.00018081304023288586,
+     "vita_pct_pareado": 0.4977538185085355,
+     "dif_pct": -0.0026954177897573484,
+     "ic95_dif_bootstrap_dias": [
+      -0.05013673655423884,
+      0.046902654867256637
+     ],
+     "p_valor_mcnemar": 0.9373364489017633,
+     "discordantes": {
+      "vita_gana": 322,
+      "vita_pierde": 325
+     },
+     "estado": 0
+    },
+    "momentum": {
+     "n": 1113,
+     "pct": 0.48787061994609165,
+     "brier": 0.25,
+     "exceso_promedio": -0.0011629441710936767,
+     "vita_pct_pareado": 0.4977538185085355,
+     "dif_pct": 0.009883198562443851,
+     "ic95_dif_bootstrap_dias": [
+      -0.03,
+      0.05225863596102746
+     ],
+     "p_valor_mcnemar": 0.6484633701390714,
+     "discordantes": {
+      "vita_gana": 246,
+      "vita_pierde": 235
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "no se distingue"
+  },
+  "5": {
+   "n": 1526,
+   "aciertos": 758,
+   "pct": 0.4967234600262123,
+   "ic95_pct": [
+    0.4716771966835899,
+    0.5217861782678842
+   ],
+   "brier": 0.2775758317615776,
+   "exceso_promedio": -0.0000561417739704484,
+   "retorno_promedio": 0.004775470783833321,
+   "bases": {
+    "siempre_sube": {
+     "n": 1526,
+     "pct": 0.5380078636959371,
+     "brier": 0.25,
+     "exceso_promedio": 0.0028399913276323874,
+     "vita_pct_pareado": 0.4967234600262123,
+     "dif_pct": -0.0412844036697248,
+     "ic95_dif_bootstrap_dias": [
+      -0.06842105263157895,
+      -0.014388489208633094
+     ],
+     "p_valor_mcnemar": 0.0013756262572161653,
+     "discordantes": {
+      "vita_gana": 157,
+      "vita_pierde": 220
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 1526,
+     "pct": 0.5072083879423329,
+     "brier": 0.25,
+     "exceso_promedio": 0.001524893693710254,
+     "vita_pct_pareado": 0.4967234600262123,
+     "dif_pct": -0.010484927916120601,
+     "ic95_dif_bootstrap_dias": [
+      -0.046052631578947366,
+      0.024454725710508923
+     ],
+     "p_valor_mcnemar": 0.5217107580255103,
+     "discordantes": {
+      "vita_gana": 266,
+      "vita_pierde": 282
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  },
+  "21": {
+   "n": 2935,
+   "aciertos": 1599,
+   "pct": 0.5448040885860307,
+   "ic95_pct": [
+    0.5267409987827981,
+    0.5627500485177089
+   ],
+   "brier": 0.2699489808507736,
+   "exceso_promedio": 0.008269284166874986,
+   "retorno_promedio": 0.017659417894545462,
+   "bases": {
+    "siempre_sube": {
+     "n": 2935,
+     "pct": 0.5727427597955707,
+     "brier": 0.25,
+     "exceso_promedio": 0.011349929882586407,
+     "vita_pct_pareado": 0.5448040885860307,
+     "dif_pct": -0.027938671209539967,
+     "ic95_dif_bootstrap_dias": [
+      -0.04868913857677903,
+      -0.00752651385562778
+     ],
+     "p_valor_mcnemar": 0.004595046057026292,
+     "discordantes": {
+      "vita_gana": 368,
+      "vita_pierde": 450
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 2935,
+     "pct": 0.5454855195911414,
+     "brier": 0.25,
+     "exceso_promedio": 0.008337106242807419,
+     "vita_pct_pareado": 0.5448040885860307,
+     "dif_pct": -0.0006814310051107553,
+     "ic95_dif_bootstrap_dias": [
+      -0.02526459542505975,
+      0.02434077079107505
+     ],
+     "p_valor_mcnemar": 0.9728318245558026,
+     "discordantes": {
+      "vita_gana": 430,
+      "vita_pierde": 432
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  },
+  "63": {
+   "n": 1876,
+   "aciertos": 1057,
+   "pct": 0.5634328358208955,
+   "ic95_pct": [
+    0.5408829143941633,
+    0.5857235070587009
+   ],
+   "brier": 0.2802683827505343,
+   "exceso_promedio": 0.037788325601892,
+   "retorno_promedio": 0.0672176924236984,
+   "bases": {
+    "siempre_sube": {
+     "n": 1876,
+     "pct": 0.5922174840085288,
+     "brier": 0.25,
+     "exceso_promedio": 0.041394738451034134,
+     "vita_pct_pareado": 0.5634328358208955,
+     "dif_pct": -0.028784648187633266,
+     "ic95_dif_bootstrap_dias": [
+      -0.05482340537691091,
+      -0.0026795284030010718
+     ],
+     "p_valor_mcnemar": 0.016787097643909392,
+     "discordantes": {
+      "vita_gana": 219,
+      "vita_pierde": 273
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 1876,
+     "pct": 0.5543710021321961,
+     "brier": 0.25,
+     "exceso_promedio": 0.04103669954327674,
+     "vita_pct_pareado": 0.5634328358208955,
+     "dif_pct": 0.009061833688699394,
+     "ic95_dif_bootstrap_dias": [
+      -0.018468223791417708,
+      0.034133333333333335
+     ],
+     "p_valor_mcnemar": 0.4939405136569868,
+     "discordantes": {
+      "vita_gana": 282,
+      "vita_pierde": 265
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  }
+ },
+ "por_regimen": {
+  "VT baja": {
+   "n": 2200,
+   "aciertos": 1041,
+   "pct": 0.4731818181818182,
+   "ic95_pct": [
+    0.4523834917285831,
+    0.49407363678775224
+   ],
+   "brier": 0.3001471437545458,
+   "exceso_promedio": -0.0027135209083146306,
+   "retorno_promedio": 0.0006339913824974368,
+   "bases": {
+    "siempre_sube": {
+     "n": 2200,
+     "pct": 0.4540909090909091,
+     "brier": 0.25,
+     "exceso_promedio": -0.003345130702432991,
+     "vita_pct_pareado": 0.4731818181818182,
+     "dif_pct": 0.019090909090909103,
+     "ic95_dif_bootstrap_dias": [
+      -0.007921714818266543,
+      0.045812124016658955
+     ],
+     "p_valor_mcnemar": 0.1327501178396384,
+     "discordantes": {
+      "vita_gana": 393,
+      "vita_pierde": 351
+     },
+     "estado": 0
+    },
+    "momentum": {
+     "n": 2200,
+     "pct": 0.45181818181818184,
+     "brier": 0.25,
+     "exceso_promedio": -0.007272594031172772,
+     "vita_pct_pareado": 0.4731818181818182,
+     "dif_pct": 0.021363636363636362,
+     "ic95_dif_bootstrap_dias": [
+      -0.010884353741496598,
+      0.055505004549590536
+     ],
+     "p_valor_mcnemar": 0.10963674162202082,
+     "discordantes": {
+      "vita_gana": 437,
+      "vita_pierde": 390
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "no se distingue"
+  },
+  "VT sube": {
+   "n": 5250,
+   "aciertos": 2927,
+   "pct": 0.5575238095238095,
+   "ic95_pct": [
+    0.5440513666349637,
+    0.570912132879465
+   ],
+   "brier": 0.25982562885812865,
+   "exceso_promedio": 0.019228941852442637,
+   "retorno_promedio": 0.03526870152513102,
+   "bases": {
+    "siempre_sube": {
+     "n": 5250,
+     "pct": 0.604,
+     "brier": 0.25,
+     "exceso_promedio": 0.023402463383739115,
+     "vita_pct_pareado": 0.5575238095238095,
+     "dif_pct": -0.04647619047619045,
+     "ic95_dif_bootstrap_dias": [
+      -0.06437355880092237,
+      -0.02813397129186603
+     ],
+     "p_valor_mcnemar": 1.0234179984485741e-9,
+     "discordantes": {
+      "vita_gana": 673,
+      "vita_pierde": 917
+     },
+     "estado": -1
+    },
+    "momentum": {
+     "n": 5250,
+     "pct": 0.5645714285714286,
+     "brier": 0.25,
+     "exceso_promedio": 0.02256887484734887,
+     "vita_pct_pareado": 0.5575238095238095,
+     "dif_pct": -0.00704761904761908,
+     "ic95_dif_bootstrap_dias": [
+      -0.025241981400645284,
+      0.012964728312678742
+     ],
+     "p_valor_mcnemar": 0.36976534277777545,
+     "discordantes": {
+      "vita_gana": 787,
+      "vita_pierde": 824
+     },
+     "estado": 0
+    }
+   },
+   "veredicto": "pierde"
+  }
+ },
  "produccion": {
-  "llamadas_vita_emitidas": 0,
-  "calificadas": 0,
-  "sin_vencer": 0,
-  "solicitudes": 0,
-  "lotes_con_json_valido": 0,
-  "pct_json_valido": null,
-  "intentos_totales": 0,
-  "llamadas_crudas": 0,
-  "llamadas_validas": 0,
-  "pct_llamadas_validas": null,
-  "segundos_modelo": 0,
-  "segundos_por_solicitud": null,
-  "segundos_por_llamada_valida": null,
-  "fechas_procesadas": 0,
+  "llamadas_vita_emitidas": 7593,
+  "calificadas": 7450,
+  "sin_vencer": 143,
+  "solicitudes": 1576,
+  "lotes_con_json_valido": 1576,
+  "pct_json_valido": 1,
+  "intentos_totales": 1633,
+  "llamadas_crudas": 7880,
+  "llamadas_validas": 7593,
+  "pct_llamadas_validas": 0.9635786802030457,
+  "segundos_modelo": 355696,
+  "segundos_por_solicitud": 225.69557614213207,
+  "segundos_por_llamada_valida": 46.84528223363626,
+  "fechas_procesadas": 394,
   "fechas_con_error": 0
  },
- "tramos": [],
- "ejemplos": [],
+ "tramos": [
+  {
+   "tramo": 0,
+   "desde": "2025-01-02",
+   "hasta": "2025-02-04",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-01-31",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 321.7,
+   "artefacto": "tramo-00"
+  },
+  {
+   "tramo": 1,
+   "desde": "2025-02-05",
+   "hasta": "2025-03-07",
+   "fechas": 22,
+   "fechas_hechas": 18,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-03-04",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 331.8,
+   "artefacto": "tramo-01"
+  },
+  {
+   "tramo": 2,
+   "desde": "2025-03-10",
+   "hasta": "2025-04-09",
+   "fechas": 23,
+   "fechas_hechas": 22,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-04-09",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 334.6,
+   "artefacto": "tramo-02"
+  },
+  {
+   "tramo": 3,
+   "desde": "2025-04-10",
+   "hasta": "2025-05-12",
+   "fechas": 22,
+   "fechas_hechas": 22,
+   "completo": true,
+   "parada": null,
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 183.9,
+   "artefacto": "tramo-03"
+  },
+  {
+   "tramo": 4,
+   "desde": "2025-05-13",
+   "hasta": "2025-06-13",
+   "fechas": 23,
+   "fechas_hechas": 17,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-06-06",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 328.7,
+   "artefacto": "tramo-04"
+  },
+  {
+   "tramo": 5,
+   "desde": "2025-06-16",
+   "hasta": "2025-07-17",
+   "fechas": 22,
+   "fechas_hechas": 22,
+   "completo": true,
+   "parada": null,
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 275.6,
+   "artefacto": "tramo-05"
+  },
+  {
+   "tramo": 6,
+   "desde": "2025-07-18",
+   "hasta": "2025-08-19",
+   "fechas": 23,
+   "fechas_hechas": 21,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-08-18",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 326.4,
+   "artefacto": "tramo-06"
+  },
+  {
+   "tramo": 7,
+   "desde": "2025-08-20",
+   "hasta": "2025-09-19",
+   "fechas": 22,
+   "fechas_hechas": 21,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-09-19",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 330,
+   "artefacto": "tramo-07"
+  },
+  {
+   "tramo": 8,
+   "desde": "2025-09-22",
+   "hasta": "2025-10-22",
+   "fechas": 23,
+   "fechas_hechas": 16,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-10-14",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 343.8,
+   "artefacto": "tramo-08"
+  },
+  {
+   "tramo": 9,
+   "desde": "2025-10-23",
+   "hasta": "2025-11-21",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-11-19",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 322.7,
+   "artefacto": "tramo-09"
+  },
+  {
+   "tramo": 10,
+   "desde": "2025-11-24",
+   "hasta": "2025-12-24",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2025-12-22",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 325,
+   "artefacto": "tramo-10"
+  },
+  {
+   "tramo": 11,
+   "desde": "2025-12-26",
+   "hasta": "2026-01-29",
+   "fechas": 23,
+   "fechas_hechas": 23,
+   "completo": true,
+   "parada": null,
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 277.1,
+   "artefacto": "tramo-11"
+  },
+  {
+   "tramo": 12,
+   "desde": "2026-01-30",
+   "hasta": "2026-03-03",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-02-27",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 330.6,
+   "artefacto": "tramo-12"
+  },
+  {
+   "tramo": 13,
+   "desde": "2026-03-04",
+   "hasta": "2026-04-06",
+   "fechas": 23,
+   "fechas_hechas": 18,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-03-30",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 323.4,
+   "artefacto": "tramo-13"
+  },
+  {
+   "tramo": 14,
+   "desde": "2026-04-07",
+   "hasta": "2026-05-06",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-05-04",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 325.7,
+   "artefacto": "tramo-14"
+  },
+  {
+   "tramo": 15,
+   "desde": "2026-05-07",
+   "hasta": "2026-06-09",
+   "fechas": 23,
+   "fechas_hechas": 23,
+   "completo": true,
+   "parada": null,
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 284.5,
+   "artefacto": "tramo-15"
+  },
+  {
+   "tramo": 16,
+   "desde": "2026-06-10",
+   "hasta": "2026-07-13",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-07-09",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 324.6,
+   "artefacto": "tramo-16"
+  },
+  {
+   "tramo": 17,
+   "desde": "2026-07-14",
+   "hasta": "2026-08-13",
+   "fechas": 23,
+   "fechas_hechas": 15,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-08-04",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 340.8,
+   "artefacto": "tramo-17"
+  },
+  {
+   "tramo": 18,
+   "desde": "2026-08-14",
+   "hasta": "2026-09-15",
+   "fechas": 22,
+   "fechas_hechas": 19,
+   "completo": false,
+   "parada": "presupuesto de tiempo agotado antes de 2026-09-11",
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 324.8,
+   "artefacto": "tramo-18"
+  },
+  {
+   "tramo": 19,
+   "desde": "2026-09-16",
+   "hasta": "2026-10-16",
+   "fechas": 23,
+   "fechas_hechas": 23,
+   "completo": true,
+   "parada": null,
+   "modelo": "qwen2.5:7b-instruct",
+   "minutos": 266.2,
+   "artefacto": "tramo-19"
+  }
+ ],
+ "ejemplos": [
+  {
+   "activo": "VLO.US",
+   "direccion": "sube",
+   "horizonte_dias": 21,
+   "probabilidad": 0.75,
+   "acierto": true,
+   "retorno": 0.14780982717894764,
+   "emitida_utc": "2025-01-02T12:00:00Z",
+   "razon": "El activo VLO ha mostrado una tendencia alcista en el último trimestre, con un rendimiento del 0.0332 en la semana pasada. Sin embargo, su volatilidad es alta, lo que podría generar fluctuaciones."
+  },
+  {
+   "activo": "XRP",
+   "direccion": "sube",
+   "horizonte_dias": 5,
+   "probabilidad": 0.7,
+   "acierto": true,
+   "retorno": 0.08017809879873883,
+   "emitida_utc": "2025-03-12T12:00:00Z",
+   "razon": "XRP ha mostrado un rendimiento positivo en el último trimestre, con un rendimiento del 3.4723% anual. La volatilidad y el indicador RSI14 sugieren un posible continuo de la tendencia alcista."
+  },
+  {
+   "activo": "ARM.US",
+   "direccion": "sube",
+   "horizonte_dias": 21,
+   "probabilidad": 0.75,
+   "acierto": true,
+   "retorno": 0.0314840655730384,
+   "emitida_utc": "2025-05-08T12:00:00Z",
+   "razon": "El activo ARM.US muestra una tendencia positiva en el mes y trimestre, con un RSI14 en un nivel saludable. La volatilidad histórica es alta, pero el z200 indica que el activo está sobrecomprado, lo que podría llevar a una corrección a corto plazo, pero a medio plazo la tendencia sigue siendo positiva."
+  },
+  {
+   "activo": "MXFS.UK",
+   "direccion": "baja",
+   "horizonte_dias": 5,
+   "probabilidad": 0.6,
+   "acierto": false,
+   "retorno": 0.02897944784092754,
+   "emitida_utc": "2025-07-14T12:00:00Z",
+   "razon": "El activo MXFS.UK ha mostrado un rendimiento negativo en los últimos meses y su volatilidad ha aumentado, lo que sugiere una posible corrección bajista en el corto plazo."
+  },
+  {
+   "activo": "RIVN.US",
+   "direccion": "baja",
+   "horizonte_dias": 21,
+   "probabilidad": 0.6,
+   "acierto": true,
+   "retorno": -0.027318495113501706,
+   "emitida_utc": "2025-09-11T12:00:00Z",
+   "razon": "El activo ha mostrado una tendencia negativa en los últimos meses, con un RSI14 en niveles altos, sugiriendo una corrección potencial."
+  },
+  {
+   "activo": "ALB.US",
+   "direccion": "sube",
+   "horizonte_dias": 21,
+   "probabilidad": 0.8,
+   "acierto": true,
+   "retorno": 0.09269444393302129,
+   "emitida_utc": "2025-11-14T12:00:00Z",
+   "razon": "El activo ha mostrado una recuperación en el último trimestre, con un z200 positivo y un RSI14 en niveles saludables."
+  },
+  {
+   "activo": "NEM.US",
+   "direccion": "sube",
+   "horizonte_dias": 21,
+   "probabilidad": 0.76,
+   "acierto": true,
+   "retorno": 0.047587005835892926,
+   "emitida_utc": "2026-01-21T12:00:00Z",
+   "razon": "El activo NEM ha mostrado una tendencia positiva en el último trimestre y año, con un RSI14 en niveles saludables. La volatilidad histórica es moderada, lo que sugiere que el activo puede experimentar movimientos significativos en el corto plazo."
+  },
+  {
+   "activo": "APA.US",
+   "direccion": "sube",
+   "horizonte_dias": 63,
+   "probabilidad": 0.85,
+   "acierto": true,
+   "retorno": 0.019442964715200795,
+   "emitida_utc": "2026-03-20T12:00:00Z",
+   "razon": "El rendimiento positivo a largo plazo y la volatilidad moderada indican un potencial de crecimiento significativo en los próximos meses."
+  },
+  {
+   "activo": "ASTS.US",
+   "direccion": "sube",
+   "horizonte_dias": 63,
+   "probabilidad": 0.85,
+   "acierto": false,
+   "retorno": -0.5490740846704554,
+   "emitida_utc": "2026-05-28T12:00:00Z",
+   "razon": "El activo ASTS.US ha mostrado una tendencia alcista en los últimos meses, con un rendimiento del 67.88% en el mes y un z200 positivo de 2.6424, sugiriendo una posible continuación de la tendencia."
+  },
+  {
+   "activo": "HMAD.UK",
+   "direccion": "sube",
+   "horizonte_dias": 21,
+   "probabilidad": 0.65,
+   "acierto": true,
+   "retorno": 0.07259812493007778,
+   "emitida_utc": "2026-07-29T12:00:00Z",
+   "razon": "HMAD.UK ha mostrado una recuperación en los últimos meses, con un z200 positivo y un RSI14 en niveles saludables, lo que sugiere una posible continuación de la tendencia alcista."
+  }
+ ],
  "noticias": false,
  "metodo": "Solo precios (sin noticias): cada fecha usa únicamente cierres anteriores a ella; la calificación usa el primer cierre igual o posterior al vencimiento en días calendario. Acierto por signo; Brier probabilístico; IC Wilson 95 %; McNemar exacto pareado frente a siempre sube y momentum, más bootstrap por días completos para respetar la correlación dentro del día. Referencia: VT para acciones y ETF, BTC para cripto alt, efectivo para BTC. Precios de Yahoo sin ajuste de dividendos. Universo actual: posible sesgo de supervivencia. Un modelo entrenado después del período no reproduce un pronóstico emitido entonces; la prueba de memoria reduce, no elimina, esa duda. Subgrupos exploratorios, sin ajuste por comparaciones múltiples.",
- "comparaciones_subgrupos": 0
+ "comparaciones_subgrupos": 12
 }
