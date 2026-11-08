@@ -1,0 +1,237 @@
+{
+  "version": 2,
+  "actualizado_utc": "2026-11-08T12:51:27.296Z",
+  "modelo": "qwen2.5:7b",
+  "variante": "noticias",
+  "periodo": {
+    "desde": "2025-01-02",
+    "hasta": "2026-10-16"
+  },
+  "llamadas_por_dia": 10,
+  "tramos_disponibles": 20,
+  "tramos_esperados": 20,
+  "parcial": false,
+  "universo_pit": false,
+  "n": 5,
+  "n_efectivo": 1,
+  "acierto": 0.6,
+  "Brier": 0.215,
+  "exceso_promedio": 0.026624667755209108,
+  "comparaciones": {
+    "azar_clase": {
+      "n": 5,
+      "dif_acierto": -0.4,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 2
+      },
+      "mcnemar_p": 0.5
+    },
+    "siempre_sube": {
+      "n": 5,
+      "dif_acierto": -0.4,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 2
+      },
+      "mcnemar_p": 0.5
+    },
+    "momentum": {
+      "n": 5,
+      "dif_acierto": 0.6,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 3,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 0.25000000000000006
+    },
+    "solo_factores": {
+      "n": 0,
+      "dif_acierto": null,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "dif_acierto": null,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    }
+  },
+  "por_clase": {
+    "ETF": {
+      "n": 2,
+      "n_efectivo": 1,
+      "acierto": 1,
+      "Brier": 0.05124999999999999,
+      "exceso_promedio": 0.04041515043095434
+    },
+    "accion": {
+      "n": 2,
+      "n_efectivo": 1,
+      "acierto": 0.5,
+      "Brier": 0.24125,
+      "exceso_promedio": 0.02468857108904654
+    },
+    "cripto": {
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 0,
+      "Brier": 0.48999999999999994,
+      "exceso_promedio": 0.002915895736043783
+    }
+  },
+  "por_horizonte": {
+    "21": {
+      "n": 5,
+      "n_efectivo": 1,
+      "acierto": 0.6,
+      "Brier": 0.215,
+      "exceso_promedio": 0.026624667755209108
+    }
+  },
+  "por_confianza": {
+    "0.50-0.55": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    },
+    "0.55-0.70": {
+      "n": 2,
+      "n_efectivo": 1,
+      "acierto": 0.5,
+      "Brier": 0.24125,
+      "exceso_promedio": 0.02468857108904654
+    },
+    ">=0.70": {
+      "n": 3,
+      "n_efectivo": 1,
+      "acierto": 0.6666666666666666,
+      "Brier": 0.19749999999999998,
+      "exceso_promedio": 0.027915398865984153
+    }
+  },
+  "calibracion": [
+    {
+      "desde": 0.5,
+      "hasta": 0.55,
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null,
+      "probabilidad_media": null
+    },
+    {
+      "desde": 0.55,
+      "hasta": 0.6,
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null,
+      "probabilidad_media": null
+    },
+    {
+      "desde": 0.6,
+      "hasta": 0.65,
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 0,
+      "Brier": 0.36,
+      "exceso_promedio": 0.068728722297132,
+      "probabilidad_media": 0.6
+    },
+    {
+      "desde": 0.65,
+      "hasta": 0.7,
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 1,
+      "Brier": 0.12249999999999998,
+      "exceso_promedio": -0.019351580119038925,
+      "probabilidad_media": 0.65
+    },
+    {
+      "desde": 0.7,
+      "hasta": 0.75,
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 0,
+      "Brier": 0.48999999999999994,
+      "exceso_promedio": 0.002915895736043783,
+      "probabilidad_media": 0.7
+    },
+    {
+      "desde": 0.75,
+      "hasta": 0.8,
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 1,
+      "Brier": 0.0625,
+      "exceso_promedio": 0.050663767014961,
+      "probabilidad_media": 0.75
+    },
+    {
+      "desde": 0.8,
+      "hasta": 0.85,
+      "n": 1,
+      "n_efectivo": 1,
+      "acierto": 1,
+      "Brier": 0.03999999999999998,
+      "exceso_promedio": 0.030166533846947674,
+      "probabilidad_media": 0.8
+    }
+  ],
+  "bases": {
+    "azar_clase": {
+      "n": 100,
+      "n_efectivo": 1,
+      "acierto": 0.97,
+      "Brier": 0.25,
+      "exceso_promedio": 0.024777260421738046
+    },
+    "siempre_sube": {
+      "n": 5,
+      "n_efectivo": 1,
+      "acierto": 1,
+      "Brier": 0.25,
+      "exceso_promedio": -0.0020331794580612074
+    },
+    "momentum": {
+      "n": 5,
+      "n_efectivo": 1,
+      "acierto": 0,
+      "Brier": 0.25,
+      "exceso_promedio": 0.0020331794580612074
+    },
+    "solo_factores": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    }
+  },
+  "veredicto": "Muestra insuficiente para concluir."
+}

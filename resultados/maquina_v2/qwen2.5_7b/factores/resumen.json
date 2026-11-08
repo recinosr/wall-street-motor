@@ -1,0 +1,249 @@
+{
+  "version": 2,
+  "actualizado_utc": "2026-11-08T12:51:27.291Z",
+  "modelo": "qwen2.5:7b",
+  "variante": "factores",
+  "periodo": {
+    "desde": "2025-01-02",
+    "hasta": "2026-10-16"
+  },
+  "llamadas_por_dia": 10,
+  "tramos_disponibles": 20,
+  "tramos_esperados": 20,
+  "parcial": false,
+  "universo_pit": false,
+  "n": 291,
+  "n_efectivo": 59,
+  "acierto": 0.5773195876288659,
+  "Brier": 0.26227369660077154,
+  "exceso_promedio": 0.011396013248125027,
+  "comparaciones": {
+    "azar_clase": {
+      "n": 291,
+      "dif_acierto": 0.010309278350515464,
+      "ic95_bootstrap_dias": [
+        -0.06440677966101695,
+        0.08098591549295775
+      ],
+      "discordantes": {
+        "vita_gana": 70,
+        "vita_pierde": 67
+      },
+      "mcnemar_p": 0.8644049750099538
+    },
+    "siempre_sube": {
+      "n": 291,
+      "dif_acierto": -0.024054982817869417,
+      "ic95_bootstrap_dias": [
+        -0.09407665505226481,
+        0.045454545454545456
+      ],
+      "discordantes": {
+        "vita_gana": 39,
+        "vita_pierde": 46
+      },
+      "mcnemar_p": 0.5154257318839065
+    },
+    "momentum": {
+      "n": 291,
+      "dif_acierto": 0.013745704467353952,
+      "ic95_bootstrap_dias": [
+        -0.06761565836298933,
+        0.09375
+      ],
+      "discordantes": {
+        "vita_gana": 63,
+        "vita_pierde": 59
+      },
+      "mcnemar_p": 0.7860578568938387
+    },
+    "solo_factores": {
+      "n": 154,
+      "dif_acierto": -0.06493506493506493,
+      "ic95_bootstrap_dias": [
+        -0.16025641025641027,
+        0.033112582781456956
+      ],
+      "discordantes": {
+        "vita_gana": 19,
+        "vita_pierde": 29
+      },
+      "mcnemar_p": 0.19341265286193704
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "dif_acierto": null,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    }
+  },
+  "por_clase": {
+    "accion": {
+      "n": 195,
+      "n_efectivo": 57,
+      "acierto": 0.5794871794871795,
+      "Brier": 0.26689470086429995,
+      "exceso_promedio": 0.01575757097509435
+    },
+    "cripto": {
+      "n": 31,
+      "n_efectivo": 25,
+      "acierto": 0.6129032258064516,
+      "Brier": 0.25080645161290327,
+      "exceso_promedio": 0.021678543107277952
+    },
+    "ETF": {
+      "n": 65,
+      "n_efectivo": 34,
+      "acierto": 0.5538461538461539,
+      "Brier": 0.25387967757363133,
+      "exceso_promedio": -0.006592635711763548
+    }
+  },
+  "por_horizonte": {
+    "21": {
+      "n": 291,
+      "n_efectivo": 59,
+      "acierto": 0.5773195876288659,
+      "Brier": 0.26227369660077154,
+      "exceso_promedio": 0.011396013248125027
+    }
+  },
+  "por_confianza": {
+    "0.50-0.55": {
+      "n": 4,
+      "n_efectivo": 4,
+      "acierto": 0.75,
+      "Brier": 0.25,
+      "exceso_promedio": 0.00019551987908161816
+    },
+    "0.55-0.70": {
+      "n": 137,
+      "n_efectivo": 59,
+      "acierto": 0.5620437956204379,
+      "Brier": 0.25033479320101043,
+      "exceso_promedio": 0.010414147906581758
+    },
+    ">=0.70": {
+      "n": 150,
+      "n_efectivo": 59,
+      "acierto": 0.5866666666666667,
+      "Brier": 0.2735051936152404,
+      "exceso_promedio": 0.012591463416575702
+    }
+  },
+  "calibracion": [
+    {
+      "desde": 0.5,
+      "hasta": 0.55,
+      "n": 4,
+      "n_efectivo": 4,
+      "acierto": 0.75,
+      "Brier": 0.25,
+      "exceso_promedio": 0.00019551987908161816,
+      "probabilidad_media": 0.5
+    },
+    {
+      "desde": 0.55,
+      "hasta": 0.6,
+      "n": 33,
+      "n_efectivo": 31,
+      "acierto": 0.5454545454545454,
+      "Brier": 0.25114760432932576,
+      "exceso_promedio": 0.026459289313429807,
+      "probabilidad_media": 0.5528229096763276
+    },
+    {
+      "desde": 0.6,
+      "hasta": 0.65,
+      "n": 58,
+      "n_efectivo": 55,
+      "acierto": 0.5862068965517241,
+      "Brier": 0.2426378573391503,
+      "exceso_promedio": -0.008157265461752385,
+      "probabilidad_media": 0.6001526434395557
+    },
+    {
+      "desde": 0.65,
+      "hasta": 0.7,
+      "n": 46,
+      "n_efectivo": 43,
+      "acierto": 0.5434782608695652,
+      "Brier": 0.2594565217391305,
+      "exceso_promedio": 0.022319632883481648,
+      "probabilidad_media": 0.6499999999999995
+    },
+    {
+      "desde": 0.7,
+      "hasta": 0.75,
+      "n": 59,
+      "n_efectivo": 56,
+      "acierto": 0.6440677966101694,
+      "Brier": 0.23204710241162774,
+      "exceso_promedio": 0.02308439373355119,
+      "probabilidad_media": 0.700575537134881
+    },
+    {
+      "desde": 0.75,
+      "hasta": 0.8,
+      "n": 51,
+      "n_efectivo": 49,
+      "acierto": 0.6078431372549019,
+      "Brier": 0.25857843137254904,
+      "exceso_promedio": 0.008625059897351099,
+      "probabilidad_media": 0.75
+    },
+    {
+      "desde": 0.8,
+      "hasta": 0.85,
+      "n": 40,
+      "n_efectivo": 37,
+      "acierto": 0.475,
+      "Brier": 0.35368750000000004,
+      "exceso_promedio": 0.002171555686048282,
+      "probabilidad_media": 0.8037500000000005
+    }
+  ],
+  "bases": {
+    "azar_clase": {
+      "n": 5820,
+      "n_efectivo": 59,
+      "acierto": 0.5824742268041238,
+      "Brier": 0.25,
+      "exceso_promedio": 0.007535857295047337
+    },
+    "siempre_sube": {
+      "n": 291,
+      "n_efectivo": 59,
+      "acierto": 0.6013745704467354,
+      "Brier": 0.25,
+      "exceso_promedio": 0.02742286042903651
+    },
+    "momentum": {
+      "n": 291,
+      "n_efectivo": 59,
+      "acierto": 0.563573883161512,
+      "Brier": 0.25,
+      "exceso_promedio": 0.021603658042448782
+    },
+    "solo_factores": {
+      "n": 760,
+      "n_efectivo": 152,
+      "acierto": 0.5960526315789474,
+      "Brier": 0.25,
+      "exceso_promedio": 0.03440794633039103
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    }
+  },
+  "veredicto": "Resultado exploratorio; interpretar junto con intervalos por dÃ­a."
+}
