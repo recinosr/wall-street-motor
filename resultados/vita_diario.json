@@ -1,20 +1,20 @@
 {
   "version": 2,
-  "fecha": "2026-11-06",
+  "fecha": "2026-11-08",
   "fuentes": {
     "marcador": {
-      "sha256": "16f20b27f7b4debfb93ddfa03351487b751b5f9915486f6d67e9a4fad2c1b0c2",
-      "fecha": "2026-11-06T21:20:28.381663+00:00",
+      "sha256": "f58bf1cd98bc12f6620e4e7a93e6303b33afcb7c28782d8fb8af66b6009aba9f",
+      "fecha": "2026-11-08T21:57:09.955153+00:00",
       "actualizado_hoy": true
     },
     "enciclopedia": {
-      "sha256": "f6ad8f86c53ff03febd62cb838bc0c6289a532c18cb4734e20017228b0134196",
-      "fecha": "2026-11-01T03:41:01.626442+00:00",
-      "actualizado_hoy": false
+      "sha256": "37f4a965b223d48e2a9492094b08a8237a8c1ae6e9cb4c960c9587dce8d326dc",
+      "fecha": "2026-11-08T08:55:41.756124+00:00",
+      "actualizado_hoy": true
     },
     "demo_cripto": {
-      "sha256": "0487eafcaa5546a348efca731eb065219c4255fc4eef7c15a88093e82f2d0d11",
-      "fecha": "2026-11-06T22:23:59.369940+00:00",
+      "sha256": "e9e18b0eea0496cf5221882157d956b757a166e23fbf0617297b063f4a8a90de",
+      "fecha": "2026-11-08T22:47:00.241945+00:00",
       "actualizado_hoy": true
     },
     "robots": {
@@ -32,24 +32,29 @@
   "frases": [
     "En el estudio histórico desde 2000-01-01 hasta antes de 2025-04-01 medí 85 patrones: 0 pasan todos los criterios después de costos. No es una medición de esta semana.",
     "Probé 3 robots en 24 casos históricos: 0 superan a mantener y al azar con corrección por pruebas múltiples.",
-    "En la demo BTC llevo US$951.53 frente a US$919.72 si hubiera mantenido, al corte 2026-11-06T22:23:56.322510234Z; son cuentas ficticias con reglas, no decisiones del chat.",
-    "Tengo 696510 etiquetas maduras de pronósticos y 16 archivos registrados; sin etiquetas no puedo medir aciertos.",
+    "En la demo BTC llevo US$930.04 frente a US$898.96 si hubiera mantenido, al corte 2026-11-08T22:46:58.015005652Z; son cuentas ficticias con reglas, no decisiones del chat.",
+    "Tengo 696524 etiquetas maduras de pronósticos y 17 archivos registrados; sin etiquetas no puedo medir aciertos.",
     "Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada."
   ],
   "que_probo_hoy": [
     {
       "fuente": "marcador",
       "descripcion": "Registro y calificación de pronósticos publicados con recibo",
-      "fecha_resultado": "2026-11-06T21:20:28.381663+00:00"
+      "fecha_resultado": "2026-11-08T21:57:09.955153+00:00"
+    },
+    {
+      "fuente": "enciclopedia",
+      "descripcion": "Pruebas históricas de patrones",
+      "fecha_resultado": "2026-11-08T08:55:41.756124+00:00"
     },
     {
       "fuente": "demo_cripto",
       "descripcion": "Observación de reglas cripto en cuentas ficticias",
-      "fecha_resultado": "2026-11-06T22:23:59.369940+00:00"
+      "fecha_resultado": "2026-11-08T22:47:00.241945+00:00"
     }
   ],
   "que_aprendio": {
-    "etiquetas_pronostico": 696510,
+    "etiquetas_pronostico": 696524,
     "aciertos": [
       {
         "predictor": "azar",
@@ -79,12 +84,12 @@
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 34366,
-        "acierto_pct": 50.16586160740267,
-        "brier": 0.4983413839259733,
+        "n": 34367,
+        "acierto_pct": 50.164401897168794,
+        "brier": 0.498355981028312,
         "ic95_descriptivo": [
-          0.4963723362064989,
-          0.5069445251665253
+          0.49635781712995386,
+          0.5069298533121921
         ]
       },
       {
@@ -127,12 +132,12 @@
         "predictor": "ensamble_hedge",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18534,
-        "acierto_pct": 46.02891982302795,
-        "brier": 0.27331540911005503,
+        "n": 18535,
+        "acierto_pct": 46.02643647154033,
+        "brier": 0.27331654354186136,
         "ic95_descriptivo": [
-          0.45312241404447834,
-          0.4674724409682
+          0.4530978072322662,
+          0.4674473901548239
         ]
       },
       {
@@ -175,12 +180,12 @@
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 32392,
-        "acierto_pct": 50.54951839960484,
-        "brier": 0.25062167338920177,
+        "n": 32393,
+        "acierto_pct": 50.54795789213719,
+        "brier": 0.2506221078556367,
         "ic95_descriptivo": [
-          0.5000500673007693,
-          0.5109389974191916
+          0.5000345462601767,
+          0.5109233120515421
         ]
       },
       {
@@ -271,12 +276,12 @@
         "predictor": "momentum_12m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 49.06524432950811,
-        "brier": 0.5093475567049189,
+        "n": 18562,
+        "acierto_pct": 49.062601012821894,
+        "brier": 0.5093739898717811,
         "ic95_descriptivo": [
-          0.48346312471670927,
-          0.4978456304304392
+          0.48343689770498305,
+          0.4978190018390484
         ]
       },
       {
@@ -319,12 +324,12 @@
         "predictor": "momentum_1m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 43.49981143257368,
-        "brier": 0.5650018856742632,
+        "n": 18562,
+        "acierto_pct": 43.49746794526452,
+        "brier": 0.5650253205473548,
         "ic95_descriptivo": [
-          0.42788008201542643,
-          0.44214304815768524
+          0.4278568875279619,
+          0.44211938114816424
         ]
       },
       {
@@ -367,12 +372,12 @@
         "predictor": "momentum_3m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 46.883249824901675,
-        "brier": 0.5311675017509833,
+        "n": 18562,
+        "acierto_pct": 46.88072405990734,
+        "brier": 0.5311927594009266,
         "ic95_descriptivo": [
-          0.4616604225789683,
-          0.47601747282521323
+          0.46163538583312946,
+          0.4759920040289062
         ]
       },
       {
@@ -3127,12 +3132,12 @@
         "predictor": "patron:separacion_alcista",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 227,
-        "acierto_pct": 41.409691629955944,
-        "brier": 0.5859030837004405,
+        "n": 228,
+        "acierto_pct": 41.228070175438596,
+        "brier": 0.5877192982456141,
         "ic95_descriptivo": [
-          0.35196811268372413,
-          0.47908486910118814
+          0.35035364069024566,
+          0.47711476877552755
         ]
       },
       {
@@ -3223,12 +3228,12 @@
         "predictor": "patron:soporte",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 2946,
-        "acierto_pct": 44.84046164290564,
-        "brier": 0.5515953835709436,
+        "n": 2947,
+        "acierto_pct": 44.82524601289447,
+        "brier": 0.5517475398710553,
         "ic95_descriptivo": [
-          0.4305242617797881,
-          0.4664193571589372
+          0.43037589184700425,
+          0.4662637651240782
         ]
       },
       {
@@ -3883,12 +3888,12 @@
         "predictor": "reversion_10pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18497,
-        "acierto_pct": 49.148510569281505,
-        "brier": 0.28650148004665915,
+        "n": 18498,
+        "acierto_pct": 49.145853605795224,
+        "brier": 0.2864998759952953,
         "ic95_descriptivo": [
-          0.48428297897384287,
-          0.49869076855556693
+          0.4842566159729869,
+          0.4986640031290598
         ]
       },
       {
@@ -3931,12 +3936,12 @@
         "predictor": "reversion_2pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18503,
-        "acierto_pct": 48.55428849375777,
-        "brier": 0.3466263567615178,
+        "n": 18504,
+        "acierto_pct": 48.551664504971896,
+        "brier": 0.3466215039394878,
         "ic95_descriptivo": [
-          0.47834512582095673,
-          0.4927466459916901
+          0.4783190966958327,
+          0.492720205909826
         ]
       },
       {
@@ -4027,12 +4032,12 @@
         "predictor": "reversion_5pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18499,
-        "acierto_pct": 48.81344937564192,
-        "brier": 0.3176210780005701,
+        "n": 18500,
+        "acierto_pct": 48.810810810810814,
+        "brier": 0.3176177919821873,
         "ic95_descriptivo": [
-          0.4809344358151792,
-          0.49533947878180895
+          0.4809082591694983,
+          0.4953128948204926
         ]
       },
       {
@@ -4123,12 +4128,12 @@
         "predictor": "tasa_base",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18487,
-        "acierto_pct": 49.61865094390653,
-        "brier": 0.251529544857951,
+        "n": 18488,
+        "acierto_pct": 49.61596711380355,
+        "brier": 0.25152983154082964,
         "ic95_descriptivo": [
-          0.4889806238956214,
-          0.5033939795404926
+          0.48895398895113784,
+          0.5033669489483086
         ]
       },
       {
@@ -4171,12 +4176,12 @@
         "predictor": "tendencia_sma200",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 46.00506438230699,
-        "brier": 0.5399493561769301,
+        "n": 18562,
+        "acierto_pct": 46.00258592824049,
+        "brier": 0.5399741407175951,
         "ic95_descriptivo": [
-          0.45288939064856043,
-          0.4672284303405504
+          0.45286483245702525,
+          0.46720342881694793
         ]
       },
       {
@@ -4193,26 +4198,26 @@
       }
     ],
     "patrones_contrastes": 11550,
-    "patrones_pasan": 162,
+    "patrones_pasan": 165,
     "robots_contrastes": 48,
     "robots_casos": 24,
-    "decisiones_demo_acumuladas": 8044,
+    "decisiones_demo_acumuladas": 8564,
     "cuentas_demo": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 951.5279544539859,
-        "hold_equity": 919.7243548061314,
-        "vs_hold": 31.803599647854526,
+        "net_liquidation": 930.0412469849728,
+        "hold_equity": 898.9558129347723,
+        "vs_hold": 31.085434050200433,
         "fees": 2.9427751490434377,
-        "quote_time": "2026-11-06T22:23:56.322510234Z"
+        "quote_time": "2026-11-08T22:46:58.015005652Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 896.4986547342796,
-        "vs_hold": 103.50134526572037,
+        "hold_equity": 849.3676657425453,
+        "vs_hold": 150.63233425745466,
         "fees": 0.0,
-        "quote_time": "2026-11-06T22:23:56.298480070Z"
+        "quote_time": "2026-11-08T22:46:58.411926592Z"
       }
     }
   },
@@ -4249,12 +4254,12 @@
         "predictor": "azar",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 34366,
-        "acierto_pct": 50.16586160740267,
-        "brier": 0.4983413839259733,
+        "n": 34367,
+        "acierto_pct": 50.164401897168794,
+        "brier": 0.498355981028312,
         "ic95_descriptivo": [
-          0.4963723362064989,
-          0.5069445251665253
+          0.49635781712995386,
+          0.5069298533121921
         ]
       },
       {
@@ -4297,12 +4302,12 @@
         "predictor": "ensamble_hedge",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18534,
-        "acierto_pct": 46.02891982302795,
-        "brier": 0.27331540911005503,
+        "n": 18535,
+        "acierto_pct": 46.02643647154033,
+        "brier": 0.27331654354186136,
         "ic95_descriptivo": [
-          0.45312241404447834,
-          0.4674724409682
+          0.4530978072322662,
+          0.4674473901548239
         ]
       },
       {
@@ -4345,12 +4350,12 @@
         "predictor": "logistica",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 32392,
-        "acierto_pct": 50.54951839960484,
-        "brier": 0.25062167338920177,
+        "n": 32393,
+        "acierto_pct": 50.54795789213719,
+        "brier": 0.2506221078556367,
         "ic95_descriptivo": [
-          0.5000500673007693,
-          0.5109389974191916
+          0.5000345462601767,
+          0.5109233120515421
         ]
       },
       {
@@ -4441,12 +4446,12 @@
         "predictor": "momentum_12m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 49.06524432950811,
-        "brier": 0.5093475567049189,
+        "n": 18562,
+        "acierto_pct": 49.062601012821894,
+        "brier": 0.5093739898717811,
         "ic95_descriptivo": [
-          0.48346312471670927,
-          0.4978456304304392
+          0.48343689770498305,
+          0.4978190018390484
         ]
       },
       {
@@ -4489,12 +4494,12 @@
         "predictor": "momentum_1m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 43.49981143257368,
-        "brier": 0.5650018856742632,
+        "n": 18562,
+        "acierto_pct": 43.49746794526452,
+        "brier": 0.5650253205473548,
         "ic95_descriptivo": [
-          0.42788008201542643,
-          0.44214304815768524
+          0.4278568875279619,
+          0.44211938114816424
         ]
       },
       {
@@ -4537,12 +4542,12 @@
         "predictor": "momentum_3m",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 46.883249824901675,
-        "brier": 0.5311675017509833,
+        "n": 18562,
+        "acierto_pct": 46.88072405990734,
+        "brier": 0.5311927594009266,
         "ic95_descriptivo": [
-          0.4616604225789683,
-          0.47601747282521323
+          0.46163538583312946,
+          0.4759920040289062
         ]
       },
       {
@@ -7297,12 +7302,12 @@
         "predictor": "patron:separacion_alcista",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 227,
-        "acierto_pct": 41.409691629955944,
-        "brier": 0.5859030837004405,
+        "n": 228,
+        "acierto_pct": 41.228070175438596,
+        "brier": 0.5877192982456141,
         "ic95_descriptivo": [
-          0.35196811268372413,
-          0.47908486910118814
+          0.35035364069024566,
+          0.47711476877552755
         ]
       },
       {
@@ -7393,12 +7398,12 @@
         "predictor": "patron:soporte",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 2946,
-        "acierto_pct": 44.84046164290564,
-        "brier": 0.5515953835709436,
+        "n": 2947,
+        "acierto_pct": 44.82524601289447,
+        "brier": 0.5517475398710553,
         "ic95_descriptivo": [
-          0.4305242617797881,
-          0.4664193571589372
+          0.43037589184700425,
+          0.4662637651240782
         ]
       },
       {
@@ -8053,12 +8058,12 @@
         "predictor": "reversion_10pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18497,
-        "acierto_pct": 49.148510569281505,
-        "brier": 0.28650148004665915,
+        "n": 18498,
+        "acierto_pct": 49.145853605795224,
+        "brier": 0.2864998759952953,
         "ic95_descriptivo": [
-          0.48428297897384287,
-          0.49869076855556693
+          0.4842566159729869,
+          0.4986640031290598
         ]
       },
       {
@@ -8101,12 +8106,12 @@
         "predictor": "reversion_2pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18503,
-        "acierto_pct": 48.55428849375777,
-        "brier": 0.3466263567615178,
+        "n": 18504,
+        "acierto_pct": 48.551664504971896,
+        "brier": 0.3466215039394878,
         "ic95_descriptivo": [
-          0.47834512582095673,
-          0.4927466459916901
+          0.4783190966958327,
+          0.492720205909826
         ]
       },
       {
@@ -8197,12 +8202,12 @@
         "predictor": "reversion_5pct",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18499,
-        "acierto_pct": 48.81344937564192,
-        "brier": 0.3176210780005701,
+        "n": 18500,
+        "acierto_pct": 48.810810810810814,
+        "brier": 0.3176177919821873,
         "ic95_descriptivo": [
-          0.4809344358151792,
-          0.49533947878180895
+          0.4809082591694983,
+          0.4953128948204926
         ]
       },
       {
@@ -8293,12 +8298,12 @@
         "predictor": "tasa_base",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18487,
-        "acierto_pct": 49.61865094390653,
-        "brier": 0.251529544857951,
+        "n": 18488,
+        "acierto_pct": 49.61596711380355,
+        "brier": 0.25152983154082964,
         "ic95_descriptivo": [
-          0.4889806238956214,
-          0.5033939795404926
+          0.48895398895113784,
+          0.5033669489483086
         ]
       },
       {
@@ -8341,12 +8346,12 @@
         "predictor": "tendencia_sma200",
         "tipo": "acción",
         "horizonte": 1,
-        "n": 18561,
-        "acierto_pct": 46.00506438230699,
-        "brier": 0.5399493561769301,
+        "n": 18562,
+        "acierto_pct": 46.00258592824049,
+        "brier": 0.5399741407175951,
         "ic95_descriptivo": [
-          0.45288939064856043,
-          0.4672284303405504
+          0.45286483245702525,
+          0.46720342881694793
         ]
       },
       {
@@ -8365,19 +8370,19 @@
     "demo_contra_mantener": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 951.5279544539859,
-        "hold_equity": 919.7243548061314,
-        "vs_hold": 31.803599647854526,
+        "net_liquidation": 930.0412469849728,
+        "hold_equity": 898.9558129347723,
+        "vs_hold": 31.085434050200433,
         "fees": 2.9427751490434377,
-        "quote_time": "2026-11-06T22:23:56.322510234Z"
+        "quote_time": "2026-11-08T22:46:58.015005652Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 896.4986547342796,
-        "vs_hold": 103.50134526572037,
+        "hold_equity": 849.3676657425453,
+        "vs_hold": 150.63233425745466,
         "fees": 0.0,
-        "quote_time": "2026-11-06T22:23:56.298480070Z"
+        "quote_time": "2026-11-08T22:46:58.411926592Z"
       }
     }
   },
