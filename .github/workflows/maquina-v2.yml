@@ -20,8 +20,8 @@ on:
         default: 'solo_compra,factores'
         type: string
       llamadas_por_dia:
-        description: Llamadas Vita por día
-        default: '20'
+        description: Llamadas Vita por día (0 elige 5 con noticias/debate y 20 en otras variantes)
+        default: '0'
         type: string
       universo_pit:
         description: Usar miembros del S&P 500 vigentes en cada fecha; excluye temas
@@ -37,7 +37,7 @@ env:
   DESDE: ${{ inputs.desde || '2024-01-02' }}
   HASTA: ${{ inputs.hasta || '2024-12-31' }}
   VARIANTES: ${{ inputs.variante || 'solo_compra,factores' }}
-  LLAMADAS: ${{ inputs.llamadas_por_dia || '20' }}
+  LLAMADAS: ${{ inputs.llamadas_por_dia != '0' && inputs.llamadas_por_dia || (contains(inputs.variante, 'noticias') || contains(inputs.variante, 'debate')) && '5' || '20' }}
   UNIVERSO_PIT: ${{ inputs.universo_pit || false }}
   INICIO_SERIES: ${{ inputs.universo_pit && '2009-10-01' || '2023-10-01' }}
   OLLAMA_URL: http://127.0.0.1:11434
@@ -57,9 +57,9 @@ jobs:
       - name: Descargar precios de los componentes hist?ricos S&P 500
         if: inputs.universo_pit
         run: node maquina_ilimitada/preparar_pit.mjs datos/universo_pit/sp500_miembros.json series_pit.json.gz
-      - name: Descargar companyfacts SEC para la variante fundamentals
+      - name: Cargar companyfacts SEC prefetched localmente
         if: contains(format(',{0},', inputs.variante), ',fundamentales,')
-        run: node --input-type=module -e "import fs from 'node:fs'; import {descargarFundamentales} from './maquina_v2/fundamentales.mjs'; import {leerJSON} from './maquina_ilimitada/lib.mjs'; await descargarFundamentales(leerJSON('maquina_ilimitada/universo.json').instrumentos, 'fundamentales.json.gz');"
+        run: cp datos/sec/fundamentales.json.gz fundamentales.json.gz
       - uses: actions/upload-artifact@v4
         with: {name: series, path: series.json.gz, retention-days: 30}
       - uses: actions/upload-artifact@v4
@@ -81,14 +81,30 @@ jobs:
       - uses: actions/download-artifact@v4
         if: inputs.universo_pit
         with: {name: series-pit}
+      - uses: actions/cache@v4
+        with:
+          path: .ollama/models
+          key: ollama-${{ runner.os }}-${{ inputs.modelo || 'qwen2.5:7b' }}
       - name: Arrancar Ollama y descargar modelo
         run: |
-          curl -fsSL https://ollama.com/install.sh | sh
+          install_ollama() {
+            for attempt in 1 2 3 4 5; do
+              if curl --retry 2 --retry-all-errors --retry-delay 2 -fsSL https://ollama.com/install.sh -o /tmp/ollama-install.sh && sudo sh /tmp/ollama-install.sh; then return 0; fi
+              sleep $((attempt * 5))
+            done
+            mkdir -p "$HOME/.local/bin" /tmp/ollama-release
+            curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tar.zst -o /tmp/ollama-release/ollama.tar.zst
+            tar --zstd -xf /tmp/ollama-release/ollama.tar.zst -C /tmp/ollama-release
+            sudo install -m 0755 /tmp/ollama-release/bin/ollama /usr/local/bin/ollama
+          }
+          command -v ollama >/dev/null || install_ollama
           sudo systemctl stop ollama 2>/dev/null || true
           mkdir -p "$OLLAMA_MODELS"
           nohup ollama serve > ollama.log 2>&1 &
-          for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/tags" >/dev/null && break; sleep 2; done
-          ollama pull "$MODELO"
+          ready=0; for i in $(seq 1 60); do if curl -sf "$OLLAMA_URL/api/tags" >/dev/null; then ready=1; break; fi; sleep 2; done
+          [[ "$ready" == 1 ]] || { cat ollama.log; exit 1; }
+          pull_model() { for attempt in 1 2 3 4 5; do ollama pull "$1" && return 0; sleep $((attempt * 10)); done; return 1; }
+          pull_model "$MODELO"
       - name: Prueba de memoria del modelo
         run: node maquina_v2/memoria.mjs --series=series.json.gz --universo=maquina_ilimitada/universo.json --modelo="$MODELO" --desde="$DESDE" --hasta="$HASTA" --universo_pit="$UNIVERSO_PIT" --membresia=datos/universo_pit/sp500_miembros.json --series_pit=series_pit.json.gz --salida=memoria.json
       - uses: actions/upload-artifact@v4
@@ -101,7 +117,7 @@ jobs:
       fail-fast: false
       max-parallel: 20
       matrix:
-        tramo: ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19']
+        tramo: ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -111,16 +127,32 @@ jobs:
       - uses: actions/download-artifact@v4
         if: contains(format(',{0},', inputs.variante), ',fundamentales,')
         with: {name: fundamentales}
+      - uses: actions/cache@v4
+        with:
+          path: .ollama/models
+          key: ollama-${{ runner.os }}-${{ inputs.modelo || 'qwen2.5:7b' }}
       - name: Instalar Ollama y modelos requeridos
         run: |
-          curl -fsSL https://ollama.com/install.sh | sh
+          install_ollama() {
+            for attempt in 1 2 3 4 5; do
+              if curl --retry 2 --retry-all-errors --retry-delay 2 -fsSL https://ollama.com/install.sh -o /tmp/ollama-install.sh && sudo sh /tmp/ollama-install.sh; then return 0; fi
+              sleep $((attempt * 5))
+            done
+            mkdir -p /tmp/ollama-release
+            curl --retry 5 --retry-all-errors --retry-delay 3 -fsSL https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tar.zst -o /tmp/ollama-release/ollama.tar.zst
+            tar --zstd -xf /tmp/ollama-release/ollama.tar.zst -C /tmp/ollama-release
+            sudo install -m 0755 /tmp/ollama-release/bin/ollama /usr/local/bin/ollama
+          }
+          command -v ollama >/dev/null || install_ollama
           sudo systemctl stop ollama 2>/dev/null || true
           mkdir -p "$OLLAMA_MODELS"
           nohup ollama serve > ollama.log 2>&1 &
-          for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/tags" >/dev/null && break; sleep 2; done
-          ollama pull "$MODELO"
-          if [[ ",$VARIANTES," == *,conjunto,* ]]; then ollama pull llama3.1:8b; ollama pull qwen2.5:7b; fi
-          if [[ ",$VARIANTES," == *,conjunto,* && "$MODELO" == *14b* ]]; then ollama pull qwen2.5:14b; fi
+          ready=0; for i in $(seq 1 60); do if curl -sf "$OLLAMA_URL/api/tags" >/dev/null; then ready=1; break; fi; sleep 2; done
+          [[ "$ready" == 1 ]] || { cat ollama.log; exit 1; }
+          pull_model() { for attempt in 1 2 3 4 5; do ollama pull "$1" && return 0; sleep $((attempt * 10)); done; return 1; }
+          pull_model "$MODELO"
+          if [[ ",$VARIANTES," == *,conjunto,* ]]; then pull_model llama3.1:8b; pull_model qwen2.5:7b; fi
+          if [[ ",$VARIANTES," == *,conjunto,* && "$MODELO" == *14b* ]]; then pull_model qwen2.5:14b; fi
       - uses: actions/download-artifact@v4
         if: inputs.universo_pit
         with: {name: series-pit}
@@ -130,7 +162,7 @@ jobs:
           mkdir -p "salida/tramo-${{ matrix.tramo }}"
           IFS=',' read -ra VS <<< "$VARIANTES"
           for V in "${VS[@]}"; do
-            node maquina_v2/experimento.mjs --tramo=${{ matrix.tramo }} --total=20 --desde="$DESDE" --hasta="$HASTA" \
+            node maquina_v2/experimento.mjs --tramo=${{ matrix.tramo }} --total=40 --desde="$DESDE" --hasta="$HASTA" \
               --series=series.json.gz --universo=maquina_ilimitada/universo.json --universo_pit="$UNIVERSO_PIT" --membresia=datos/universo_pit/sp500_miembros.json --series_pit=series_pit.json.gz --salida="salida/tramo-${{ matrix.tramo }}/$V" \
               --modelo="$MODELO" --variante="$V" --llamadas="$LLAMADAS" --fundamentales=fundamentales.json.gz
           done
@@ -170,8 +202,9 @@ jobs:
         with: {pattern: noticias-*, path: cache_artifacts, merge-multiple: false}
       - name: Generar resumen y tabla
         if: always() && needs.preparar.result == 'success'
-        run: node maquina_v2/resumir.mjs --artefactos=artefactos --modelo="$MODELO" --variantes="${VARIANTES//,/;}" --desde="$DESDE" --hasta="$HASTA" --llamadas="$LLAMADAS" --universo_pit="$UNIVERSO_PIT"
+        run: node maquina_v2/resumir.mjs --artefactos=artefactos --tramos=40 --modelo="$MODELO" --variantes="${VARIANTES//,/;}" --desde="$DESDE" --hasta="$HASTA" --llamadas="$LLAMADAS" --universo_pit="$UNIVERSO_PIT"
       - name: Conservar caché de titulares del período
+        continue-on-error: true
         run: |
           mkdir -p resultados/cache_gdelt
           find cache_artifacts -name '*.jsonl.gz' -type f -print0 2>/dev/null | while IFS= read -r -d '' F; do
