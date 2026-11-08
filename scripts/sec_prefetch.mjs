@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 
-const UA = 'ProyectoWallStreet recinosr@users.noreply.github.com';
+// La SEC exige un contacto real; en Actions del repo privado viene del secreto SEC_CONTACT.
+const UA = process.env.SEC_CONTACT || 'ProyectoWallStreet recinosr@users.noreply.github.com';
 const OUT = 'datos/sec/fundamentales.json.gz';
 const TAGS = {
   ingresos: ['RevenueFromContractWithCustomerExcludingAssessedTax', 'Revenues', 'SalesRevenueNet'],
