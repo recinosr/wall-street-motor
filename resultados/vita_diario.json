@@ -1,20 +1,20 @@
 {
   "version": 2,
-  "fecha": "2026-11-08",
+  "fecha": "2026-11-09",
   "fuentes": {
     "marcador": {
-      "sha256": "f58bf1cd98bc12f6620e4e7a93e6303b33afcb7c28782d8fb8af66b6009aba9f",
-      "fecha": "2026-11-08T21:57:09.955153+00:00",
+      "sha256": "f61807b79d48d8130e1a5bbada82ff67b77029a4addcccc48185d296cdd49f67",
+      "fecha": "2026-11-09T20:30:36.249418+00:00",
       "actualizado_hoy": true
     },
     "enciclopedia": {
       "sha256": "37f4a965b223d48e2a9492094b08a8237a8c1ae6e9cb4c960c9587dce8d326dc",
       "fecha": "2026-11-08T08:55:41.756124+00:00",
-      "actualizado_hoy": true
+      "actualizado_hoy": false
     },
     "demo_cripto": {
-      "sha256": "e9e18b0eea0496cf5221882157d956b757a166e23fbf0617297b063f4a8a90de",
-      "fecha": "2026-11-08T22:47:00.241945+00:00",
+      "sha256": "96bc502f7e6e594d25f57785cb4b6ff85c5bce5431faa3aec02b62cdbb30273e",
+      "fecha": "2026-11-09T23:29:28.003823+00:00",
       "actualizado_hoy": true
     },
     "robots": {
@@ -32,7 +32,7 @@
   "frases": [
     "En el estudio histórico desde 2000-01-01 hasta antes de 2025-04-01 medí 85 patrones: 0 pasan todos los criterios después de costos. No es una medición de esta semana.",
     "Probé 3 robots en 24 casos históricos: 0 superan a mantener y al azar con corrección por pruebas múltiples.",
-    "En la demo BTC llevo US$930.04 frente a US$898.96 si hubiera mantenido, al corte 2026-11-08T22:46:58.015005652Z; son cuentas ficticias con reglas, no decisiones del chat.",
+    "En la demo BTC llevo US$942.63 frente a US$911.13 si hubiera mantenido, al corte 2026-11-09T23:29:26.340236491Z; son cuentas ficticias con reglas, no decisiones del chat.",
     "Tengo 696524 etiquetas maduras de pronósticos y 17 archivos registrados; sin etiquetas no puedo medir aciertos.",
     "Después seguiré registrando pronósticos con las reglas publicadas y esperaré sus vencimientos; no tengo una fecha de primer marcador verificada."
   ],
@@ -40,17 +40,12 @@
     {
       "fuente": "marcador",
       "descripcion": "Registro y calificación de pronósticos publicados con recibo",
-      "fecha_resultado": "2026-11-08T21:57:09.955153+00:00"
-    },
-    {
-      "fuente": "enciclopedia",
-      "descripcion": "Pruebas históricas de patrones",
-      "fecha_resultado": "2026-11-08T08:55:41.756124+00:00"
+      "fecha_resultado": "2026-11-09T20:30:36.249418+00:00"
     },
     {
       "fuente": "demo_cripto",
       "descripcion": "Observación de reglas cripto en cuentas ficticias",
-      "fecha_resultado": "2026-11-08T22:47:00.241945+00:00"
+      "fecha_resultado": "2026-11-09T23:29:28.003823+00:00"
     }
   ],
   "que_aprendio": {
@@ -4201,23 +4196,23 @@
     "patrones_pasan": 165,
     "robots_contrastes": 48,
     "robots_casos": 24,
-    "decisiones_demo_acumuladas": 8564,
+    "decisiones_demo_acumuladas": 8654,
     "cuentas_demo": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 930.0412469849728,
-        "hold_equity": 898.9558129347723,
-        "vs_hold": 31.085434050200433,
+        "net_liquidation": 942.6317854480483,
+        "hold_equity": 911.1255288221619,
+        "vs_hold": 31.506256625886408,
         "fees": 2.9427751490434377,
-        "quote_time": "2026-11-08T22:46:58.015005652Z"
+        "quote_time": "2026-11-09T23:29:26.340236491Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 849.3676657425453,
-        "vs_hold": 150.63233425745466,
+        "hold_equity": 854.6013254333203,
+        "vs_hold": 145.3986745666797,
         "fees": 0.0,
-        "quote_time": "2026-11-08T22:46:58.411926592Z"
+        "quote_time": "2026-11-09T23:29:26.810649923Z"
       }
     }
   },
@@ -8370,19 +8365,19 @@
     "demo_contra_mantener": {
       "BTC": {
         "initial": 1000.0,
-        "net_liquidation": 930.0412469849728,
-        "hold_equity": 898.9558129347723,
-        "vs_hold": 31.085434050200433,
+        "net_liquidation": 942.6317854480483,
+        "hold_equity": 911.1255288221619,
+        "vs_hold": 31.506256625886408,
         "fees": 2.9427751490434377,
-        "quote_time": "2026-11-08T22:46:58.015005652Z"
+        "quote_time": "2026-11-09T23:29:26.340236491Z"
       },
       "ETH": {
         "initial": 1000.0,
         "net_liquidation": 1000.0,
-        "hold_equity": 849.3676657425453,
-        "vs_hold": 150.63233425745466,
+        "hold_equity": 854.6013254333203,
+        "vs_hold": 145.3986745666797,
         "fees": 0.0,
-        "quote_time": "2026-11-08T22:46:58.411926592Z"
+        "quote_time": "2026-11-09T23:29:26.810649923Z"
       }
     }
   },
