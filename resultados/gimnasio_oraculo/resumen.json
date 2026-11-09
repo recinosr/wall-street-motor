@@ -1,7 +1,7 @@
 {
- "actualizado": "2026-11-09T01:18Z",
- "repeticiones_entrenamiento": 28500,
- "sesiones": 57,
+ "actualizado": "2026-11-09T06:46Z",
+ "repeticiones_entrenamiento": 29000,
+ "sesiones": 58,
  "validacion": {
   "filas": 11235,
   "fechas": 349,
@@ -22,51 +22,51 @@
    "brier_referencia": 0.24224480231892653,
    "top5": [
     {
-     "metodo": "regimen_volatilidad",
-     "skill": 0.007252003388236061,
-     "brier": 0.2404880421917271,
-     "brier_ref": 0.24224480231892653,
-     "t": 2.958590674254143,
-     "n": 11235
-    },
-    {
      "metodo": "soporte_resist_20",
-     "skill": 0.00720246344683706,
-     "brier": 0.2405000429850382,
+     "skill": 0.0073001786302557825,
+     "brier": 0.24047637198974736,
      "brier_ref": 0.24224480231892653,
-     "t": 3.4975078253897225,
+     "t": 3.554801418933701,
      "n": 11235
     },
     {
-     "metodo": "reversion_caida",
-     "skill": 0.006853721092851095,
-     "brier": 0.24058452400763977,
+     "metodo": "regimen_volatilidad",
+     "skill": 0.007243537346621087,
+     "brier": 0.24049009304630456,
      "brier_ref": 0.24224480231892653,
-     "t": 3.924977604729524,
+     "t": 2.904734071240421,
      "n": 11235
     },
     {
      "metodo": "soporte_resist_60",
-     "skill": 0.006841022993991586,
-     "brier": 0.2405876000560878,
+     "skill": 0.006937534514127264,
+     "brier": 0.24056422064197105,
      "brier_ref": 0.24224480231892653,
-     "t": 3.7405189802129373,
+     "t": 3.8002694226810645,
+     "n": 11235
+    },
+    {
+     "metodo": "reversion_caida",
+     "skill": 0.006929145462605479,
+     "brier": 0.2405662528460986,
+     "brier_ref": 0.24224480231892653,
+     "t": 3.9407195797563936,
      "n": 11235
     },
     {
      "metodo": "momentum_1m",
-     "skill": 0.006794383100589552,
-     "brier": 0.24059889832784517,
+     "skill": 0.006877837725976277,
+     "brier": 0.24057868187861575,
      "brier_ref": 0.24224480231892653,
-     "t": 3.832318422928291,
+     "t": 3.8749707953109804,
      "n": 11235
     }
    ],
    "ensamble": {
-    "skill": 0.006899111136505098,
-    "brier": 0.24057352850548755,
+    "skill": 0.0069891465010629705,
+    "brier": 0.2405517179063985,
     "brier_ref": 0.24224480231892653,
-    "t": 4.301700777006199,
+    "t": 4.350289752345224,
     "n": 11235
    }
   },
@@ -74,51 +74,51 @@
    "brier_referencia": 0.2390602036954182,
    "top5": [
     {
-     "metodo": "regimen_volatilidad",
-     "skill": -0.0059727151329966865,
-     "brier": 0.2404880421917271,
-     "brier_ref": 0.2390602036954182,
-     "t": -1.1954355884836305,
-     "n": 11235
-    },
-    {
      "metodo": "soporte_resist_20",
-     "skill": -0.006022915012046326,
-     "brier": 0.2405000429850382,
+     "skill": -0.00592389813293015,
+     "brier": 0.24047637198974736,
      "brier_ref": 0.2390602036954182,
-     "t": -1.1432927442097258,
+     "t": -1.1261937240528335,
      "n": 11235
     },
     {
-     "metodo": "reversion_caida",
-     "skill": -0.006376303076206291,
-     "brier": 0.24058452400763977,
+     "metodo": "regimen_volatilidad",
+     "skill": -0.005981293953501998,
+     "brier": 0.24049009304630456,
      "brier_ref": 0.2390602036954182,
-     "t": -1.3265269793792933,
+     "t": -1.1970131259174577,
      "n": 11235
     },
     {
      "metodo": "soporte_resist_60",
-     "skill": -0.006389170330565186,
-     "brier": 0.2405876000560878,
+     "skill": -0.006291373149121426,
+     "brier": 0.24056422064197105,
      "brier_ref": 0.2390602036954182,
-     "t": -1.2788861630297057,
+     "t": -1.2599592805760504,
+     "n": 11235
+    },
+    {
+     "metodo": "reversion_caida",
+     "skill": -0.006299873953923507,
+     "brier": 0.2405662528460986,
+     "brier_ref": 0.2390602036954182,
+     "t": -1.3142612565799219,
      "n": 11235
     },
     {
      "metodo": "momentum_1m",
-     "skill": -0.006436431529136533,
-     "brier": 0.24059889832784517,
+     "skill": -0.006351865177577798,
+     "brier": 0.24057868187861575,
      "brier_ref": 0.2390602036954182,
-     "t": -1.309692713044922,
+     "t": -1.293018493491228,
      "n": 11235
     }
    ],
    "ensamble": {
-    "skill": -0.006330308377037408,
-    "brier": 0.24057352850548755,
+    "skill": -0.006239073622143376,
+    "brier": 0.2405517179063985,
     "brier_ref": 0.2390602036954182,
-    "t": -1.2909532576235947,
+    "t": -1.2745560270014586,
     "n": 11235
    }
   },
@@ -126,101 +126,101 @@
    "brier_referencia": 0.23649849275007898,
    "top5": [
     {
-     "metodo": "regimen_volatilidad",
-     "skill": -0.01686923834167553,
-     "brier": 0.2404880421917271,
-     "brier_ref": 0.23649849275007898,
-     "t": -2.011033083253949,
-     "n": 11235
-    },
-    {
      "metodo": "soporte_resist_20",
-     "skill": -0.01691998197716993,
-     "brier": 0.2405000429850382,
+     "skill": -0.016819892564271077,
+     "brier": 0.24047637198974736,
      "brier_ref": 0.23649849275007898,
-     "t": -1.9393157713494538,
+     "t": -1.929093145821046,
      "n": 11235
     },
     {
-     "metodo": "reversion_caida",
-     "skill": -0.01727719787998283,
-     "brier": 0.24058452400763977,
+     "metodo": "regimen_volatilidad",
+     "skill": -0.016877910086487313,
+     "brier": 0.24049009304630456,
      "brier_ref": 0.23649849275007898,
-     "t": -2.050796459329051,
+     "t": -2.0136466465386076,
      "n": 11235
     },
     {
      "metodo": "soporte_resist_60",
-     "skill": -0.017290204510225005,
-     "brier": 0.2405876000560878,
+     "skill": -0.017191348006553975,
+     "brier": 0.24056422064197105,
      "brier_ref": 0.23649849275007898,
-     "t": -2.005282060161851,
+     "t": -1.9939579111993129,
+     "n": 11235
+    },
+    {
+     "metodo": "reversion_caida",
+     "skill": -0.01719994089060961,
+     "brier": 0.2405662528460986,
+     "brier_ref": 0.23649849275007898,
+     "t": -2.044375733950366,
      "n": 11235
     },
     {
      "metodo": "momentum_1m",
-     "skill": -0.01733797763396039,
-     "brier": 0.24059889832784517,
+     "skill": -0.017252495274244994,
+     "brier": 0.24057868187861575,
      "brier_ref": 0.23649849275007898,
-     "t": -2.0733040980351016,
+     "t": -2.0629103112071276,
      "n": 11235
     }
    ],
    "ensamble": {
-    "skill": -0.017230704974153355,
-    "brier": 0.24057352850548755,
+    "skill": -0.017138481980106368,
+    "brier": 0.2405517179063985,
     "brier_ref": 0.23649849275007898,
-    "t": -2.08220092194668,
+    "t": -2.072483347022565,
     "n": 11235
    }
   }
  },
  "pesos_hedge": {
   "1": {
-   "calendario": 0.08803474631485068,
-   "eventos": 0.08855734745715914,
-   "logistica": 0.0642299632345367,
-   "momentum_12m": 0.07549513429974325,
-   "momentum_1m": 0.07477884598773865,
-   "momentum_3m": 0.07415895160281494,
-   "regimen_volatilidad": 0.07364069403120896,
-   "reversion_caida": 0.07533536986508227,
-   "rsi": 0.0778683743799698,
-   "soporte_resist_20": 0.0837802564491568,
-   "soporte_resist_60": 0.07433143792486338,
-   "tendencia_sma200": 0.075018245583818,
-   "volumen_anomalo": 0.07477063286905744
+   "calendario": 0.08709192636249166,
+   "eventos": 0.08884886311907418,
+   "logistica": 0.06457092439652296,
+   "momentum_12m": 0.07528382889860245,
+   "momentum_1m": 0.07484747813915452,
+   "momentum_3m": 0.07387899831746755,
+   "regimen_volatilidad": 0.07403439206884527,
+   "reversion_caida": 0.07570623492769368,
+   "rsi": 0.07826373418769762,
+   "soporte_resist_20": 0.08366345535786494,
+   "soporte_resist_60": 0.07445288173376388,
+   "tendencia_sma200": 0.07483269706151964,
+   "volumen_anomalo": 0.07452458542930172
   },
   "5": {
-   "calendario": 0.07987194558243135,
-   "eventos": 0.07953873901247224,
-   "logistica": 0.040678350599328006,
-   "momentum_12m": 0.08601225893214104,
-   "momentum_1m": 0.0776987823430883,
-   "momentum_3m": 0.07782241917323526,
-   "regimen_volatilidad": 0.08880273898395401,
-   "reversion_caida": 0.07685148008950446,
-   "rsi": 0.0780404261994276,
-   "soporte_resist_20": 0.08097730024228944,
-   "soporte_resist_60": 0.07425495589118779,
-   "tendencia_sma200": 0.0805007046285309,
-   "volumen_anomalo": 0.07894989832240959
+   "calendario": 0.08005084568407839,
+   "eventos": 0.07920455517279276,
+   "logistica": 0.040897919638931975,
+   "momentum_12m": 0.08625436162101628,
+   "momentum_1m": 0.07750735146788656,
+   "momentum_3m": 0.077625964123997,
+   "regimen_volatilidad": 0.08931929047439166,
+   "reversion_caida": 0.0770008486622043,
+   "rsi": 0.07789666753655464,
+   "soporte_resist_20": 0.08102297039123557,
+   "soporte_resist_60": 0.07410121395559063,
+   "tendencia_sma200": 0.08016294495960932,
+   "volumen_anomalo": 0.07895506631171087
   },
   "21": {
-   "calendario": 0.06551628720751818,
-   "eventos": 0.0691217188651835,
-   "logistica": 0.07490776482115519,
-   "momentum_12m": 0.09597396478563497,
-   "momentum_1m": 0.07268697390385345,
-   "momentum_3m": 0.07314398942277159,
-   "regimen_volatilidad": 0.07775692555299732,
-   "reversion_caida": 0.08096856110154665,
-   "rsi": 0.07318302871933074,
-   "soporte_resist_20": 0.08230697316214113,
-   "soporte_resist_60": 0.07171251532681255,
-   "tendencia_sma200": 0.08982229267495945,
-   "volumen_anomalo": 0.07289900445609528
+   "calendario": 0.06445492690526289,
+   "eventos": 0.06902370188369768,
+   "logistica": 0.07611111279824104,
+   "momentum_12m": 0.09573213200520168,
+   "momentum_1m": 0.07251696750661954,
+   "momentum_3m": 0.072807526204344,
+   "regimen_volatilidad": 0.078355430687735,
+   "reversion_caida": 0.08228947079741443,
+   "rsi": 0.0726497331130414,
+   "soporte_resist_20": 0.08215302245450921,
+   "soporte_resist_60": 0.07140200488308038,
+   "tendencia_sma200": 0.08972228675056876,
+   "volumen_anomalo": 0.07278168401028404
   }
  },
- "frase": "Sin ventaja demostrada: ningún método supera la tasa base de la propia ventana 2015-2019 (mejor regimen_volatilidad, skill -0.0060, t=-1.2; ensamble skill -0.0063, t=-1.3). La ganancia contra la tasa base de entrenamiento 1990-2014 (ensamble skill 0.0069, t=4.3) es compatible con el sesgo alcista de 2015-2019 (frecuencia de subida mayor que la histórica) y no demuestra capacidad de predicción."
+ "frase": "Sin ventaja demostrada: ningún método supera la tasa base de la propia ventana 2015-2019 (mejor soporte_resist_20, skill -0.0059, t=-1.1; ensamble skill -0.0062, t=-1.3). La ganancia contra la tasa base de entrenamiento 1990-2014 (ensamble skill 0.0070, t=4.4) es compatible con el sesgo alcista de 2015-2019 (frecuencia de subida mayor que la histórica) y no demuestra capacidad de predicción."
 }
