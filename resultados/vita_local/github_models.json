@@ -1,7 +1,7 @@
 {
- "fecha": "2026-11-10T02:31:55.622Z",
+ "fecha": "2026-11-10T11:42:36.815Z",
  "repo": "recinosr/wall-street-motor",
- "runner": "GitHub Actions 1000023326",
+ "runner": "GitHub Actions 1000023458",
  "hay_token": true,
  "token_tipo": "GITHUB_TOKEN de Actions (ghs_)",
  "proxy_env": {
@@ -14,7 +14,7 @@
  },
  "dns": {
   "models.github.ai": [
-   "140.82.113.22"
+   "140.82.112.21"
   ],
   "models.inference.ai.azure.com": "error ENOTFOUND",
   "api.github.com": [
@@ -24,7 +24,7 @@
  "tls": [
   {
    "host": "models.github.ai",
-   "ip": "140.82.113.22",
+   "ip": "140.82.112.21",
    "sujeto": "*.github.ai",
    "emisor": "Sectigo Limited",
    "autorizado": true,
@@ -47,7 +47,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 205,
+   "ms": 102,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -63,7 +63,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 165,
+   "ms": 61,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -79,7 +79,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 175,
+   "ms": 62,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -95,7 +95,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 164,
+   "ms": 67,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -111,7 +111,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/orgs/recinosr/inference/chat/completions",
-   "ms": 163,
+   "ms": 66,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -127,7 +127,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/catalog/models",
-   "ms": 164,
+   "ms": 76,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -142,7 +142,7 @@
    "metodo": "POST",
    "error": "fetch failed",
    "causa": "ENOTFOUND",
-   "ms": 8
+   "ms": 11
   },
   {
    "nombre": "api.github.com /rate_limit (mismo token)",
@@ -151,7 +151,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://api.github.com/rate_limit",
-   "ms": 351,
+   "ms": 267,
    "tipo": "application/json; charset=utf-8",
    "cabeceras": {
     "access-control-allow-origin": "*",
@@ -160,7 +160,7 @@
     "content-encoding": "gzip",
     "content-security-policy": "default-src 'none'",
     "content-type": "application/json; charset=utf-8",
-    "date": "Tue, 10 Nov 2026 02:31:57 GMT",
+    "date": "Tue, 10 Nov 2026 11:42:37 GMT",
     "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
     "server": "github.com",
     "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
@@ -172,15 +172,15 @@
     "x-github-api-version-selected": "2022-11-28",
     "x-github-edge-region": "iad",
     "x-github-media-type": "github.v3; format=json",
-    "x-github-request-id": "64C1:63A29:4CCFA0D:F5C207A:6AF2821D",
+    "x-github-request-id": "1029:1ED816:8970006:1B5E0CCE:6AF3032D",
     "x-ratelimit-limit": "5000",
-    "x-ratelimit-remaining": "4975",
-    "x-ratelimit-reset": "1794280626",
+    "x-ratelimit-remaining": "4991",
+    "x-ratelimit-reset": "1794313435",
     "x-ratelimit-resource": "core",
-    "x-ratelimit-used": "25",
+    "x-ratelimit-used": "9",
     "x-xss-protection": "0"
    },
-   "cuerpo": "{\"resources\":{\"core\":{\"limit\":5000,\"used\":25,\"remaining\":4975,\"reset\":1794280626},\"search\":{\"limit\":30,\"used\":0,\"remaining\":30,\"reset\":1794277977},\"graphql\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794281517},\"integration_manifest\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794281517},",
+   "cuerpo": "{\"resources\":{\"core\":{\"limit\":5000,\"used\":9,\"remaining\":4991,\"reset\":1794313435},\"search\":{\"limit\":30,\"used\":0,\"remaining\":30,\"reset\":1794311017},\"graphql\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794314557},\"integration_manifest\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794314557},\"",
    "es_json": true
   }
  ],
