@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "actualizado_utc": "2026-11-10T22:32:57.064Z",
+  "actualizado_utc": "2026-11-10T22:44:03.786Z",
   "modelo": "qwen2.5:7b",
   "variante": "solo_compra",
   "periodo": {
@@ -12,27 +12,27 @@
   "tramos_esperados": 40,
   "parcial": false,
   "universo_pit": true,
-  "n": 1357,
-  "n_efectivo": 275,
-  "acierto": 0.559322033898305,
-  "Brier": 0.27853529845247005,
-  "exceso_promedio": 0.004405781509339071,
+  "n": 1362,
+  "n_efectivo": 276,
+  "acierto": 0.5513950073421439,
+  "Brier": 0.2782534508076372,
+  "exceso_promedio": 0.003888386612693583,
   "comparaciones": {
     "azar_clase": {
-      "n": 1357,
-      "dif_acierto": 0.0058953574060427415,
+      "n": 1362,
+      "dif_acierto": -0.0007342143906020558,
       "ic95_bootstrap_dias": [
-        -0.027266028002947678,
-        0.03920118343195266
+        -0.03679175864606328,
+        0.032448377581120944
       ],
       "discordantes": {
-        "vita_gana": 261,
-        "vita_pierde": 253
+        "vita_gana": 256,
+        "vita_pierde": 257
       },
-      "mcnemar_p": 0.7575411186216554
+      "mcnemar_p": 0.9999999999999724
     },
     "siempre_sube": {
-      "n": 1357,
+      "n": 1362,
       "dif_acierto": 0,
       "ic95_bootstrap_dias": [
         0,
@@ -45,17 +45,17 @@
       "mcnemar_p": 1
     },
     "momentum": {
-      "n": 1357,
-      "dif_acierto": 0.023581429624170966,
+      "n": 1362,
+      "dif_acierto": 0.021292217327459617,
       "ic95_bootstrap_dias": [
-        -0.011029411764705883,
-        0.061254612546125464
+        -0.016874541452677916,
+        0.056742815033161385
       ],
       "discordantes": {
-        "vita_gana": 215,
-        "vita_pierde": 183
+        "vita_gana": 217,
+        "vita_pierde": 188
       },
-      "mcnemar_p": 0.1201009747513337
+      "mcnemar_p": 0.16404394987962329
     },
     "solo_factores": {
       "n": 0,
@@ -80,152 +80,152 @@
   },
   "por_clase": {
     "cripto": {
-      "n": 117,
-      "n_efectivo": 86,
-      "acierto": 0.3418803418803419,
-      "Brier": 0.39376068376068374,
-      "exceso_promedio": -0.048911281240107
+      "n": 108,
+      "n_efectivo": 79,
+      "acierto": 0.3425925925925926,
+      "Brier": 0.37847222222222215,
+      "exceso_promedio": -0.04514493688315951
     },
     "accion": {
-      "n": 752,
+      "n": 750,
       "n_efectivo": 275,
-      "acierto": 0.5492021276595744,
-      "Brier": 0.27969853723404314,
-      "exceso_promedio": 0.007106111525341385
+      "acierto": 0.5333333333333333,
+      "Brier": 0.2864594666666674,
+      "exceso_promedio": 0.0035619806892379408
     },
     "ETF": {
-      "n": 488,
-      "n_efectivo": 267,
-      "acierto": 0.6270491803278688,
-      "Brier": 0.2491170081967216,
-      "exceso_promedio": 0.013027601529116618
+      "n": 504,
+      "n_efectivo": 270,
+      "acierto": 0.623015873015873,
+      "Brier": 0.24456666666666696,
+      "exceso_promedio": 0.014881250462185344
     }
   },
   "por_horizonte": {
     "21": {
-      "n": 1357,
-      "n_efectivo": 275,
-      "acierto": 0.559322033898305,
-      "Brier": 0.27853529845247005,
-      "exceso_promedio": 0.004405781509339071
+      "n": 1362,
+      "n_efectivo": 276,
+      "acierto": 0.5513950073421439,
+      "Brier": 0.2782534508076372,
+      "exceso_promedio": 0.003888386612693583
     }
   },
   "por_confianza": {
     "0.50-0.55": {
-      "n": 8,
-      "n_efectivo": 8,
-      "acierto": 0.75,
+      "n": 5,
+      "n_efectivo": 5,
+      "acierto": 0.2,
       "Brier": 0.25,
-      "exceso_promedio": 0.026487575918245312
+      "exceso_promedio": -0.04278563102049056
     },
     "0.55-0.70": {
       "n": 455,
-      "n_efectivo": 265,
-      "acierto": 0.5846153846153846,
-      "Brier": 0.24438967032967013,
-      "exceso_promedio": 0.008295623145749685
+      "n_efectivo": 263,
+      "acierto": 0.5582417582417583,
+      "Brier": 0.2499252747252746,
+      "exceso_promedio": 0.0048492515496150876
     },
     ">=0.70": {
-      "n": 894,
-      "n_efectivo": 275,
-      "acierto": 0.5447427293064877,
-      "Brier": 0.29616901565995485,
-      "exceso_promedio": 0.002228452314889312
+      "n": 902,
+      "n_efectivo": 276,
+      "acierto": 0.549889135254989,
+      "Brier": 0.2926997782705099,
+      "exceso_promedio": 0.0036624182555612386
     }
   },
   "calibracion": [
     {
       "desde": 0.5,
       "hasta": 0.55,
-      "n": 8,
-      "n_efectivo": 8,
-      "acierto": 0.75,
+      "n": 5,
+      "n_efectivo": 5,
+      "acierto": 0.2,
       "Brier": 0.25,
-      "exceso_promedio": 0.026487575918245312,
+      "exceso_promedio": -0.04278563102049056,
       "probabilidad_media": 0.5
     },
     {
       "desde": 0.55,
       "hasta": 0.6,
       "n": 13,
-      "n_efectivo": 13,
+      "n_efectivo": 12,
       "acierto": 0.5384615384615384,
-      "Brier": 0.24865384615384623,
-      "exceso_promedio": 0.025699171142142877,
-      "probabilidad_media": 0.5499999999999999
+      "Brier": 0.2466461538461539,
+      "exceso_promedio": -0.0012087151214765096,
+      "probabilidad_media": 0.5523076923076922
     },
     {
       "desde": 0.6,
       "hasta": 0.65,
-      "n": 168,
-      "n_efectivo": 168,
-      "acierto": 0.5595238095238095,
-      "Brier": 0.24809523809523754,
-      "exceso_promedio": 0.005308694839789083,
-      "probabilidad_media": 0.5999999999999985
+      "n": 166,
+      "n_efectivo": 166,
+      "acierto": 0.4939759036144578,
+      "Brier": 0.2612048192771078,
+      "exceso_promedio": 0.004806869871342884,
+      "probabilidad_media": 0.5999999999999986
     },
     {
       "desde": 0.65,
       "hasta": 0.7,
-      "n": 274,
-      "n_efectivo": 264,
-      "acierto": 0.6021897810218978,
-      "Brier": 0.2419153284671536,
-      "exceso_promedio": 0.00930130866198425,
-      "probabilidad_media": 0.6502189781021931
+      "n": 276,
+      "n_efectivo": 262,
+      "acierto": 0.5978260869565217,
+      "Brier": 0.24329565217391347,
+      "exceso_promedio": 0.0051600809891707905,
+      "probabilidad_media": 0.650434782608699
     },
     {
       "desde": 0.7,
       "hasta": 0.75,
-      "n": 279,
+      "n": 281,
       "n_efectivo": 273,
-      "acierto": 0.5627240143369175,
-      "Brier": 0.2648688172043021,
-      "exceso_promedio": 0.000917108519036343,
-      "probabilidad_media": 0.700071684587811
+      "acierto": 0.5551601423487544,
+      "Brier": 0.267853380782919,
+      "exceso_promedio": 0.0014591765401662327,
+      "probabilidad_media": 0.7001423487544457
     },
     {
       "desde": 0.75,
       "hasta": 0.8,
-      "n": 276,
-      "n_efectivo": 265,
-      "acierto": 0.5108695652173914,
-      "Brier": 0.3071804347826087,
-      "exceso_promedio": -0.005027356745766762,
-      "probabilidad_media": 0.7502173913043478
+      "n": 284,
+      "n_efectivo": 272,
+      "acierto": 0.528169014084507,
+      "Brier": 0.29857711267605636,
+      "exceso_promedio": 0.0019053207221938634,
+      "probabilidad_media": 0.7501056338028169
     },
     {
       "desde": 0.8,
       "hasta": 0.85,
-      "n": 339,
-      "n_efectivo": 246,
-      "acierto": 0.5575221238938053,
-      "Brier": 0.31296430678466125,
-      "exceso_promedio": 0.009215084231656425,
-      "probabilidad_media": 0.813185840707968
+      "n": 337,
+      "n_efectivo": 244,
+      "acierto": 0.5637982195845698,
+      "Brier": 0.30846439169139495,
+      "exceso_promedio": 0.006980301405419784,
+      "probabilidad_media": 0.8137982195845731
     }
   ],
   "bases": {
     "azar_clase": {
-      "n": 27140,
-      "n_efectivo": 275,
-      "acierto": 0.5567059690493736,
+      "n": 27240,
+      "n_efectivo": 276,
+      "acierto": 0.550330396475771,
       "Brier": 0.25,
-      "exceso_promedio": -0.003571945631347238
+      "exceso_promedio": -0.0037057113382185924
     },
     "siempre_sube": {
-      "n": 1357,
-      "n_efectivo": 275,
-      "acierto": 0.559322033898305,
+      "n": 1362,
+      "n_efectivo": 276,
+      "acierto": 0.5513950073421439,
       "Brier": 0.25,
-      "exceso_promedio": 0.004405781509339071
+      "exceso_promedio": 0.003888386612693583
     },
     "momentum": {
-      "n": 1357,
-      "n_efectivo": 275,
-      "acierto": 0.5357406042741342,
+      "n": 1362,
+      "n_efectivo": 276,
+      "acierto": 0.5301027900146843,
       "Brier": 0.25,
-      "exceso_promedio": 0.003315664151283056
+      "exceso_promedio": 0.004494453656821462
     },
     "solo_factores": {
       "n": 0,

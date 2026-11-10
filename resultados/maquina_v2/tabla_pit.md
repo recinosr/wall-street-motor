@@ -4,6 +4,6 @@ Modelo: qwen2.5:7b; periodo 2025-01-02 a 2026-10-16. Los resultados permanecen v
 
 | Variante | n | Días efectivos | Acierto | Brier | Exceso medio | Veredicto |
 |---|---:|---:|---:|---:|---:|---|
-| solo_compra | 1357 | 275 | 55.9 % | 0.2785 | 0.44 % | Resultado exploratorio; interpretar junto con intervalos por dÃ­a. |
-| factores | 338 | 73 | 57.7 % | 0.2581 | 2.08 % | Resultado exploratorio; interpretar junto con intervalos por dÃ­a. |
-| noticias | 209 | 43 | 48.8 % | 0.2976 | -0.35 % | Resultado exploratorio; interpretar junto con intervalos por dÃ­a. |
+| solo_compra | 1362 | 276 | 55.1 % | 0.2783 | 0.39 % | Resultado exploratorio; interpretar junto con intervalos por dÃ­a. |
+| factores | 357 | 78 | 51.8 % | 0.2872 | 1.44 % | Resultado exploratorio; interpretar junto con intervalos por dÃ­a. |
+| debate | 0 | 0 | n/d | n/d | n/d | Muestra insuficiente para concluir. |
