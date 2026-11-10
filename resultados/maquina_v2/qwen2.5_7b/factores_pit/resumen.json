@@ -1,0 +1,249 @@
+{
+  "version": 2,
+  "actualizado_utc": "2026-11-10T22:14:12.105Z",
+  "modelo": "qwen2.5:7b",
+  "variante": "factores",
+  "periodo": {
+    "desde": "2025-01-02",
+    "hasta": "2026-10-16"
+  },
+  "llamadas_por_dia": 10,
+  "tramos_disponibles": 40,
+  "tramos_esperados": 40,
+  "parcial": false,
+  "universo_pit": true,
+  "n": 606,
+  "n_efectivo": 117,
+  "acierto": 0.5396039603960396,
+  "Brier": 0.2684361687846369,
+  "exceso_promedio": 0.003066450395950131,
+  "comparaciones": {
+    "azar_clase": {
+      "n": 606,
+      "dif_acierto": 0.0297029702970297,
+      "ic95_bootstrap_dias": [
+        -0.041884816753926704,
+        0.10517529215358931
+      ],
+      "discordantes": {
+        "vita_gana": 172,
+        "vita_pierde": 154
+      },
+      "mcnemar_p": 0.34644120907130216
+    },
+    "siempre_sube": {
+      "n": 606,
+      "dif_acierto": -0.024752475247524754,
+      "ic95_bootstrap_dias": [
+        -0.07364975450081833,
+        0.023140495867768594
+      ],
+      "discordantes": {
+        "vita_gana": 77,
+        "vita_pierde": 92
+      },
+      "mcnemar_p": 0.2814784417058098
+    },
+    "momentum": {
+      "n": 606,
+      "dif_acierto": 0.01485148514851485,
+      "ic95_bootstrap_dias": [
+        -0.037337662337662336,
+        0.07325383304940375
+      ],
+      "discordantes": {
+        "vita_gana": 131,
+        "vita_pierde": 122
+      },
+      "mcnemar_p": 0.6150831119049895
+    },
+    "solo_factores": {
+      "n": 235,
+      "dif_acierto": -0.11063829787234042,
+      "ic95_bootstrap_dias": [
+        -0.1853448275862069,
+        -0.035555555555555556
+      ],
+      "discordantes": {
+        "vita_gana": 26,
+        "vita_pierde": 52
+      },
+      "mcnemar_p": 0.004334880883507454
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "dif_acierto": null,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    }
+  },
+  "por_clase": {
+    "accion": {
+      "n": 559,
+      "n_efectivo": 117,
+      "acierto": 0.5491949910554562,
+      "Brier": 0.26635951231289506,
+      "exceso_promedio": 0.004903617655404147
+    },
+    "cripto": {
+      "n": 18,
+      "n_efectivo": 15,
+      "acierto": 0.5555555555555556,
+      "Brier": 0.2722139389212008,
+      "exceso_promedio": -0.009365854634484373
+    },
+    "ETF": {
+      "n": 29,
+      "n_efectivo": 26,
+      "acierto": 0.3448275862068966,
+      "Brier": 0.3061206896551725,
+      "exceso_promedio": -0.024629929172566144
+    }
+  },
+  "por_horizonte": {
+    "21": {
+      "n": 606,
+      "n_efectivo": 117,
+      "acierto": 0.5396039603960396,
+      "Brier": 0.2684361687846369,
+      "exceso_promedio": 0.003066450395950131
+    }
+  },
+  "por_confianza": {
+    "0.50-0.55": {
+      "n": 6,
+      "n_efectivo": 6,
+      "acierto": 0.5,
+      "Brier": 0.25,
+      "exceso_promedio": -0.005110787934376841
+    },
+    "0.55-0.70": {
+      "n": 270,
+      "n_efectivo": 117,
+      "acierto": 0.4703703703703704,
+      "Brier": 0.27072028299032685,
+      "exceso_promedio": -0.024082143120105152
+    },
+    ">=0.70": {
+      "n": 330,
+      "n_efectivo": 117,
+      "acierto": 0.5969696969696969,
+      "Brier": 0.26690255113970146,
+      "exceso_promedio": 0.02542761306054678
+    }
+  },
+  "calibracion": [
+    {
+      "desde": 0.5,
+      "hasta": 0.55,
+      "n": 6,
+      "n_efectivo": 6,
+      "acierto": 0.5,
+      "Brier": 0.25,
+      "exceso_promedio": -0.005110787934376841,
+      "probabilidad_media": 0.5
+    },
+    {
+      "desde": 0.55,
+      "hasta": 0.6,
+      "n": 57,
+      "n_efectivo": 48,
+      "acierto": 0.5263157894736842,
+      "Brier": 0.24876842105263175,
+      "exceso_promedio": -0.03677161872349087,
+      "probabilidad_media": 0.5536842105263161
+    },
+    {
+      "desde": 0.6,
+      "hasta": 0.65,
+      "n": 109,
+      "n_efectivo": 100,
+      "acierto": 0.43119266055045874,
+      "Brier": 0.27363051663449744,
+      "exceso_promedio": -0.014839313105812997,
+      "probabilidad_media": 0.6013679486939336
+    },
+    {
+      "desde": 0.65,
+      "hasta": 0.7,
+      "n": 104,
+      "n_efectivo": 92,
+      "acierto": 0.4807692307692308,
+      "Brier": 0.2797014432137313,
+      "exceso_promedio": -0.026814531217844176,
+      "probabilidad_media": 0.6517979412885911
+    },
+    {
+      "desde": 0.7,
+      "hasta": 0.75,
+      "n": 115,
+      "n_efectivo": 102,
+      "acierto": 0.591304347826087,
+      "Brier": 0.2540583527205691,
+      "exceso_promedio": 0.02373319523499779,
+      "probabilidad_media": 0.7013030948362733
+    },
+    {
+      "desde": 0.75,
+      "hasta": 0.8,
+      "n": 108,
+      "n_efectivo": 98,
+      "acierto": 0.5925925925925926,
+      "Brier": 0.26614473438181335,
+      "exceso_promedio": 0.026790553225687373,
+      "probabilidad_media": 0.7501211066785395
+    },
+    {
+      "desde": 0.8,
+      "hasta": 0.85,
+      "n": 107,
+      "n_efectivo": 85,
+      "acierto": 0.6074766355140186,
+      "Brier": 0.28147196261682217,
+      "exceso_promedio": 0.025873038407303303,
+      "probabilidad_media": 0.807009345794391
+    }
+  ],
+  "bases": {
+    "azar_clase": {
+      "n": 12120,
+      "n_efectivo": 117,
+      "acierto": 0.513943894389439,
+      "Brier": 0.25,
+      "exceso_promedio": -0.004458344162637534
+    },
+    "siempre_sube": {
+      "n": 606,
+      "n_efectivo": 117,
+      "acierto": 0.5643564356435643,
+      "Brier": 0.25,
+      "exceso_promedio": 0.021072573484854275
+    },
+    "momentum": {
+      "n": 606,
+      "n_efectivo": 117,
+      "acierto": 0.5247524752475248,
+      "Brier": 0.25,
+      "exceso_promedio": 0.005576868233290625
+    },
+    "solo_factores": {
+      "n": 1815,
+      "n_efectivo": 363,
+      "acierto": 0.5482093663911846,
+      "Brier": 0.25,
+      "exceso_promedio": 0.019806554525627622
+    },
+    "solo_fundamentales": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    }
+  },
+  "veredicto": "Resultado exploratorio; interpretar junto con intervalos por dÃ­a."
+}
