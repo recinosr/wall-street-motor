@@ -1,0 +1,246 @@
+{
+  "version": 2,
+  "actualizado_utc": "2026-11-11T03:17:21.852Z",
+  "modelo": "qwen2.5:7b",
+  "variante": "fundamentales",
+  "periodo": {
+    "desde": "2025-01-02",
+    "hasta": "2026-10-16"
+  },
+  "llamadas_por_dia": 10,
+  "tramos_disponibles": 39,
+  "tramos_esperados": 40,
+  "parcial": true,
+  "universo_pit": true,
+  "n": 1024,
+  "n_efectivo": 180,
+  "acierto": 0.521484375,
+  "Brier": 0.2813856445312509,
+  "exceso_promedio": 0.0020019076125492316,
+  "comparaciones": {
+    "azar_clase": {
+      "n": 1024,
+      "dif_acierto": -0.025390625,
+      "ic95_bootstrap_dias": [
+        -0.06889564336372847,
+        0.01981230448383733
+      ],
+      "discordantes": {
+        "vita_gana": 223,
+        "vita_pierde": 249
+      },
+      "mcnemar_p": 0.24982125224001306
+    },
+    "siempre_sube": {
+      "n": 1024,
+      "dif_acierto": -0.033203125,
+      "ic95_bootstrap_dias": [
+        -0.07331378299120235,
+        0.006862745098039216
+      ],
+      "discordantes": {
+        "vita_gana": 174,
+        "vita_pierde": 208
+      },
+      "mcnemar_p": 0.09119847154861796
+    },
+    "momentum": {
+      "n": 1024,
+      "dif_acierto": 0.0244140625,
+      "ic95_bootstrap_dias": [
+        -0.0210727969348659,
+        0.06991720331186753
+      ],
+      "discordantes": {
+        "vita_gana": 237,
+        "vita_pierde": 212
+      },
+      "mcnemar_p": 0.25734489787546033
+    },
+    "solo_factores": {
+      "n": 0,
+      "dif_acierto": null,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    },
+    "solo_fundamentales": {
+      "n": 1,
+      "dif_acierto": 0,
+      "ic95_bootstrap_dias": null,
+      "discordantes": {
+        "vita_gana": 0,
+        "vita_pierde": 0
+      },
+      "mcnemar_p": 1
+    }
+  },
+  "por_clase": {
+    "accion": {
+      "n": 439,
+      "n_efectivo": 180,
+      "acierto": 0.5170842824601367,
+      "Brier": 0.2804214123006835,
+      "exceso_promedio": 0.00267143735516453
+    },
+    "ETF": {
+      "n": 325,
+      "n_efectivo": 170,
+      "acierto": 0.5230769230769231,
+      "Brier": 0.2688384615384616,
+      "exceso_promedio": 0.002157190501930482
+    },
+    "cripto": {
+      "n": 260,
+      "n_efectivo": 164,
+      "acierto": 0.5269230769230769,
+      "Brier": 0.2986976923076924,
+      "exceso_promedio": 0.000677328781560683
+    }
+  },
+  "por_horizonte": {
+    "21": {
+      "n": 1024,
+      "n_efectivo": 180,
+      "acierto": 0.521484375,
+      "Brier": 0.2813856445312509,
+      "exceso_promedio": 0.0020019076125492316
+    }
+  },
+  "por_confianza": {
+    "0.50-0.55": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    },
+    "0.55-0.70": {
+      "n": 413,
+      "n_efectivo": 180,
+      "acierto": 0.48426150121065376,
+      "Brier": 0.26254576271186386,
+      "exceso_promedio": -0.000128097495956011
+    },
+    ">=0.70": {
+      "n": 611,
+      "n_efectivo": 180,
+      "acierto": 0.546644844517185,
+      "Brier": 0.29412029459901823,
+      "exceso_promedio": 0.0034416655664161145
+    }
+  },
+  "calibracion": [
+    {
+      "desde": 0.5,
+      "hasta": 0.55,
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null,
+      "probabilidad_media": null
+    },
+    {
+      "desde": 0.55,
+      "hasta": 0.6,
+      "n": 81,
+      "n_efectivo": 73,
+      "acierto": 0.41975308641975306,
+      "Brier": 0.2609432098765432,
+      "exceso_promedio": 0.0042913312966595665,
+      "probabilidad_media": 0.55037037037037
+    },
+    {
+      "desde": 0.6,
+      "hasta": 0.65,
+      "n": 190,
+      "n_efectivo": 167,
+      "acierto": 0.45789473684210524,
+      "Brier": 0.26842105263157806,
+      "exceso_promedio": -0.006062784303947381,
+      "probabilidad_media": 0.5999999999999981
+    },
+    {
+      "desde": 0.65,
+      "hasta": 0.7,
+      "n": 142,
+      "n_efectivo": 132,
+      "acierto": 0.5563380281690141,
+      "Brier": 0.2555985915492953,
+      "exceso_promedio": 0.005291738851343276,
+      "probabilidad_media": 0.6500000000000011
+    },
+    {
+      "desde": 0.7,
+      "hasta": 0.75,
+      "n": 205,
+      "n_efectivo": 177,
+      "acierto": 0.5658536585365853,
+      "Brier": 0.26365853658536675,
+      "exceso_promedio": 0.012910890359134944,
+      "probabilidad_media": 0.7000000000000005
+    },
+    {
+      "desde": 0.75,
+      "hasta": 0.8,
+      "n": 202,
+      "n_efectivo": 174,
+      "acierto": 0.594059405940594,
+      "Brier": 0.265470297029703,
+      "exceso_promedio": -0.0009970682573415064,
+      "probabilidad_media": 0.75
+    },
+    {
+      "desde": 0.8,
+      "hasta": 0.85,
+      "n": 204,
+      "n_efectivo": 168,
+      "acierto": 0.4803921568627451,
+      "Brier": 0.35310049019607875,
+      "exceso_promedio": -0.0016787601694089954,
+      "probabilidad_media": 0.8031862745098043
+    }
+  ],
+  "bases": {
+    "azar_clase": {
+      "n": 20480,
+      "n_efectivo": 180,
+      "acierto": 0.547802734375,
+      "Brier": 0.25,
+      "exceso_promedio": -0.005028002042294475
+    },
+    "siempre_sube": {
+      "n": 1024,
+      "n_efectivo": 180,
+      "acierto": 0.5546875,
+      "Brier": 0.25,
+      "exceso_promedio": 0.0030853515985338285
+    },
+    "momentum": {
+      "n": 1024,
+      "n_efectivo": 180,
+      "acierto": 0.4970703125,
+      "Brier": 0.25,
+      "exceso_promedio": 0.0007370605094276243
+    },
+    "solo_factores": {
+      "n": 0,
+      "n_efectivo": 0,
+      "acierto": null,
+      "Brier": null,
+      "exceso_promedio": null
+    },
+    "solo_fundamentales": {
+      "n": 1765,
+      "n_efectivo": 353,
+      "acierto": 0.5155807365439093,
+      "Brier": 0.25,
+      "exceso_promedio": 0.0007368164882651852
+    }
+  },
+  "veredicto": "Resultado exploratorio; interpretar junto con intervalos por dÃ­a."
+}
