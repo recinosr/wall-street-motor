@@ -96,7 +96,9 @@ def run(minutes=350):
             state['despachos'].append(item);dirty=True
             print(json.dumps(item),flush=True)
         block=int(now.timestamp()//600)
-        if block!=last or dirty:
+        # El latido se publica una vez por bloque de 10 minutos (antes: tras cada despacho, ~730 commits al día
+        # que inflaban el repo y chocaban con los push de otros flujos). Los despachos del bloque van juntos.
+        if block!=last:
             state['ultimo_latido']=now.isoformat();state['run_id']=os.environ['GITHUB_RUN_ID']
             state['latidos'].append({'hora':now.isoformat(),'run_id':state['run_id']})
             state['latidos']=state['latidos'][-600:]
@@ -113,6 +115,11 @@ def run(minutes=350):
                 try:_,sha=load()
                 except Exception:pass
         time.sleep(20)
+    if dirty:
+        # Antes del relevo se guarda lo despachado para que el siguiente vigilante no lo repita.
+        try:
+            state['ultimo_latido']=dt.datetime.now(UTC).isoformat();publish(state,sha)
+        except Exception as e:print('Latido final pendiente:',type(e).__name__,flush=True)
     for attempt in range(3):
         try:
             api('actions/workflows/vigilante.yml/dispatches','POST',{'ref':'main'});return
