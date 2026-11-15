@@ -442,6 +442,7 @@ def resumen_web(r):
         "prereg_sha256": r["prereg_sha256"], "prereg_commit": r["prereg_commit"],
         "aperturas_prueba_sellada": json.loads(REGISTRO.read_text(encoding="utf-8"))["aperturas"],
         "nivel_actual": 1, "aprobados": r["aprobados"],
+        "nota_nivel": "nivel_actual 1 = punto de partida: ningún nivel de DIRECCIÓN (1-4) ganó a la tasa base. aprobados [5] = regla de tendencia que reduce la caída máxima (riesgo), no predice dirección; no sube el nivel de la escalera.",
         "nivel1": {"estado": r["nivel1"]["estado"], "activo": "^GSPC", "horizonte": 1, "n": n1["n"],
                    "brier_modelo": n1["brier_modelo"], "brier_base": n1["brier_tasa_base"], "mejora": n1["brier"]["mejora"],
                    "ic95": n1["brier"]["ic95"], "p": n1["brier"]["p"], "q": n1["brier"]["q"],

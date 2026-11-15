@@ -30,6 +30,7 @@
  "aprobados": [
   5
  ],
+ "nota_nivel": "nivel_actual 1 = punto de partida: ningún nivel de DIRECCIÓN (1-4) ganó a la tasa base. aprobados [5] = regla de tendencia que reduce la caída máxima (riesgo), no predice dirección; no sube el nivel de la escalera.",
  "nivel1": {
   "estado": "no_aprobado",
   "activo": "^GSPC",
