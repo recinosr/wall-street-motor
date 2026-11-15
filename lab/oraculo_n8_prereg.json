@@ -1,0 +1,42 @@
+{
+ "version": "oraculo-nivel8",
+ "escrito_utc": "2026-11-15",
+ "nota": "Pre-registro escrito y subido a origin/main en un commit propio ANTES de escribir el código que calcula (lección del N4: el manifiesto se commiteó 4 s antes del resultado). Nivel 8 = pronóstico de VOLATILIDAD (riesgo) del mes siguiente, no de dirección: los niveles de dirección 1-4, 6 y 7 no ganaron a 'siempre sube'. Útil para el inversionista como banda de riesgo honesta ('el próximo mes el S&P 500 puede moverse ±X % con 95 %'). Un resultado positivo NO cambia el plan 45/20/20/15; solo alimenta la banda de riesgo que Vita y la web muestran.",
+ "datos": {
+  "activo_principal": "_GSPC (datos/pit/precios/_GSPC.csv.gz, close diario sin dividendos)",
+  "activos_secundarios": ["QQQ", "VT"],
+  "nota_secundarios": "se reportan, no aprueban",
+  "corte": "2026-10-15 (último día de origen; el objetivo puede usar cierres hasta 21 sesiones después, siempre <= 2026-11-13)",
+  "regla_tiempo": "el pronóstico con origen en la sesión t usa solo filas con available_at <= available_at de la sesión t (cierre de t). El objetivo usa las sesiones t+1..t+21.",
+  "particion": {"entrenamiento": ["inicio", "2014-12-31"], "validacion": ["2015-01-01", "2019-12-31"], "prueba_sellada": ["2020-01-01", "2026-10-15"]},
+  "nota_particion": "las fechas se refieren al día de origen t; un origen se asigna al tramo de su fecha aunque el objetivo cruce al tramo siguiente"
+ },
+ "objetivo": {
+  "r": "retorno log diario r_t = ln(close_t / close_{t-1})",
+  "rv21": "varianza realizada del mes siguiente: suma de r^2 de t+1..t+21",
+  "origenes": "todas las sesiones del tramo con al menos 252 sesiones de historia previa y 21 sesiones posteriores dentro del corte"
+ },
+ "pronosticos": {
+  "B0_historica_252": "21 * media de r^2 de las 252 sesiones t-251..t (referencia: la volatilidad 'de largo plazo' que se usaba en la banda de riesgo)",
+  "B1_historica_21": "21 * media de r^2 de las 21 sesiones t-20..t",
+  "M1_ewma": "RiskMetrics sin parámetros ajustables: s2_t = 0.94*s2_{t-1} + 0.06*r_t^2, semilla = media de r^2 de las primeras 252 sesiones; pronóstico = 21 * s2_t",
+  "M2_har": "HAR-RV de Corsi sobre varianza diaria (r^2): rv21_futuro = b0 + b1*d_t + b2*w_t + b3*m_t, con d_t = 21*r_t^2, w_t = 21*media(r^2 de 5 sesiones), m_t = 21*media(r^2 de 22 sesiones). Coeficientes por MCO SOLO con orígenes del tramo de entrenamiento, fijados después. Si un pronóstico sale <= 0 se reemplaza por B0 de ese día."
+ },
+ "metrica": {
+  "perdida": "QLIKE: L = y/f - ln(y/f) - 1, con y = rv21 y f = pronóstico (robusta al ruido del proxy de varianza, Patton 2011)",
+  "mejora": "media de L(B0) - L(modelo) por origen; positiva = el modelo es mejor",
+  "secundarias": "(a) MSE de la varianza; (b) intervalo 95 % del retorno log a 21 sesiones = ±1.96*sqrt(f): cobertura y ancho medio, para B0, M1 y M2. Se reportan, no aprueban."
+ },
+ "estadistica": {
+  "semilla": 8150826,
+  "bootstrap_rondas": 2000,
+  "bootstrap": "circular por bloques de 63 orígenes consecutivos (los objetivos se solapan)",
+  "p_valor": "unilateral: (1 + #{media bootstrap de la mejora <= 0}) / (rondas + 1)",
+  "comparaciones_principales": ["M1_ewma vs B0", "M2_har vs B0"],
+  "multiples_comparaciones": "Benjamini-Hochberg sobre las 2 comparaciones principales en el tramo de prueba",
+  "aprobada": "un modelo se aprueba si q_BH < 0.05 en prueba Y la mejora media > 0 en validación",
+  "nivel_aprobado": "el nivel 8 se aprueba si al menos un modelo se aprueba en _GSPC"
+ },
+ "apertura": "la prueba sellada se abre UNA sola vez: el script corre validación primero, escribe resultados/oraculo_n8.json y se niega a reabrir si ese archivo ya registra una apertura. Una corrida fallida o interrumpida después de abrir cuenta como apertura.",
+ "prohibido": "cambiar modelos, lambda, ventanas, tramos, la pérdida o el criterio después de ver cualquier número del tramo de prueba. El resultado se publica gane o pierda."
+}
