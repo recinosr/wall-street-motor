@@ -1,7 +1,7 @@
 {
- "fecha": "2026-11-16T22:21:51.256Z",
+ "fecha": "2026-11-17T04:40:37.887Z",
  "repo": "recinosr/wall-street-motor",
- "runner": "GitHub Actions 1000028532",
+ "runner": "GitHub Actions 1000028733",
  "hay_token": true,
  "token_tipo": "GITHUB_TOKEN de Actions (ghs_)",
  "proxy_env": {
@@ -14,17 +14,17 @@
  },
  "dns": {
   "models.github.ai": [
-   "140.82.113.21"
+   "140.82.114.21"
   ],
   "models.inference.ai.azure.com": "error ENOTFOUND",
   "api.github.com": [
-   "140.82.113.5"
+   "20.29.134.17"
   ]
  },
  "tls": [
   {
    "host": "models.github.ai",
-   "ip": "140.82.113.21",
+   "ip": "140.82.114.21",
    "sujeto": "*.github.ai",
    "emisor": "Sectigo Limited",
    "autorizado": true,
@@ -32,7 +32,7 @@
   },
   {
    "host": "api.github.com",
-   "ip": "140.82.113.5",
+   "ip": "20.29.134.17",
    "sujeto": "*.github.com",
    "emisor": "Sectigo Limited",
    "autorizado": true,
@@ -47,7 +47,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 79,
+   "ms": 336,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -63,7 +63,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 32,
+   "ms": 251,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -79,7 +79,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 44,
+   "ms": 232,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -95,7 +95,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/inference/chat/completions",
-   "ms": 40,
+   "ms": 231,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -111,7 +111,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/orgs/recinosr/inference/chat/completions",
-   "ms": 32,
+   "ms": 239,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -127,7 +127,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://models.github.ai/catalog/models",
-   "ms": 52,
+   "ms": 253,
    "tipo": "text/plain",
    "cabeceras": {
     "connection": "close",
@@ -142,7 +142,7 @@
    "metodo": "POST",
    "error": "fetch failed",
    "causa": "ENOTFOUND",
-   "ms": 48
+   "ms": 3
   },
   {
    "nombre": "api.github.com /rate_limit (mismo token)",
@@ -151,7 +151,7 @@
    "estado": 200,
    "redirigido": false,
    "url_final": "https://api.github.com/rate_limit",
-   "ms": 228,
+   "ms": 224,
    "tipo": "application/json; charset=utf-8",
    "cabeceras": {
     "access-control-allow-origin": "*",
@@ -160,7 +160,7 @@
     "content-encoding": "gzip",
     "content-security-policy": "default-src 'none'",
     "content-type": "application/json; charset=utf-8",
-    "date": "Mon, 16 Nov 2026 22:21:51 GMT",
+    "date": "Tue, 17 Nov 2026 04:40:39 GMT",
     "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
     "server": "github.com",
     "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
@@ -170,17 +170,17 @@
     "x-content-type-options": "nosniff",
     "x-frame-options": "deny",
     "x-github-api-version-selected": "2022-11-28",
-    "x-github-edge-region": "iad",
+    "x-github-edge-region": "westus2",
     "x-github-media-type": "github.v3; format=json",
-    "x-github-request-id": "0C31:2D5F96:2711D4E:7C8EA18:6AFB81FF",
+    "x-github-request-id": "FE39:3B8780:DA6E3:1596B6:6AFBDAC7",
     "x-ratelimit-limit": "5000",
-    "x-ratelimit-remaining": "4925",
-    "x-ratelimit-reset": "1794867962",
+    "x-ratelimit-remaining": "4941",
+    "x-ratelimit-reset": "1794891616",
     "x-ratelimit-resource": "core",
-    "x-ratelimit-used": "75",
+    "x-ratelimit-used": "59",
     "x-xss-protection": "0"
    },
-   "cuerpo": "{\"resources\":{\"core\":{\"limit\":5000,\"used\":75,\"remaining\":4925,\"reset\":1794867962},\"search\":{\"limit\":30,\"used\":0,\"remaining\":30,\"reset\":1794867771},\"graphql\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794871311},\"integration_manifest\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794871311},",
+   "cuerpo": "{\"resources\":{\"core\":{\"limit\":5000,\"used\":59,\"remaining\":4941,\"reset\":1794891616},\"search\":{\"limit\":30,\"used\":0,\"remaining\":30,\"reset\":1794890499},\"graphql\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794894039},\"integration_manifest\":{\"limit\":5000,\"used\":0,\"remaining\":5000,\"reset\":1794894039},",
    "es_json": true
   }
  ],
